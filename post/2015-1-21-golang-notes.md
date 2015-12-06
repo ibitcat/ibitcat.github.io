@@ -2,7 +2,7 @@
 layout: post
 title: go语言学习笔记
 description: "go语言的学习笔记。"
-date: 2015-01-21 16:30:44 Wednesday
+date: 2015-01-21 16:30:44
 updated: 2015-01-21 
 tags: [go]
 comments: true
