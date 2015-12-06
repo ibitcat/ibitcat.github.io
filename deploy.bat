@@ -12,7 +12,7 @@ if exist %dest% rd  %dest% /s /q
 md  %dest%
 xcopy %source% %dest% /e /y
 
-hexo deploy
+call hexo deploy
 
 pause
 
