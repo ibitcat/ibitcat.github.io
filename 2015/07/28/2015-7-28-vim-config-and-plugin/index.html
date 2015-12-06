@@ -1,0 +1,795 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="go," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="vim的.vimrc配置，以及介绍我自己收录的一些vim插件以及介绍使用vundle管理vim插件的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim配置以及使用vundle管理vim插件">
+<meta property="og:url" content="http://domicat.me/2015/07/28/2015-7-28-vim-config-and-plugin/index.html">
+<meta property="og:site_name" content="Domi'Blog">
+<meta property="og:description" content="vim的.vimrc配置，以及介绍我自己收录的一些vim插件以及介绍使用vundle管理vim插件的方法">
+<meta property="og:updated_time" content="2015-11-05T09:22:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim配置以及使用vundle管理vim插件">
+<meta name="twitter:description" content="vim的.vimrc配置，以及介绍我自己收录的一些vim插件以及介绍使用vundle管理vim插件的方法">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'hide',
+    motion: true
+  };
+</script>
+
+  <title> vim配置以及使用vundle管理vim插件 | Domi'Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-71084139-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?f112fd6367b2f823a16ac8c8deb429c6";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Domi'Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                vim配置以及使用vundle管理vim插件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-07-28T15:08:00+08:00" content="2015-07-28">
+              2015-07-28
+            </time>
+
+		    &nbsp; | &nbsp; 更新于
+		    <time itemprop="dateCreated" datetime="2015-11-05T17:22:00+08:00" content="2015-11-05">
+			  2015-11-05 17:22:00
+		    </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/28/2015-7-28-vim-config-and-plugin/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/28/2015-7-28-vim-config-and-plugin/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>搬到linux后，学习使用了一段时间的vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。</p>
+<p><strong>vimrc下载地址</strong>：<a href="https://github.com/shuimu98/domi-vimrc" target="_blank" rel="external">传送门</a><br><strong>另外推荐一个</strong>:<a href="https://github.com/wklken/k-vim" target="_blank" rel="external">k-vim</a></p>
+<h3 id="vim基础配置">vim基础配置</h3><p>这部分主要包括vim的一些基础配置，例如显示行号、括号配对等，<strong>大部分的设置在我的配置里面已经有了注释，不详细说明</strong>。</p>
+<h3 id="一些实用的设置">一些实用的设置</h3><p>找了一些比较实用的功能设置：</p>
+<pre><code><span class="number">1</span>、代码补全
+<span class="number">2</span>、NERDTree
+<span class="number">3</span>、新建文件标题模板
+</code></pre><h3 id="vim默认的常用快捷键、命令">vim默认的常用快捷键、命令</h3><pre><code>:vsplit        分割屏幕（垂直分割）
+:<span class="keyword">split</span>        分割屏幕（水平分割）
+:!command     运行vim外部环境命令（注意 “!”），如 :!<span class="keyword">ls</span> -<span class="keyword">l</span>，表示显示当前目录文件
+:tabnew    xxx    新建名为xxx的标签,<span class="keyword">tab</span>类的其他命令百度。
+gt, gT         可以直接在<span class="keyword">tab</span>之间切换
+gg            跳到文件开头（小写的<span class="keyword">g</span>连续按两次）
+<span class="keyword">G</span>            调到文件尾部（大写<span class="keyword">G</span>）
+xxx + <span class="keyword">g</span>        调到xxx行（在一般模式下先按xxx行，再按<span class="keyword">g</span>）
+ctrl+s 和 ctlr+q 这一组快捷键需要注意，其实是linux锁/解屏的快捷键，但是会导致vim僵死
+Ctrl+f和Ctrl+b    上下翻页
+Ctrl+<span class="keyword">u</span>和Ctrl+<span class="keyword">d</span>    上下翻半页
+/xxx        在一般模式下，先按<span class="string">"/"</span>，再输入要搜素的xxx，在按enter
+dd            删除整行
+dw            删除整词
+yy            复制整行
+p            粘贴
+<span class="keyword">u</span>            撤销更改
+</code></pre><h3 id="自定义的快捷键设置">自定义的快捷键设置</h3><p>常用快捷键，参考<a href="http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html" target="_blank" rel="external">这里</a><br>另外我自己定义了一些我自己习惯用的快捷键。</p>
+<pre><code><span class="comment">F2</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">tag窗口开关</span>
+<span class="comment">F3</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">TagbarToggle</span> <span class="comment">开关</span>
+<span class="comment">F4</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">资源管理器</span>
+<span class="comment">F5</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">C</span><span class="string">,</span><span class="comment">C</span><span class="literal">+</span><span class="literal">+</span><span class="comment">编译运行</span>
+<span class="comment">F7</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">生成Tags文件</span>
+<span class="comment">F8</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">C</span><span class="string">,</span><span class="comment">C</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">GDB调试</span>
+<span class="comment">F10</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">编辑模式下，切换paste模式，解决vim复制缩进的问题</span>
+<span class="comment">F11</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">上一个窗口</span>
+<span class="comment">F12</span>     <span class="literal">-</span><span class="literal">-</span><span class="comment">vim窗口切换</span>
+</code></pre><h3 id="常用插件的快捷键">常用插件的快捷键</h3><pre><code>有些需要配置leader键，vim默认的leader键为 “<span class="string">\”（enter键上面的那个键）</span>
+
+scrooloose/nerdcommenter 快速 加减注释插件：
+<span class="string">\cc</span>        注释
+<span class="string">\ci</span>        取消注释
+
+fatih/vim-go 插件：
+<span class="string">\dt</span>        转到定义（新的标签页打开）
+<span class="string">\ds</span>        转到定义（水平分割窗口）
+<span class="string">\dv</span>        转到定义（垂直分割窗口）
+
+kien/ctrlp.vim 插件：
+ctrl+p     打开文件搜素。
+ctrl+d     在全路径搜索和文件名搜索间切换。
+ctrl+r     在字符串搜索模式和正则表达式模式之间切换
+
+关于切换搜索路径：
+ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下输入cd .. <span class="keyword">or</span> cd <span class="pi">/path/to/youwant/</span> 就可以了。
+参考 <span class="attribute">https</span>:<span class="pi">//ruby-china.org/topics/12417  以及 http://</span>blog.codepiano.com/pages/ctrlp-cn.light.html（中文帮助文档）
+</code></pre><h3 id="插件管理">插件管理</h3><p>使用<a href="http://github.com/VundleVim/Vundle.Vim" target="_blank" rel="external">vundle</a>管理插件，具体安装方法不在赘述。</p>
+<p>比较实用的插件：  </p>
+<ul>
+<li>Plugin ‘scrooloose/nerdtree’              <u><strong>以树形结构浏览文件夹中的文件</strong></u>  </li>
+<li>Plugin ‘fatih/vim-go’                      <u><strong>golang的vim插件</strong></u>  </li>
+<li>Plugin ‘fatih/molokai’                      <u><strong>molokai主题</strong></u>  </li>
+<li>Plugin ‘Shougo/neocomplete.vim’          <u><strong>实时代码补全提示，支持golang</strong></u>  </li>
+<li>Plugin ‘SirVer/ultisnips’                  <u><strong>代码模板，支持golang</strong></u>  </li>
+<li>Plugin ‘majutsushi/tagbar’                 <u><strong>Tagbar 比 taglist 更现代的代码结构浏览工具</strong></u>   </li>
+<li>Plugin ‘kien/rainbow_parentheses.vim’     <u><strong>括号显示增强</strong></u>   </li>
+<li>Plugin ‘scrooloose/nerdcommenter’         <u><strong>快速 加减注释</strong></u>   </li>
+<li>Plugin ‘Raimondi/delimitMate’             <u><strong>输入引号,括号时,自动补全</strong></u>  </li>
+<li>Plugin ‘kien/ctrlp.vim’                     <u><strong>文件查找</strong></u>  </li>
+<li>Plugin ‘altercation/vim-colors-solarized’<u><strong>主题配色插件</strong></u>  </li>
+<li>Plugin ‘vim-scripts/AutoComplPop’         <u><strong>自动补全，与neocomplete有点冲突，推荐使用neocomplete</strong></u>  </li>
+<li>Plugin ‘vim-scripts/OmniCppComplete’     <u><strong>OmniCppComplete 自动补全，推荐使用</strong></u>  </li>
+<li>Plugin ‘vim-scripts/taglist.vim’         <u><strong>标签导航 要装ctags</strong></u>  </li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag">#go</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/28/2015-7-28-golang-std-lib/" rel="next" title="golang的标准库">
+                <i class="fa fa-chevron-left"></i> golang的标准库
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/17/2015-9-17-jwt-with-golang/" rel="prev" title="学习jwt以及jwt在golang中的使用">
+                学习jwt以及jwt在golang中的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/07/28/2015-7-28-vim-config-and-plugin/"
+           data-title="vim配置以及使用vundle管理vim插件" data-url="http://domicat.me/2015/07/28/2015-7-28-vim-config-and-plugin/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="DomiCat" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">DomiCat</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/shuimu98" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/shuimu98" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim基础配置"><span class="nav-number">1.</span> <span class="nav-text">vim基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些实用的设置"><span class="nav-number">2.</span> <span class="nav-text">一些实用的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim默认的常用快捷键、命令"><span class="nav-number">3.</span> <span class="nav-text">vim默认的常用快捷键、命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义的快捷键设置"><span class="nav-number">4.</span> <span class="nav-text">自定义的快捷键设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用插件的快捷键"><span class="nav-number">5.</span> <span class="nav-text">常用插件的快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件管理"><span class="nav-number">6.</span> <span class="nav-text">插件管理</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DomiCat</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"domicat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+</body>
+</html>
