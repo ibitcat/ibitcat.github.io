@@ -471,7 +471,7 @@ pre,
 }
 pre,
 code {
-  font-family: "Input Mono", "PT Mono", Consolas, Monaco, Menlo, monospace;
+  font-family: "Input Mono", "PT Mono", "Microsoft YaHei", Consolas, Monaco, Menlo, monospace;
 }
 code {
   word-break: break-all;
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #1b9a18;
+  background: #45c1ff;
 }
 .sidebar-nav {
   margin: 0 0 20px;
