@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #afffff;
+  background: #59b163;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2131,7 +2131,7 @@ ul li {
   display: none;
 }
 .posts-expand .post {
-  margin-top: 120px;
+  margin-top: 80px;
 }
 .posts-expand .post:first-child {
   margin-top: 0;
