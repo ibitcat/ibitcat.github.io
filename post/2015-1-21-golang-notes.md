@@ -6,6 +6,8 @@ date: 2015-01-21 16:30:44
 updated: 2015-01-21 
 tags: [go]
 comments: true
+photos:
+ - img/golang_import.jpg
 
 ---
 
