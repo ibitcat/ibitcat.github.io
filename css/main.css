@@ -188,7 +188,7 @@ body {
   font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 14px;
   line-height: 2;
-  color: #555;
+  color: #333;
   background: #fff;
 }
 @media (max-width: 767px) {
@@ -270,7 +270,7 @@ p {
   margin: 0 0 25px 0;
 }
 a {
-  color: #555;
+  color: #333;
   text-decoration: none;
   border-bottom: 1px solid #999;
 }
@@ -864,7 +864,7 @@ body {
 }
 .sidebar a {
   color: #999;
-  border-bottom-color: #555;
+  border-bottom-color: #333;
 }
 .sidebar a:hover {
   color: #eee;
@@ -900,7 +900,7 @@ body {
 .site-description {
   margin-top: 5px;
   font-size: 14px;
-  color: #555;
+  color: #333;
 }
 .site-state {
   overflow: hidden;
@@ -954,7 +954,7 @@ body {
   vertical-align: middle;
   margin-right: 10px;
   margin-bottom: 10px;
-  border-bottom-color: #555;
+  border-bottom-color: #333;
   font-size: 13px;
 }
 .links-of-author a:before {
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2e2552;
+  background: #1806da;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -1185,7 +1185,7 @@ body {
   display: block;
   width: 22px;
   height: 2px;
-  background: #555;
+  background: #333;
   border-radius: 1px;
 }
 .btn-bar+.btn-bar {
@@ -1243,7 +1243,7 @@ body {
 .posts-expand .post-title-link {
   display: inline-block;
   position: relative;
-  color: #555;
+  color: #333;
   border-bottom: none;
   line-height: 1.2;
   vertical-align: top;
@@ -1332,7 +1332,7 @@ body {
   display: inline-block;
   line-height: 25px;
   font-size: 14px;
-  color: #555;
+  color: #333;
   border-bottom: none;
 }
 .post-nav-item a:hover {
@@ -1902,7 +1902,7 @@ body {
   width: 10px;
   height: 10px;
   opacity: 0.5;
-  background: #555;
+  background: #333;
   border: 1px solid #fff;
   border-radius: 50%;
 }
