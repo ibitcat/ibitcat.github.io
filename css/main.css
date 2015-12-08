@@ -641,7 +641,7 @@ body {
 }
 @media (min-width: 1600px) {
   .one-column .header-inner {
-    width: 900px;
+    width: 700px;
   }
 }
 .main {
@@ -656,7 +656,7 @@ body {
 }
 @media (min-width: 1600px) {
   .one-column .main-inner {
-    width: 900px;
+    width: 700px;
   }
 }
 .footer {
@@ -675,7 +675,7 @@ body {
 }
 @media (min-width: 1600px) {
   .one-column .footer-inner {
-    width: 900px;
+    width: 700px;
   }
 }
 .headband {
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #084fcc;
+  background: #0dfffc;
 }
 .sidebar-nav {
   margin: 0 0 20px;
