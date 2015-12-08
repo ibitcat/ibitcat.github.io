@@ -900,7 +900,7 @@ body {
 .site-description {
   margin-top: 5px;
   font-size: 14px;
-  color: #333;
+  color: #fff;
 }
 .site-state {
   overflow: hidden;
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0e6066;
+  background: #084fcc;
 }
 .sidebar-nav {
   margin: 0 0 20px;

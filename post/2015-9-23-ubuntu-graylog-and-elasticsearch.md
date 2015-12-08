@@ -112,8 +112,7 @@ ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163
 [http://stackoverflow.com/questions/24975895/elasticsearch-cant-write-to-log-files](http://stackoverflow.com/questions/24975895/elasticsearch-cant-write-to-log-files)  
 [https://discuss.elastic.co/t/running-with-supervisor-via-command-line/28798](https://discuss.elastic.co/t/running-with-supervisor-via-command-line/28798)
 
-	If you installed using a packet manager like yum or apt-get you should not start elasticsearch this way.
-	Try to use the service: for instance /etc/init.d/elasticsearch.
+>If you installed using a packet manager like yum or apt-get you should not start elasticsearch this way.Try to use the service: for instance /etc/init.d/elasticsearch.
 
 <font color=#FF090f>**小知识：**</font>
 

@@ -344,9 +344,10 @@ at org<span class="class">.elasticsearch</span><span class="class">.common</span
 log4j:WARN No appenders could be found <span class="keyword">for</span> logger (node).  
 </code></pre><p>解决办法参考 ：</p>
 <p><a href="http://stackoverflow.com/questions/24975895/elasticsearch-cant-write-to-log-files" target="_blank" rel="external">http://stackoverflow.com/questions/24975895/elasticsearch-cant-write-to-log-files</a><br><a href="https://discuss.elastic.co/t/running-with-supervisor-via-command-line/28798" target="_blank" rel="external">https://discuss.elastic.co/t/running-with-supervisor-via-command-line/28798</a></p>
-<pre><code>If you installed using a packet manager like yum<span class="instruction"> or </span>apt-get you should<span class="instruction"> not </span>start elasticsearch this way.
-Try to use the service: for<span class="instruction"> instance </span>/etc/init.d/elasticsearch.
-</code></pre><font color="#FF090f"><strong>小知识：</strong></font>
+<blockquote>
+<p>If you installed using a packet manager like yum or apt-get you should not start elasticsearch this way.Try to use the service: for instance /etc/init.d/elasticsearch.</p>
+</blockquote>
+<font color="#FF090f"><strong>小知识：</strong></font>
 
 <pre><code>关于 /etc/init.d/ 目录，里面放的是启动脚本，类似于windows的开机启动项， 该命令的结构大致如下所示：
      /etc/init.d/<span class="command"><span class="keyword">command</span> 选项</span>
