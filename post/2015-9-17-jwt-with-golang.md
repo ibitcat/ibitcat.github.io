@@ -3,7 +3,6 @@ layout: post
 title: 学习jwt以及jwt在golang中的使用
 date: 2015-9-17 15:08:00
 updated: 2015-11-05 17:23:00
-description: "学习jwt（json web token）以及在golang中，如何使用jwt"
 tags: [go, jwt]
 comments: true
 
@@ -14,6 +13,8 @@ comments: true
 这一篇主要记录关于jwt的相关知识，主要分为两个部分：  
 1、了解jwt（json web token）；  
 2、如何在项目中使用jwt-go；
+
+<!-- more -->
 
 ### 学习jwt以及jwt在golang中的使用
 

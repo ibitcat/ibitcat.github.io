@@ -51,23 +51,23 @@
 
 
 
-<meta name="description" content="整理记录了工作中遇到的一些常用的hash算法、对称加密、非对称加密算法">
+<meta name="description" content="最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非常大的必要记录下来，后面想想，还是整理下记录下来，有备无患嘛。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="这些年，我遇到的哈希、加密算法">
 <meta property="og:url" content="http://domicat.me/2015/11/24/hash-and-crypto-alg/index.html">
 <meta property="og:site_name" content="Domi'Blog">
-<meta property="og:description" content="整理记录了工作中遇到的一些常用的hash算法、对称加密、非对称加密算法">
+<meta property="og:description" content="最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非常大的必要记录下来，后面想想，还是整理下记录下来，有备无患嘛。">
 <meta property="og:updated_time" content="2015-11-24T08:50:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="这些年，我遇到的哈希、加密算法">
-<meta name="twitter:description" content="整理记录了工作中遇到的一些常用的hash算法、对称加密、非对称加密算法">
+<meta name="twitter:description" content="最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非常大的必要记录下来，后面想想，还是整理下记录下来，有备无患嘛。">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'hide',
+    sidebar: 'post',
     motion: true
   };
 </script>
@@ -267,6 +267,7 @@
 
       
         <span itemprop="articleBody"><p>最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非常大的必要记录下来，后面想想，还是整理下记录下来，有备无患嘛。</p>
+<a id="more"></a>
 <h3 id="1、hash算法">1、hash算法</h3><p>“哈希”在工作中常常被提起，主要是把任意长度的输入，通过散列算法，变换成固定长度的输出。比较常见的算法有：<strong>MD5</strong>、<strong>SHA1</strong>、<strong>HMAC</strong>、<strong>HMAC_SHA1</strong> 等。</p>
 <p>很多人将他们称之为加密算法，个人觉得其实他们算不算加密算法，除了其中的<strong>HMAC_SHA1需要输入秘钥</strong>，其他的都是不需要秘钥的，他们的作用都是计算输入内存的散列值，确保信息传输完整一致。例如很多软件，都会在官网放出软件的MD5、SHA值，主要是确保你下载的软件是否是原版的，确保没有被其他人破解、篡改。</p>
 <p>特别注意：哈希算法都是不可逆算法，也就是你无法根据给定的MD5反向解密得出hash前的数据。举个栗子：你可以计算出1G MP4文件的MD5值”123456”(假设的)，但是你肯定无法根据这个“123456”得到这个1G的MP4，如果可以，那该是多么牛逼的压缩技术，还需要等待漫长的下载吗?找AV得多么幸福啊……</p>

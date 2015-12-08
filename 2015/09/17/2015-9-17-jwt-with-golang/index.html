@@ -51,23 +51,26 @@
 
 
 
-<meta name="description" content="学习jwt（json web token）以及在golang中，如何使用jwt">
+<meta name="description" content="最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。
+这一篇主要记录关于jwt的相关知识，主要分为两个部分：1、了解jwt（json web token）；2、如何在项目中使用jwt-go；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="学习jwt以及jwt在golang中的使用">
 <meta property="og:url" content="http://domicat.me/2015/09/17/2015-9-17-jwt-with-golang/index.html">
 <meta property="og:site_name" content="Domi'Blog">
-<meta property="og:description" content="学习jwt（json web token）以及在golang中，如何使用jwt">
+<meta property="og:description" content="最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。
+这一篇主要记录关于jwt的相关知识，主要分为两个部分：1、了解jwt（json web token）；2、如何在项目中使用jwt-go；">
 <meta property="og:updated_time" content="2015-11-05T09:23:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习jwt以及jwt在golang中的使用">
-<meta name="twitter:description" content="学习jwt（json web token）以及在golang中，如何使用jwt">
+<meta name="twitter:description" content="最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。
+这一篇主要记录关于jwt的相关知识，主要分为两个部分：1、了解jwt（json web token）；2、如何在项目中使用jwt-go；">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'hide',
+    sidebar: 'post',
     motion: true
   };
 </script>
@@ -268,6 +271,7 @@
       
         <span itemprop="articleBody"><p>最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。</p>
 <p>这一篇主要记录关于jwt的相关知识，主要分为两个部分：<br>1、了解jwt（json web token）；<br>2、如何在项目中使用jwt-go；</p>
+<a id="more"></a>
 <h3 id="学习jwt以及jwt在golang中的使用">学习jwt以及jwt在golang中的使用</h3><h4 id="1、什么是jwt">1、什么是jwt</h4><p>jwt（json web token），主要包括三个部分：head、claim、sign。</p>
 <p><strong>JWT Claims</strong></p>
 <ul>

@@ -3,7 +3,6 @@ layout: post
 title: ubuntu下nginx安装与使用笔记
 date: 2015-9-17 15:37:00
 updated: 2015-11-05 17:25:00
-description: "ubuntu下搭建nginx环境以及过程中遇到的问题"
 tags: [nginx]
 comments: true
 
@@ -11,7 +10,9 @@ comments: true
 
 最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。
 
-这一篇主要记录关于ngnix的相关知识，暂时只是简单了解一部分皮毛，如果以后遇到更深入的知识，会持续更新。
+这一篇主要记录关于ngnix在ubuntu下搭建nginx环境以及过程中遇到的问题，暂时只是简单了解一部分皮毛，如果以后遇到更深入的知识，会持续更新。
+
+<!-- more -->
 
 ### 1、nginx 的安装
 > 安装环境 ubuntu Release: 14.04  

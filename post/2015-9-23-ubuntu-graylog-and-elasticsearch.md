@@ -3,15 +3,18 @@ layout: post
 title: ubuntu elasticsearch和graylog安装与使用
 date: 2015-9-23 11:25:00
 updated: 2015-11-05 17:26:00
-description: "ubuntu server 14.04下elasticsearch-1.7安装以及graylog-1.2安装笔记以及基本的使用"
 tags: [linux, graylog]
 comments: true
 
 ---
 
+本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。
+
 ### 1、起因
 
 从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库[logrus](https://github.com/gogap/logrus)（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中，可能会出问题，所有就看了下graylog是个什么东西，初步了解，发现比较强大，虽然我比较讨厌java，但是没办法，项目需要。so~ 开始动手搞起来。
+
+<!-- more -->
 
 ### 2、前期准备
 

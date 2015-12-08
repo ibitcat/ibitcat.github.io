@@ -3,18 +3,18 @@ layout: post
 title: ubuntu下supervisor安装与使用笔记
 date: 2015-9-18 09:10:00
 updated: 2015-11-05 17:26:00
-description: "学习如何在ubuntu下安装supervisor与使用supervisor"
 tags: [linux, supervisor]
 comments: true
 
 ---
-
 
 ### 1、supervisor 介绍
 
 它是个什么东东？用来干嘛的？  
 supervisor是linux下的进程管理工具，python编写。用来监控进程的运行。比如说你要一直运行进程A，使用supervisor后，如果A进程崩掉了，
 或者意外被kill了，supervisor可以快速帮你重新启动A，当然还有其他功能。待我后面一一挖掘。
+
+<!-- more -->
 
 ### 2、supervisor 安装
 

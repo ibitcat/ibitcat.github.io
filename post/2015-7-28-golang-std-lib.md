@@ -3,7 +3,6 @@ layout: post
 title: golang的标准库
 date: 2015-7-28 15:05:00
 updated: 2015-11-05 17:20:00
-description: "简单介绍golang标准库的package，以及简单介绍每个package的功能."
 tags: [go]
 comments: true
 
@@ -15,6 +14,7 @@ comments: true
 - [https://github.com/polaris1119/The-Golang-Standard-Library-by-Example](https://github.com/polaris1119/The-Golang-Standard-Library-by-Example) 
 - [http://pkgdoc-liudiwu.coding.io/](http://pkgdoc-liudiwu.coding.io/)
 
+<!-- more -->
 
 ### archive
 >归档访问包，包含两个package。

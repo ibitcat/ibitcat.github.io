@@ -3,16 +3,17 @@ layout: post
 title: vim配置以及使用vundle管理vim插件
 date: 2015-7-28 15:08:00
 updated: 2015-11-05 17:22:00
-description: "vim的.vimrc配置，以及介绍我自己收录的一些vim插件以及介绍使用vundle管理vim插件的方法"
-tags: [go]
+tags: [linux]
 comments: true
 
 ---
 
-搬到linux后，学习使用了一段时间的vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。
+搬到linux后，需要使用装逼利器**vim**，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。
 
 **vimrc下载地址**：[传送门](https://github.com/shuimu98/domi-vimrc)
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
+
+<!-- more -->
 
 ### vim基础配置
 

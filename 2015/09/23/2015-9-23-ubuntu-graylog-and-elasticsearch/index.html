@@ -51,24 +51,27 @@
 
 
 
-<meta name="description" content="ubuntu server 14.04下elasticsearch-1.7安装以及graylog-1.2安装笔记以及基本的使用">
+<meta name="description" content="本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。
+1、起因从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库logrus（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ubuntu elasticsearch和graylog安装与使用">
 <meta property="og:url" content="http://domicat.me/2015/09/23/2015-9-23-ubuntu-graylog-and-elasticsearch/index.html">
 <meta property="og:site_name" content="Domi'Blog">
-<meta property="og:description" content="ubuntu server 14.04下elasticsearch-1.7安装以及graylog-1.2安装笔记以及基本的使用">
+<meta property="og:description" content="本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。
+1、起因从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库logrus（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中">
 <meta property="og:image" content="http://domicat.me/img/graylog-web.png">
 <meta property="og:updated_time" content="2015-11-05T09:26:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu elasticsearch和graylog安装与使用">
-<meta name="twitter:description" content="ubuntu server 14.04下elasticsearch-1.7安装以及graylog-1.2安装笔记以及基本的使用">
+<meta name="twitter:description" content="本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。
+1、起因从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库logrus（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中">
 
 
 
 <script type="text/javascript" id="hexo.configuration">
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'hide',
+    sidebar: 'post',
     motion: true
   };
 </script>
@@ -267,7 +270,9 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="1、起因">1、起因</h3><p>从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库<a href="https://github.com/gogap/logrus" target="_blank" rel="external">logrus</a>（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中，可能会出问题，所有就看了下graylog是个什么东西，初步了解，发现比较强大，虽然我比较讨厌java，但是没办法，项目需要。so~ 开始动手搞起来。</p>
+        <span itemprop="articleBody"><p>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。</p>
+<h3 id="1、起因">1、起因</h3><p>从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库<a href="https://github.com/gogap/logrus" target="_blank" rel="external">logrus</a>（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中，可能会出问题，所有就看了下graylog是个什么东西，初步了解，发现比较强大，虽然我比较讨厌java，但是没办法，项目需要。so~ 开始动手搞起来。</p>
+<a id="more"></a>
 <h3 id="2、前期准备">2、前期准备</h3><p>从百度找了一堆的教程，都是很老以前的版本，最新的1.2界面更清新，于是，只能去<a href="http://docs.graylog.org/en/1.2/pages/installation.html" target="_blank" rel="external">官网</a>找帮助文档。</p>
 <p>安装graylog之前，需要安装java环境、mongodb和 elasticsearch。</p>
 <h4 id="2-1_安装java">2-1 安装java</h4><p>这里参考了<a href="http://www.linuxidc.com/Linux/2014-09/106445.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2014-09/106445.htm</a></p>
