@@ -78,7 +78,8 @@ comments: true
 
 ### 2、加密算法
 
-加密算法又分为：**对称加密**和**非对称加密**，对称加密，顾名思义，就是加密和解密都使用相同的秘钥；非对称加密则是加密和解密的秘钥是不一样的。具体可以参考：[http://www.willrey.com/support/ssl_DES.html](http://www.willrey.com/support/ssl_DES.html)
+加密算法又分为：**对称加密**和**非对称加密**，对称加密，顾名思义，就是加密和解密都使用相同的秘钥；非对称加密则是加密和解密的秘钥是不一样的。  
+具体可以参考：[http://www.willrey.com/support/ssl_DES.html](http://www.willrey.com/support/ssl_DES.html)
 
 常用的对称加密：
 

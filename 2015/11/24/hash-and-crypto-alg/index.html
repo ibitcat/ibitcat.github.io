@@ -320,7 +320,7 @@ md5.<span class="function"><span class="title">Sum</span><span class="params">([
 <li>方式一中：Write函数会把MD5对象内部的字符串clear掉，然后把其参数作为新的内部字符串。Sum函数则是先计算出内部字符串的MD5值，而后把输入参数附加到内部字符串后面。如果 <code>h.Sum(nil)</code>参数不填nil，而传入<code>[]byte(&quot;foo&quot;)</code>,则最后的结果为：<code>098f6bcd4621d373cade4e832627b4f6foo</code>,会发现foo出现在md5(“test”)的后面。</li>
 <li>方式二中：直接使用md5包中的<code>Sum</code>方法，效果与方式一中传nil参数是一样的。</li>
 </ul>
-<h3 id="2、加密算法">2、加密算法</h3><p>加密算法又分为：<strong>对称加密</strong>和<strong>非对称加密</strong>，对称加密，顾名思义，就是加密和解密都使用相同的秘钥；非对称加密则是加密和解密的秘钥是不一样的。具体可以参考：<a href="http://www.willrey.com/support/ssl_DES.html" target="_blank" rel="external">http://www.willrey.com/support/ssl_DES.html</a></p>
+<h3 id="2、加密算法">2、加密算法</h3><p>加密算法又分为：<strong>对称加密</strong>和<strong>非对称加密</strong>，对称加密，顾名思义，就是加密和解密都使用相同的秘钥；非对称加密则是加密和解密的秘钥是不一样的。<br>具体可以参考：<a href="http://www.willrey.com/support/ssl_DES.html" target="_blank" rel="external">http://www.willrey.com/support/ssl_DES.html</a></p>
 <p>常用的对称加密：</p>
 <ul>
 <li>DES（Data Encryption Standard）：数据加密标准，速度较快，适用于加密大量数据的场合。</li>
