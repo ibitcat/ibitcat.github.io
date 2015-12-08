@@ -203,7 +203,7 @@ body {
 }
 @media (min-width: 1600px) {
   body {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 h1,
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0dfffc;
+  background: #ffffd9;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -2195,7 +2195,7 @@ ul li {
 }
 @media (min-width: 1600px) {
   .post-more-link a {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 .post-more-link a:hover {
