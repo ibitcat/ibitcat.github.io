@@ -61,7 +61,7 @@
 <meta property="og:description" content="一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
 一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，最后迁移到hexo。
 一路下来，也是耗费了很多心血。但是感觉很值得，从一开始什么都不懂，到现在能自己改写小东西，虽然我一点前端都不会 - -">
-<meta property="og:updated_time" content="2015-12-08T01:46:49.606Z">
+<meta property="og:updated_time" content="2015-12-08T12:58:26.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="入住github pages">
 <meta name="twitter:description" content="一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
@@ -190,6 +190,161 @@
         </li>
       
 
+      <!--添加high一下-->
+      <li class="menu-item menu-item-about">
+        <a title="high起来" href='javascript:(function() {
+            function c() {
+                var e = document.createElement("link");
+                e.setAttribute("type", "text/css");
+                e.setAttribute("rel", "stylesheet");
+                e.setAttribute("href", f);
+                e.setAttribute("class", l);
+                document.body.appendChild(e)
+            }
+         
+            function h() {
+                var e = document.getElementsByClassName(l);
+                for (var t = 0; t < e.length; t++) {
+                    document.body.removeChild(e[t])
+                }
+            }
+         
+            function p() {
+                var e = document.createElement("div");
+                e.setAttribute("class", a);
+                document.body.appendChild(e);
+                setTimeout(function() {
+                    document.body.removeChild(e)
+                }, 100)
+            }
+         
+            function d(e) {
+                return {
+                    height : e.offsetHeight,
+                    width : e.offsetWidth
+                }
+            }
+         
+            function v(i) {
+                var s = d(i);
+                return s.height > e && s.height < n && s.width > t && s.width < r
+            }
+         
+            function m(e) {
+                var t = e;
+                var n = 0;
+                while (!!t) {
+                    n += t.offsetTop;
+                    t = t.offsetParent
+                }
+                return n
+            }
+         
+            function g() {
+                var e = document.documentElement;
+                if (!!window.innerWidth) {
+                    return window.innerHeight
+                } else if (e && !isNaN(e.clientHeight)) {
+                    return e.clientHeight
+                }
+                return 0
+            }
+         
+            function y() {
+                if (window.pageYOffset) {
+                    return window.pageYOffset
+                }
+                return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+            }
+         
+            function E(e) {
+                var t = m(e);
+                return t >= w && t <= b + w
+            }
+         
+            function S() {
+                var e = document.createElement("audio");
+                e.setAttribute("class", l);
+                e.src = i;
+                e.loop = false;
+                e.addEventListener("canplay", function() {
+                    setTimeout(function() {
+                        x(k)
+                    }, 500);
+                    setTimeout(function() {
+                        N();
+                        p();
+                        for (var e = 0; e < O.length; e++) {
+                            T(O[e])
+                        }
+                    }, 15500)
+                }, true);
+                e.addEventListener("ended", function() {
+                    N();
+                    h()
+                }, true);
+                e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+                document.body.appendChild(e);
+                e.play()
+            }
+         
+            function x(e) {
+                e.className += " " + s + " " + o
+            }
+         
+            function T(e) {
+                e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+            }
+         
+            function N() {
+                var e = document.getElementsByClassName(s);
+                var t = new RegExp("\\b" + s + "\\b");
+                for (var n = 0; n < e.length; ) {
+                    e[n].className = e[n].className.replace(t, "")
+                }
+            }
+         
+            var e = 30;
+            var t = 30;
+            var n = 350;
+            var r = 350;
+            var i = "/res/imageharlem-shake.mp3";
+            var s = "mw-harlem_shake_me";
+            var o = "im_first";
+            var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+            var a = "mw-strobe_light";
+            var f = "/res/imageharlem-shake-style.css";
+            var l = "mw_added_css";
+            var b = g();
+            var w = y();
+            var C = document.getElementsByTagName("*");
+            var k = null;
+            for (var L = 0; L < C.length; L++) {
+                var A = C[L];
+                if (v(A)) {
+                    if (E(A)) {
+                        k = A;
+                        break
+                    }
+                }
+            }
+            if (A === null) {
+                console.warn("Could not find a node of the right size. Please try a different page.");
+                return
+            }
+            c();
+            S();
+            var O = [];
+            for (var L = 0; L < C.length; L++) {
+                var A = C[L];
+                if (v(A)) {
+                    O.push(A)
+                }
+            }
+        })()'>High一下
+        </a>
+      </li>
+
       
       
     </ul>
@@ -241,8 +396,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-08T09:46:49+08:00" content="2015-12-08">
-			  2015-12-08 09:46:49
+		    <time itemprop="dateCreated" datetime="2015-12-08T20:58:26+08:00" content="2015-12-08">
+			  2015-12-08 20:58:26
 		    </time>
           </span>
 
@@ -263,7 +418,10 @@
       
 
       
-        <span itemprop="articleBody"><p>一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。</p>
+        <span itemprop="articleBody"><center> <iframe name="iframe_canvas" src="http://douban.fm/partner/baidu/doubanradio" scrolling="no" frameborder="0" width="400" height="200"></iframe> </center>
+
+
+<p>一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。</p>
 <p>一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，<br>最后迁移到hexo。</p>
 <p>一路下来，也是耗费了很多心血。但是感觉很值得，从一开始什么都不懂，到现在能自己改写小东西，虽然我一点前端都不会 - -</p>
 <a id="more"></a>
@@ -271,7 +429,7 @@
 <p>markdown笔记定义格式：</p>
 </blockquote>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">layout: post				<span class="preprocessor">#post样式</span></span><br><span class="line">title: 标题					<span class="preprocessor">#标题</span></span><br><span class="line">description: <span class="string">"简介"</span>			<span class="preprocessor">#简介</span></span><br><span class="line">modified: <span class="number">2013</span>-<span class="number">05</span>-<span class="number">31</span>		<span class="preprocessor">#修改时间</span></span><br><span class="line">date: <span class="number">2015</span>-<span class="number">08</span>-<span class="number">18</span> <span class="number">15</span>:<span class="number">07</span>:<span class="number">19</span> <span class="preprocessor">#发布时间</span></span><br><span class="line">tags: [标签<span class="number">1</span>, 标签<span class="number">2</span>]		<span class="preprocessor">#标签</span></span><br><span class="line">comments: <span class="literal">true</span>			<span class="preprocessor">#是否可用评论</span></span><br><span class="line">photos: <span class="preprocessor">#图片</span></span><br><span class="line">	 - img/golang_import.jpg</span><br></pre></td></tr></table></figure>
-<p><strong>关于目录</strong>：<br>h3标签为一级标题；<br>h4标签为二级标题；<br>目前目录只支持这两种标题。</p>
+<p>另外，关于如何添加一下小玩意到NexT主题上，请参考：<br><a href="http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/" target="_blank" rel="external">玩转NexT</a><br><a href="http://lizhuolun.com/posts/%E4%B8%BAhexo-next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0tinysou-Swiftype-%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">站内搜索</a></p>
 </span>
       
     </div>
