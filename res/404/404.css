@@ -60,3 +60,16 @@ body {
 	margin: 250px auto;
 }
 
+#asiance a {
+	background: url(/res/404/goback.png) no-repeat;
+	width: 507px;
+	height: 97px;
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	display: block;
+	text-decoration: none;
+}
+#asiance a:hover {
+	background: url(/res/404/goback.png) no-repeat left -97px;
+}
