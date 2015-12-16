@@ -51,7 +51,7 @@
 
 
 
-<meta name="description" content="git是什么东西，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
+<meta name="description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
 1、git的常用操作；
@@ -60,7 +60,7 @@
 <meta property="og:title" content="git 操作手册">
 <meta property="og:url" content="http://domicat.me/2015/12/16/git-doc/index.html">
 <meta property="og:site_name" content="Domi●Cat">
-<meta property="og:description" content="git是什么东西，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
+<meta property="og:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
 1、git的常用操作；
@@ -68,7 +68,7 @@
 <meta property="og:updated_time" content="2015-12-16T03:54:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
-<meta name="twitter:description" content="git是什么东西，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
+<meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
 1、git的常用操作；
@@ -433,14 +433,24 @@
       
 
       
-        <span itemprop="articleBody"><p>git是什么东西，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。</p>
+        <span itemprop="articleBody"><p>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着<strong>好记性不如烂笔头</strong>的伟大信念，我决定有必要系统性整理一下，方便日后查找。</p>
 <p>分为两个部分：  </p>
 <ul>
 <li>1、git的常用操作；</li>
 <li>2、错误解决方法；</li>
 </ul>
 <a id="more"></a>
-<h3 id="常用操作">常用操作</h3><h3 id="出现的错误以及解决方法">出现的错误以及解决方法</h3></span>
+<h3 id="常用操作">常用操作</h3><h3 id="出现的错误以及解决方法">出现的错误以及解决方法</h3><h4 id="warning:_push-default_is_unset">warning: push.default is unset</h4><p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple" target="_blank" rel="external">点这里</a></p>
+<p>解决方法：<br>打开git bash，设置git全局配置： <code>git config --global push.default matching</code> 或者 <code>git config --global push.default simple</code></p>
+<ul>
+<li>matching，  Git 1.x 的默认行为，其意是如果你执行 git push 但没有指定分支，它将 push 所有你本地的分支到远程仓库中对应匹配的分支。</li>
+<li>simple，Git 2.x 的默认行为，意味着执行 git push 没有指定分支时，只有当前分支会被 push 到你使用 git pull 获取的代码。</li>
+</ul>
+<h4 id="warning:_LF_will_be_replaced_by_CRLF">warning: LF will be replaced by CRLF</h4><blockquote>
+<p>CRLF（ Carriage-Return Line-Feed，回车换行），ACSII字符为 <code>\r\n</code>。</p>
+</blockquote>
+<p>原因： Git的换行符检查功能。因为操作系统定义的换行符的不一致，windows系统使用 <strong>CRLF</strong>(\r\n)来表示一行结束，而linux用 \n 来表示换行，Git提供了一个换行符检查功能（core.safecrlf），可以在提交时检查文件是否混用了不同风格的换行符。</p>
+</span>
       
     </div>
 
@@ -625,7 +635,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的错误以及解决方法"><span class="nav-number">2.</span> <span class="nav-text">出现的错误以及解决方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的错误以及解决方法"><span class="nav-number">2.</span> <span class="nav-text">出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">2.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">2.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
