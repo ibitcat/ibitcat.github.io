@@ -69,7 +69,7 @@
 2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
-<meta property="og:updated_time" content="2015-12-16T10:04:33.462Z">
+<meta property="og:updated_time" content="2015-12-16T10:05:48.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
@@ -408,8 +408,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-16T18:04:33+08:00" content="2015-12-16">
-			  2015-12-16 18:04:33
+		    <time itemprop="dateCreated" datetime="2015-12-16T18:05:48+08:00" content="2015-12-16">
+			  2015-12-16 18:05:48
 		    </time>
           </span>
 
@@ -469,8 +469,10 @@ git pull <span class="comment">#此时就会报错，因为git不知道去拉取
 </ul>
 <h4 id="常用操作">常用操作</h4><ul>
 <li><p>提交所有有改动的文件：  </p>
-<p>  git add .<br>  git add –update .<br>  git commit -am “提交描述”</p>
-</li>
+<pre><code>git <span class="built_in">add</span> .
+git <span class="built_in">add</span> --<span class="keyword">update</span> .
+git commit -<span class="keyword">am</span> <span class="string">"提交描述"</span>
+</code></pre></li>
 </ul>
 <h3 id="第三部分_-_git的设置">第三部分 - git的设置</h3><p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
 <h4 id="git_push免用户名、密码输入">git push免用户名、密码输入</h4><p>如果使用https向远程push代码时，总是要输入用户名和密码，长期如此会觉得很烦，网上搜索有三种解决方案。具体参考：  </p>
