@@ -69,7 +69,7 @@
 2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
-<meta property="og:updated_time" content="2015-12-16T11:33:32.916Z">
+<meta property="og:updated_time" content="2015-12-16T12:32:05.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
@@ -408,8 +408,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-16T19:33:32+08:00" content="2015-12-16">
-			  2015-12-16 19:33:32
+		    <time itemprop="dateCreated" datetime="2015-12-16T20:32:05+08:00" content="2015-12-16">
+			  2015-12-16 20:32:05
 		    </time>
           </span>
 
@@ -464,6 +464,11 @@ git push origin <span class="built_in">test</span>
 git pull <span class="comment">#此时就会报错，因为git不知道去拉取远程的哪个分支</span>
 </code></pre><p>但是，如果使用了<code>git push -u origin test</code>，等价于： <code>git push origin test ; git branch --set-upstream test origin/test</code>。</p>
 <h3 id="第二部分_-_git命令与常用操作">第二部分 - git命令与常用操作</h3><h4 id="git命令">git命令</h4><ul>
+<li>git status #查看仓库状态</li>
+<li>git add xxx.txt #添加文件到仓库</li>
+<li>git log #查询历史记录，加参数 <code>--pretty=oneline</code>简化显示信息</li>
+<li>git checkout – file #撤销工作区的修改，即撤销未add的修改</li>
+<li>git reset HEAD file #撤销暂存区的修改，即撤销add后的修改，之后再使用<code>git checkout -- file</code></li>
 <li>git branch #查看本地分支</li>
 <li>git branch -a #查看所有分支，包括本地和远程分支</li>
 <li>git push origin –delete test #删除远程仓库的test分支</li>
@@ -471,6 +476,13 @@ git pull <span class="comment">#此时就会报错，因为git不知道去拉取
 <li>git remote -v #显示远程仓库，-v表示显示仓库的url地址</li>
 </ul>
 <h4 id="常用操作">常用操作</h4><ul>
+<li><p>版本回退与恢复，使用<strong>git reset</strong>  </p>
+<blockquote>
+<p>在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，往上100个版本写成HEAD~100</p>
+</blockquote>
+<pre><code>git <span class="keyword">reset</span> --hard HEAD^ <span class="comment">#回退到上一个版本，HEAD表示当前版本</span>
+git reflog <span class="comment">#仓库的所有操作记录</span>
+</code></pre></li>
 <li><p>提交所有有改动的文件：  </p>
 <pre><code>git <span class="built_in">add</span> .
 git <span class="built_in">add</span> --<span class="keyword">update</span> .
