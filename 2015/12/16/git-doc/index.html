@@ -54,8 +54,10 @@
 <meta name="description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
-1、git的常用操作；
-2、错误解决方法；">
+1、git学习资料；
+2、git的常用操作；
+3、git的设置；
+4、错误解决方法；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 操作手册">
 <meta property="og:url" content="http://domicat.me/2015/12/16/git-doc/index.html">
@@ -63,16 +65,20 @@
 <meta property="og:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
-1、git的常用操作；
-2、错误解决方法；">
+1、git学习资料；
+2、git的常用操作；
+3、git的设置；
+4、错误解决方法；">
 <meta property="og:updated_time" content="2015-12-16T03:54:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为两个部分：  
 
-1、git的常用操作；
-2、错误解决方法；">
+1、git学习资料；
+2、git的常用操作；
+3、git的设置；
+4、错误解决方法；">
 
 
 
@@ -436,11 +442,34 @@
         <span itemprop="articleBody"><p>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着<strong>好记性不如烂笔头</strong>的伟大信念，我决定有必要系统性整理一下，方便日后查找。</p>
 <p>分为两个部分：  </p>
 <ul>
-<li>1、git的常用操作；</li>
-<li>2、错误解决方法；</li>
+<li>1、git学习资料；</li>
+<li>2、git的常用操作；</li>
+<li>3、git的设置；</li>
+<li>4、错误解决方法；</li>
 </ul>
 <a id="more"></a>
-<h3 id="常用操作">常用操作</h3><h3 id="出现的错误以及解决方法">出现的错误以及解决方法</h3><h4 id="warning:_push-default_is_unset">warning: push.default is unset</h4><p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple" target="_blank" rel="external">点这里</a></p>
+<h3 id="git学习资料">git学习资料</h3><ul>
+<li><a href="https://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">GitHub秘籍</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">Git教程</a></li>
+<li><a href="http://git.oschina.net/progit/index.html" target="_blank" rel="external">Pro Git（中文版）</a></li>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/index.html" target="_blank" rel="external">Git Magic</a></li>
+</ul>
+<h3 id="常用操作">常用操作</h3><h4 id="提交所有有改动的文件">提交所有有改动的文件</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git <span class="built_in">add</span> .</span><br><span class="line">git <span class="built_in">add</span> --<span class="keyword">update</span> .</span><br><span class="line">git commit -<span class="keyword">am</span> <span class="string">"提交描述"</span></span><br></pre></td></tr></table></figure>
+<h3 id="git的设置">git的设置</h3><p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
+<h4 id="git_push免用户名、密码输入">git push免用户名、密码输入</h4><p>如果使用https向远程push代码时，总是要输入用户名和密码，长期如此会觉得很烦，网上搜索有三种解决方案。具体参考：  </p>
+<ul>
+<li><a href="http://git-scm.com/docs/gitcredentials" target="_blank" rel="external">Git - gitcredentials Documentation</a></li>
+<li><a href="http://git-scm.com/docs/git-credential-store" target="_blank" rel="external">Git - git credential store</a></li>
+<li><a href="https://help.github.com/articles/caching-your-github-password-in-git/" target="_blank" rel="external">Caching your GitHub password in Git</a></li>
+<li><a href="http://www.cnblogs.com/ballwql/p/3462104.html" target="_blank" rel="external">Git Push 避免用户名和密码方法</a></li>
+</ul>
+<p><strong>方法一</strong>：切换成ssh模式<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Domi@DomiCat MINGW64 /d/Github/domi-vimrc (master)</span><br><span class="line">$ git remote -v</span><br><span class="line">origin  https://github.com/shuimu98/domi-vimrc.git (fetch) <span class="preprocessor">#这里表示使用的是https方式</span></span><br><span class="line">origin  https://github.com/shuimu98/domi-vimrc.git (<span class="keyword">push</span>) </span><br><span class="line"></span><br><span class="line">$ git remote rm origin</span><br><span class="line">$ git remote <span class="keyword">add</span> origin git@github.com:shuimu98/domi-vimrc.git</span><br><span class="line">$ git <span class="keyword">push</span> </span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#如果push失败，报以下错误</span></span><br><span class="line"><span class="label">fatal:</span> The current branch master has no upstream branch.</span><br><span class="line">To <span class="keyword">push</span> the current branch <span class="keyword">and</span> <span class="keyword">set</span> the remote as upstream, use</span><br><span class="line"></span><br><span class="line">   	git <span class="keyword">push</span> --<span class="keyword">set</span>-upstream origin master</span><br><span class="line">按照提示输入</span><br><span class="line">$ git <span class="keyword">push</span> -u origin master</span><br><span class="line">或</span><br><span class="line">$ git <span class="keyword">push</span> --<span class="keyword">set</span>-upstream origin master</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法二</strong>：设置 credential helper，打开git bash，按顺序输入以下命令：  </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">cd ~</span><br><span class="line">touch <span class="class">.git-credentials</span></span><br><span class="line">vim <span class="class">.git-credentials</span> #输入 https:<span class="comment">//&#123;username&#125;:&#123;password&#125;@github.com </span></span><br><span class="line">git config --global credential<span class="class">.helper</span> store</span><br></pre></td></tr></table></figure>
+<p>用<code>cat .gitconfig</code>查看配置文件，会看到：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="string">[credential]</span></span><br><span class="line">       helper = store</span><br></pre></td></tr></table></figure>
+<p><strong>方法三</strong>： 使用环境变量存储用户名和密码（未自测）<br>1、在windows中添加一个HOME环境变量，变量名:HOME,变量值：%USERPROFILE%；<br>2、进入%HOME%目录，新建一个名为”_netrc”的文件，文件中内容格式如下：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title">machine</span> &#123;<span class="title">git</span> account name&#125;.github.com  <span class="comment">#如果无效，改为 machine github.com</span></span><br><span class="line">login your-usernmae</span><br><span class="line">password your-password</span><br></pre></td></tr></table></figure></p>
+<h3 id="出现的错误以及解决方法">出现的错误以及解决方法</h3><h4 id="warning:_push-default_is_unset">warning: push.default is unset</h4><p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple" target="_blank" rel="external">这里</a></p>
 <p>解决方法：<br>打开git bash，设置git全局配置： <code>git config --global push.default matching</code> 或者 <code>git config --global push.default simple</code></p>
 <ul>
 <li>matching，  Git 1.x 的默认行为，其意是如果你执行 git push 但没有指定分支，它将 push 所有你本地的分支到远程仓库中对应匹配的分支。</li>
@@ -449,7 +478,7 @@
 <h4 id="warning:_LF_will_be_replaced_by_CRLF">warning: LF will be replaced by CRLF</h4><blockquote>
 <p>CRLF（ Carriage-Return Line-Feed，回车换行），ACSII字符为 <code>\r\n</code>。</p>
 </blockquote>
-<p>原因： Git的换行符检查功能。因为操作系统定义的换行符的不一致，windows系统使用 <strong>CRLF</strong>(\r\n)来表示一行结束，而linux用 \n 来表示换行，Git提供了一个换行符检查功能（core.safecrlf），可以在提交时检查文件是否混用了不同风格的换行符。</p>
+<p>原因： Git的换行符检查功能。因为操作系统定义的换行符的不一致，windows系统使用 <strong>CRLF</strong>(\r\n)来表示一行结束，而linux用 \n 来表示换行，Git提供了一个换行符检查功能（core.safecrlf），可以在提交时检查文件是否混用了不同风格的换行符。Git可以在你提交时自动地把行结束符CRLF转换成LF，而在迁出代码时把LF转换成CRLF。具体参考：<a href="http://blog.csdn.net/feng88724/article/details/11600375" target="_blank" rel="external">这里</a></p>
 </span>
       
     </div>
@@ -635,7 +664,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">1.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的错误以及解决方法"><span class="nav-number">2.</span> <span class="nav-text">出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">2.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">2.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git学习资料"><span class="nav-number">1.</span> <span class="nav-text">git学习资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">2.</span> <span class="nav-text">常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#提交所有有改动的文件"><span class="nav-number">2.1.</span> <span class="nav-text">提交所有有改动的文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git的设置"><span class="nav-number">3.</span> <span class="nav-text">git的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_push免用户名、密码输入"><span class="nav-number">3.1.</span> <span class="nav-text">git push免用户名、密码输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的错误以及解决方法"><span class="nav-number">4.</span> <span class="nav-text">出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">4.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">4.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

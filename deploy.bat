@@ -1,4 +1,5 @@
 @echo off
+@echo 需要放到hexo folder下执行
 
 call hexo clean
 call hexo g
