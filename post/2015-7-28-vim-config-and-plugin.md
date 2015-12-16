@@ -13,6 +13,9 @@ comments: true
 **vimrc下载地址**：[传送门](https://github.com/shuimu98/domi-vimrc)
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
 
+先来一张预览图：  
+![pic](/img/vim.png) 
+
 <!-- more -->
 
 ### vim基础配置
