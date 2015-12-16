@@ -69,7 +69,7 @@
 2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
-<meta property="og:updated_time" content="2015-12-16T10:05:48.239Z">
+<meta property="og:updated_time" content="2015-12-16T11:33:32.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
@@ -408,8 +408,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-16T18:05:48+08:00" content="2015-12-16">
-			  2015-12-16 18:05:48
+		    <time itemprop="dateCreated" datetime="2015-12-16T19:33:32+08:00" content="2015-12-16">
+			  2015-12-16 19:33:32
 		    </time>
           </span>
 
@@ -466,6 +466,9 @@ git pull <span class="comment">#此时就会报错，因为git不知道去拉取
 <h3 id="第二部分_-_git命令与常用操作">第二部分 - git命令与常用操作</h3><h4 id="git命令">git命令</h4><ul>
 <li>git branch #查看本地分支</li>
 <li>git branch -a #查看所有分支，包括本地和远程分支</li>
+<li>git push origin –delete test #删除远程仓库的test分支</li>
+<li>git push origin –delete tag <tagname> #删除远程仓库的标签</tagname></li>
+<li>git remote -v #显示远程仓库，-v表示显示仓库的url地址</li>
 </ul>
 <h4 id="常用操作">常用操作</h4><ul>
 <li><p>提交所有有改动的文件：  </p>
@@ -475,6 +478,16 @@ git commit -<span class="keyword">am</span> <span class="string">"提交描述"<
 </code></pre></li>
 </ul>
 <h3 id="第三部分_-_git的设置">第三部分 - git的设置</h3><p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
+<h4 id="git_config_常用配置">git config 常用配置</h4><ul>
+<li><p>设置用户名和邮箱  </p>
+<blockquote>
+<p>–global，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。  </p>
+</blockquote>
+<pre><code>$ git config --global user<span class="class">.name</span> <span class="string">"Your Name"</span>
+$ git config --global user<span class="class">.email</span> <span class="string">"email@example.com"</span>
+</code></pre></li>
+<li></li>
+</ul>
 <h4 id="git_push免用户名、密码输入">git push免用户名、密码输入</h4><p>如果使用https向远程push代码时，总是要输入用户名和密码，长期如此会觉得很烦，网上搜索有三种解决方案。具体参考：  </p>
 <ul>
 <li><a href="http://git-scm.com/docs/gitcredentials" target="_blank" rel="external">Git - gitcredentials Documentation</a></li>
@@ -708,7 +721,7 @@ password your-password
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分_-_git学习资料以及选项解释"><span class="nav-number">1.</span> <span class="nav-text">第一部分 - git学习资料以及选项解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#origin到底是什么意思？"><span class="nav-number">1.1.</span> <span class="nav-text">origin到底是什么意思？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_-u这个参数到底表示什么？"><span class="nav-number">1.2.</span> <span class="nav-text">git -u这个参数到底表示什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分_-_git命令与常用操作"><span class="nav-number">2.</span> <span class="nav-text">第二部分 - git命令与常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git命令"><span class="nav-number">2.1.</span> <span class="nav-text">git命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用操作"><span class="nav-number">2.2.</span> <span class="nav-text">常用操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分_-_git的设置"><span class="nav-number">3.</span> <span class="nav-text">第三部分 - git的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_push免用户名、密码输入"><span class="nav-number">3.1.</span> <span class="nav-text">git push免用户名、密码输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四部分_-_出现的错误以及解决方法"><span class="nav-number">4.</span> <span class="nav-text">第四部分 - 出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">4.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">4.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分_-_git学习资料以及选项解释"><span class="nav-number">1.</span> <span class="nav-text">第一部分 - git学习资料以及选项解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#origin到底是什么意思？"><span class="nav-number">1.1.</span> <span class="nav-text">origin到底是什么意思？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_-u这个参数到底表示什么？"><span class="nav-number">1.2.</span> <span class="nav-text">git -u这个参数到底表示什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分_-_git命令与常用操作"><span class="nav-number">2.</span> <span class="nav-text">第二部分 - git命令与常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git命令"><span class="nav-number">2.1.</span> <span class="nav-text">git命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用操作"><span class="nav-number">2.2.</span> <span class="nav-text">常用操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分_-_git的设置"><span class="nav-number">3.</span> <span class="nav-text">第三部分 - git的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_config_常用配置"><span class="nav-number">3.1.</span> <span class="nav-text">git config 常用配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_push免用户名、密码输入"><span class="nav-number">3.2.</span> <span class="nav-text">git push免用户名、密码输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四部分_-_出现的错误以及解决方法"><span class="nav-number">4.</span> <span class="nav-text">第四部分 - 出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">4.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">4.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
