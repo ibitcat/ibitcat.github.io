@@ -55,7 +55,7 @@
 分为四个部分：  
 
 1、git学习资料；
-2、git的常用操作；
+2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
 <meta property="og:type" content="article">
@@ -66,17 +66,17 @@
 分为四个部分：  
 
 1、git学习资料；
-2、git的常用操作；
+2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
-<meta property="og:updated_time" content="2015-12-16T10:00:32.907Z">
+<meta property="og:updated_time" content="2015-12-16T10:04:33.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
 分为四个部分：  
 
 1、git学习资料；
-2、git的常用操作；
+2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
 
@@ -408,8 +408,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-16T18:00:32+08:00" content="2015-12-16">
-			  2015-12-16 18:00:32
+		    <time itemprop="dateCreated" datetime="2015-12-16T18:04:33+08:00" content="2015-12-16">
+			  2015-12-16 18:04:33
 		    </time>
           </span>
 
@@ -443,12 +443,12 @@
 <p>分为四个部分：  </p>
 <ul>
 <li>1、git学习资料；</li>
-<li>2、git的常用操作；</li>
+<li>2、git命令与常用操作；</li>
 <li>3、git的设置；</li>
 <li>4、错误解决方法；</li>
 </ul>
 <a id="more"></a>
-<h3 id="第一部分_git学习资料以及选项解释">第一部分 git学习资料以及选项解释</h3><p>这里是我收集的git学习资料：  </p>
+<h3 id="第一部分_-_git学习资料以及选项解释">第一部分 - git学习资料以及选项解释</h3><p>这里是我收集的git学习资料：  </p>
 <ul>
 <li><a href="https://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html" target="_blank" rel="external">GitHub秘籍</a></li>
 <li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">Git教程</a></li>
@@ -463,14 +463,16 @@
 git push origin <span class="built_in">test</span>
 git pull <span class="comment">#此时就会报错，因为git不知道去拉取远程的哪个分支</span>
 </code></pre><p>但是，如果使用了<code>git push -u origin test</code>，等价于： <code>git push origin test ; git branch --set-upstream test origin/test</code>。</p>
-<h3 id="第二部分_常用操作">第二部分 常用操作</h3><h4 id="分支">分支</h4><ul>
+<h3 id="第二部分_-_git命令与常用操作">第二部分 - git命令与常用操作</h3><h4 id="git命令">git命令</h4><ul>
 <li>git branch #查看本地分支</li>
 <li>git branch -a #查看所有分支，包括本地和远程分支</li>
 </ul>
-<h4 id="提交所有有改动的文件">提交所有有改动的文件</h4><pre><code>git <span class="built_in">add</span> .
-git <span class="built_in">add</span> --<span class="keyword">update</span> .
-git commit -<span class="keyword">am</span> <span class="string">"提交描述"</span>
-</code></pre><h3 id="第三部分_git的设置">第三部分 git的设置</h3><p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
+<h4 id="常用操作">常用操作</h4><ul>
+<li><p>提交所有有改动的文件：  </p>
+<p>  git add .<br>  git add –update .<br>  git commit -am “提交描述”</p>
+</li>
+</ul>
+<h3 id="第三部分_-_git的设置">第三部分 - git的设置</h3><p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
 <h4 id="git_push免用户名、密码输入">git push免用户名、密码输入</h4><p>如果使用https向远程push代码时，总是要输入用户名和密码，长期如此会觉得很烦，网上搜索有三种解决方案。具体参考：  </p>
 <ul>
 <li><a href="http://git-scm.com/docs/gitcredentials" target="_blank" rel="external">Git - gitcredentials Documentation</a></li>
@@ -509,7 +511,7 @@ git config --global credential<span class="class">.helper</span> store
 <pre><code><span class="title">machine</span> {<span class="title">git</span> account name}.github.com  <span class="comment">#如果无效，改为 machine github.com</span>
 login your-usernmae
 password your-password
-</code></pre><h3 id="第四部分_出现的错误以及解决方法">第四部分 出现的错误以及解决方法</h3><h4 id="warning:_push-default_is_unset">warning: push.default is unset</h4><p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple" target="_blank" rel="external">这里</a></p>
+</code></pre><h3 id="第四部分_-_出现的错误以及解决方法">第四部分 - 出现的错误以及解决方法</h3><h4 id="warning:_push-default_is_unset">warning: push.default is unset</h4><p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple" target="_blank" rel="external">这里</a></p>
 <p>解决方法：<br>打开git bash，设置git全局配置： <code>git config --global push.default matching</code> 或者 <code>git config --global push.default simple</code></p>
 <ul>
 <li>matching，  Git 1.x 的默认行为，其意是如果你执行 git push 但没有指定分支，它将 push 所有你本地的分支到远程仓库中对应匹配的分支。</li>
@@ -704,7 +706,7 @@ password your-password
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分_git学习资料以及选项解释"><span class="nav-number">1.</span> <span class="nav-text">第一部分 git学习资料以及选项解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#origin到底是什么意思？"><span class="nav-number">1.1.</span> <span class="nav-text">origin到底是什么意思？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_-u这个参数到底表示什么？"><span class="nav-number">1.2.</span> <span class="nav-text">git -u这个参数到底表示什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分_常用操作"><span class="nav-number">2.</span> <span class="nav-text">第二部分 常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分支"><span class="nav-number">2.1.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提交所有有改动的文件"><span class="nav-number">2.2.</span> <span class="nav-text">提交所有有改动的文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分_git的设置"><span class="nav-number">3.</span> <span class="nav-text">第三部分 git的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_push免用户名、密码输入"><span class="nav-number">3.1.</span> <span class="nav-text">git push免用户名、密码输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四部分_出现的错误以及解决方法"><span class="nav-number">4.</span> <span class="nav-text">第四部分 出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">4.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">4.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分_-_git学习资料以及选项解释"><span class="nav-number">1.</span> <span class="nav-text">第一部分 - git学习资料以及选项解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#origin到底是什么意思？"><span class="nav-number">1.1.</span> <span class="nav-text">origin到底是什么意思？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git_-u这个参数到底表示什么？"><span class="nav-number">1.2.</span> <span class="nav-text">git -u这个参数到底表示什么？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分_-_git命令与常用操作"><span class="nav-number">2.</span> <span class="nav-text">第二部分 - git命令与常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git命令"><span class="nav-number">2.1.</span> <span class="nav-text">git命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用操作"><span class="nav-number">2.2.</span> <span class="nav-text">常用操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分_-_git的设置"><span class="nav-number">3.</span> <span class="nav-text">第三部分 - git的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git_push免用户名、密码输入"><span class="nav-number">3.1.</span> <span class="nav-text">git push免用户名、密码输入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四部分_-_出现的错误以及解决方法"><span class="nav-number">4.</span> <span class="nav-text">第四部分 - 出现的错误以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_push-default_is_unset"><span class="nav-number">4.1.</span> <span class="nav-text">warning: push.default is unset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warning:_LF_will_be_replaced_by_CRLF"><span class="nav-number">4.2.</span> <span class="nav-text">warning: LF will be replaced by CRLF</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
