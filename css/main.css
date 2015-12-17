@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #5cb3b0;
+  background: #fe604b;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -1472,7 +1472,7 @@ body {
   word-wrap: break-word;
 }
 .fmt a:not(.btn) {
-  color: #87daff;
+  color: #06c;
   border-bottom: 0px;
 }
 .fmt a:not(.btn):hover {
