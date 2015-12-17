@@ -487,31 +487,8 @@ defer func()
 <p>关于这两者之间的区别，可以举个栗子：你钱包的钱可以直接拿来使用，就是<strong>值类型</strong>；而你存在银行的钱，它们托管在银行，就相当于<strong>引用类型</strong>，银行卡号就类似底层的指针。</p>
 </blockquote>
 <p>2、什么是引用传递？它和值传递有什么区别？<br><strong>值传递：</strong> 直接拷贝一份参数的值，然后传递给参数，记住它是一份拷贝，对它的改变是不会影响原本的参数；<br><strong>引用传递：</strong> 类似传递了参数的一个别名，对它的改变会影响到原本的参数；<br>3、golang 中slice、map、chan都是引用类型，但是用它们做参数传递给函数，则是值传递（可以用 %p打印内存地址来对比），注意：不要混淆<strong>引用类型</strong>和<strong>引用传递</strong>；<br>4、golang 中slice特殊之处：map和chan做参数，对它们的修改，可以反映在原本的参数上，是因为底层的指针不会改变；但是如果对slice的参数进行append之后，底层的数组地址可能会发生改变。<br>注意区分slice的以下三种操作：</p>
-<pre><code><span class="function">func <span class="title">main</span><span class="params">()</span> </span>{
-    a := []<span class="keyword">int</span>{<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>}
-    fmt.Println(a)
-    modifySliceData(a)
-    fmt.Println(a)
-}
-
-<span class="comment">// 这里只是修改了底层指针指向的值，所以原本的参数的值也发生了变化    </span>
-<span class="function">func <span class="title">modifySliceData</span><span class="params">(data []<span class="keyword">int</span>)</span> </span>{
-    fmt.Printf(<span class="string">"%p"</span>,&amp;data)
-    data[<span class="number">0</span>] = <span class="number">0</span>
-}
-
-<span class="comment">// 这里append之后，底层的数组地址发生了变化</span>
-<span class="function">func <span class="title">appendSliceData</span><span class="params">(data []<span class="keyword">int</span>)</span> </span>{
-    fmt.Printf(<span class="string">"%p"</span>,&amp;data)
-    data = append(data,<span class="number">4</span>) <span class="comment">// 注意：append并不会生成新的data，只会修改data底层指向数组的地址，以便存储append之后的值</span>
-}
-
-<span class="comment">// 如果要操作原本的参数，应该传入slice的指针</span>
-<span class="function">func <span class="title">updateSliceData</span><span class="params">(data *[]<span class="keyword">int</span>)</span> </span>{
-    fmt.Printf(<span class="string">"%p"</span>,data)
-    *data = append(*data,<span class="number">4</span>)    <span class="comment">// 此时，main函数的变量a=[]int{1,2,3,4}    </span>
-}
-</code></pre><p>总结：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">func <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    a := []<span class="keyword">int</span>&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">    fmt.Println(a)</span><br><span class="line">    modifySliceData(a)</span><br><span class="line">    fmt.Println(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里只是修改了底层指针指向的值，所以原本的参数的值也发生了变化	</span></span><br><span class="line"><span class="function">func <span class="title">modifySliceData</span><span class="params">(data []<span class="keyword">int</span>)</span> </span>&#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%p"</span>,&amp;data)</span><br><span class="line">    data[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里append之后，底层的数组地址发生了变化</span></span><br><span class="line"><span class="function">func <span class="title">appendSliceData</span><span class="params">(data []<span class="keyword">int</span>)</span> </span>&#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%p"</span>,&amp;data)</span><br><span class="line">	data = append(data,<span class="number">4</span>) <span class="comment">// 注意：append并不会生成新的data，只会修改data底层指向数组的地址，以便存储append之后的值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果要操作原本的参数，应该传入slice的指针</span></span><br><span class="line"><span class="function">func <span class="title">updateSliceData</span><span class="params">(data *[]<span class="keyword">int</span>)</span> </span>&#123;</span><br><span class="line">	fmt.Printf(<span class="string">"%p"</span>,data)</span><br><span class="line">	*data = append(*data,<span class="number">4</span>)	<span class="comment">// 此时，main函数的变量a=[]int&#123;1,2,3,4&#125;	</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
 <ul>
 <li>在golang中，函数传递参数都是值传递，闭包使用引用传递；</li>
 <li>引用类型和传引用是不同的两个概念；</li>

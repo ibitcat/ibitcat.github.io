@@ -129,6 +129,8 @@ const 里面声明常量，有如下要求：
 4、golang 中slice特殊之处：map和chan做参数，对它们的修改，可以反映在原本的参数上，是因为底层的指针不会改变；但是如果对slice的参数进行append之后，底层的数组地址可能会发生改变。  
 注意区分slice的以下三种操作：
 
+```
+
 	func main() {
 	    a := []int{1,2,3}
 	    fmt.Println(a)
@@ -153,6 +155,8 @@ const 里面声明常量，有如下要求：
 		fmt.Printf("%p",data)
 		*data = append(*data,4)	// 此时，main函数的变量a=[]int{1,2,3,4}	
 	}
+
+```
 
 总结：
 

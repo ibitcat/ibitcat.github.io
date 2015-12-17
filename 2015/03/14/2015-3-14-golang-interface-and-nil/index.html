@@ -436,9 +436,19 @@
 <blockquote>
 <p>只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。</p>
 </blockquote>
-<p>那么思考如下问题：</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="typedef"><span class="keyword">type</span> <span class="type">T</span> struct<span class="container">&#123;</span><br><span class="line">	<span class="type">Age</span> int</span><br><span class="line">	<span class="type">Name</span> string</span><br><span class="line">&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="title">func</span> main()&#123;</span><br><span class="line">	t1:= &amp;<span class="type">T</span>&#123;<span class="number">20</span>,<span class="string">"kaka"</span>&#125;</span><br><span class="line">	fmt.<span class="type">Printf</span>(<span class="string">"%p\n"</span>, t1)</span><br><span class="line">	fmt.<span class="type">Println</span>(t1==nil)</span><br><span class="line">	//fmt.<span class="type">Println</span>(*t1 == nil) //cannot convert nil to <span class="typedef"><span class="keyword">type</span> test</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>为什么注释的那行会报错？我的分析是：<br>t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： <strong>nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。</strong></p>
+<p>那么思考如下问题：  </p>
+<pre><code><span class="typedef"><span class="keyword">type</span> <span class="type">T</span> struct<span class="container">{
+    <span class="type">Age</span> int
+    <span class="type">Name</span> string
+}</span></span>
+
+<span class="title">func</span> main(){
+    t1:= &amp;<span class="type">T</span>{<span class="number">20</span>,<span class="string">"kaka"</span>}
+    fmt.<span class="type">Printf</span>(<span class="string">"%p\n"</span>, t1)
+    fmt.<span class="type">Println</span>(t1==nil)
+    //fmt.<span class="type">Println</span>(*t1 == nil) //cannot convert nil to <span class="typedef"><span class="keyword">type</span> test</span>
+}
+</code></pre><p>为什么注释的那行会报错？我的分析是：<br>t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： <strong>nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。</strong></p>
 <h3 id="error类型的nil">error类型的nil</h3><p>TODO</p>
 </span>
       

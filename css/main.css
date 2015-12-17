@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #47ff7f;
+  background: #ff4788;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -1508,27 +1508,6 @@ body {
 }
 .fmt h6 {
   font-size: 0.85714em;
-}
-.fmt h4,
-.fmt p,
-.fmt ul,
-.fmt ol,
-.fmt pre,
-.fmt blockquote,
-.fmt table {
-  margin: 18px 0;
-}
-.fmt > h1:first-child,
-.fmt h2:first-child,
-.fmt h3:first-child,
-.fmt h4:first-child,
-.fmt p:first-child,
-.fmt ul:first-child,
-.fmt ol:first-child,
-.fmt pre:first-child,
-.fmt blockquote:first-child,
-.fmt table:first-child {
-  margin-top: 0;
 }
 .pagination {
   margin: 120px 0 40px;

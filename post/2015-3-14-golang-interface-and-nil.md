@@ -38,9 +38,8 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 根据上面对interface{}的介绍，判断interface{}是否为nil的规则：  
 >只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
 
-那么思考如下问题：
+那么思考如下问题：  
 
-```
 	type T struct{
 		Age int
 		Name string
@@ -52,8 +51,6 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 		fmt.Println(t1==nil)
 		//fmt.Println(*t1 == nil) //cannot convert nil to type test
 	}
-
-```
 
 为什么注释的那行会报错？我的分析是：  
 t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
