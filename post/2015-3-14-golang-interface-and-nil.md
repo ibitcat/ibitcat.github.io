@@ -55,7 +55,8 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 
 ```
 
-为什么注释的那行会报错？我的分析是：*t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
+为什么注释的那行会报错？我的分析是：  
+t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
 
 ### error类型的nil
 TODO
