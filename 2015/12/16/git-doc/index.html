@@ -69,7 +69,7 @@
 2、git命令与常用操作；
 3、git的设置；
 4、错误解决方法；">
-<meta property="og:updated_time" content="2015-12-16T12:32:05.858Z">
+<meta property="og:updated_time" content="2015-12-17T03:21:13.284Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作手册">
 <meta name="twitter:description" content="git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
@@ -408,8 +408,8 @@
             </time>
 
 		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-12-16T20:32:05+08:00" content="2015-12-16">
-			  2015-12-16 20:32:05
+		    <time itemprop="dateCreated" datetime="2015-12-17T11:21:13+08:00" content="2015-12-17">
+			  2015-12-17 11:21:13
 		    </time>
           </span>
 
@@ -548,6 +548,7 @@ password your-password
 <p>CRLF（ Carriage-Return Line-Feed，回车换行），ACSII字符为 <code>\r\n</code>。</p>
 </blockquote>
 <p>原因： Git的换行符检查功能。因为操作系统定义的换行符的不一致，windows系统使用 <strong>CRLF</strong>(\r\n)来表示一行结束，而linux用 \n 来表示换行，Git提供了一个换行符检查功能（core.safecrlf），可以在提交时检查文件是否混用了不同风格的换行符。Git可以在你提交时自动地把行结束符CRLF转换成LF，而在迁出代码时把LF转换成CRLF。具体参考：<a href="http://blog.csdn.net/feng88724/article/details/11600375" target="_blank" rel="external">这里</a></p>
+<p>解决方法： 可以忽略</p>
 </span>
       
     </div>
