@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #67dfff;
+  background: #5cb3b0;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -1465,6 +1465,70 @@ body {
 .page-home .post-type-quote .post-tags,
 .page-post-detail .post-type-quote .post-tags {
   display: none;
+}
+.fmt {
+  font-size: 14px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+.fmt a:not(.btn) {
+  color: #87daff;
+  border-bottom: 0px;
+}
+.fmt a:not(.btn):hover {
+  color: #3aaadb;
+  text-decoration: underline;
+}
+.fmt h1,
+.fmt h2,
+.fmt h3,
+.fmt h4,
+.fmt h5,
+.fmt h6 {
+  margin: 28px 0 18px;
+}
+.fmt h1 {
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ddd;
+  font-size: 1.71429em;
+}
+.fmt h2 {
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #ccc;
+  font-size: 1.42857em;
+}
+.fmt h3 {
+  font-size: 1.14286em;
+}
+.fmt h4 {
+  font-size: 1em;
+}
+.fmt h5 {
+  font-size: 0.92857em;
+}
+.fmt h6 {
+  font-size: 0.85714em;
+}
+.fmt h4,
+.fmt p,
+.fmt ul,
+.fmt ol,
+.fmt pre,
+.fmt blockquote,
+.fmt table {
+  margin: 18px 0;
+}
+.fmt > h1:first-child,
+.fmt h2:first-child,
+.fmt h3:first-child,
+.fmt h4:first-child,
+.fmt p:first-child,
+.fmt ul:first-child,
+.fmt ol:first-child,
+.fmt pre:first-child,
+.fmt blockquote:first-child,
+.fmt table:first-child {
+  margin-top: 0;
 }
 .pagination {
   margin: 120px 0 40px;
