@@ -22,5 +22,6 @@ photos:
 
 - [玩转NexT](http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/)  
 - [站内搜索](http://lizhuolun.com/posts/%E4%B8%BAhexo-next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0tinysou-Swiftype-%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/)
+- [多说评论自定义](http://wsgzao.github.io/post/duoshuo/)
 
 <center> <iframe name="iframe_canvas" src="http://douban.fm/partner/baidu/doubanradio" scrolling="no" frameborder="0" width="400" height="200"></iframe> </center>
