@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="graylog,linux," />
@@ -44,7 +50,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -69,10 +75,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -81,15 +93,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -116,7 +119,16 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -145,7 +157,7 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -188,7 +200,20 @@
         </li>
       
 
-      <!--添加high一下-->
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      
+      <!--添加high一下
       <li class="menu-item menu-item-about">
         <a title="high起来" href='javascript:(function() {
             function c() {
@@ -342,20 +367,16 @@
         })()'>High一下
         </a>
       </li>
-
-      
-      
+      -->
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -377,8 +398,9 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -409,7 +431,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-09-23T11:25:00+08:00" content="2015-09-23">
               2015-09-23
             </time>
@@ -435,18 +460,19 @@
 
           
 
+          
+          
+
         </div>
       </header>
     
 
-
-    <div class="post-body fmt">
-
+    <div class="post-body fmt" itemprop="articleBody">
       
       
 
       
-        <span itemprop="articleBody"><p>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。</p>
+        <p>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。</p>
 <h3 id="1、起因">1、起因</h3><p>从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库<a href="https://github.com/gogap/logrus" target="_blank" rel="external">logrus</a>（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中，可能会出问题，所有就看了下graylog是个什么东西，初步了解，发现比较强大，虽然我比较讨厌java，但是没办法，项目需要。so~ 开始动手搞起来。</p>
 <a id="more"></a>
 <h3 id="2、前期准备">2、前期准备</h3><p>从百度找了一堆的教程，都是很老以前的版本，最新的1.2界面更清新，于是，只能去<a href="http://docs.graylog.org/en/1.2/pages/installation.html" target="_blank" rel="external">官网</a>找帮助文档。</p>
@@ -604,7 +630,13 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 <p>之前对于graylog存储日志的概念一直不是很清楚，一直以为日志是存在mongodb中的，可是在mongodb又找不到插入成功后的数据，后面通过慢慢摸索elasticsearch，慢慢有了一些理解，应用程序通过gelf吐出日志到graylog，graylog将日志存到elasticsearch，说白了，就是graylog对elasticsearch的一个封装，它提过一个友好的界面，给你来管理日志。</p>
 <p>关于日志的物理存储路径，默认是在 <code>/usr/share/elasticsearch/data</code> 下面，但是不知道为什么我本机的好像存储在了 <code>/var/lib/elasticsearch</code>。也可以通过修改ES的配置来更改存储路径。</p>
 <h3 id="9、elasticsearch_使用与head插件">9、elasticsearch 使用与head插件</h3><p>关于elasticsearch，我也是第一次接触，很多东西需要时间来慢慢摸索和熟悉。<br>这里有一个国人翻译的es的教程，让我知道了ES是个什么东西，请参考：<a href="http://es.xiaoleilu.com/" target="_blank" rel="external">http://es.xiaoleilu.com/</a> 。<br>关于head插件的安装，请参考 ：<a href="http://my.oschina.net/pangyangyang/blog/361753" target="_blank" rel="external">http://my.oschina.net/pangyangyang/blog/361753</a>，当然，博主还介绍了其他的插件，这个等后面需要的时候，我再尝试使用。<br>ES索引的增删改查，参考<a href="http://blog.csdn.net/gdutliuyun827/article/details/40077013" target="_blank" rel="external">http://blog.csdn.net/gdutliuyun827/article/details/40077013</a></p>
-</span>
+
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -652,12 +684,11 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/09/23/2015-9-23-ubuntu-graylog-and-elasticsearch/"
@@ -667,10 +698,9 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -698,10 +728,12 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="DomiCat" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="DomiCat" />
           <p class="site-author-name" itemprop="name">DomiCat</p>
+          <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -712,12 +744,14 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 
           
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -756,34 +790,37 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">网络收藏夹</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://codingnow.com/" target="_blank">云风</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://coolshell.cn/" target="_blank">酷壳</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.programlife.net/" target="_blank">程序人生</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.ha97.com/" target="_blank">服务器运维</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.skywind.me/blog/" target="_blank">skywind</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://skynetclub.github.io/" target="_blank">skynetclub</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">网络收藏夹</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://codingnow.com/" target="_blank">云风</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.programlife.net/" target="_blank">程序人生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ha97.com/" target="_blank">服务器运维</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.skywind.me/blog/" target="_blank">skywind</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://skynetclub.github.io/" target="_blank">skynetclub</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -812,7 +849,8 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -822,7 +860,7 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">DomiCat</span>
 </div>
@@ -843,59 +881,54 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"domicat"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -1029,7 +1062,7 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -1042,11 +1075,12 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
+    NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
+          NexT.utils.displaySidebar();
         }
       }
     };
@@ -1055,8 +1089,41 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"domicat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
   
   
   <script type="text/x-mathjax-config">
@@ -1085,6 +1152,7 @@ root<span class="variable">@st</span>-<span class="constant">B85M</span>-<span c
 
 
   
+
   
 
 </body>

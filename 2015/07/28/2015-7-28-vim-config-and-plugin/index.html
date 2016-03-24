@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="linux," />
@@ -44,7 +50,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -72,10 +78,16 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -84,15 +96,6 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -119,7 +122,16 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -148,7 +160,7 @@ vimrc下载地址：传送门另外推荐一个:k-vim
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
@@ -191,7 +203,20 @@ vimrc下载地址：传送门另外推荐一个:k-vim
         </li>
       
 
-      <!--添加high一下-->
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+      
+      <!--添加high一下
       <li class="menu-item menu-item-about">
         <a title="high起来" href='javascript:(function() {
             function c() {
@@ -345,20 +370,16 @@ vimrc下载地址：传送门另外推荐一个:k-vim
         })()'>High一下
         </a>
       </li>
-
-      
-      
+      -->
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -380,8 +401,9 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -412,7 +434,10 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-28T15:08:00+08:00" content="2015-07-28">
               2015-07-28
             </time>
@@ -438,18 +463,19 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 
           
 
+          
+          
+
         </div>
       </header>
     
 
-
-    <div class="post-body fmt">
-
+    <div class="post-body fmt" itemprop="articleBody">
       
       
 
       
-        <span itemprop="articleBody"><p>搬到linux后，需要使用装逼利器<strong>vim</strong>，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。</p>
+        <p>搬到linux后，需要使用装逼利器<strong>vim</strong>，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。</p>
 <p><strong>vimrc下载地址</strong>：<a href="https://github.com/shuimu98/domi-vimrc" target="_blank" rel="external">传送门</a><br><strong>另外推荐一个</strong>:<a href="https://github.com/wklken/k-vim" target="_blank" rel="external">k-vim</a></p>
 <p>先来一张预览图：<br><img src="/img/vim.png" alt="pic"> </p>
 <a id="more"></a>
@@ -522,7 +548,13 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 <li>Plugin ‘vim-scripts/OmniCppComplete’     <u><strong>OmniCppComplete 自动补全，推荐使用</strong></u>  </li>
 <li>Plugin ‘vim-scripts/taglist.vim’         <u><strong>标签导航 要装ctags</strong></u>  </li>
 </ul>
-</span>
+
+      
+    </div>
+
+    <div>
+      
+        
       
     </div>
 
@@ -568,12 +600,11 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/07/28/2015-7-28-vim-config-and-plugin/"
@@ -583,10 +614,9 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -614,10 +644,12 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/avatar.jpg" alt="DomiCat" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="DomiCat" />
           <p class="site-author-name" itemprop="name">DomiCat</p>
+          <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         </div>
-        <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -628,12 +660,14 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 
           
 
-          <div class="site-state-item site-state-tags">
-            <a href="/tags">
-              <span class="site-state-item-count">12</span>
-              <span class="site-state-item-name">标签</span>
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
               </a>
-          </div>
+            </div>
+          
 
         </nav>
 
@@ -672,34 +706,37 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
         
         
 
-        <div class="links-of-author motion-element">
+        
+        <div class="links-of-blogroll motion-element">
           
-            <p class="site-author-name">网络收藏夹</p>
-            
-              <span class="links-of-author-item">
-                <a href="http://codingnow.com/" target="_blank">云风</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://coolshell.cn/" target="_blank">酷壳</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.programlife.net/" target="_blank">程序人生</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.ha97.com/" target="_blank">服务器运维</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.skywind.me/blog/" target="_blank">skywind</a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://skynetclub.github.io/" target="_blank">skynetclub</a>
-              </span>
-            
+            <div class="links-of-blogroll-title">网络收藏夹</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://codingnow.com/" target="_blank">云风</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://coolshell.cn/" target="_blank">酷壳</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.programlife.net/" target="_blank">程序人生</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ha97.com/" target="_blank">服务器运维</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.skywind.me/blog/" target="_blank">skywind</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://skynetclub.github.io/" target="_blank">skynetclub</a>
+                </li>
+              
+            </ul>
           
         </div>
 
@@ -728,7 +765,8 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -738,7 +776,7 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">DomiCat</span>
 </div>
@@ -759,59 +797,54 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
 
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"domicat"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -945,7 +978,7 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -958,11 +991,12 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
+    NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
-      if (CONFIG.sidebar === 'post') {
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
+          NexT.utils.displaySidebar();
         }
       }
     };
@@ -971,8 +1005,41 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"domicat"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
   
   
   <script type="text/x-mathjax-config">
@@ -1001,6 +1068,7 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 
 
   
+
   
 
 </body>
