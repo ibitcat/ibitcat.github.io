@@ -18,17 +18,30 @@ comments: true
 
 <!-- more -->
 
+### 安装步骤
+
+	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	2、git clone https://github.com/shuimu98/domi-vimrc.git
+	3、cp domi-vimrc/.vimrc ~/
+	4、打开vim，输入命令 :PluginInstall
+
+这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
+
 ### vim基础配置
 
 这部分主要包括vim的一些基础配置，例如显示行号、括号配对等，**大部分的设置在我的配置里面已经有了注释，不详细说明**。
+另外，tagbar等插件需要ctags支持，自行安装。
 
-### 一些实用的设置
+	<CR> 在vimrc配置中表示回车的意思
+	<C-w> 表示ctrl + v
+	<S-a> 表示shift + a
+	<A-w><Left> 表示 alt+w+ <--
 
-找了一些比较实用的功能设置：
-	
-	1、代码补全
-	2、NERDTree
-	3、新建文件标题模板
+一些小技巧：
+
+- 输入 vim --version 可以查看vim支持的特性，如果支持会有 "(+)"
+- 目前的vim版本的7.4，7.2升级到7.4尽量不要直接卸载vim，否则会出现很多蛋疼的问题，最好自己拉源码编译
+
 
 ### vim默认的常用快捷键、命令
 
@@ -49,6 +62,11 @@ comments: true
 	yy			复制整行
 	p			粘贴
 	u			撤销更改
+	ctrl+r		恢复撤销
+	>>          右缩进（英文键盘模式下，按住 shift+>(连续按两次>键)）
+	<<			左缩进
+	多行选中缩进： 按住shift+v,进入VISUAL LINE模式，选中多行，再 >> 缩进
+	
 
 ### 自定义的快捷键设置
 常用快捷键，参考[这里](http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html)
@@ -105,3 +123,4 @@ comments: true
 -  Plugin 'vim-scripts/AutoComplPop' 		<u>**自动补全，与neocomplete有点冲突，推荐使用neocomplete**</u>  
 -  Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
 -  Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
+-  Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
