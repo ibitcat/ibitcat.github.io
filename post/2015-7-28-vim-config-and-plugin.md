@@ -66,6 +66,8 @@ comments: true
 	>>          右缩进（英文键盘模式下，按住 shift+>(连续按两次>键)）
 	<<			左缩进
 	多行选中缩进： 按住shift+v,进入VISUAL LINE模式，选中多行，再 >> 缩进
+	# 			反向查找
+	*	        正向查找
 	
 
 ### 自定义的快捷键设置
@@ -124,3 +126,11 @@ comments: true
 -  Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
 -  Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
 -  Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
+
+最后，附上两张vim快捷键图，都是从网上扣下来的。
+
+**图一**  
+![pic](/img/vim1.png) 
+
+**图二**  
+![pic](/img/vim2.png) 

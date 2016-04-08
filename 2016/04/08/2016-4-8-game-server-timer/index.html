@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="算法," />
 
 
 
@@ -80,20 +80,46 @@
 
 
 
-<meta name="description" content="一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
-一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，最后迁移到hexo。">
+<meta name="description" content="游戏服务器中的定时器实现一般常见的有两种方式：
+
+时间轮（time_wheel）
+最小堆
+
+就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。
+分别解释下最小堆和时间轮的简单概念：
+
+最小堆：最小堆是一个经过排序的完全二叉树,除开跟节点，其他任意节点的值都要小于它两个左右孩子的值。
+
+另外关于二叉树的分类，我会另外单独写个笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="入住github pages">
-<meta property="og:url" content="http://domicat.me/2014/12/13/first-blog/index.html">
+<meta property="og:title" content="游戏服务器两种定时器实现">
+<meta property="og:url" content="http://domicat.me/2016/04/08/2016-4-8-game-server-timer/index.html">
 <meta property="og:site_name" content="Domi●Cat">
-<meta property="og:description" content="一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
-一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，最后迁移到hexo。">
-<meta property="og:image" content="http://domicat.me/img/githubpages.jpg">
-<meta property="og:updated_time" content="2015-12-29T08:29:09.557Z">
+<meta property="og:description" content="游戏服务器中的定时器实现一般常见的有两种方式：
+
+时间轮（time_wheel）
+最小堆
+
+就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。
+分别解释下最小堆和时间轮的简单概念：
+
+最小堆：最小堆是一个经过排序的完全二叉树,除开跟节点，其他任意节点的值都要小于它两个左右孩子的值。
+
+另外关于二叉树的分类，我会另外单独写个笔记">
+<meta property="og:updated_time" content="2016-04-08T15:34:58.759Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="入住github pages">
-<meta name="twitter:description" content="一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
-一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，最后迁移到hexo。">
+<meta name="twitter:title" content="游戏服务器两种定时器实现">
+<meta name="twitter:description" content="游戏服务器中的定时器实现一般常见的有两种方式：
+
+时间轮（time_wheel）
+最小堆
+
+就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。
+分别解释下最小堆和时间轮的简单概念：
+
+最小堆：最小堆是一个经过排序的完全二叉树,除开跟节点，其他任意节点的值都要小于它两个左右孩子的值。
+
+另外关于二叉树的分类，我会另外单独写个笔记">
 
 
 
@@ -111,7 +137,7 @@
   };
 </script>
 
-  <title> 入住github pages | Domi●Cat </title>
+  <title> 游戏服务器两种定时器实现 | Domi●Cat </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -290,7 +316,7 @@
             
             
               
-                入住github pages
+                游戏服务器两种定时器实现
               
             
           </h1>
@@ -302,13 +328,22 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-13T00:00:00+08:00" content="2014-12-13">
-              2014-12-13
+            <time itemprop="dateCreated" datetime="2016-04-08T23:33:00+08:00" content="2016-04-08">
+              2016-04-08
             </time>
           </span>
 
           
 
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/08/2016-4-8-game-server-timer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/08/2016-4-8-game-server-timer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -325,42 +360,52 @@
 
       
       
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="/img/githubpages.jpg" rel="gallery_cimrvj016001fbsjwa2tqqfrb"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="/img/githubpages.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
 
       
-        <p>一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。</p>
-<p>一共经历了三个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，稍微高大上了那么一点点，<br>最后迁移到hexo。</p>
-<a id="more"></a>
-<p>一路下来，也是耗费了很多心血。但是感觉很值得，从一开始什么都不懂，到现在能自己改写小东西，虽然我一点前端都不会 - -</p>
-<p>另外，关于如何添加一下小玩意到NexT主题上，请参考：  </p>
+        <p>游戏服务器中的定时器实现一般常见的有两种方式：</p>
 <ul>
-<li><a href="http://jijiaxin89.com/2015/08/21/%E7%8E%A9%E8%BD%AChexo%E5%8D%9A%E5%AE%A2%E4%B9%8Bnext/" target="_blank" rel="external">玩转NexT</a>  </li>
-<li><a href="http://lizhuolun.com/posts/%E4%B8%BAhexo-next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0tinysou-Swiftype-%E7%AB%99%E5%86%85%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">站内搜索</a></li>
-<li><a href="http://wsgzao.github.io/post/duoshuo/" target="_blank" rel="external">多说评论自定义</a></li>
+<li>时间轮（time_wheel）</li>
+<li>最小堆</li>
 </ul>
-<p>在博客中内嵌播放器：</p>
-<p><strong>豆瓣fm：</strong>  </p>
-<pre><code><span class="tag">&lt;<span class="title">center</span>&gt;</span> <span class="tag">&lt;<span class="title">iframe</span> <span class="attribute">name</span>=<span class="value">"iframe_canvas"</span> <span class="attribute">src</span>=<span class="value">"http://douban.fm/partner/baidu/doubanradio"</span> <span class="attribute">scrolling</span>=<span class="value">"no"</span> <span class="attribute">frameborder</span>=<span class="value">"0"</span> <span class="attribute">width</span>=<span class="value">"400"</span> <span class="attribute">height</span>=<span class="value">"200"</span>&gt;</span><span class="tag">&lt;/<span class="title">iframe</span>&gt;</span> <span class="tag">&lt;/<span class="title">center</span>&gt;</span>
-</code></pre><p><strong>虾米播播：</strong><br>可以参考<a href="http://jingyan.baidu.com/article/a65957f48947af24e67f9bb6.html" target="_blank" rel="external">http://jingyan.baidu.com/article/a65957f48947af24e67f9bb6.html</a></p>
-<pre><code><span class="tag">&lt;<span class="title">center</span>&gt;</span><span class="tag">&lt;<span class="title">embed</span> <span class="attribute">src</span>=<span class="value">"http://www.xiami.com/widget/0_1769157640,_360_260_CD5C5C_808080_1/multiPlayer.swf"</span> <span class="attribute">type</span>=<span class="value">"application/x-shockwave-flash"</span> <span class="attribute">width</span>=<span class="value">"360"</span> <span class="attribute">height</span>=<span class="value">"175"</span> <span class="attribute">wmode</span>=<span class="value">"transparent"</span>&gt;</span><span class="tag">&lt;/<span class="title">embed</span>&gt;</span><span class="tag">&lt;/<span class="title">center</span>&gt;</span>
-</code></pre><p><strong>网易云音乐：</strong>  </p>
-<pre><code>&lt;<span class="tag">iframe</span> frameborder=<span class="string">"no"</span> <span class="attribute">border</span>=<span class="string">"0"</span> marginwidth=<span class="string">"0"</span> marginheight=<span class="string">"0"</span> <span class="attribute">width</span>=<span class="number">330</span> <span class="attribute">height</span>=<span class="number">86</span> src=<span class="string">"http://music.163.com/outchain/player?type=2&amp;id=28287199&amp;auto=1&amp;height=66"</span>&gt;&lt;/iframe&gt;
-</code></pre>
+<p>就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。</p>
+<p>分别解释下最小堆和时间轮的简单概念：</p>
+<ul>
+<li>最小堆：最小堆是一个经过排序的完全二叉树,除开跟节点，其他任意节点的值都要小于它两个左右孩子的值。</li>
+</ul>
+<p>另外关于二叉树的分类，我会另外单独写个笔记整理一下。</p>
+<blockquote>
+<p>关于完全二叉树，一个n层的二叉树，除了第n-1层是满的（没有空位），第n层右边可以满可以不满，但是从左到右不能出现空位。可使用广度遍历来判断是否是完全二叉树。</p>
+</blockquote>
+<ul>
+<li>时间轮：可以直接拿我们生活中的手边做例子，手表一共有三个分级，时钟、分针和秒针，我们把秒针的一个刻度称为一个tick，秒针每走一圈，分针就移动一个刻度，<br>时间轮的原理就跟手表的模型是一样的。</li>
+</ul>
+<h3 id="时间轮">时间轮</h3><p>时间轮算法的复杂程度跟你的分级层数有关，最简单的就是只有一轮，我们现在游戏服务器就只使用一轮。</p>
+<p>只有一轮的时间轮非常简单，假设需要一个一轮为1分钟的时间轮，每一个tick等于10ms,那么就需要6000个刻度（60s/10ms）。这样时间轮的模型就出来了。</p>
+<pre><code>tick = <span class="number">10</span> ms    -- tick
+slotlen = <span class="number">6000</span>    -- 刻度数量
+
+下面用lua的table表示这个时间轮的数据结构：
+time_wheel = {
+    slots = {
+        [<span class="number">1</span>] = {timeobj1,timeobj2,……} -- 刻度<span class="number">1</span>上的定时对象
+        [<span class="number">2</span>] = {timeobj1,timeobj2,……} -- 刻度<span class="number">2</span>上的定时对象
+    },
+    lslot = {t1,t2,……}    -- 这里存放的是tick超过一圈的定时对象
+    curTick = <span class="number">0</span>,        -- 当前走了多少个tick    
+}
+
+timeObj = {
+    tick=<span class="number">10</span>,         -- 表示这个定时对象需要<span class="number">10</span>个tick，
+    tickout = <span class="number">1230</span>,    -- 表示超时的tick，即当定时器tick了<span class="number">1230</span>次后，就触发超时事件
+}
+
+ps：
+关于curTick,这里必须使用无符号，因为curTick是定时器每tick一次就会自增<span class="number">1</span>，而无符号没有溢出的问题，这样可以满足定时器tick到无符号整数能容纳的最大数之后也能继续正确运行。
+
+举个例子：如果我们有用无符号的<span class="number">32</span>位<span class="keyword">int</span>表示curTick，那么当curTick一直自增到 <span class="number">0xFFFFFFFF</span>(<span class="number">4294967295</span>)，那么当下一次tick是，curTick又会复位到<span class="number">0</span>，新的tick又会继续运行。
+</code></pre><p>这是我自己用go实现的 <a href="https://github.com/shuimu98/domi-lab/blob/master/golang/time_wheel.go" target="_blank" rel="external">time_wheel</a>，比较简单，还有很多需要优化的细节，但是基础都实现了。</p>
+<p>当然，上面的这种实现是比较简单的，但是对于游戏服务器来说，这个简单的时间轮已经够用了，如果说想实现更高端的，可以参考<a href="https://github.com/cloudwu/skynet/blob/master/skynet-src/skynet_timer.c" target="_blank" rel="external">云风skynet里面的时间轮实现</a>。</p>
+<h3 id="最小堆">最小堆</h3>
       
     </div>
     
@@ -380,7 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag">#生活</a>
+            <a href="/tags/算法/" rel="tag">#算法</a>
           
         </div>
       
@@ -389,12 +434,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/12/16/git-doc/" rel="next" title="git 操作手册">
+                <i class="fa fa-chevron-left"></i> git 操作手册
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/01/21/2015-1-21-golang-notes/" rel="prev" title="go语言学习笔记">
-                go语言学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/04/08/2016-4-8-sort-alg/" rel="prev" title="常见的排序算法解析">
+                常见的排序算法解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -419,6 +468,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/08/2016-4-8-game-server-timer/"
+           data-title="游戏服务器两种定时器实现" data-url="http://domicat.me/2016/04/08/2016-4-8-game-server-timer/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -558,7 +615,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间轮"><span class="nav-number">1.</span> <span class="nav-text">时间轮</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小堆"><span class="nav-number">2.</span> <span class="nav-text">最小堆</span></a></li></ol></div>
             
           </div>
         </section>
