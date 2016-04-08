@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,25 +32,48 @@
 
 
 
-  <link href="//fonts.useso.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="DomiCat, Domi's Blog" />
-
-
-
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -100,7 +123,7 @@ golang
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -218,16 +241,6 @@ golang
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
 
       
         <li class="menu-item menu-item-search">
@@ -241,162 +254,6 @@ golang
           </a>
         </li>
       
-      
-      <!--添加high一下
-      <li class="menu-item menu-item-about">
-        <a title="high起来" href='javascript:(function() {
-            function c() {
-                var e = document.createElement("link");
-                e.setAttribute("type", "text/css");
-                e.setAttribute("rel", "stylesheet");
-                e.setAttribute("href", f);
-                e.setAttribute("class", l);
-                document.body.appendChild(e)
-            }
-         
-            function h() {
-                var e = document.getElementsByClassName(l);
-                for (var t = 0; t < e.length; t++) {
-                    document.body.removeChild(e[t])
-                }
-            }
-         
-            function p() {
-                var e = document.createElement("div");
-                e.setAttribute("class", a);
-                document.body.appendChild(e);
-                setTimeout(function() {
-                    document.body.removeChild(e)
-                }, 100)
-            }
-         
-            function d(e) {
-                return {
-                    height : e.offsetHeight,
-                    width : e.offsetWidth
-                }
-            }
-         
-            function v(i) {
-                var s = d(i);
-                return s.height > e && s.height < n && s.width > t && s.width < r
-            }
-         
-            function m(e) {
-                var t = e;
-                var n = 0;
-                while (!!t) {
-                    n += t.offsetTop;
-                    t = t.offsetParent
-                }
-                return n
-            }
-         
-            function g() {
-                var e = document.documentElement;
-                if (!!window.innerWidth) {
-                    return window.innerHeight
-                } else if (e && !isNaN(e.clientHeight)) {
-                    return e.clientHeight
-                }
-                return 0
-            }
-         
-            function y() {
-                if (window.pageYOffset) {
-                    return window.pageYOffset
-                }
-                return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-            }
-         
-            function E(e) {
-                var t = m(e);
-                return t >= w && t <= b + w
-            }
-         
-            function S() {
-                var e = document.createElement("audio");
-                e.setAttribute("class", l);
-                e.src = i;
-                e.loop = false;
-                e.addEventListener("canplay", function() {
-                    setTimeout(function() {
-                        x(k)
-                    }, 500);
-                    setTimeout(function() {
-                        N();
-                        p();
-                        for (var e = 0; e < O.length; e++) {
-                            T(O[e])
-                        }
-                    }, 15500)
-                }, true);
-                e.addEventListener("ended", function() {
-                    N();
-                    h()
-                }, true);
-                e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
-                document.body.appendChild(e);
-                e.play()
-            }
-         
-            function x(e) {
-                e.className += " " + s + " " + o
-            }
-         
-            function T(e) {
-                e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
-            }
-         
-            function N() {
-                var e = document.getElementsByClassName(s);
-                var t = new RegExp("\\b" + s + "\\b");
-                for (var n = 0; n < e.length; ) {
-                    e[n].className = e[n].className.replace(t, "")
-                }
-            }
-         
-            var e = 30;
-            var t = 30;
-            var n = 350;
-            var r = 350;
-            var i = "/res/imageharlem-shake.mp3";
-            var s = "mw-harlem_shake_me";
-            var o = "im_first";
-            var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
-            var a = "mw-strobe_light";
-            var f = "/res/imageharlem-shake-style.css";
-            var l = "mw_added_css";
-            var b = g();
-            var w = y();
-            var C = document.getElementsByTagName("*");
-            var k = null;
-            for (var L = 0; L < C.length; L++) {
-                var A = C[L];
-                if (v(A)) {
-                    if (E(A)) {
-                        k = A;
-                        break
-                    }
-                }
-            }
-            if (A === null) {
-                console.warn("Could not find a node of the right size. Please try a different page.");
-                return
-            }
-            c();
-            S();
-            var O = [];
-            for (var L = 0; L < C.length; L++) {
-                var A = C[L];
-                if (v(A)) {
-                    O.push(A)
-                }
-            }
-        })()'>High一下
-        </a>
-      </li>
-      -->
     </ul>
   
 
@@ -431,9 +288,7 @@ golang
           <div id="content" class="content">
             
 
-  
-  <div id="posts" class="posts-expand fmt">
-  
+  <div id="posts" class="posts-expand">
     
     
       <blockquote class="blockquote-center">痛苦不止，希望不灭。</blockquote>
@@ -486,7 +341,7 @@ golang
                src="/images/avatar.jpg"
                alt="DomiCat" />
           <p class="site-author-name" itemprop="name">DomiCat</p>
-          <p class="" itemprop="description">对该认真的事，请给它多一份严肃。</p>
+          <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -517,24 +372,27 @@ golang
               <span class="links-of-author-item">
                 <a href="https://github.com/shuimu98" target="_blank">
                   
-                    <i class="fa fa-globe"></i> github
+                    <i class="fa fa-globe"></i>
                   
+                  github
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/shuimu98" target="_blank">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://www.xiami.com/u/1681793" target="_blank">
                   
-                    <i class="fa fa-globe"></i> 虾米
+                    <i class="fa fa-globe"></i>
                   
+                  虾米
                 </a>
               </span>
             
@@ -609,7 +467,7 @@ golang
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
 
@@ -625,12 +483,6 @@ golang
 
   
 
-
-  
-
-
-
-
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
@@ -638,37 +490,54 @@ golang
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
   
-  
-
   
 
   
 
+  
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -702,30 +571,6 @@ golang
   
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
 

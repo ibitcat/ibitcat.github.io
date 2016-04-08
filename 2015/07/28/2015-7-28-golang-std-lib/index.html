@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,13 +32,36 @@
 
 
 
-  <link href="//fonts.useso.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="go," />
@@ -50,7 +73,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -82,7 +105,7 @@ http://pkgdoc-liudiwu.coding.io/">
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
+    scheme: 'Muse',
     sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
@@ -194,16 +217,6 @@ http://pkgdoc-liudiwu.coding.io/">
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
 
       
         <li class="menu-item menu-item-search">
@@ -217,162 +230,6 @@ http://pkgdoc-liudiwu.coding.io/">
           </a>
         </li>
       
-      
-      <!--添加high一下
-      <li class="menu-item menu-item-about">
-        <a title="high起来" href='javascript:(function() {
-            function c() {
-                var e = document.createElement("link");
-                e.setAttribute("type", "text/css");
-                e.setAttribute("rel", "stylesheet");
-                e.setAttribute("href", f);
-                e.setAttribute("class", l);
-                document.body.appendChild(e)
-            }
-         
-            function h() {
-                var e = document.getElementsByClassName(l);
-                for (var t = 0; t < e.length; t++) {
-                    document.body.removeChild(e[t])
-                }
-            }
-         
-            function p() {
-                var e = document.createElement("div");
-                e.setAttribute("class", a);
-                document.body.appendChild(e);
-                setTimeout(function() {
-                    document.body.removeChild(e)
-                }, 100)
-            }
-         
-            function d(e) {
-                return {
-                    height : e.offsetHeight,
-                    width : e.offsetWidth
-                }
-            }
-         
-            function v(i) {
-                var s = d(i);
-                return s.height > e && s.height < n && s.width > t && s.width < r
-            }
-         
-            function m(e) {
-                var t = e;
-                var n = 0;
-                while (!!t) {
-                    n += t.offsetTop;
-                    t = t.offsetParent
-                }
-                return n
-            }
-         
-            function g() {
-                var e = document.documentElement;
-                if (!!window.innerWidth) {
-                    return window.innerHeight
-                } else if (e && !isNaN(e.clientHeight)) {
-                    return e.clientHeight
-                }
-                return 0
-            }
-         
-            function y() {
-                if (window.pageYOffset) {
-                    return window.pageYOffset
-                }
-                return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
-            }
-         
-            function E(e) {
-                var t = m(e);
-                return t >= w && t <= b + w
-            }
-         
-            function S() {
-                var e = document.createElement("audio");
-                e.setAttribute("class", l);
-                e.src = i;
-                e.loop = false;
-                e.addEventListener("canplay", function() {
-                    setTimeout(function() {
-                        x(k)
-                    }, 500);
-                    setTimeout(function() {
-                        N();
-                        p();
-                        for (var e = 0; e < O.length; e++) {
-                            T(O[e])
-                        }
-                    }, 15500)
-                }, true);
-                e.addEventListener("ended", function() {
-                    N();
-                    h()
-                }, true);
-                e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
-                document.body.appendChild(e);
-                e.play()
-            }
-         
-            function x(e) {
-                e.className += " " + s + " " + o
-            }
-         
-            function T(e) {
-                e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
-            }
-         
-            function N() {
-                var e = document.getElementsByClassName(s);
-                var t = new RegExp("\\b" + s + "\\b");
-                for (var n = 0; n < e.length; ) {
-                    e[n].className = e[n].className.replace(t, "")
-                }
-            }
-         
-            var e = 30;
-            var t = 30;
-            var n = 350;
-            var r = 350;
-            var i = "/res/imageharlem-shake.mp3";
-            var s = "mw-harlem_shake_me";
-            var o = "im_first";
-            var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
-            var a = "mw-strobe_light";
-            var f = "/res/imageharlem-shake-style.css";
-            var l = "mw_added_css";
-            var b = g();
-            var w = y();
-            var C = document.getElementsByTagName("*");
-            var k = null;
-            for (var L = 0; L < C.length; L++) {
-                var A = C[L];
-                if (v(A)) {
-                    if (E(A)) {
-                        k = A;
-                        break
-                    }
-                }
-            }
-            if (A === null) {
-                console.warn("Could not find a node of the right size. Please try a different page.");
-                return
-            }
-            c();
-            S();
-            var O = [];
-            for (var L = 0; L < C.length; L++) {
-                var A = C[L];
-                if (v(A)) {
-                    O.push(A)
-                }
-            }
-        })()'>High一下
-        </a>
-      </li>
-      -->
     </ul>
   
 
@@ -443,11 +300,6 @@ http://pkgdoc-liudiwu.coding.io/">
             <time itemprop="dateCreated" datetime="2015-07-28T15:05:00+08:00" content="2015-07-28">
               2015-07-28
             </time>
-
-		    &nbsp; | &nbsp; 更新于
-		    <time itemprop="dateCreated" datetime="2015-11-05T17:20:00+08:00" content="2015-11-05">
-			  2015-11-05 17:20:00
-		    </time>
           </span>
 
           
@@ -472,7 +324,9 @@ http://pkgdoc-liudiwu.coding.io/">
       </header>
     
 
-    <div class="post-body fmt" itemprop="articleBody">
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
@@ -552,6 +406,12 @@ func main(){
 <p>因为工作需要使用过<strong>ras</strong>、<strong>rand</strong>、<strong>md5</strong>算法：</p>
 <p>1、rand 实现了加密安全伪随机数发生器。</p>
 
+      
+    </div>
+    
+    <div>
+      
+        
       
     </div>
 
@@ -651,7 +511,7 @@ func main(){
                src="/images/avatar.jpg"
                alt="DomiCat" />
           <p class="site-author-name" itemprop="name">DomiCat</p>
-          <p class="" itemprop="description">对该认真的事，请给它多一份严肃。</p>
+          <p class="site-description motion-element" itemprop="description">对该认真的事，请给它多一份严肃。</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -682,24 +542,27 @@ func main(){
               <span class="links-of-author-item">
                 <a href="https://github.com/shuimu98" target="_blank">
                   
-                    <i class="fa fa-globe"></i> github
+                    <i class="fa fa-globe"></i>
                   
+                  github
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://weibo.com/shuimu98" target="_blank">
                   
-                    <i class="fa fa-globe"></i> weibo
+                    <i class="fa fa-globe"></i>
                   
+                  weibo
                 </a>
               </span>
             
               <span class="links-of-author-item">
                 <a href="http://www.xiami.com/u/1681793" target="_blank">
                   
-                    <i class="fa fa-globe"></i> 虾米
+                    <i class="fa fa-globe"></i>
                   
+                  虾米
                 </a>
               </span>
             
@@ -747,9 +610,6 @@ func main(){
 
       
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
             
               
@@ -757,9 +617,6 @@ func main(){
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#archive"><span class="nav-number">1.</span> <span class="nav-text">archive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bufio"><span class="nav-number">2.</span> <span class="nav-text">bufio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#crypto"><span class="nav-number">3.</span> <span class="nav-text">crypto</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
           </div>
         </section>
       
@@ -791,7 +648,7 @@ func main(){
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
 
@@ -807,12 +664,6 @@ func main(){
 
   
 
-
-  
-
-
-
-
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
@@ -820,198 +671,58 @@ func main(){
 </script>
 
 
+
+
+
+
+
+
+
+  
+
+
+
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
-
-  
-  
 
   
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -1045,30 +756,6 @@ func main(){
   
   
   
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-  </script>
-
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-    });
-  </script>
-
-  
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
-  
-
 
   
 
