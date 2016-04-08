@@ -337,8 +337,7 @@
 
       
         
-          
-            <p>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。</p>
+          <p>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。</p>
 <p>比较常用的排序算法：</p>
 <ul>
 <li>冒泡排序 （面试常用 - -!）</li>
@@ -346,10 +345,11 @@
 <li>直接选择排序</li>
 <li>红黑树排序</li>
 </ul>
-<h3 id="冒泡排序">冒泡排序</h3><p>这个排序算法，是比较基础的算法，该算法的核心在我自己的理解是： 两两交换。<br>只要记住这个算法就是依次比较相邻的两个元素的大小。</p>
-<p>如果是升序：每一轮排序就会找到</p>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/08/2016-4-8-sort-alg/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -446,52 +446,17 @@
 
       
         
-          
-            <p>游戏服务器中的定时器实现一般常见的有两种方式：</p>
+          <p>游戏服务器中的定时器实现一般常见的有两种方式：</p>
 <ul>
 <li>时间轮（time_wheel）</li>
 <li>最小堆</li>
 </ul>
 <p>就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。</p>
-<p>分别解释下最小堆和时间轮的简单概念：</p>
-<ul>
-<li>最小堆：最小堆是一个经过排序的完全二叉树,除开跟节点，其他任意节点的值都要小于它两个左右孩子的值。</li>
-</ul>
-<p>另外关于二叉树的分类，我会另外单独写个笔记整理一下。</p>
-<blockquote>
-<p>关于完全二叉树，一个n层的二叉树，除了第n-1层是满的（没有空位），第n层右边可以满可以不满，但是从左到右不能出现空位。可使用广度遍历来判断是否是完全二叉树。</p>
-</blockquote>
-<ul>
-<li>时间轮：可以直接拿我们生活中的手边做例子，手表一共有三个分级，时钟、分针和秒针，我们把秒针的一个刻度称为一个tick，秒针每走一圈，分针就移动一个刻度，<br>时间轮的原理就跟手表的模型是一样的。</li>
-</ul>
-<h3 id="时间轮">时间轮</h3><p>时间轮算法的复杂程度跟你的分级层数有关，最简单的就是只有一轮，我们现在游戏服务器就只使用一轮。</p>
-<p>只有一轮的时间轮非常简单，假设需要一个一轮为1分钟的时间轮，每一个tick等于10ms,那么就需要6000个刻度（60s/10ms）。这样时间轮的模型就出来了。</p>
-<pre><code>tick = <span class="number">10</span> ms    -- tick
-slotlen = <span class="number">6000</span>    -- 刻度数量
-
-下面用lua的table表示这个时间轮的数据结构：
-time_wheel = {
-    slots = {
-        [<span class="number">1</span>] = {timeobj1,timeobj2,……} -- 刻度<span class="number">1</span>上的定时对象
-        [<span class="number">2</span>] = {timeobj1,timeobj2,……} -- 刻度<span class="number">2</span>上的定时对象
-    },
-    lslot = {t1,t2,……}    -- 这里存放的是tick超过一圈的定时对象
-    curTick = <span class="number">0</span>,        -- 当前走了多少个tick    
-}
-
-timeObj = {
-    tick=<span class="number">10</span>,         -- 表示这个定时对象需要<span class="number">10</span>个tick，
-    tickout = <span class="number">1230</span>,    -- 表示超时的tick，即当定时器tick了<span class="number">1230</span>次后，就触发超时事件
-}
-
-ps：
-关于curTick,这里必须使用无符号，因为curTick是定时器每tick一次就会自增<span class="number">1</span>，而无符号没有溢出的问题，这样可以满足定时器tick到无符号整数能容纳的最大数之后也能继续正确运行。
-
-举个例子：如果我们有用无符号的<span class="number">32</span>位<span class="keyword">int</span>表示curTick，那么当curTick一直自增到 <span class="number">0xFFFFFFFF</span>(<span class="number">4294967295</span>)，那么当下一次tick是，curTick又会复位到<span class="number">0</span>，新的tick又会继续运行。
-</code></pre><p>这是我自己用go实现的 <a href="https://github.com/shuimu98/domi-lab/blob/master/golang/time_wheel.go" target="_blank" rel="external">time_wheel</a>，比较简单，还有很多需要优化的细节，但是基础都实现了。</p>
-<p>当然，上面的这种实现是比较简单的，但是对于游戏服务器来说，这个简单的时间轮已经够用了，如果说想实现更高端的，可以参考<a href="https://github.com/cloudwu/skynet/blob/master/skynet-src/skynet_timer.c" target="_blank" rel="external">云风skynet里面的时间轮实现</a>。</p>
-<h3 id="最小堆">最小堆</h3>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/08/2016-4-8-game-server-timer/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
