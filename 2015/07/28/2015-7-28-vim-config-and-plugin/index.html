@@ -360,30 +360,109 @@ vimrc下载地址：传送门另外推荐一个:k-vim
 <li>输入 vim –version 可以查看vim支持的特性，如果支持会有 “(+)”</li>
 <li>目前的vim版本的7.4，7.2升级到7.4尽量不要直接卸载vim，否则会出现很多蛋疼的问题，最好自己拉源码编译</li>
 </ul>
-<h3 id="vim默认的常用快捷键、命令">vim默认的常用快捷键、命令</h3><pre><code>:vsplit        分割屏幕（垂直分割）
-:<span class="keyword">split</span>        分割屏幕（水平分割）
-:!command     运行vim外部环境命令（注意 “!”），如 :!<span class="keyword">ls</span> -<span class="keyword">l</span>，表示显示当前目录文件
-:tabnew    xxx    新建名为xxx的标签,<span class="keyword">tab</span>类的其他命令百度。
-gt, gT         可以直接在<span class="keyword">tab</span>之间切换
-gg            跳到文件开头（小写的<span class="keyword">g</span>连续按两次）
-<span class="keyword">G</span>            调到文件尾部（大写<span class="keyword">G</span>）
-xxx + <span class="keyword">g</span>        调到xxx行（在一般模式下先按xxx行，再按<span class="keyword">g</span>）
-ctrl+s 和 ctlr+q 这一组快捷键需要注意，其实是linux锁/解屏的快捷键，但是会导致vim僵死
-Ctrl+f和Ctrl+b    上下翻页
-Ctrl+<span class="keyword">u</span>和Ctrl+<span class="keyword">d</span>    上下翻半页
-/xxx        在一般模式下，先按<span class="string">"/"</span>，再输入要搜素的xxx，在按enter
-dd            删除整行
-dw            删除整词
-yy            复制整行
-p            粘贴
-<span class="keyword">u</span>            撤销更改
-ctrl+r        恢复撤销
-&gt;&gt;          右缩进（英文键盘模式下，按住 shift+&gt;(连续按两次&gt;键)）
-&lt;&lt;            左缩进
-多行选中缩进： 按住shift+v,进入VISUAL <span class="keyword">LINE</span>模式，选中多行，再 &gt;&gt; 缩进
-#             反向查找
-<span class="comment">*            正向查找</span>
-</code></pre><h3 id="自定义的快捷键设置">自定义的快捷键设置</h3><p>常用快捷键，参考<a href="http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html" target="_blank" rel="external">这里</a><br>另外我自己定义了一些我自己习惯用的快捷键。</p>
+<h3 id="vim默认的常用快捷键、命令">vim默认的常用快捷键、命令</h3><table>
+<thead>
+<tr>
+<th>快捷键或命令</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:vsplit</td>
+<td style="text-align:center">分割屏幕（垂直分割）</td>
+</tr>
+<tr>
+<td>:split</td>
+<td style="text-align:center">分割屏幕（水平分割）</td>
+</tr>
+<tr>
+<td>:!command</td>
+<td style="text-align:center">运行vim外部环境命令（注意 “!”），如 :!ls -l，表示显示当前目录文件</td>
+</tr>
+<tr>
+<td>:tabnew    xxx</td>
+<td style="text-align:center">新建名为xxx的标签,tab类的其他命令请自行百度。</td>
+</tr>
+<tr>
+<td>gt, gT</td>
+<td style="text-align:center">可以直接在tab之间切换</td>
+</tr>
+<tr>
+<td>gg</td>
+<td style="text-align:center">跳到文件开头（小写的g连续按两次）</td>
+</tr>
+<tr>
+<td>G</td>
+<td style="text-align:center">调到文件尾部（大写G）</td>
+</tr>
+<tr>
+<td>xxx + g</td>
+<td style="text-align:center">调到xxx行（在一般模式下先按xxx行，再按g）</td>
+</tr>
+<tr>
+<td>ctrl+s 和 ctlr+q</td>
+<td style="text-align:center">这一组快捷键需要注意，其实是linux锁/解屏的快捷键，但是会导致vim僵死</td>
+</tr>
+<tr>
+<td>Ctrl+f和Ctrl+b</td>
+<td style="text-align:center">上下翻页</td>
+</tr>
+<tr>
+<td>Ctrl+u和Ctrl+d</td>
+<td style="text-align:center">上下翻半页</td>
+</tr>
+<tr>
+<td>/xxx</td>
+<td style="text-align:center">在一般模式下，先按”/“，再输入要搜素的xxx，在按enter</td>
+</tr>
+<tr>
+<td>#</td>
+<td style="text-align:center">反向查找</td>
+</tr>
+<tr>
+<td>*</td>
+<td style="text-align:center">正向查找</td>
+</tr>
+<tr>
+<td>dd</td>
+<td style="text-align:center">删除整行</td>
+</tr>
+<tr>
+<td>dw</td>
+<td style="text-align:center">删除整词</td>
+</tr>
+<tr>
+<td>yy</td>
+<td style="text-align:center">复制整行</td>
+</tr>
+<tr>
+<td>p</td>
+<td style="text-align:center">粘贴</td>
+</tr>
+<tr>
+<td>u</td>
+<td style="text-align:center">撤销更改</td>
+</tr>
+<tr>
+<td>ctrl+r</td>
+<td style="text-align:center">恢复撤销</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td style="text-align:center">右缩进（英文键盘模式下，按住 shift+&gt;(连续按两次&gt;键)）</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td style="text-align:center">左缩进</td>
+</tr>
+<tr>
+<td>多行选中缩进</td>
+<td style="text-align:center">按住shift+v,进入VISUAL LINE模式，选中多行，再 &gt;&gt; 缩进</td>
+</tr>
+</tbody>
+</table>
+<h3 id="自定义的快捷键设置">自定义的快捷键设置</h3><p>常用快捷键，参考<a href="http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html" target="_blank" rel="external">这里</a><br>另外我自己定义了一些我自己习惯用的快捷键。</p>
 <pre><code><span class="comment">F2</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">tag窗口开关</span>
 <span class="comment">F3</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">TagbarToggle</span> <span class="comment">开关</span>
 <span class="comment">F4</span>        <span class="literal">-</span><span class="literal">-</span><span class="comment">资源管理器</span>
