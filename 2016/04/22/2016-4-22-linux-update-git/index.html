@@ -91,7 +91,7 @@ error: The requested URL returned error: 401 Unauthorized while accessing https:
 另外一个原因是在centos 使用git push的时候，出现错误：
 error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98">
 <meta property="og:image" content="http://domicat.me/img/gitpush.png">
-<meta property="og:updated_time" content="2016-04-22T14:07:02.233Z">
+<meta property="og:updated_time" content="2016-04-22T14:10:11.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux 源码升级git">
 <meta name="twitter:description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。
@@ -350,8 +350,7 @@ error: The requested URL returned error: 401 Unauthorized while accessing https:
 <h3 id="(1)_卸载之前的git">(1) 卸载之前的git</h3><pre><code>git --<span class="keyword">version</span>
 git <span class="keyword">version</span> <span class="number">1.7</span>.<span class="number">1</span>
 yum <span class="built_in">remove</span> git
-</code></pre><p>###(2) 安装依赖的包</p>
-<pre><code>sudo yum <span class="operator"><span class="keyword">update</span>
+</code></pre><h3 id="(2)_安装依赖的包">(2) 安装依赖的包</h3><pre><code>sudo yum <span class="operator"><span class="keyword">update</span>
 sudo yum <span class="keyword">install</span> curl-devel expat-devel gettext-devel openssl-devel zlib-devel </span>
 </code></pre><p>如果Git在make的时候报错：<code>Can&#39;t locate ExtUtils/MakeMaker.pm in @INC</code></p>
 <p>解决方法如下：</p>
@@ -364,23 +363,18 @@ cd ExtUtils-MakeMaker-<span class="number">6.31</span>
 perl Makefile<span class="class">.PL</span>
 make
 make install
-</code></pre><p>###(3) 下载git源码并解压缩</p>
-<pre><code>wget https:<span class="comment">//github.com/git/git/archive/v2.8.1.tar.gz</span>
+</code></pre><h3 id="(3)_下载git源码并解压缩">(3) 下载git源码并解压缩</h3><pre><code>wget https:<span class="comment">//github.com/git/git/archive/v2.8.1.tar.gz</span>
 tar -zxvf git-<span class="number">2.3</span><span class="number">.0</span>.tar.gz
 cd git-<span class="number">2.8</span><span class="number">.1</span>
-</code></pre><p>###(4) 编译安装</p>
-<pre><code>make prefix=<span class="regexp">/usr/local</span><span class="regexp">/git all
+</code></pre><h3 id="(4)_编译安装">(4) 编译安装</h3><pre><code>make prefix=<span class="regexp">/usr/local</span><span class="regexp">/git all
 sudo make prefix=/usr</span><span class="regexp">/local/git</span> install
-</code></pre><p>###(5) 将git安装路径添加到PATH变量</p>
-<pre><code>sudo vim <span class="regexp">/etc/</span>bashrc
+</code></pre><h3 id="(5)_将git安装路径添加到PATH变量">(5) 将git安装路径添加到PATH变量</h3><pre><code>sudo vim <span class="regexp">/etc/</span>bashrc
 </code></pre><p>在最后一行添加 <code>export PATH=/usr/local/git/bin:$PATH</code> 保存退出</p>
-<p>###(6) 验证是否安装成功</p>
-<pre><code>source /etc/bashrc
+<h3 id="(6)_验证是否安装成功">(6) 验证是否安装成功</h3><pre><code>source /etc/bashrc
 git --<span class="operator">version</span>
 git <span class="keyword">clone</span> <span class="title">https</span>://github.com/shuimu98/domi-vimrc.git
 </code></pre><p>如果在clone过程中出现错误：<code>Failed connect to github.com:443; Operation now in progress</code>，不用担心，ctrl+c后再试一次，一般是网络的问题。</p>
-<p>###(7) 配置git</p>
-<pre><code>git config --global user<span class="class">.name</span> <span class="string">"username"</span>
+<h3 id="(7)_配置git">(7) 配置git</h3><pre><code>git config --global user<span class="class">.name</span> <span class="string">"username"</span>
 git config --global user<span class="class">.email</span> <span class="string">"user@mail.com"</span>
 </code></pre>
       
@@ -590,7 +584,7 @@ git config --global user<span class="class">.email</span> <span class="string">"
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#(1)_卸载之前的git"><span class="nav-number">1.</span> <span class="nav-text">(1) 卸载之前的git</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#(1)_卸载之前的git"><span class="nav-number">1.</span> <span class="nav-text">(1) 卸载之前的git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(2)_安装依赖的包"><span class="nav-number">2.</span> <span class="nav-text">(2) 安装依赖的包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(3)_下载git源码并解压缩"><span class="nav-number">3.</span> <span class="nav-text">(3) 下载git源码并解压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(4)_编译安装"><span class="nav-number">4.</span> <span class="nav-text">(4) 编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(5)_将git安装路径添加到PATH变量"><span class="nav-number">5.</span> <span class="nav-text">(5) 将git安装路径添加到PATH变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(6)_验证是否安装成功"><span class="nav-number">6.</span> <span class="nav-text">(6) 验证是否安装成功</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#(7)_配置git"><span class="nav-number">7.</span> <span class="nav-text">(7) 配置git</span></a></li></ol></div>
             
           </div>
         </section>

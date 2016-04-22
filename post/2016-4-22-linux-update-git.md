@@ -33,7 +33,7 @@ centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了
 	git version 1.7.1
 	yum remove git
 
-###(2) 安装依赖的包
+### (2) 安装依赖的包
 
 	sudo yum update
 	sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel 
@@ -54,23 +54,23 @@ centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了
 	make
 	make install
 
-###(3) 下载git源码并解压缩
+### (3) 下载git源码并解压缩
 
 	wget https://github.com/git/git/archive/v2.8.1.tar.gz
 	tar -zxvf git-2.3.0.tar.gz
 	cd git-2.8.1
 	 
-###(4) 编译安装
+### (4) 编译安装
 
 	make prefix=/usr/local/git all
 	sudo make prefix=/usr/local/git install
  
-###(5) 将git安装路径添加到PATH变量
+### (5) 将git安装路径添加到PATH变量
 
 	sudo vim /etc/bashrc
 在最后一行添加 `export PATH=/usr/local/git/bin:$PATH` 保存退出
  
-###(6) 验证是否安装成功
+### (6) 验证是否安装成功
 
 	source /etc/bashrc
 	git --version
@@ -78,7 +78,7 @@ centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了
 
 如果在clone过程中出现错误：`Failed connect to github.com:443; Operation now in progress`，不用担心，ctrl+c后再试一次，一般是网络的问题。
  
-###(7) 配置git
+### (7) 配置git
 
 	git config --global user.name "username"
 	git config --global user.email "user@mail.com"
