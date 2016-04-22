@@ -77,15 +77,20 @@ comments: true
 常用快捷键，参考[这里](http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html)
 另外我自己定义了一些我自己习惯用的快捷键。
 
-	F2		--tag窗口开关
+	F2		--资源管理器
 	F3		--TagbarToggle 开关
-	F4		--资源管理器
+	F4		--关闭窗口快捷键
 	F5		--C,C++编译运行
 	F7		--生成Tags文件
 	F8		--C,C++ GDB调试
 	F10		--编辑模式下，切换paste模式，解决vim复制缩进的问题
 	F11		--上一个窗口
 	F12 	--vim窗口切换
+	Shift+l	--svn log
+	Shift+d	--svn diff
+	Shift+u	--svn update
+	Shift+c	--svn commit
+	Shift+r	--svn revert 
 
 ### 常用插件的快捷键
 
@@ -129,6 +134,7 @@ comments: true
 -  Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
 -  Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
 -  Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
+-  Plugin 'vim-scripts/vcscommand.vim'		<u>**svn插件**</u>
 
 最后，附上两张vim快捷键图，都是从网上扣下来的。
 
