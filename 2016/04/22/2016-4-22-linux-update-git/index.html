@@ -91,7 +91,7 @@ error: The requested URL returned error: 401 Unauthorized while accessing https:
 另外一个原因是在centos 使用git push的时候，出现错误：
 error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98">
 <meta property="og:image" content="http://domicat.me/img/gitpush.png">
-<meta property="og:updated_time" content="2016-04-22T14:10:11.743Z">
+<meta property="og:updated_time" content="2016-04-22T14:13:15.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux 源码升级git">
 <meta name="twitter:description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。
@@ -341,8 +341,8 @@ error: The requested URL returned error: 401 Unauthorized while accessing https:
       
         <p>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。</p>
 <p>另外一个原因是在centos 使用git push的时候，出现错误：</p>
-<pre><code><span class="string">error:</span> The requested URL returned <span class="string">error:</span> <span class="number">401</span> Unauthorized <span class="keyword">while</span> accessing <span class="string">https:</span><span class="comment">//github.com/shuimu98/domi-vimrc/info/refs</span>
-</code></pre><p>而根据网上找的<a href="http://houzhiqingjava.blog.163.com/blog/static/167399507201472343324562/" target="_blank" rel="external">解决方案</a>会导致提交到github上的commit记录有问题（提交者信息为<code>invalid-email-address</code>），如图：<br><img src="/img/gitpush.png" alt="pic"> </p>
+<p><code>error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98/domi-vimrc/info/refs</code></p>
+<p>而根据网上找的<a href="http://houzhiqingjava.blog.163.com/blog/static/167399507201472343324562/" target="_blank" rel="external">解决方案</a>会导致提交到github上的commit记录有问题（提交者信息为<code>invalid-email-address</code>），如图：<br><img src="/img/gitpush.png" alt="pic"> </p>
 <a id="more"></a>
 <p>虽然可以正常提交，但是总是感觉别扭，网上说需要升级git版本，所以顺手就源码升级下git。</p>
 <p>这里参照了这篇<a href="http://www.centoscn.com/image-text/install/2015/0225/4735.html" target="_blank" rel="external">教程</a>，另外记录了在实践中出现的问题以及解决方案。</p>
