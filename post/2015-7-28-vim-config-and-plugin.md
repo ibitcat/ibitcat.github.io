@@ -144,8 +144,8 @@ comments: true
 
 出现这个提示是vim没有支持lua，输入命令 
 	
-	`domi@ubuntu:~$ vim --version|grep lua
-	+dialog_con      -lua             +rightleft       +writebackup`
+	domi@ubuntu:~$ vim --version|grep lua
+	+dialog_con      -lua             +rightleft       +writebackup
 lua前面有个“-”说明还没支持lua。
 
 解决方法：	

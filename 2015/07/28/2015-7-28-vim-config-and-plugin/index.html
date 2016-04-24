@@ -489,8 +489,8 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 <p>最后，附上两张vim快捷键图，都是从网上扣下来的。</p>
 <h3 id="出现的问题">出现的问题</h3><p><strong>问题一</strong>： <code>neocomplete requires Vim 7.3.885 or later with Lua support (&quot;+lua&quot;).</code></p>
 <p>出现这个提示是vim没有支持lua，输入命令 </p>
-<pre><code>`domi<span class="variable">@ubuntu</span><span class="symbol">:~</span><span class="variable">$ </span>vim --version|grep lua
-+dialog_con      -lua             +rightleft       +writebackup`
+<pre><code>domi<span class="variable">@ubuntu</span><span class="symbol">:~</span><span class="variable">$ </span>vim --version|grep lua
++dialog_con      -lua             +rightleft       +writebackup
 </code></pre><p>lua前面有个“-”说明还没支持lua。</p>
 <p>解决方法：<br>1、重新编译vim，添加lua支持，请参考<a href="http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81" target="_blank" rel="external">这篇文章</a></p>
 <blockquote>
