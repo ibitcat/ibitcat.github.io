@@ -487,7 +487,30 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 <li>Plugin ‘vim-scripts/vcscommand.vim’        <u><strong>svn插件</strong></u></li>
 </ul>
 <p>最后，附上两张vim快捷键图，都是从网上扣下来的。</p>
-<p><strong>图一</strong><br><img src="/img/vim1.png" alt="pic"> </p>
+<h3 id="出现的问题">出现的问题</h3><p><strong>问题一</strong>： <code>neocomplete requires Vim 7.3.885 or later with Lua support (&quot;+lua&quot;).</code></p>
+<p>出现这个提示是vim没有支持lua，输入命令 </p>
+<pre><code>`domi<span class="variable">@ubuntu</span><span class="symbol">:~</span><span class="variable">$ </span>vim --version|grep lua
++dialog_con      -lua             +rightleft       +writebackup`
+</code></pre><p>lua前面有个“-”说明还没支持lua。</p>
+<p>解决方法：<br>1、重新编译vim，添加lua支持，请参考<a href="http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81" target="_blank" rel="external">这篇文章</a></p>
+<blockquote>
+<p>编译vim和macvim带python和lua支持<br>首先编译lua安装</p>
+<p>cd vim<br>./configure –with-features=huge –enable-rubyinterp \<br>–enable-pythoninterp –enable-luainterp –enable-perlinterp \<br>–enable-multibyte –enable-sniff  –enable-fontset –enable-cscope \<br>–disable-gui –prefix=/usr  </p>
+<p>(a) –with-features=huge：支持最大特性<br>(b) –enable-rubyinterp：启用Vim对ruby的支持<br>(c) –enable-pythoninterp：启用Vim对python的支持<br>(d) –enable-luainterp：启用Vim对lua的支持<br>(e) –enable-perlinterp：启用Vim对perl的支持<br>(f) –enable-multibyte：多字节支持 可以在Vim中输入中文<br>(g) –enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式<br>(h) –enable-cscope：Vim对cscope支持<br>(i) –disable-gui：不用编译生成图形界面版gvim<br>(j) –prefix=/usr：编译安装路径<br>(k) 更多参数执行./configure –help查看<br>编译vim</p>
+<p>./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff &gt;–with-luajit</p>
+<p>编译macvim</p>
+<p>./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local&gt;</p>
+</blockquote>
+<p>2、参考：<a href="https://github.com/Shougo/neocomplete.vim" target="_blank" rel="external">https://github.com/Shougo/neocomplete.vim</a></p>
+<pre><code>neocomplete requires <span class="type">Vim</span> <span class="number">7.3</span>.<span class="number">885</span>+ compiled <span class="keyword">with</span> if_lua. <span class="type">If</span> :echo has(<span class="string">"lua"</span>) returns <span class="number">1</span>, <span class="keyword">then</span> you're <span class="keyword">done</span>; otherwise, see below.
+
+<span class="type">Make</span> sure you have any <span class="keyword">of</span> these packages:
+
+vim-nox
+vim-gtk
+vim-gnome
+vim-athena
+</code></pre><p><strong>图一</strong><br><img src="/img/vim1.png" alt="pic"> </p>
 <p><strong>图二</strong><br><img src="/img/vim2.png" alt="pic"> </p>
 
       
@@ -699,7 +722,7 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装步骤"><span class="nav-number">1.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim基础配置"><span class="nav-number">2.</span> <span class="nav-text">vim基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim默认的常用快捷键、命令"><span class="nav-number">3.</span> <span class="nav-text">vim默认的常用快捷键、命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义的快捷键设置"><span class="nav-number">4.</span> <span class="nav-text">自定义的快捷键设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用插件的快捷键"><span class="nav-number">5.</span> <span class="nav-text">常用插件的快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件管理"><span class="nav-number">6.</span> <span class="nav-text">插件管理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装步骤"><span class="nav-number">1.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim基础配置"><span class="nav-number">2.</span> <span class="nav-text">vim基础配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vim默认的常用快捷键、命令"><span class="nav-number">3.</span> <span class="nav-text">vim默认的常用快捷键、命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义的快捷键设置"><span class="nav-number">4.</span> <span class="nav-text">自定义的快捷键设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用插件的快捷键"><span class="nav-number">5.</span> <span class="nav-text">常用插件的快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件管理"><span class="nav-number">6.</span> <span class="nav-text">插件管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现的问题"><span class="nav-number">7.</span> <span class="nav-text">出现的问题</span></a></li></ol></div>
             
           </div>
         </section>

@@ -138,6 +138,60 @@ comments: true
 
 最后，附上两张vim快捷键图，都是从网上扣下来的。
 
+### 出现的问题
+
+**问题一**： `neocomplete requires Vim 7.3.885 or later with Lua support ("+lua").`
+
+出现这个提示是vim没有支持lua，输入命令 
+	
+	`domi@ubuntu:~$ vim --version|grep lua
+	+dialog_con      -lua             +rightleft       +writebackup`
+lua前面有个“-”说明还没支持lua。
+
+解决方法：	
+1、重新编译vim，添加lua支持，请参考[这篇文章](http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81)
+>编译vim和macvim带python和lua支持
+>首先编译lua安装
+>
+> cd vim  
+> ./configure --with-features=huge --enable-rubyinterp \    
+> --enable-pythoninterp --enable-luainterp --enable-perlinterp \    
+> --enable-multibyte --enable-sniff  --enable-fontset --enable-cscope \    
+> --disable-gui --prefix=/usr  
+>
+>
+> (a) --with-features=huge：支持最大特性  
+> (b) --enable-rubyinterp：启用Vim对ruby的支持  
+> (c) --enable-pythoninterp：启用Vim对python的支持  
+> (d) --enable-luainterp：启用Vim对lua的支持  
+> (e) --enable-perlinterp：启用Vim对perl的支持  
+> (f) --enable-multibyte：多字节支持 可以在Vim中输入中文  
+> (g) --enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+> (h) --enable-cscope：Vim对cscope支持  
+> (i) --disable-gui：不用编译生成图形界面版gvim  
+> (j) --prefix=/usr：编译安装路径  
+> (k) 更多参数执行./configure --help查看  
+>编译vim
+>
+>./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff >–with-luajit
+>
+>编译macvim
+>
+>./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local>
+
+2、参考：[https://github.com/Shougo/neocomplete.vim](https://github.com/Shougo/neocomplete.vim)
+
+	neocomplete requires Vim 7.3.885+ compiled with if_lua. If :echo has("lua") returns 1, then you're done; otherwise, see below.
+	
+	Make sure you have any of these packages:
+	
+	vim-nox
+	vim-gtk
+	vim-gnome
+	vim-athena
+
+
+
 **图一**  
 ![pic](/img/vim1.png) 
 
