@@ -510,7 +510,13 @@ vim-nox
 vim-gtk
 vim-gnome
 vim-athena
-</code></pre><p><strong>图一</strong><br><img src="/img/vim1.png" alt="pic"> </p>
+</code></pre><p><strong>问题二</strong>：当tagbar打开时，Easygrep的搜索结果窗口会跑到tagbar的窗口</p>
+<p>原因是 easygrep默认打开quickfix 是使用 <code>:copen</code>，他会在最后一个窗口打开，所以他会跑到tagbar的下面。<br>google了一下，参考：</p>
+<p><a href="https://github.com/majutsushi/tagbar/issues/195" target="_blank" rel="external">https://github.com/majutsushi/tagbar/issues/195</a><br><a href="http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim" target="_blank" rel="external">http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim</a></p>
+<p>解决办法：<br>去改掉（.vim/bundle/vim-easygrep/plugin/EasyGrep.vim）easygrep.vim里面的 copen，搜索<code>copen</code> 改为 <code>bo copen</code> 或 <code>botright  copen</code></p>
+<p>例如： <code>execute g:EasyGrepWindowPosition.&quot; botright copen&quot;</code></p>
+<p>然而我发现我傻逼了，还是需要仔细读帮助文档：<br>在.vimrc 里面直接设置 <code>let g:EasyGrepWindowPosition = &quot;botright&quot;</code> 就OK了</p>
+<p><strong>图一</strong><br><img src="/img/vim1.png" alt="pic"> </p>
 <p><strong>图二</strong><br><img src="/img/vim2.png" alt="pic"> </p>
 
       

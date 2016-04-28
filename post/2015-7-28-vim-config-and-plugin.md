@@ -190,7 +190,22 @@ lua前面有个“-”说明还没支持lua。
 	vim-gnome
 	vim-athena
 
+**问题二**：当tagbar打开时，Easygrep的搜索结果窗口会跑到tagbar的窗口
 
+原因是 easygrep默认打开quickfix 是使用 `:copen`，他会在最后一个窗口打开，所以他会跑到tagbar的下面。
+google了一下，参考：
+
+[https://github.com/majutsushi/tagbar/issues/195](https://github.com/majutsushi/tagbar/issues/195)  
+[http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim](http://stackoverflow.com/questions/6726783/changing-default-position-of-quickfix-window-in-vim)
+
+
+解决办法：
+去改掉（.vim/bundle/vim-easygrep/plugin/EasyGrep.vim）easygrep.vim里面的 copen，搜索`copen` 改为 `bo copen` 或 `botright  copen`
+
+例如： `execute g:EasyGrepWindowPosition." botright copen" `
+
+然而我发现我傻逼了，还是需要仔细读帮助文档：
+在.vimrc 里面直接设置 `let g:EasyGrepWindowPosition = "botright"` 就OK了
 
 **图一**  
 ![pic](/img/vim1.png) 
