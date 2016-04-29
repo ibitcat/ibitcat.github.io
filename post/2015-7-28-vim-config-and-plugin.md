@@ -136,8 +136,6 @@ comments: true
 -  Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
 -  Plugin 'vim-scripts/vcscommand.vim'		<u>**svn插件**</u>
 
-最后，附上两张vim快捷键图，都是从网上扣下来的。
-
 ### 出现的问题
 
 **问题一**： `neocomplete requires Vim 7.3.885 or later with Lua support ("+lua").`
@@ -206,6 +204,11 @@ google了一下，参考：
 
 然而我发现我傻逼了，还是需要仔细读帮助文档：
 在.vimrc 里面直接设置 `let g:EasyGrepWindowPosition = "botright"` 就OK了
+
+
+### 彩蛋
+
+最后，附上两张vim快捷键图，都是从网上扣下来的。
 
 **图一**  
 ![pic](/img/vim1.png) 
