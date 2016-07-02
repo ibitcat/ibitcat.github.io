@@ -1,0 +1,105 @@
+# ---------------- #
+#   Main Configs   #
+# ---------------- #
+baseurl:
+url: http://domicat.me
+date_format: "ordinal"
+title: Domi●Cat
+subtitle: "烂笔头的一生"
+description: "美乃滋大人的个人博客"
+keywords: 码志, Zhuang Ma, mzlogin, mazhuang
+favicon: /favicon.ico
+timezone: Asia/Shanghai
+encoding: "utf-8"
+source_code: https://github.com/shuimu98/shuimu98.github.io
+side_bar_repo_limit: 3
+google:
+    analytics_id: UA-71084139-1
+
+# ---------------- #
+#      Author      #
+# ---------------- #
+author: domicat
+organization: Txitech, Inc.
+organization_url: http://txitech.com/
+location: GuangZhou, China
+email: shui_mu98@163.com
+
+# ---------------- #
+#    Navigation    #
+# ---------------- #
+navs:
+  -
+    href: /
+    label: 首页
+
+  -
+    href: /categories/
+    label: 分类
+
+  -
+    href: /wiki/
+    label: 维基
+
+  -
+    href: /links/
+    label: 链接
+
+  -
+    href: /about/
+    label: 关于
+
+# ---------------- #
+#       RSS        #
+# ---------------- #
+subscribe_rss: /feed.xml
+
+# ---------------- #
+#      Jekyll      #
+# ---------------- #
+markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: rouge
+paginate: 5
+lsi: false
+quiet: false
+excerpt_separator: "\n\n"
+permalink: /:year/:month/:day/:title/
+gems:
+    - rouge
+#     - jekyll-html-pipeline
+    - jekyll-paginate
+    - jekyll-sitemap
+    - jekyll-feed
+    - jemoji
+#     - jekyll-mentions
+collections:
+    wiki:
+        output: true
+        permalink: /wiki/:path/
+
+# ---------------- #
+#      Socials     #
+# ---------------- #
+github_username: shuimu98
+douban_username: 
+facebook_username: 
+weibo_username: shuimu98
+zhihu_username: 
+twitter_username: 
+
+# ---------------- #
+#      Comments    #
+# ---------------- #
+# support provider: disqus, duoshuo, changyan
+comments_provider: duoshuo
+# !!!重要!!! 请修改下面两个用户名为你自己申请的
+# !!!Important!!! Please modify usernames below to yours
+duoshuo_username: DomiCat
+#disqus_username: shuimu98
+
+# ---------------- #
+#      Datas       #
+# ---------------- #
+skill: [C++, Lua, Golang]

@@ -1,26 +1,13 @@
-我的个人站点
-============
+Domicat
+=================
 
-### 第一版 和 第二版
+我的个人博客：<http://domicat.me>，外观基于 [mzlogin](http://mzlogin.github.io) 修改。
 
-这两个版本是基于[jekyll](http://jekyllrb.com/)的，已经弃用了。
+博客从jekyll迁移到hexo，又从hexo迁移回到jekyll，hexo好是好，奈何每次更新文章都要重新生成，实在是太麻烦了。
 
-### 当前版本
 
-目前使用的版本是基于[hexo](https://hexo.io/)。
 
-### markdown 文章定义格式
-
-```
-
-	layout: post					#post样式
-	title: 标题					    #标题
-	description: "简介"			    #简介
-	updated: 2015-11-5 17:17:00		#修改时间
-	date: 2015-08-18 15:07:19 #发布时间
-	tags: [标签1, 标签2]		#标签
-	comments: true			#是否可用评论
-	photos: #图片
- 	 - img/golang_import.jpg
-
-```
+[1]: https://github.com/mzlogin/chinese-copywriting-guidelines
+[2]: http://mazhuang.org/2015/12/05/diff-between-gfm-and-redcarpet/
+[3]: https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/
+[4]: https://github.com/mzlogin/mzlogin.github.io/issues/2
