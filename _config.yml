@@ -7,14 +7,14 @@ date_format: "ordinal"
 title: Domi●Cat
 subtitle: "烂笔头的一生"
 description: "美乃滋大人的个人博客"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang
+keywords: Domicat
 favicon: /favicon.ico
 timezone: Asia/Shanghai
 encoding: "utf-8"
 source_code: https://github.com/shuimu98/shuimu98.github.io
 side_bar_repo_limit: 3
-google:
-    analytics_id: UA-71084139-1
+#google:
+#    analytics_id: UA-71084139-1
 
 # ---------------- #
 #      Author      #
