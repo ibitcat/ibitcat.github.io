@@ -36,23 +36,23 @@ comments: true
 只有一轮的时间轮非常简单，假设需要一个一轮为1分钟的时间轮，每一个tick等于10ms,那么就需要6000个刻度（60s/10ms）。这样时间轮的模型就出来了。
 
 ```lua
-	tick = 10 ms	-- tick
-	slotlen = 6000	-- 刻度数量
+tick = 10 ms	-- tick
+slotlen = 6000	-- 刻度数量
 
-	下面用lua的table表示这个时间轮的数据结构：
-	time_wheel = {
-		slots = {
-			[1] = {timeobj1,timeobj2,……} -- 刻度1上的定时对象
-			[2] = {timeobj1,timeobj2,……} -- 刻度2上的定时对象
-		},
-		lslot = {t1,t2,……}	-- 这里存放的是tick超过一圈的定时对象
-		curTick = 0,		-- 当前走了多少个tick	
-	}
-	
-	timeObj = {
-		tick=10, 		-- 表示这个定时对象需要10个tick，
-		tickout = 1230,	-- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件
-	}
+下面用lua的table表示这个时间轮的数据结构：
+time_wheel = {
+	slots = {
+		[1] = {timeobj1,timeobj2,……} -- 刻度1上的定时对象
+		[2] = {timeobj1,timeobj2,……} -- 刻度2上的定时对象
+	},
+	lslot = {t1,t2,……}	-- 这里存放的是tick超过一圈的定时对象
+	curTick = 0,		-- 当前走了多少个tick	
+}
+
+timeObj = {
+	tick=10, 		-- 表示这个定时对象需要10个tick，
+	tickout = 1230,	-- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件
+}
 ```
 	ps：
 	关于curTick,这里必须使用无符号，因为curTick是定时器每tick一次就会自增1，而无符号没有溢出的问题，这样可以满足定时器tick到无符号整数能容纳的最大数之后也能继续正确运行。
