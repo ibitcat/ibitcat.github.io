@@ -9,6 +9,11 @@ comments: true
 
 ---
 
+**目录**
+
+* TOC
+{:toc}
+
 ### package 别名
    
 import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可以使用 xxx.Println 来调用函数。
@@ -24,34 +29,34 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
    切片：切片是长度可变、容量固定的相同的元素序列。Go语言的切片本质是一个数组。容量固定是因为数组的长度是固定的，切片的容量即隐藏数组的长度。长度可变指的是在数组长度的范围内可变。
 
 ### defer、panic、recover
-这是golang中的异常处理函数。
+~~这是golang中的异常处理函数。~~
 
 defer函数（延迟函数）：
 
 当一个func执行完毕，就会执行defer语句，如果一个func中有多个defer，那么defer将按照逆序的顺序执行，通俗点说，就是哪个defer写在前面，那个defer就最后执行。这里有一个地方需要注意：defer应该是在return之前执行的，这里有一个网上的例子 
 
 ```go
-	func f() (result int) {
-	defer func()
- 	{
-    	result++
-  	}()
-	return 0
-	}
+func f() (result int) {
+defer func()
+	{
+	result++
+	}()
+return 0
+}
 ```
 
 返回 result = 1,因为在函数f() return 之前，defer函数执行了一次。  
 	
 ```go
-	func f() (result int) {
-	return 0
-  	defer func()
- 	{
-		result++
-  	}()
+func f() (result int) {
+return 0
+	defer func()
+	{
+	result++
+	}()
 
-  	return 0
-	}
+	return 0
+}
 ```
 返回 result = 0，因为在defer之前，函数f() 就已经返回了。
 
@@ -104,10 +109,12 @@ const 里面声明常量，有如下要求：
 - 声明常量的同时必须进行初始化，其值不可再次修改；
 - 在const的定义列表中，如果某个变量没有右值，则该变量的右值等于上一个变量的右值；
 
-		const（
-			A = 100
-			B       // 此处B=100，使用了上一个变量A的右值
-		）
+```go
+const(
+	A = 100
+	B       // 此处B=100，使用了上一个变量A的右值
+)
+```
 
 2、iota：用来定义枚举，iota 在 const结构里面使用， 记住一点，**iota 是属于当前 const 里面的行数索引器（索引从0开始），不管中间有没有定义其他的变量**；  
 
@@ -133,32 +140,32 @@ const 里面声明常量，有如下要求：
 4、golang 中slice特殊之处：map和chan做参数，对它们的修改，可以反映在原本的参数上，是因为底层的指针不会改变；但是如果对slice的参数进行append之后，底层的数组地址可能会发生改变。  
 注意区分slice的以下三种操作：
 
-```
+```go
 
-	func main() {
-	    a := []int{1,2,3}
-	    fmt.Println(a)
-	    modifySliceData(a)
-	    fmt.Println(a)
-	}
-	
-	// 这里只是修改了底层指针指向的值，所以原本的参数的值也发生了变化	
-	func modifySliceData(data []int) {
-		fmt.Printf("%p",&data)
-	    data[0] = 0
-	}
+func main() {
+    a := []int{1,2,3}
+    fmt.Println(a)
+    modifySliceData(a)
+    fmt.Println(a)
+}
 
-	// 这里append之后，底层的数组地址发生了变化
-	func appendSliceData(data []int) {
-		fmt.Printf("%p",&data)
-		data = append(data,4) // 注意：append并不会生成新的data，只会修改data底层指向数组的地址，以便存储append之后的值
-	}
+// 这里只是修改了底层指针指向的值，所以原本的参数的值也发生了变化	
+func modifySliceData(data []int) {
+	fmt.Printf("%p",&data)
+    data[0] = 0
+}
 
-	// 如果要操作原本的参数，应该传入slice的指针
-	func updateSliceData(data *[]int) {
-		fmt.Printf("%p",data)
-		*data = append(*data,4)	// 此时，main函数的变量a=[]int{1,2,3,4}	
-	}
+// 这里append之后，底层的数组地址发生了变化
+func appendSliceData(data []int) {
+	fmt.Printf("%p",&data)
+	data = append(data,4) // 注意：append并不会生成新的data，只会修改data底层指向数组的地址，以便存储append之后的值
+}
+
+// 如果要操作原本的参数，应该传入slice的指针
+func updateSliceData(data *[]int) {
+	fmt.Printf("%p",data)
+	*data = append(*data,4)	// 此时，main函数的变量a=[]int{1,2,3,4}	
+}
 
 ```
 
