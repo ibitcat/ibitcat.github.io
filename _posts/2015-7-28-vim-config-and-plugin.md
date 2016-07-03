@@ -119,22 +119,22 @@ comments: true
 
 比较实用的插件：  
 
--  Plugin 'scrooloose/nerdtree'  			<u>**以树形结构浏览文件夹中的文件**</u>  
--  Plugin 'fatih/vim-go'  					<u>**golang的vim插件**</u>  
--  Plugin 'fatih/molokai'  					<u>**molokai主题**</u>  
--  Plugin 'Shougo/neocomplete.vim'  		<u>**实时代码补全提示，支持golang**</u>  
--  Plugin 'SirVer/ultisnips'  				<u>**代码模板，支持golang**</u>  
--  Plugin 'majutsushi/tagbar' 				<u>**Tagbar 比 taglist 更现代的代码结构浏览工具**</u>   
--  Plugin 'kien/rainbow_parentheses.vim' 	<u>**括号显示增强**</u>   
--  Plugin 'scrooloose/nerdcommenter' 		<u>**快速 加减注释**</u>   
--  Plugin 'Raimondi/delimitMate' 			<u>**输入引号,括号时,自动补全**</u>  
--  Plugin 'kien/ctrlp.vim' 					<u>**文件查找**</u>  
--  Plugin 'altercation/vim-colors-solarized'<u>**主题配色插件**</u>  
--  Plugin 'vim-scripts/AutoComplPop' 		<u>**自动补全，与neocomplete有点冲突，推荐使用neocomplete**</u>  
--  Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
--  Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
--  Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
--  Plugin 'vim-scripts/vcscommand.vim'		<u>**svn插件**</u>
+- Plugin 'scrooloose/nerdtree'  			<u>**以树形结构浏览文件夹中的文件**</u>  
+- Plugin 'fatih/vim-go'  					<u>**golang的vim插件**</u>  
+- Plugin 'fatih/molokai'  					<u>**molokai主题**</u>  
+- Plugin 'Shougo/neocomplete.vim'  		<u>**实时代码补全提示，支持golang**</u>  
+- Plugin 'SirVer/ultisnips'  				<u>**代码模板，支持golang**</u>  
+- Plugin 'majutsushi/tagbar' 				<u>**Tagbar 比 taglist 更现代的代码结构浏览工具**</u>   
+- Plugin 'kien/rainbow_parentheses.vim' 	<u>**括号显示增强**</u>   
+- Plugin 'scrooloose/nerdcommenter' 		<u>**快速 加减注释**</u>   
+- Plugin 'Raimondi/delimitMate' 			<u>**输入引号,括号时,自动补全**</u>  
+- Plugin 'kien/ctrlp.vim' 					<u>**文件查找**</u>  
+- Plugin 'altercation/vim-colors-solarized'<u>**主题配色插件**</u>  
+- Plugin 'vim-scripts/AutoComplPop' 		<u>**自动补全，与neocomplete有点冲突，推荐使用neocomplete**</u>  
+- Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
+- Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
+- Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
+- Plugin 'vim-scripts/vcscommand.vim'		<u>**svn插件**</u>
 
 ### 出现的问题
 
@@ -147,6 +147,7 @@ comments: true
 lua前面有个“-”说明还没支持lua。
 
 解决方法：	
+
 1、重新编译vim，添加lua支持，请参考[这篇文章](http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81)
 >编译vim和macvim带python和lua支持
 >首先编译lua安装

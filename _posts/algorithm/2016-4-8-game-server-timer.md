@@ -39,7 +39,7 @@ comments: true
 tick = 10 ms	-- tick
 slotlen = 6000	-- 刻度数量
 
-下面用lua的table表示这个时间轮的数据结构：
+--下面用lua的table表示这个时间轮的数据结构：
 time_wheel = {
 	slots = {
 		[1] = {timeobj1,timeobj2,……} -- 刻度1上的定时对象
@@ -54,10 +54,10 @@ timeObj = {
 	tickout = 1230,	-- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件
 }
 ```
-	ps：
-	关于curTick,这里必须使用无符号，因为curTick是定时器每tick一次就会自增1，而无符号没有溢出的问题，这样可以满足定时器tick到无符号整数能容纳的最大数之后也能继续正确运行。
-
-	举个例子：如果我们有用无符号的32位int表示curTick，那么当curTick一直自增到 0xFFFFFFFF(4294967295)，那么当下一次tick是，curTick又会复位到0，新的tick又会继续运行。
+>ps：
+>
+>关于curTick,这里必须使用无符号，因为curTick是定时器每tick一次就会自增1，而无符号没有溢出的问题，这样可以满足定时器tick到无符号整数能容纳的最大数之后也能继续正确运行。
+>举个例子：如果我们有用无符号的32位int表示curTick，那么当curTick一直自增到 0xFFFFFFFF(4294967295)，那么当下一次tick是，curTick又会复位到0，新的tick又会继续运行。
 
 这是我自己用go实现的 [time_wheel](https://github.com/shuimu98/domi-lab/blob/master/golang/time_wheel.go)，比较简单，还有很多需要优化的细节，但是基础都实现了。
 

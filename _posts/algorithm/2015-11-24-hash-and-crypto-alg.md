@@ -64,13 +64,15 @@ func HmacSha1() string{
 
 关于golang MD5等计算的小问题：
 
-	// 方式一
-	h := md5.New()
-	h.Write([]byte("test"))
-	h.Sum(nil)
-	
-	// 方式二
-	md5.Sum([]byte("test"))
+```go
+// 方式一
+h := md5.New()
+h.Write([]byte("test"))
+h.Sum(nil)
+
+// 方式二
+md5.Sum([]byte("test"))
+```
 
 这两种方式是有区别的：  
 
