@@ -4,10 +4,10 @@ title: "入住github pages"
 categories: [生活]
 share: false
 comments: false
-photos: 
- - img/githubpages.jpg
 
 ---
+
+![pic](/images/posts/githubpages.jpg)
 
 一番折腾，我的github pages 终于搭建完成。以后这里就是我的code block。
 
