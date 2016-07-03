@@ -4,6 +4,7 @@ title: Wiki
 description: 各种wiki
 keywords: 维基, Wiki
 comments: false
+repo: false
 menu: 维基
 permalink: /wiki/
 ---

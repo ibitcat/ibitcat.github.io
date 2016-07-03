@@ -28,7 +28,9 @@ layout: default
             </div>
             <div class="column one-third">
                 {% include sidebar-search.html %}
+                {% if page.repo %}
                 {% include sidebar-popular-repo.html %}
+                {% endif %}
             </div>
         </div>
     </section>
