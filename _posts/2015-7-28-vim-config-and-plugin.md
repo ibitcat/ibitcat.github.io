@@ -147,8 +147,8 @@ comments: true
 lua前面有个“-”说明还没支持lua。
 
 解决方法：	
-
 1、重新编译vim，添加lua支持，请参考[这篇文章](http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81)
+
 >编译vim和macvim带python和lua支持
 >首先编译lua安装
 >
