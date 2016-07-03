@@ -33,11 +33,13 @@
     <script>
       jQuery(document).ready(function($) {
         // geopattern
-        {% if page.menu != "首页" %}
         $('.geopattern').each(function(){
-          $(this).geopattern($(this).data('pattern-id'));
+          //alert("123123121",$(this).data('pattern-id').length);
+          if ($(this).data('pattern-id').length>0)
+          {
+            $(this).geopattern($(this).data('pattern-id'));
+          }
         });
-        {% endif %}
        // hljs.initHighlightingOnLoad();
       });
     </script>
