@@ -42,10 +42,10 @@ slotlen = 6000	-- 刻度数量
 --下面用lua的table表示这个时间轮的数据结构：
 time_wheel = {
 	slots = {
-		[1] = {timeobj1,timeobj2,……} -- 刻度1上的定时对象
-		[2] = {timeobj1,timeobj2,……} -- 刻度2上的定时对象
+		[1] = {timeobj1,timeobj2,…} -- 刻度1上的定时对象
+		[2] = {timeobj1,timeobj2,…} -- 刻度2上的定时对象
 	},
-	lslot = {t1,t2,……}	-- 这里存放的是tick超过一圈的定时对象
+	lslot = {t1,t2,…}	-- 这里存放的是tick超过一圈的定时对象
 	curTick = 0,		-- 当前走了多少个tick	
 }
 
