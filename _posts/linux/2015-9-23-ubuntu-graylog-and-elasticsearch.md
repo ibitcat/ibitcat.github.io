@@ -51,7 +51,9 @@ comments: true
 
 因为之前已经安装了mongdb，就不在记录，个人感觉mongodb官方的帮助非常清新，一路下来，完全没错误。给个地址[http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
 
-#### 2-3 安装elasticsearch **重点部分**
+#### 2-3 安装elasticsearch
+
+**重点部分**
 
 这货真难搞（其实是我linux用的不够熟练），有两种安装方式：
 
