@@ -4,7 +4,7 @@ title: Links
 description: 我的博客收藏夹
 keywords: 友情链接
 comments: false
-repo: false
+hiderepo: true
 menu: 链接
 permalink: /links/
 ---
