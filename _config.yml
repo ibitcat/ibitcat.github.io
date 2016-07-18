@@ -24,6 +24,8 @@ organization: Txitech, Inc.
 organization_url: http://txitech.com/
 location: GuangZhou, China
 email: shui_mu98@163.com
+bio: "Enthusiast performance, responsive design and usability, always looking for the best project and good coffee."
+thumb: /assets/images/author.jpg
 
 # ---------------- #
 #    Navigation    #
@@ -68,11 +70,12 @@ excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
 gems:
     - rouge
-#     - jekyll-html-pipeline
+    - jekyll-paginate
     - jekyll-paginate
     - jekyll-sitemap
     - jekyll-feed
     - jemoji
+#     - jekyll-html-pipeline
 #     - jekyll-mentions
 collections:
     wiki:
