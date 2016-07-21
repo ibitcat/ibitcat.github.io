@@ -9,11 +9,6 @@ comments: true
 
 ---
 
-ps:主要参考：  
->[http://my.oschina.net/chai2010/blog/117923](http://my.oschina.net/chai2010/blog/117923 "Go中error类型的nil值和nil")  
->[http://my.oschina.net/goal/blog/194233](http://my.oschina.net/goal/blog/194233 "详解interface和nil")  
->[http://my.oschina.net/goal/blog/194308](http://my.oschina.net/goal/blog/194308 "golang类型转换")
-
 
 ### interface（接口）
 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括nil也可以赋值给interface{}，interface{}有点像c艹中的**纯虚基类**，只包含了方法的集合。
@@ -41,17 +36,17 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 那么思考如下问题：  
 
 ```golang
-	type T struct{
-		Age int
-		Name string
-	}
-	
-	func main(){
-		t1:= &T{20,"kaka"}
-		fmt.Printf("%p\n", t1)
-		fmt.Println(t1==nil)
-		//fmt.Println(*t1 == nil) //cannot convert nil to type test
-	}
+type T struct{
+	Age int
+	Name string
+}
+
+func main(){
+	t1:= &T{20,"kaka"}
+	fmt.Printf("%p\n", t1)
+	fmt.Println(t1==nil)
+	//fmt.Println(*t1 == nil) //cannot convert nil to type test
+}
 ```
 
 为什么注释的那行会报错？我的分析是：  
@@ -59,3 +54,10 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
 
 ### error类型的nil
 TODO
+
+
+ps:主要参考：  
+
+- [http://my.oschina.net/chai2010/blog/117923](http://my.oschina.net/chai2010/blog/117923 "Go中error类型的nil值和nil")  
+- [http://my.oschina.net/goal/blog/194233](http://my.oschina.net/goal/blog/194233 "详解interface和nil")  
+- [http://my.oschina.net/goal/blog/194308](http://my.oschina.net/goal/blog/194308 "golang类型转换")
