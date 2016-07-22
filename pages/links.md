@@ -17,3 +17,4 @@ permalink: /links/
 * [服务器运维](http://www.ha97.com/)
 * [skywind](http://www.skywind.me/blog/)
 * [skynetclub](http://skynetclub.github.io/)
+* [ai分享站](http://www.aisharing.com/)
