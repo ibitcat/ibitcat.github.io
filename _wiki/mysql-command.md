@@ -23,11 +23,9 @@ keywords: Mysql, Mysql Command
 | 清空表数据           			| delete from 表名;   							|
 | 显示表中的记录           		| select * from 表名;							|
 | 导入.sql文件命令           		| use 库名;<br>source d:/mysql.sql;				|
-| 命令行修改root密码           	| update mysql.user SET password=PASSWORD('新密码') WHERE User='root';<br>FLUSH PRIVILEGES;				|
+| 命令行修改root密码           	| update mysql.user SET password=PASSWORD('新密码') WHERE User='root';<br>FLUSH PRIVILEGES;|
 | 显示当前use的数据库名			| select database();							|
 | 显示当前的user					| select user();								|
-| 显示当前use的数据库名			| select database();							|
-| 显示当前use的数据库名			| select database();							|
 
 ### 数据库操作示例
 
