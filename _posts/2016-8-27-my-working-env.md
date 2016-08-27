@@ -32,28 +32,27 @@ comments: true
 | GoSublime      		| golang 插件，有少许不足(第三方包不能转到定义)			      					|
 
 - 设置  
-
 ```json
 {
-	"color_scheme": "Packages/User/SublimeLinter/Triplet (SL).tmTheme",
-	"colored_folder_glyphs": true,
-	"font_face": "Microsoft YaHei Mono",
-	"font_options":
-	[
-		"directwrite"
-	],
-	"font_size": 11,
-	"highlight_line": true,
-	"highlight_modified_tabs": true,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
-	"mid_line_tabs": true,
-	"sidebar_folders": true,
-	"theme": "Nil.sublime-theme",
-	"update_check": false,
-	"word_wrap": "auto"
+"color_scheme": "Packages/User/SublimeLinter/Triplet (SL).tmTheme",
+"colored_folder_glyphs": true,
+"font_face": "Microsoft YaHei Mono",
+"font_options":
+[
+	"directwrite"
+],
+"font_size": 11,
+"highlight_line": true,
+"highlight_modified_tabs": true,
+"ignored_packages":
+[
+	"Vintage"
+],
+"mid_line_tabs": true,
+"sidebar_folders": true,
+"theme": "Nil.sublime-theme",
+"update_check": false,
+"word_wrap": "auto"
 }
 ```
 
