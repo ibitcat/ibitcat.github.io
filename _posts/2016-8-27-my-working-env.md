@@ -17,19 +17,19 @@ comments: true
 
 - 插件
 	
-	| 插件        	        | 备注           															|
-	| --------------------- |:--------------------------------------------------------------------------|
-	| SideBarEnhancements   | 侧边栏增强插件 																|
-	| BracketHighlighter    | 匹配高亮插件（我使用默认的下划线显示，不刺眼）  								|
-	| ConvertToUTF8    		| 中文必备插件																|
-	| IMESupport	     	| 中文输入法鼠标跟随，在st3中如果使用中文输入法（搜狗、微软中文）等，输入法的框没办法跟随鼠标光标，特别是双屏的时候，特别不方便。|
-	| TortoiseSVN    		| 小乌龟svn，设置快捷键后，update、commit、log、diff简直不能太舒心				|
-	| HexViewer		      	| 16进制显示，有时候会用到														|
-	| SublimeLinter-lua		| lua语法检查（其他语言也有对应的SublimeLinter）								|
-	| Terminal     			| 右键打开cmd，默认是打开powershell，太难看，更改配置可以打开git bash  			|
-	| SublimeTextTrans      | sublime text 3透明，仅限windows，可能更适合前端同学[^footer1]					|
-	| Theme - Nil	  		| 这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服						|
-	| GoSublime      		| golang 插件，有少许不足(第三方包不能转到定义)			      					|
+| 插件        	        | 备注           															|
+| --------------------- |:--------------------------------------------------------------------------|
+| SideBarEnhancements   | 侧边栏增强插件 																|
+| BracketHighlighter    | 匹配高亮插件（我使用默认的下划线显示，不刺眼）  								|
+| ConvertToUTF8    		| 中文必备插件																|
+| IMESupport	     	| 中文输入法鼠标跟随，在st3中如果使用中文输入法（搜狗、微软中文）等，输入法的框没办法跟随鼠标光标，特别是双屏的时候，特别不方便。|
+| TortoiseSVN    		| 小乌龟svn，设置快捷键后，update、commit、log、diff简直不能太舒心				|
+| HexViewer		      	| 16进制显示，有时候会用到														|
+| SublimeLinter-lua		| lua语法检查（其他语言也有对应的SublimeLinter）								|
+| Terminal     			| 右键打开cmd，默认是打开powershell，太难看，更改配置可以打开git bash  			|
+| SublimeTextTrans      | sublime text 3透明，仅限windows，可能更适合前端同学[^footer1]					|
+| Theme - Nil	  		| 这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服						|
+| GoSublime      		| golang 插件，有少许不足(第三方包不能转到定义)			      					|
 
 - 设置  
 
