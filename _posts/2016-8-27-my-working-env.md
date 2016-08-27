@@ -32,6 +32,7 @@ comments: true
 	| GoSublime      		| golang 插件，有少许不足(第三方包不能转到定义)			      					|
 
 - 设置  
+
 ```json
 {
 	"color_scheme": "Packages/User/SublimeLinter/Triplet (SL).tmTheme",
