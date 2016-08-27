@@ -31,7 +31,7 @@ comments: true
 	| Theme - Nil	  		| 这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服						|
 	| GoSublime      		| golang 插件，有少许不足(第三方包不能转到定义)			      					|
 
-- 设置
+- 设置  
 ```json
 {
 	"color_scheme": "Packages/User/SublimeLinter/Triplet (SL).tmTheme",
