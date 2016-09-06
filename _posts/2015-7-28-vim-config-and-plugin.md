@@ -14,7 +14,7 @@ comments: true
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
 
 先来一张预览图：  
-![pic](/images/posts/vim.png) 
+![vim](/images/posts/vim.png) 
 
 <!-- more -->
 
