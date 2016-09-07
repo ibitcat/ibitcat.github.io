@@ -15,7 +15,7 @@ centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了
 `error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98/domi-vimrc/info/refs`
 
 而根据网上找的[解决方案](http://houzhiqingjava.blog.163.com/blog/static/167399507201472343324562/)会导致提交到github上的commit记录有问题（提交者信息为`invalid-email-address`），如图：
-![pic](/images/posts/gitpush.png) 
+![图1](/images/posts/gitpush.png) 
 
 <!-- more -->
 

@@ -14,7 +14,7 @@ comments: true
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
 
 先来一张预览图：  
-![vim](/images/posts/vim.png) 
+![预览](/images/posts/vim.png) 
 
 <!-- more -->
 
@@ -212,7 +212,7 @@ google了一下，参考：
 最后，附上两张vim快捷键图，都是从网上扣下来的。
 
 **图一**  
-![pic](/images/posts/vim1.png) 
+![图1](/images/posts/vim1.png) 
 
 **图二**  
-![pic](/images/posts/vim2.png) 
+![图1](/images/posts/vim2.png) 
