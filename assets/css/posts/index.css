@@ -126,6 +126,6 @@
     color: #808080;
     position: relative;
     font-size: 0.9em;
-    padding-right: 50%;
+    text-align:center;/*文字水平居中*/
 }
 
