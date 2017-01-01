@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Mysql Command
+date: 2016-09-13
 categories: Mysql
 excerpt: Mysql 常用命令
 keywords: Mysql, Mysql Command
