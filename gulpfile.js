@@ -8,7 +8,6 @@ var gulp        = require('gulp'),
  * Javascript Task
  */
 var jsList = [
-			'assets/js/modernizr-3.3.1.custom.min.js',
 			'assets/js/jquery-1.12.0.min.js',
 			'assets/js/jquery.dlmenu.min.js',
 			'assets/js/jquery.goup.min.js',
