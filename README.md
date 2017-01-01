@@ -1,5 +1,5 @@
 
-该主题Fork [Moon Jekyll Theme](https://github.com/TaylanTatli/Moon), 并做了一些修改。
+该主题Fork [Moon Jekyll Theme](https://github.com/TaylanTatli/Moon), 并做了一些修改，欢迎fork。
 
 修改如下：
 - 评论改为多说
