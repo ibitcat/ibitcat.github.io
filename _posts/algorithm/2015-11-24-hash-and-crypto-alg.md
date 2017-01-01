@@ -3,7 +3,7 @@ layout: post
 title: 这些年，我遇到的哈希、加密算法
 date: 2015-11-24 16:50:00
 updated: 2015-11-24 16:50:00
-categories: [算法]
+tag: [算法]
 comments: true
 
 ---

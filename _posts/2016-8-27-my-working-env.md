@@ -2,7 +2,7 @@
 layout: post
 title: 我的工作环境分享
 date: 2016-8-27 15:08:00 +0800
-categories: [环境搭建]
+tag: [环境搭建]
 comments: true
 
 ---

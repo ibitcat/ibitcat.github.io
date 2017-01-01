@@ -1,8 +1,7 @@
 ---
 layout: post
 title: "入住github pages"
-categories: [生活]
-share: false
+tag: [生活]
 comments: false
 
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: 常见的排序算法解析
 date: 2016-4-8 23:35:00
-categories: [算法]
+tag: [算法]
 comments: true
 
 ---

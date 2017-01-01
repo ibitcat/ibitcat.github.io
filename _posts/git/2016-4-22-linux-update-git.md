@@ -2,7 +2,7 @@
 layout: post
 title: linux 源码升级git
 date: 2016-4-22 22:05:00
-categories: [Git]
+tag: [Git]
 comments: true
 
 ---

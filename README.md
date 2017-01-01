@@ -1,13 +1,14 @@
-Domicat
-=================
 
-我的个人博客：<http://domicat.me>，外观基于 [mzlogin](http://mzlogin.github.io) 修改。
+该主题Fork [Moon Jekyll Theme](https://github.com/TaylanTatli/Moon), 并做了一些修改。
 
-博客从jekyll迁移到hexo，又从hexo迁移回到jekyll，hexo好是好，奈何每次更新文章都要重新生成，实在是太麻烦了。
-
-
-
-[1]: https://github.com/mzlogin/chinese-copywriting-guidelines
-[2]: http://mazhuang.org/2015/12/05/diff-between-gfm-and-redcarpet/
-[3]: https://help.github.com/articles/setting-up-your-pages-site-locally-with-jekyll/
-[4]: https://github.com/mzlogin/mzlogin.github.io/issues/2
+修改如下：
+- 评论改为多说
+- 增加文章目录
+- 图片显示改为fancybox,之前是magnific-popup
+- 修改字体
+- 增加footer，并固定到页面底部
+- 修改404页面
+- 增加搜索功能，功能移植自[space-jekyll-template](https://github.com/victorvoid/space-jekyll-template)
+- 移除文章分析功能（因为对我没啥用，博客主要用来做笔记）
+- 增加wiki
+- 增加links

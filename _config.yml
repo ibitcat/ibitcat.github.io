@@ -1,105 +1,81 @@
-# ---------------- #
-#   Main Configs   #
-# ---------------- #
-baseurl:
-url: http://domicat.me
-date_format: "ordinal"
-title: Domi●Cat
-subtitle: "烂笔头的一生"
-description: "美乃滋大人的个人博客"
-keywords: Domicat
-favicon: /favicon.ico
-timezone: Asia/Shanghai
-encoding: "utf-8"
-source_code: https://github.com/shuimu98/shuimu98.github.io
-side_bar_repo_limit: 3
-#google:
-#    analytics_id: UA-71084139-1
+# Site
+title:              Domi●Cat
+bio:                '烂笔头的一生.'
+description:        "美乃滋大人的个人博客."
+reading_time:       false
+words_per_minute:   200
+logo:               'assets/img/avatar.jpg'
+background:         'assets/img/placeholder-big.jpg'
+tiled_bg:           false   # Set this true if you want to tile your background image, otherwise it will be covered
+locale:             zh_CN
+url:                'http://shuimu98.github.io'
 
-# ---------------- #
-#      Author      #
-# ---------------- #
-author: Domi●Cat
-organization: Txitech, Inc.
-organization_url: http://txitech.com/
-location: GuangZhou, China
-email: shui_mu98@163.com
-
-# ---------------- #
-#    Navigation    #
-# ---------------- #
-navs:
-  -
-    href: /
-    label: 首页
-
-  -
-    href: /categories/
-    label: 分类
-
-  -
-    href: /wiki/
-    label: 维基
-
-  -
-    href: /links/
-    label: 链接
-
-  -
-    href: /about/
-    label: 关于
-
-# ---------------- #
-#       RSS        #
-# ---------------- #
-subscribe_rss: /feed.xml
-
-# ---------------- #
-#      Jekyll      #
-# ---------------- #
-markdown: kramdown
+# Jekyll
+permalink:          /:title/
+markdown:           kramdown
+highlighter:        rouge
 kramdown:
-    input: GFM
-highlighter: rouge
-paginate: 5
-lsi: false
-quiet: false
-excerpt_separator: "\n\n"
-permalink: /:year/:month/:day/:title/
-gems:
-    - rouge
-#     - jekyll-html-pipeline
-    - jekyll-paginate
-    - jekyll-sitemap
-    - jekyll-feed
-    - jemoji
-#     - jekyll-mentions
+  input:            GFM
+  auto_ids:         true
+  footnote_nr:      1
+  entity_output:    as_char
+  toc_levels:       1..6
+  enable_coderay:   false
+mathjax:            true
+sass:
+  sass_dir:         _sass
+  #style:            compressed #开发环境不压缩
 collections:
     wiki:
         output: true
         permalink: /wiki/:path/
 
-# ---------------- #
-#      Socials     #
-# ---------------- #
-github_username: shuimu98
-douban_username: 
-facebook_username: 
-weibo_username: shuimu98
-zhihu_username: 
-twitter_username: 
+# Comments
+#disqus_shortname:   taylantatli
+duoshuo_username:   domicat
 
-# ---------------- #
-#      Comments    #
-# ---------------- #
-# support provider: disqus, duoshuo, changyan
-comments_provider: duoshuo
-# !!!重要!!! 请修改下面两个用户名为你自己申请的
-# !!!Important!!! Please modify usernames below to yours
-duoshuo_username: domicat
-#disqus_username: shuimu98
+# Social
+# if you don't have any of social below, comment the line.
+email:              shui_mu98@163.com
+github-url:         shuimu98
+weibo:              shuimu98
+#google:
+  #plus:            #username
+  #analytics:
+  #verify:
+  #ad-client:
+  #ad-slot:
+#bing-verify:
+#twitter:            username
+#facebook:           username
+#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
+#linkedin:          username
+#xing:              username
+#instagram:          username
+#lastfm:            username
+#tumblr:            username
+#medium:            '@username'
+#pinterest:         username
+#foursquare:        username
+#steam:              username
+#dribbble:          username
+#youtube:           username
+#soundcloud:        username
+#flickr:            username
+#codepen:           username
+#keybase:           username
+#xmpp:              username@server.com
+#hackernews:        username
 
-# ---------------- #
-#      Datas       #
-# ---------------- #
-skill: [C, Lua, Golang, C++(已弃坑)]
+# Gems
+gems:
+  - jekyll-mentions
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-gist
+
+jekyll-mentions:
+    base_url: https://github.com
+
+# Exclude list
+exclude: [README.md, Gemfile, Gemfile.lock, node_modules, gulpfile.js, package.json, _site, src, vendor, CNAME, LICENSE, Rakefile]

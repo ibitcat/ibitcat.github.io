@@ -1,8 +1,8 @@
 ---
-layout: wiki
+layout: post
 title: Mysql Command
 categories: Mysql
-description: Mysql 常用命令
+excerpt: Mysql 常用命令
 keywords: Mysql, Mysql Command
 ---
 

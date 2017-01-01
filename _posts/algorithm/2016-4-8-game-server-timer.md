@@ -2,7 +2,7 @@
 layout: post
 title: 游戏服务器两种定时器实现
 date: 2016-4-8 23:33:00
-categories: [算法]
+tag: [算法]
 comments: true
 
 ---

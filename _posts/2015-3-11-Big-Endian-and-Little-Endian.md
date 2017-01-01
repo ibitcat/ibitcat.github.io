@@ -2,9 +2,8 @@
 layout: post
 date: 2015-3-11 15:36:00
 title: 大端与小端
-description: "比较详细描述大、小端的区别，方便记忆。."
-updated: 2015-11-5 17:17:00
-categories: [网络]
+excerpt: "比较详细描述大、小端的区别，方便记忆。."
+tag: [网络]
 comments: true
 ---
 
