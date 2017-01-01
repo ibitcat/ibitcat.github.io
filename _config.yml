@@ -24,7 +24,7 @@ kramdown:
 mathjax:            true
 sass:
   sass_dir:         _sass
-  #style:            compressed #开发环境不压缩
+  style:            compressed #开发环境不压缩
 collections:
     wiki:
         output: true
