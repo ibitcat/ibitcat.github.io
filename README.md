@@ -9,6 +9,6 @@
 - 增加footer，并固定到页面底部
 - 修改404页面
 - 增加搜索功能，功能移植自[space-jekyll-template](https://github.com/victorvoid/space-jekyll-template)
-- 移除文章分析功能（因为对我没啥用，博客主要用来做笔记）
+- 移除文章分享功能（因为对我没啥用，博客主要用来做笔记）
 - 增加wiki
 - 增加links
