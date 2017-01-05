@@ -2,7 +2,7 @@
 layout: post
 title:  "Markdown Syntax"
 date:   2016-03-15
-excerpt: "Markdown 语法."
+excerpt: "Markdown 语法"
 tag:
 - markdown 
 comments: true
@@ -16,7 +16,7 @@ comments: true
 
 ## Heading 1（标题1）
 
-标题1，两个"#"表示用`<h2>`标签，这里需要注意的是：我修改的文章目录，只支持从两个"#"开始，不支持一个"#",因为`<h1>`字太大了。
+两个"#"表示用`<h2>`标签，这里需要注意的是：我修改的文章目录，只支持从两个"#"开始，不支持一个"#",因为`<h1>`字太大了。
 
 ## Heading 2（标题2）
 
@@ -30,7 +30,7 @@ comments: true
 
 ### Body text （内容）
 
-文本内容，**这里是加粗**， *这里是斜体*
+文本内容，**这里是加粗**， *这里是斜体*.
 
 ![这里是图片](/assets/img/avatar.jpg)
 {: .image-right}
@@ -123,5 +123,5 @@ Press <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move your car. **Midto
 
 ## Notices（通知）
 
-**Watch out!** You can also add notices by appending `{: .notice}` to a paragraph.
+**注意!** 你可以将 `{: .notice}`附加到段落后面来添加通知.
 {: .notice}
