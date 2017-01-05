@@ -24,9 +24,9 @@ feature: http://domicat.me/images/posts/githubpages.jpg
 在博客中内嵌播放器：
 
 **豆瓣fm：**  
-```
-<center> <iframe name="iframe_canvas" src="http://douban.fm/partner/baidu/doubanradio" scrolling="no" frameborder="0" width="400" height="200"></iframe> </center>
-```
+	
+	<center> <iframe name="iframe_canvas" src="http://douban.fm/partner/baidu/doubanradio" scrolling="no" frameborder="0" width="400" height="200"></iframe> </center>
+
 
 **虾米播播：**  
 可以参考[http://jingyan.baidu.com/article/a65957f48947af24e67f9bb6.html](http://jingyan.baidu.com/article/a65957f48947af24e67f9bb6.html)
