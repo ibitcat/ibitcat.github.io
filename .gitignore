@@ -3,3 +3,4 @@ _site/
 .jekyll-metadata
 .git-credentials
 *.sublime*
+.git-credentials
