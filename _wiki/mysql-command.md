@@ -27,6 +27,7 @@ keywords: Mysql, Mysql Command
 | 命令行修改root密码           	| update mysql.user SET password=PASSWORD('新密码') WHERE User='root';<br>FLUSH PRIVILEGES;|
 | 显示当前use的数据库名			| select database();							|
 | 显示当前的user					| select user();								|
+{: rules="all"}
 
 ### 数据库操作示例
 
