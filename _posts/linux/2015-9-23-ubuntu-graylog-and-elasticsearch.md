@@ -3,7 +3,7 @@ layout: post
 title: ubuntu elasticsearch和graylog安装与使用
 date: 2015-9-23 11:25:00
 updated: 2015-11-05 17:26:00
-categories: [环境搭建]
+tag: [环境搭建]
 comments: true
 
 ---

@@ -2,22 +2,25 @@
 layout: post
 title:  "Markdown Syntax"
 date:   2016-03-15
-excerpt: "Just about everything you'll need to style in the theme: headings, paragraphs, blockquotes, tables, code blocks, and more."
+excerpt: "Markdown 语法."
 tag:
 - markdown 
 comments: true
 ---
 
+文章转载自[Markdown Syntax](https://taylantatli.github.io/Moon/markdown-syntax/)
+
 ## HTML Elements
 
-这里是中文测试，爱迪生借记卡和打火机家具店啊
-Below is just about everything you'll need to style in the theme. Check the source code to see the many embedded elements within paragraphs.
+像写记事本一样，可以记录你想记录的内容，可以是html 内容，也可以是纯文本内容。
 
-## Heading 1
+## Heading 1（标题1）
 
-## Heading 2
+标题1，两个"#"表示用`<h2>`标签，这里需要注意的是：我修改的文章目录，只支持从两个"#"开始，不支持一个"#",因为`<h1>`字太大了。
 
-### Heading 3
+## Heading 2（标题2）
+
+### Heading 3（子标题3）
 
 #### Heading 4
 
@@ -25,24 +28,23 @@ Below is just about everything you'll need to style in the theme. Check the sour
 
 ###### Heading 6
 
-### Body text
+### Body text （内容）
 
-Lorem ipsum dolor sit amet, test link adipiscing elit. **This is strong**. Nullam dignissim convallis est. Quisque aliquam.
+文本内容，**这里是加粗**， *这里是斜体*
 
-![Smithsonian Image](https://mmistakes.github.io/minimal-mistakes/images/3953273590_704e3899d5_m.jpg)
+![这里是图片](/assets/img/avatar.jpg)
 {: .image-right}
 
-*This is emphasized*. Donec faucibus. Nunc iaculis suscipit dui. 53 = 125. Water is H2O. Nam sit amet sem. Aliquam libero nisi, imperdiet at, tincidunt nec, gravida vehicula, nisl. The New York Times (That’s a citation). Underline.Maecenas ornare tortor. Donec sed tellus eget sapien fringilla nonummy. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus.
+~~这里是删除线~~
 
-HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, commodo vitae, feugiat in, nunc. Morbi imperdiet augue quis tellus. Praesent mattis, massa quis luctus fermentum, turpis mi volutpat justo, eu volutpat enim diam eget metus.
+### Blockquotes（引用）
 
-### Blockquotes
+> 这里是引用。
 
-> Lorem ipsum dolor sit amet, test link adipiscing elit. Nullam dignissim convallis est. Quisque aliquam.
+## List Types（列表）
 
-## List Types
 
-### Ordered Lists
+### Ordered Lists（有序列表）
 
 1. Item one
    1. sub item one
@@ -50,13 +52,13 @@ HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, c
    3. sub item three
 2. Item two
 
-### Unordered Lists
+### Unordered Lists（无序列表）
 
 * Item one
 * Item two
 * Item three
 
-## Tables
+## Tables（表格）
 
 | Header1 | Header2 | Header3 |
 |:--------|:-------:|--------:|
@@ -69,7 +71,18 @@ HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, c
 | Foot1   | Foot2   | Foot3
 {: rules="groups"}
 
-## Code Snippets
+注意： `{: rules="groups"}`，这里的rules可以填写下面的值：
+
+| 值 | 描述 |
+|:--------|:-------:|
+| none   | 没有线条。   |
+| groups   | 位于行组和列组之间的线条。   |
+| rows   | 位于行之间的线条。   |
+| cols   | 位于列之间的线条。   |
+| all   | 位于行和列之间的线条。   |
+{: rules="all"}
+
+## Code Snippets（代码高亮）
 
 {% highlight css %}
 #container {
@@ -79,9 +92,14 @@ HTML and CSS are our tools. Mauris a ante. Suspendisse quam sem, consequat at, c
 }
 {% endhighlight %}
 
-## Buttons
+代码高亮有两种方式：
+- 方式1: 使用 highlight xxx endhighlight
+- 方式2: 使用三个反引号
 
-Make any link standout more when applying the `.btn` class.
+
+## Buttons（按钮）
+
+应用 `.btn` class，可以是你的链接更突出。
 
 {% highlight html %}
 <a href="#" class="btn btn-success">Success Button</a>
@@ -95,7 +113,7 @@ Make any link standout more when applying the `.btn` class.
 
 ## KBD
 
-You can also use `<kbd>` tag for keyboard buttons.
+也可以为键盘按钮使用 `<kbd>` 标签.
 
 {% highlight html %}
 <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
@@ -103,7 +121,7 @@ You can also use `<kbd>` tag for keyboard buttons.
 
 Press <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to move your car. **Midtown Maddness!!**
 
-## Notices
+## Notices（通知）
 
 **Watch out!** You can also add notices by appending `{: .notice}` to a paragraph.
 {: .notice}
