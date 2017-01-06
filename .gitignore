@@ -4,3 +4,4 @@ _site/
 .git-credentials
 *.sublime*
 .git-credentials
+Gemfile.lock
