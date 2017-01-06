@@ -11,57 +11,55 @@ comments: true
 
 ### 第一部分 - 常用简单命令
 
-<font color="#FF090f">小知识：</font>
->markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。
+<font color="#FF090f">小知识：</font> markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 
+{: .notice}
 
 命令列表：
 
-- 重命名文件文件夹 ： `mv file1 file2`
-- 移动文件文件夹 ： `mv file1 dir1` 
-- 新建文件夹 ： `mkdir dirname`
-- 删除非空目录 ： `rm -rf dirname`
-- 实时打印文件变化 ： `tail -f file.log`
-- 解压zip文件 ： `unzip file.zip -d/temp`
-- 文件夹压缩成zip ： `zip –q –r test.zip ~/test`   
-- tar解压： `tar zxvf zhcon-0.2.5.tar.gz`  
+1. 重命名文件文件夹 ： `mv file1 file2`
+2. 移动文件文件夹 ： `mv file1 dir1` 
+3. 新建文件夹 ： `mkdir dirname`
+4. 删除非空目录 ： `rm -rf dirname`
+5. 实时打印文件变化 ： `tail -f file.log`
+6. 解压zip文件 ： `unzip file.zip -d/temp`
+7. 文件夹压缩成zip ： `zip –q –r test.zip ~/test`   
+8. tar解压： `tar zxvf zhcon-0.2.5.tar.gz`  
+```
+x : 从 tar 包中把文件提取出来  
+z : 表示tar包被gzip压缩过,需要用gunzip解压  
+v : 显示详细信息  
+f : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz  
+```
 
-    >x : 从 tar 包中把文件提取出来  
-    >z : 表示tar包被gzip压缩过,需要用gunzip解压  
-    >v : 显示详细信息  
-    >f : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz  
+9. 文件夹压缩成zip ： `zip –q –r xahot.zip /home/xahot`
+10. 查看文件夹以及文件大小 ： `du -ah  filename`
+11. 建立软连接 ： `ln -s /usr/local/bin/python2.7 /usr/bin/python`  
+  将python2.7软连接到系统的默认python,即`/usr/bin/python`是`python2.7`的快捷方式
 
-- 文件夹压缩成zip ： `zip –q –r xahot.zip /home/xahot`
-- 查看文件夹以及文件大小 ： `du -ah  filename`
-- 建立软连接 ： `ln -s /usr/local/bin/python2.7 /usr/bin/python`  
+12. 查看文件夹下文件的总数目 ：  `find ./ -type f |wc -l`
+13. 查看文件列出文件下一级目的的大小 ： 
+```
+1、df -h    
+2、du -h --max-depth=1 指定层数
+```
 
-	>将python2.7 软连接到系统的默认python
+14. 查看磁盘占用情况 ： `df -hl `  
+```
+    df是以磁盘分区为单位来查看文件系统，/dev/hdb2 75G 75G 0 100% /, 以此为例。
+    就是HD硬盘借口的第二个硬盘(b)上，里面的第二个分区(2)，容量是75G，用了75G，可用是0。
+    因此利用率是100%, 他被挂载到根分区目录上（/）。
 
-- 查看文件夹下文件的总数目 ：  `find ./ -type f |wc -l`
-- 查看文件列出文件下一级目的的大小 ： 
+    文件系统 容量 已用 可用 已用% 挂载点
+    /dev/hdb2 75G 75G 0 100% /
+    /dev/hdb1 99M 9.2M 85M 10% /boot
+    none 251M 0 251M 0% /dev/shm
+```
 
-	>1：df -h    
-	>2、du -h --max-depth=1 指定层数
+15. 只显示文件夹 ： `ls -F|grep /$`
+16. 查看端口占用 ： `netstat -nltp|grep 80` 
+  t表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态
 
-- 查看磁盘占用情况 ： `df -hl `  
-
-    >df是以磁盘分区为单位来查看文件系统，/dev/hdb2 75G 75G 0 100% /, 以此为例。
-    >就是HD硬盘借口的第二个硬盘(b)上，里面的第二个分区(2），容量是75G，用了75G，可用是0。
-    >因此利用率是100%, 他被挂载到根分区目录上（/）。[^footer1]
-    >
-    >```
-    >文件系统 容量 已用 可用 已用% 挂载点
-    >/dev/hdb2 75G 75G 0 100% /
-    >/dev/hdb1 99M 9.2M 85M 10% /boot
-    >none 251M 0 251M 0% /dev/shm
-    >```
-    
-
-- 只显示文件夹 ： `ls -F|grep /$`
-- 查看端口占用 ： `netstat -nltp|grep 80` 
-
-    >t表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态
-
-- 查找文件 ：   
+17. 查找文件 ：   
     
     - 1.whereis 文件名  
 		特点:快速,但是是模糊查找,例如 找 #whereis mysql 它会把mysql,mysql.ini,mysql.*所在的目录都找出来.我一般的查找都用这条命令.
@@ -74,43 +72,98 @@ comments: true
 		强力推荐的方法,最快,最好的方法.
 		注意:第一次使用该命令,可能需要更新数据库,按照提示的命令执行一下就好了.
 
-- 查看ubuntu版本号 ： 
+18. 查看ubuntu版本号 ： 
 	- 1、`cat /etc/issue`
 	+ 2、`lsb_release -a` (此方法显示内容更详细)
 
-- 查看端口占用情况：
+19. 查看端口占用情况：
     - `netstat -nltp|grep 80`  表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态
 	- `netstat -anp|grep 80`
 
-- top命令  
+20. top命令  [^footer1]
+```html  
+参考：
+http://www.cnblogs.com/gaojun/p/3406096.html
+http://www.jb51.net/LINUXjishu/34604.html
+字段解释：
+PID：进程的ID  
+USER：进程所有者  
+PR：进程的优先级别，越小越优先被执行  
+NInice：值  
+VIRT：进程占用的虚拟内存  
+RES：进程占用的物理内存  
+SHR：进程使用的共享内存  
+S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数  
+%CPU：进程占用CPU的使用率  
+%MEM：进程使用的物理内存和总内存的百分比  
+TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
+COMMAND：进程启动命令名  	
+```
 
-参考：<http://www.cnblogs.com/gaojun/p/3406096.html>
+21. chmod更改文件权限 : `chmod u+r xxx` 或者 `chmod u=rwx,g=r xxx` [^footer2]
+22. 查看文件类型： `file xxx` 
+23. 修改linux时间： `date -s 11:00` 或者 `date -s "2008-08-08 12:00:00"`
+24. 将指定的时间戳按日期格式显示 ： `date -d @1361542596`
+25. linux解压缩文件：
+    - 01-.tar格式  
+    解包：tar xvf FileName.tar  
+    打包：tar cvf FileName.tar DirName（注：tar是打包，不是压缩！）
 
-字段解释：  
-  
->PID：进程的ID  
->USER：进程所有者  
->PR：进程的优先级别，越小越优先被执行  
->NInice：值  
->VIRT：进程占用的虚拟内存  
->RES：进程占用的物理内存  
->SHR：进程使用的共享内存  
->S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数  
->%CPU：进程占用CPU的使用率  
->%MEM：进程使用的物理内存和总内存的百分比  
->TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
->COMMAND：进程启动命令名  
-	
-常用的命令（输入top后）：
-P：按%CPU使用率排行
-T：按MITE+排行
-M：按%MEM排行
+    - 02-.gz格式  
+    解压1：gunzip FileName.gz  
+    解压2：gzip -d FileName.gz  
+    压 缩：gzip FileName
+
+    - 03-.tar.gz格式  
+    解压：tar zxvf FileName.tar.gz    
+    压缩：tar zcvf FileName.tar.gz DirName
+
+    - 04-.bz2格式  
+    解压1：bzip2 -d FileName.bz2  
+    解压2：bunzip2 FileName.bz2  
+    压 缩：bzip2 -z FileName
+
+    - 05-.tar.bz2格式    
+    解压：tar jxvf FileName.tar.bz2  
+    压缩：tar jcvf FileName.tar.bz2 DirName
+
+    - 06-.bz格式   
+    解压1：bzip2 -d FileName.bz  
+    解压2：bunzip2 FileName.bz
+
+    - 07-.tar.bz格式  
+    解压：tar jxvf FileName.tar.bz
+
+    - 08-.Z格式  
+    解压：uncompress FileName.Z  
+    压缩：compress FileName
+
+    - 09-.tar.Z格式  
+    解压：tar Zxvf FileName.tar.Z  
+    压缩：tar Zcvf FileName.tar.Z DirName
+
+    - 10-.tgz格式  
+    解压：tar zxvf FileName.tgz
+
+    - 11-.tar.tgz格式 
+    解压：tar zxvf FileName.tar.tgz  
+    压缩：tar zcvf FileName.tar.tgz FileName
+
+    - 12-.zip格式  
+    解压：unzip FileName.zip  
+    压缩：zip FileName.zip DirName
+
+    - 13-.lha格式  
+    解压：lha -e FileName.lha  
+    压缩：lha -a FileName.lha FileName
+
+    - 14-.rar格式  
+    解压：rar a FileName.rar  
+    压缩：rar e FileName.rar    
 
 ### 第二部分 - 稍微复杂的命令
 
-#### 1、tree ：
-
-> 一般需要安装tree，ubuntu下安装： `apt-get install tree`
+#### 1、tree
 
 比较常用的：  
 
@@ -118,17 +171,17 @@ M：按%MEM排行
 - tree -d ： `仅显示目录`  
 - tree -f ： `显示完整路径`
 
+**注意!** 一般需要安装tree，ubuntu下安装： `apt-get install tree`
+{: .notice}
+
 #### 2、ls、ps、grep和awk结合使用
 首先了解 `/proc`目录，参考[Linux下/proc目录简介](http://blog.csdn.net/zdwzzu2006/article/details/7747977)。
-
->Linux 内核提供了一种通过 /proc 文件系统，在运行时访问内核内部数据结构、改变内核设置的机制。
-	
+Linux 内核提供了一种通过 /proc 文件系统，在运行时访问内核内部数据结构、改变内核设置的机制。	
 proc文件系统是一个伪文件系统，它只存在内存当中，而不占用外存空间。它以文件系统的方式为访问系统内核数据的操作提供接口。
 
 ps：用来查看进程的相关信息；  
 grep：用来查找、过滤（可使用正则表达式）；  
 awak：类似grep的扫描和处理工具，比grep强大些； 
-
 ```shell
 ps -aux                 # 显示所有进程
 ps -e                   # 显示所有进程、环境变量
@@ -141,7 +194,6 @@ ls -l /proc/{pid}/exe |grep -w "xxx" | awk '{print $11}'  # 查看进程可执�
 #### 3、grep详解
 
 - **或操作：**  
-
 ```shell
 grep -E '123|abc' filename    #找出文件（filename）中包含123或者包含abc的行`  
 egrep '123|abc' filename      #用egrep同样可以实现`
@@ -149,11 +201,9 @@ awk '/123|abc/' filename      #awk 的实现方式`
 ```
 
 - **与操作：**  
-
 `shell grep pattern1 files | grep pattern2`   显示既匹配 pattern1 又匹配 pattern2 的行
 
 - **其他操作:**  
-
 ```shell
 grep -i pattern files           # 不区分大小写地搜索。默认情况区分大小写
 grep -l pattern files           # 只列出匹配的文件名  
@@ -169,4 +219,7 @@ grep -C number pattern files    # 匹配的上下文分别显示[number]行
 ### 第三部分 - 实用的shell脚本
  TODO
 
-[^footer1]: 这是一个测试，用来阐释注脚。
+> 脚注
+
+[^footer1]: 常用的命令（输入top后）：P：按%CPU使用率排行  T：按MITE+排行  M：按%MEM排行
+[^footer2]: linux文件权限可参考[这篇文章](http://www.cnblogs.com/123-/p/4189072.html)
