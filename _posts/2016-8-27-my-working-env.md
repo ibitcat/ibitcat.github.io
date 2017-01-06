@@ -64,6 +64,33 @@ comments: true
   我们可以修改这个插件路径，先关闭st，在我的电脑输入路径 `%appdata%`。删除sublime text文件夹，然后在
   sublime text的安装路径下建立一个名为Data的文件夹。重新打开st就OK了。
 
+- 修改sublime project设置 (有两种方式修改project设置)
+  1. 在*.sublime-project文件中，你可以定义工程配置。例如你可以定义多个目录路径，或者哪些目录或文件需要排除在外。
+  2. 打开菜单栏：Project --> Edit Project
+
+`folder_exclude_patterns` 表示从项目中排除哪些文件夹  
+`file_exclude_patterns`   表示从项目中排除哪些文件  
+```json
+  {
+    "folders":
+    [
+        {
+            "path": "wwwroot",
+            "folder_exclude_patterns": ["images"]
+        },
+        {
+            "path": "c:\wwwroot\project1\assets",
+            "name": "Project 1",
+            "file_exclude_patterns": ["*.php"]
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 8
+    }
+ }
+```
+
 #### Visual studio 2015
 
 目前比较少用vs，除了必装的小番茄助手（Visual Assist X ）之外，Indent Guides这个插件也还不错。
