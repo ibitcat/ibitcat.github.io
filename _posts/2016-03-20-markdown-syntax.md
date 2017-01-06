@@ -92,7 +92,8 @@ comments: true
 }
 {% endhighlight %}
 
-代码高亮有两种方式：
+代码高亮有两种方式：  
+
 - 方式1: 使用 highlight xxx endhighlight
 - 方式2: 使用三个反引号
 
