@@ -52,8 +52,7 @@ comments: true
 
 
 15. 只显示文件夹 ： `ls -F|grep /$`
-16. 查看端口占用 ： `netstat -nltp|grep 80` 
-  t表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态
+16. 查看端口占用 ： `netstat -nltp|grep 80` t表示tcp协议; l表示仅列出有在 Listen (监听) 的服務状态
 
 17. 查找文件 ：   
     
@@ -77,7 +76,7 @@ comments: true
 	- `netstat -anp|grep 80`
 
 20. top命令  [^footer1]  
--参考：  
+- 参考：  
     - http://www.cnblogs.com/gaojun/p/3406096.html
     - http://www.jb51.net/LINUXjishu/34604.html
 - 字段解释：  
