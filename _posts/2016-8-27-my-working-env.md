@@ -70,6 +70,7 @@ comments: true
 
 `folder_exclude_patterns` 表示从项目中排除哪些文件夹  
 `file_exclude_patterns`   表示从项目中排除哪些文件  
+
 ```json
   {
     "folders":
