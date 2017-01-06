@@ -77,10 +77,10 @@ comments: true
 	- `netstat -anp|grep 80`
 
 20. top命令  [^footer1]  
-参考：  
-- http://www.cnblogs.com/gaojun/p/3406096.html
-- http://www.jb51.net/LINUXjishu/34604.html
-字段解释：
+-参考：  
+    - http://www.cnblogs.com/gaojun/p/3406096.html
+    - http://www.jb51.net/LINUXjishu/34604.html
+- 字段解释：  
 `PID`：进程的ID  
 `USER`：进程所有者  
 `PR`：进程的优先级别，越小越优先被执行   
@@ -185,7 +185,7 @@ awak：类似grep的扫描和处理工具，比grep强大些；
 #### 3、grep详解
 
 - **或操作：**  
-`grep -E '123|abc' filename`    #找出文件（filename）中包含123或者包含abc的行`  
+`grep -E '123|abc' filename`    #找出文件（filename）中包含123或者包含abc的行  
 `egrep '123|abc' filename`      #用egrep同样可以实现`  
 `awk '/123|abc/' filename`      #awk 的实现方式`  
 
