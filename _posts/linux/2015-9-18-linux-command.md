@@ -22,7 +22,7 @@ comments: true
 4. 删除非空目录 ： `rm -rf dirname`
 5. 实时打印文件变化 ： `tail -f file.log`
 6. 解压zip文件 ： `unzip file.zip -d/temp`
-7. 文件夹压缩成zip ： `zip –q –r test.zip ~/test`   
+7. 文件夹压缩成zip ： `zip –q –r test.zip ~/test`
 8. tar解压： `tar zxvf zhcon-0.2.5.tar.gz`  
 `x` : 从 tar 包中把文件提取出来  
 `z` : 表示tar包被gzip压缩过,需要用gunzip解压  
