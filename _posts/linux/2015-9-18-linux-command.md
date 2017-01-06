@@ -24,13 +24,11 @@ comments: true
 6. 解压zip文件 ： `unzip file.zip -d/temp`
 7. 文件夹压缩成zip ： `zip –q –r test.zip ~/test`   
 8. tar解压： `tar zxvf zhcon-0.2.5.tar.gz` 
+`x` : 从 tar 包中把文件提取出来  
+`z` : 表示tar包被gzip压缩过,需要用gunzip解压  
+`v` : 显示详细信息  
+`f` : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz  
 
-```
-x : 从 tar 包中把文件提取出来  
-z : 表示tar包被gzip压缩过,需要用gunzip解压  
-v : 显示详细信息  
-f : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz  
-```
 
 9. 文件夹压缩成zip ： `zip –q –r xahot.zip /home/xahot`
 10. 查看文件夹以及文件大小 ： `du -ah  filename`
@@ -39,24 +37,19 @@ f : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz
 
 12. 查看文件夹下文件的总数目 ：  `find ./ -type f |wc -l`
 13. 查看文件列出文件下一级目的的大小 ：
-
-```
-1、df -h    
-2、du -h --max-depth=1 指定层数
-```
+    - 1、df -h    
+    - 2、du -h --max-depth=1 指定层数
 
 14. 查看磁盘占用情况 ： `df -hl ` 
+  df是以磁盘分区为单位来查看文件系统，/dev/hdb2 75G 75G 0 100% /, 以此为例。
+  就是HD硬盘借口的第二个硬盘(b)上，里面的第二个分区(2)，容量是75G，用了75G，可用是0。
+  因此利用率是100%, 他被挂载到根分区目录上（/）。
 
-```
-    df是以磁盘分区为单位来查看文件系统，/dev/hdb2 75G 75G 0 100% /, 以此为例。
-    就是HD硬盘借口的第二个硬盘(b)上，里面的第二个分区(2)，容量是75G，用了75G，可用是0。
-    因此利用率是100%, 他被挂载到根分区目录上（/）。
+  文件系统 容量 已用 可用 已用% 挂载点
+  /dev/hdb2 75G 75G 0 100% /
+  /dev/hdb1 99M 9.2M 85M 10% /boot
+  none 251M 0 251M 0% /dev/shm
 
-    文件系统 容量 已用 可用 已用% 挂载点
-    /dev/hdb2 75G 75G 0 100% /
-    /dev/hdb1 99M 9.2M 85M 10% /boot
-    none 251M 0 251M 0% /dev/shm
-```
 
 15. 只显示文件夹 ： `ls -F|grep /$`
 16. 查看端口占用 ： `netstat -nltp|grep 80` 
@@ -84,25 +77,21 @@ f : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz
 	- `netstat -anp|grep 80`
 
 20. top命令  [^footer1]
-
-```html  
 参考：
 http://www.cnblogs.com/gaojun/p/3406096.html
 http://www.jb51.net/LINUXjishu/34604.html
 字段解释：
-PID：进程的ID  
-USER：进程所有者  
-PR：进程的优先级别，越小越优先被执行  
-NInice：值  
-VIRT：进程占用的虚拟内存  
-RES：进程占用的物理内存  
-SHR：进程使用的共享内存  
-S：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数  
-%CPU：进程占用CPU的使用率  
-%MEM：进程使用的物理内存和总内存的百分比  
-TIME+：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
-COMMAND：进程启动命令名  	
-```
+`PID`：进程的ID  
+`USER`：进程所有者  
+`PR`：进程的优先级别，越小越优先被执行   
+`VIRT`：进程占用的虚拟内存  
+`RES`：进程占用的物理内存  
+`SHR`：进程使用的共享内存  
+`S`：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数  
+`%CPU`：进程占用CPU的使用率  
+`%MEM`：进程使用的物理内存和总内存的百分比  
+`TIME+`：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
+`COMMAND`：进程启动命令名  	
 
 21. chmod更改文件权限 : `chmod u+r xxx` 或者 `chmod u=rwx,g=r xxx` [^footer2]
 22. 查看文件类型： `file xxx` 
@@ -186,32 +175,30 @@ proc文件系统是一个伪文件系统，它只存在内存当中，而不占�
 ps：用来查看进程的相关信息；  
 grep：用来查找、过滤（可使用正则表达式）；  
 awak：类似grep的扫描和处理工具，比grep强大些； 
-```shell
-ps -aux                 # 显示所有进程
-ps -e                   # 显示所有进程、环境变量
-ps -e |grep nginx       # 查看nginx所有进程
-grep -w ss              # -w表示全字匹配
-ls -l /proc/{pid}/exe   # 链接到进程的执行命令文件
-ls -l /proc/{pid}/exe |grep -w "xxx" | awk '{print $11}'  # 查看进程可执行文件的绝对路径
-```
+`ps -aux`                 # 显示所有进程
+`ps -e`                   # 显示所有进程、环境变量
+`ps -e |grep nginx`       # 查看nginx所有进程
+`grep -w ss `             # -w表示全字匹配
+`ls -l /proc/{pid}/exe`   # 链接到进程的执行命令文件
+`ls -l /proc/{pid}/exe |grep -w "xxx" | awk '{print $11}'`  # 查看进程可执行文件的绝对路径
 
 #### 3、grep详解
 
-- **或操作：** 
-grep -E '123|abc' filename    #找出文件（filename）中包含123或者包含abc的行`  
-egrep '123|abc' filename      #用egrep同样可以实现`
-awk '/123|abc/' filename      #awk 的实现方式`
+- **或操作：**  
+`grep -E '123|abc' filename`    #找出文件（filename）中包含123或者包含abc的行`  
+`egrep '123|abc' filename`      #用egrep同样可以实现`
+`awk '/123|abc/' filename`      #awk 的实现方式`
 
 
 - **与操作：**  
 `shell grep pattern1 files | grep pattern2`   显示既匹配 pattern1 又匹配 pattern2 的行
 
 - **其他操作:**  
-grep -i pattern files           # 不区分大小写地搜索。默认情况区分大小写
-grep -l pattern files           # 只列出匹配的文件名  
-grep -L pattern files           # 列出不匹配的文件名  
-grep -w pattern files           # 只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’）` 
-grep -C number pattern files    # 匹配的上下文分别显示[number]行
+`grep -i pattern files`           # 不区分大小写地搜索。默认情况区分大小写
+`grep -l pattern files`           # 只列出匹配的文件名  
+`grep -L pattern files`           # 列出不匹配的文件名  
+`grep -w pattern files`           # 只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’）` 
+`grep -C number pattern files`    # 匹配的上下文分别显示[number]行
 
 
 ### 第三部分 - 常用软件的安装
