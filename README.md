@@ -3,7 +3,7 @@
 
 修改如下：
 - 评论改为多说
-- 增加文章目录
+- 增加文章目录,移植自[http://mazhuang.org](http://mazhuang.org),(因为之前的博客是基于他修改的)
 - 图片显示改为fancybox,之前是magnific-popup
 - 修改字体
 - 增加footer，并固定到页面底部
