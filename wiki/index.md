@@ -5,6 +5,8 @@ excerpt: 各种wiki
 comments: false
 ---
 
+<center><a href="http://domicat.me"><b>Domicat</b></a> 好记性不如烂笔头.</center>
+
 <div class="post-list">
     {% for post in site.wiki %} 
     <ul>
