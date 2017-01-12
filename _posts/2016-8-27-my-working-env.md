@@ -134,7 +134,7 @@ windows下面有很多非常好用的小软件，下面是我收集的一些方�
   linux下这些配置，以后整理之后放到github上，方便以后使用。
 
 - vim：
-  vim的折腾主要是vim的配置文件和vim插件了，关于vim，我之前有篇文章已经做了比较详细的介绍，[传送门](http://domicat.me/2015/07/28/vim-config-and-plugin/)。 
+  vim的折腾主要是vim的配置文件和vim插件了，关于vim，我之前有篇文章已经做了比较详细的介绍，[传送门](http://domicat.me/vim-config-and-plugin/)。 
 
 - zsh：
   zsh 兼容 bash，但是比bash更好用，zsh有个非常有名的配置：oh-my-zsh，安装简单，傻瓜式。
