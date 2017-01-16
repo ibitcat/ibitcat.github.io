@@ -71,7 +71,7 @@ select pid,name from player where pid = 1; #按条件查询指定字段
 - **删除**
 
 ```sql
-delete * from player; #清空所有记录
+delete from player; #清空所有记录
 delete from player where pid = 1; #清空pid等于1的记录
 ```
 
