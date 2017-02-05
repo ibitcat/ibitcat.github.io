@@ -14,7 +14,7 @@ comments: true
 &emsp;&emsp;「以大多数人的努力程度之低,根本轮不到拼天赋」。奈何道理都懂，努力不够。
 
 ## 关于博客
-&emsp;&emsp;2014年末诞生，主题基于[Moon Jekyll Theme](https://github.com/TaylanTatli/Moon)修改。
+&emsp;&emsp;2014年末诞生，[本主题](https://github.com/shuimu98/shuimu98.github.io)基于[Moon Jekyll Theme](https://github.com/TaylanTatli/Moon)修改。
 
 ## 联系
 
