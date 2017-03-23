@@ -1,21 +1,34 @@
 {% if page.comments != false %}
   {% if site.duoshuo_username %}
-  <!-- 多说评论框 BEGIN -->
-  <script type="text/javascript">
-  var duoshuoQuery = {short_name:"{{ site.duoshuo_username }}"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-       || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
+    <!-- 多说评论框 BEGIN -->
+    <script type="text/javascript">
+      var duoshuoQuery = {short_name:"{{ site.duoshuo_username }}"};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
     </script>
   {% endif %}
-{% endif %}
 
-{% if site.disqus_shortname %}
+  <!--网易云跟帖-->
+  {% if site.netease_username %}
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "http://domicat.me",
+        productKey: "c473f2d95c6c4623bad5380201b61425",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+  {% endif %}
+
+  <!--disqus-->
+  {% if site.disqus_shortname %}
     <script type="text/javascript">
         var disqus_shortname = '{{ site.disqus_shortname }}';
         (function() {
@@ -31,4 +44,5 @@
         }());
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  {% endif %}
 {% endif %}

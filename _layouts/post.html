@@ -48,9 +48,9 @@ layout: compress
             </div>
         
             <!--评论-->
-            {% if page.comments and site.duoshuo_username %}
+            {% if page.comments and site.netease_username %}
                 <section id="disqus_thread" class="float-left animated fadeInUp">
-                    <div class="ds-thread" data-thread-key="{{ page.url }}" data-title="{{ page.title }}" data-url="{{ site.url }}{{ page.url }}"></div>   
+                    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
                 </section><!-- /#disqus_thread -->
             {% endif %}
         </div>

@@ -27,11 +27,12 @@ layout: compress
             </div>
         </div>
 
-        <!--多说评论-->
-        {% if page.comments and site.duoshuo_username %}
+        <!--评论-->
+        {% if page.comments and site.netease_username %}
             <section id="disqus_thread" class="comment-width animated fadeInUp">
-                <div class="ds-thread" data-thread-key="{{ page.url }}" data-title="{{ page.title }}" data-url="{{ site.url }}{{ page.url }}"></div>   
-            </section><!-- /#disqus_thread -->
+                <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>   
+            </section>
+            <!-- /#disqus_thread -->
         {% endif %}
     </header>
     {% include scripts.html %}
