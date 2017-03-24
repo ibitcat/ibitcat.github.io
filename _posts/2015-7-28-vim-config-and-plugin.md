@@ -10,7 +10,7 @@ comments: true
 
 搬到linux后，需要使用装逼利器**vim**，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。
 
-**vimrc下载地址**：[传送门](https://github.com/shuimu98/domi-vimrc)
+**vimrc下载地址**：[传送门](https://github.com/shuimu98/domi-dotfile)
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
 
 先来一张预览图：  
@@ -21,8 +21,8 @@ comments: true
 ### 安装步骤
 
 	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	2、git clone https://github.com/shuimu98/domi-vimrc.git
-	3、cp domi-vimrc/.vimrc ~/
+	2、git clone https://github.com/shuimu98/domi-dotfile.git
+	3、cp domi-dotfile/.vimrc ~/
 	4、打开vim，输入命令 :PluginInstall
 
 这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
