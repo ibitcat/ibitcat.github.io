@@ -48,9 +48,9 @@ layout: compress
             </div>
         
             <!--评论-->
-            {% if page.comments and site.netease_username %}
+            {% if page.comments and site.disqus_shortname %}
                 <section id="disqus_thread" class="float-left animated fadeInUp">
-                    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+                    <!---div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div-->
                 </section><!-- /#disqus_thread -->
             {% endif %}
         </div>
