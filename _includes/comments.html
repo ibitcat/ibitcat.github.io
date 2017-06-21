@@ -4,21 +4,21 @@
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   <script type="text/javascript">
     var gitment = new Gitment({
-      owner: 'shuimu98',
-      repo: 'shuimu98.github.io',
-      oauth: {
-        client_id: 'af5065a1372570c7babc',
-        client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10',
-      }})
-
-    gitment.render('gitmentContainer')
+      owner:'shuimu98',
+      repo:'shuimu98.github.io',
+      oauth:{
+        client_id:'af5065a1372570c7babc',
+        client_secret:'3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10',
+      },
+    });
+    gitment.render('gitmentContainer');
   </script>
 
   <!--网易云跟帖-->
   {% if site.netease_username %}
     <script>
       var cloudTieConfig = {
-        url: document.location.href, 
+        url: document.location.href,
         sourceId: "http://domicat.me",
         productKey: "c473f2d95c6c4623bad5380201b61425",
         target: "cloud-tie-wrapper"
