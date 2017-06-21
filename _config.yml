@@ -31,7 +31,7 @@ collections:
         permalink: /wiki/:path/
 
 # Comments
-disqus_shortname:   shuimu98
+#disqus_shortname:   shuimu98
 #duoshuo_username:   domicat
 #netease_username:   domicat
 
