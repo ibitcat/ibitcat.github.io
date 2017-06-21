@@ -1,18 +1,19 @@
 {% if page.comments != false %}
-  {% if site.duoshuo_username %}
-    <!-- 多说评论框 BEGIN -->
-    <script type="text/javascript">
-      var duoshuoQuery = {short_name:"{{ site.duoshuo_username }}"};
-      (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-      })();
-    </script>
-  {% endif %}
+  <!--gitment-->
+  <div id="container"></div>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+  <script>
+  var gitment = new Gitment({
+    owner: 'shuimu98',
+    repo: 'shuimu98.github.io',
+    oauth: {
+      client_id: 'af5065a1372570c7babc',
+      client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10',
+    },
+  })
+  gitment.render('container')
+  </script>
 
   <!--网易云跟帖-->
   {% if site.netease_username %}
