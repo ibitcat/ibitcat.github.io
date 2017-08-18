@@ -54,6 +54,14 @@ $(document).ready(function() {
         $('.fancybox').fancybox();
     };
 
+    //Search sidebar active
+    if($('.search-form').hasClass('active')){
+      switch(e.key) {
+        case "Escape":
+          $('.icon-remove-sign').trigger('click');
+          break;
+      }
+    };
     // Search
     var bs = {
       close: $(".icon-remove-sign"),
