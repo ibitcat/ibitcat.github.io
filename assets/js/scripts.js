@@ -6,6 +6,12 @@ $(function() {
 });
 // Need this to show animation when go back in browser
 window.onunload = function() {};
+window.onkeydown = function(e) {
+  if(e.keyCode == 32 && e.target == document.body) {
+      e.preventDefault();
+      return false;
+  }
+};
 
 // Add lightbox class to all image links
 //$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
@@ -13,15 +19,6 @@ window.onunload = function() {};
 // FitVids options
 $(function() {
   $(".content").fitVids();
-});
-
-// search keyup
-$(document).keyup(function(e){
-  if($('.search-form').hasClass('active')){
-    $(".search-form").find('input').focus();
-  }else{
-    $(".search-form").find('input').blur();
-  }
 });
 
 // All others
@@ -47,22 +44,7 @@ $(document).ready(function() {
         arrowColor: '#000',
         goupSpeed: 'normal'
     });
-	  //$('.image-popup').magnificPopup({
-    //type: 'image',
-    //tLoading: 'Loading image #%curr%...',
-    //gallery: {
-    //  enabled: true,
-    //  navigateByImgClick: true,
-    //  preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    //},
-    //image: {
-    //  tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
-    //},
-    //removalDelay: 300, // Delay in milliseconds before popup is removed
-    //// Class that is added to body when popup is open. 
-    //// make it unique to apply your CSS animations just to this exact popup
-    //mainClass: 'mfp-fade'
-    //});
+    // 图片处理
     $("[class='header']").each(function(i){
         $(this).find('img').each(function(){
           if ($(this).parent().hasClass('fancybox')) return;
@@ -77,6 +59,15 @@ $(document).ready(function() {
     if($.fancybox){
         $('.fancybox').fancybox();
     };
+
+    // search keyup
+    $(document).keyup(function(e){
+      if($('.search-form').hasClass('active')){
+        $(".search-form").find('input').focus();
+      }else{
+        $(".search-form").find('input').blur();
+      }
+    });
 
     //Search sidebar active
     if($('.search-form').hasClass('active')){
