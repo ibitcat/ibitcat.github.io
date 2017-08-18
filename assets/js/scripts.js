@@ -15,6 +15,15 @@ $(function() {
   $(".content").fitVids();
 });
 
+// search keyup
+$(document).keyup(function(e){
+  if($('.search-form').hasClass('active')){
+    $(".search-form").find('input').focus();
+  }else{
+    $(".search-form").find('input').blur();
+  }
+});
+
 // All others
 $(document).ready(function() {
     // zoom in/zoom out animations
@@ -68,10 +77,11 @@ $(document).ready(function() {
     if($.fancybox){
         $('.fancybox').fancybox();
     };
-    //sidebar active
+
+    //Search sidebar active
     if($('.search-form').hasClass('active')){
       switch(e.key) {
-        case "Esc":
+        case "Escape":
           $('.icon-remove-sign').trigger('click');
           break;
       }
@@ -87,7 +97,7 @@ $(document).ready(function() {
     bs.dothis.on('click', function() {
       $('.search-wrapper').toggleClass('active');
       bs.searchform.toggleClass('active');
-      bs.searchform.find('input').focus();
+      //bs.searchform.find('input').focus();
       bs.canvas.toggleClass('search-overlay');
       $('.search-field').simpleJekyllSearch();
     });

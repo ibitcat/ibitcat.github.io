@@ -1,6 +1,5 @@
 var gulp        = require('gulp'),
 	plumber     = require('gulp-plumber'),
-	browserSync = require('browser-sync'),
 	uglify      = require('gulp-uglify'),
 	concat      = require('gulp-concat');
 
@@ -22,7 +21,6 @@ gulp.task('js', function(){
 		.pipe(concat('main.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('assets/js/'))
-		.pipe(browserSync.reload({stream:true}))
 });
 
 /**
