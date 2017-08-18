@@ -6,12 +6,6 @@ $(function() {
 });
 // Need this to show animation when go back in browser
 window.onunload = function() {};
-window.onkeydown = function(e) {
-  if(e.keyCode == 32 && e.target == document.body) {
-      e.preventDefault();
-      return false;
-  }
-};
 
 // Add lightbox class to all image links
 //$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
@@ -60,23 +54,6 @@ $(document).ready(function() {
         $('.fancybox').fancybox();
     };
 
-    // search keyup
-    $(document).keyup(function(e){
-      if($('.search-form').hasClass('active')){
-        $(".search-form").find('input').focus();
-      }else{
-        $(".search-form").find('input').blur();
-      }
-    });
-
-    //Search sidebar active
-    if($('.search-form').hasClass('active')){
-      switch(e.key) {
-        case "Escape":
-          $('.icon-remove-sign').trigger('click');
-          break;
-      }
-    };
     // Search
     var bs = {
       close: $(".icon-remove-sign"),
