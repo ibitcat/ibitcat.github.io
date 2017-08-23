@@ -62,6 +62,14 @@ $(document).ready(function() {
           break;
       }
     };
+    $(document).keyup(function(e){
+      if($('.search-form').hasClass('active')){
+        $(".search-form").find('input').focus();
+      }else{
+        $(".search-form").find('input').blur();
+      }
+    });
+
     // Search
     var bs = {
       close: $(".icon-remove-sign"),
@@ -73,7 +81,7 @@ $(document).ready(function() {
     bs.dothis.on('click', function() {
       $('.search-wrapper').toggleClass('active');
       bs.searchform.toggleClass('active');
-      //bs.searchform.find('input').focus();
+      bs.searchform.find('input').focus();
       bs.canvas.toggleClass('search-overlay');
       $('.search-field').simpleJekyllSearch();
     });
