@@ -383,3 +383,67 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 - C程序将输入看作字节流；流的来源可以是文件、输入设备（如键盘），甚至可以是另一个程序的输出。与之类似，C程序将输出也看作字节流；流的目的地可以是文件，视频显示等等。
 
 - ANSI C提供两种打开文件的模式：二进制模式和文本模式。以二进制模式打开一个文件时，可以逐字节地读取它。以文本模式打开一个文件时，会把文件内容从具体系统的文本表示法映射到C表示法。对于UNIX和Linux系统，这两种模式是相同的。
+
+## 第十四章：存储类、链接和内存管理（重点）
+
+- 声明结构的过程和定义结构变量的过程可以被合并成一步。
+
+		struct book {
+			char title[20];
+			char author[10];
+			float value;
+		} library;
+
+- 结构体的初始化：
+
+	- 顺序初始化: 按照成员定义的顺序，从前到后逐个初始化；允许只初始化部分成员；在被初始化的成员之前，不能有未初始化的成员。 
+
+			struct book library = {"c primer plus","domicat",1.23};
+	- 乱序初始化（C99），语法与数组指定初始化项目相似。可以只初始化部分成员。
+	
+			struct name {
+				char first[10];
+				char second[10];
+			};
+
+			struct book library = {
+				.value = 3.14,
+				.title = "c primer plus",
+				.author = "domi"
+			}
+
+			// 如果是嵌套结构体
+			struct book library = {
+				.value = 3.14,
+				.title = "c primer plus",
+				.author = "domi",
+				.player.first = "domi",
+				.player.second = "cat"
+			}
+			//或者
+			struct book library = {
+				.value = 3.14,
+				.title = "c primer plus",
+				.author = "domi",
+				.player = {
+					first = "domi",
+					second = "cat"
+				}
+			}
+
+- 和数组不同，一个结构的名字并不是该结构的地址，所以，获取一个结构的地址时，必须使用`&`运算符。
+
+- 在一些系统中，结构的大小有可能大于它内部各成员大小之和，那是因为系统对数据的对齐存储需求会导致缝隙。即**结构体内存对齐**。
+
+- C99具有一个称为伸缩型数组成员（flexible array member）的新特性。利用这一新特性可以声明最后一个成员是一个具有特殊属性的数组的结构。**注意：**它和变成数组的概念要区分，不能混淆。声明一个伸缩型数组成员有三个规则：
+
+	- 伸缩型数组成员必须是结构体的最后一个数组成员。
+	- 伸缩型数组成员必须是最后一个数组成员。
+	- 伸缩型数组就像普通数组一样被声明，除了它的方括号内是空的。
+
+		struct flex{
+			int count;
+			double average;
+			double scors[];	//伸缩型数组成员
+		}
+
