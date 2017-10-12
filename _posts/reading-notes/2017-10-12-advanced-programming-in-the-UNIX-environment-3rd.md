@@ -28,4 +28,11 @@ comments: true
 
 ## 第2章：UNIX标准及实现
 
-1. todo
+1. 两个比较常见的标准,参考[这篇文章](http://blog.csdn.net/skylj0209/article/details/3071507)
+
+	- **ANSI C**：这一标准是 ANSI（美国国家标准局）于 1989 年制定的 C 语言标准。 后来被 ISO（国际标准化组织）接受为标准，因此也称为 **ISO C**。它的目标是**为各种操作系统上的 C 程序提供可移植性保证，而不仅仅限于 UNIX**。
+	- **POSIX**：该标准最初由 IEEE 开发的标准族，部分已经被 ISO 接受为国际标准。POSIX.1 和 POSIX.2 分别定义了 POSIX 兼容操作系统的 C 语言系统接口 以及 shell 和工具标准。这两个标准是通常提到的标准。POSIX 表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX 是为了读音更 像 UNIX）。塔的目标是**为了提高 UNIX 环境下应用程序的可移植性，而不仅仅局限于UNIX**。
+2. 头文件<sys/types.h>定义了某些与实现相关的数据类型，它们被称为**基本系统数据类型**。下表列出了常用的基本系统数据类型。
+![常用的基本系统数据类型](/images/posts/primitive_system_data_type.jpg)
+
+3. todo
