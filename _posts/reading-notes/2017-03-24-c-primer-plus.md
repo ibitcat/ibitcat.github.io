@@ -122,16 +122,20 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - 不能在引号括起来的字符串中间断行，但是C的新方法：如果在一个用双引号引起来的字符串后面跟有另一个用双引号引起来的字符串，而且二者之间仅用空白字符分隔，那么C会把该组合当作一个字符串来处理。例如：
 
-		printf("this is test
-		text.");//错误
-		printf("this is test"
-		"text.")//正确
+	~~~c
+	printf("this is test
+	text.");//错误
+	printf("this is test"
+	"text.")//正确
+	~~~
 
 - 使用`scanf()`的两点规则：1、如果使用scanf()读取某种基本变量类型的值，请在变量名之前加上一个`&`；2、如果使用scanf()把一个字符串读进一个字符数组中，请不要使用& 。
-		
-		int a;
-		char b[32];
-		scanf("%d %s",&a,b);
+
+	~~~c
+	int a;
+	char b[32];
+	scanf("%d %s",&a,b);
+	~~~
 
 ## 第五章：运算符、表达式和语句
 
@@ -207,15 +211,19 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - ANSI C形式要求在每个变量前声明其类型。也就是说，不能像通常的变量声明那样使用变量列表来声明同一类型的变量。
 
-		void test(int a,b,c);//错误
-		void test(int a, int b, int c);//正确
+	~~~c
+	void test(int a,b,c);//错误
+	void test(int a, int b, int c);//正确
+	~~~
 
 - 当函数的实际返回值类型与函数原型声明的返回值类型不同时，实际返回值是把**指定的要返回的值**赋给一个**具有所声明的返回类型的变量**时得到的数值。例如：
 
-		int test(){
-			double a=1.2;
-			return a; // 相当于把a的值赋值给一个int变量，然后返回这个int变量
-		}
+	~~~c
+	int test(){
+		double a=1.2;
+		return a; // 相当于把a的值赋值给一个int变量，然后返回这个int变量
+	}
+	~~~
 
 - return语句的另一作用是终止执行函数，并把控制返回给调用函数的下一个语句。即使return语句不是函数的最后一个语句，其执行结果也是如此。
 
@@ -251,15 +259,17 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - C不支持把数组作为一个整体来进行赋值，也不支持用花括号括起来的列表形式进行赋值（初始化的时候除外）。
 
-		int a[10];
-		int b[10];
-		b=a;//错误
-		a={1,2,3};//错误
+	~~~c
+	int a[10];
+	int b[10];
+	b=a;//错误
+	a={1,2,3};//错误
+	~~~
 
 - 编译器不检查索引的合法性。在标准C中，如果使用了错误的索引，程序执行结果是不可知的。也就是，程序也许能够运行，但是运行结果可能很奇怪，也可能会异常中断程序的执行。  
 **注意**：不检查数组边界。
 
-### 1、变长数组  
+### 1、变长数组
 
 - C99引入变长数组，即：`int a=10; int arr[a];`，但是，变长数组声明时，不能进行初始化。
 - 变长数组必须是自动存储类的，这意味着它们必须在函数内部或作为函数参量声明，而且声明时不可以进行初始化。
@@ -312,8 +322,10 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - 一般地，声明N维数组的指针时，除了最左边的方括号可以留空之外，其他都需要填写数值。 这是因为首方括号表示这是一个指针，而其他方括号描述的是所指向对象的数据类型，但是，最左边方括号的维数需要用第二个参数来传递（如下面例子的`int rows`）。
 
-		int sum(int arr[][12][20][30],int rows);
-		int sum(int (*p)[12][20][30],int rows); //效果同上
+	~~~c
+	int sum(int arr[][12][20][30],int rows);
+	int sum(int (*p)[12][20][30],int rows); //效果同上
+	~~~
 
 - 变长数组允许动态分配存储单元。这表示可以在程序运行时指定数组的大小。常规的C数组是静态存储分配的，也就是说数组大小在编译时已经确定。
 
@@ -326,32 +338,39 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - 如果字符串文字中间没有间隔或者间隔的是空格符，ANSI C会将其串联起来。
 
-		char str[50] = "hello, and " "how are " "you " "today";
-		char str[50] = "hello, and how are you today"; //效果相同
+	~~~c
+	char str[50] = "hello, and " "how are " "you " "today";
+	char str[50] = "hello, and how are you today"; //效果相同
+	~~~
 
 - 字符串常量属于静态存储（static storage）类。静态存储是指如果在一个函数中使用字符串常量，即使是多次调用了这个函数，该字符串在程序的整个运行过程中只存储一份。整个引号中的内容作为指向该字符串存储位置的指针。例如：
 
-		printf("%s,%p,%c\n","We","are",*"family");
-		//输出：We,0x0040c010,f
-		//%s输出字符串“We”
-		//%p产生一个地址,
-		//%c则产生这个指针指向的值，即字符串“family”的第一个字符。
+	~~~c
+	printf("%s,%p,%c\n","We","are",*"family");
+	//输出：We,0x0040c010,f
+	//%s输出字符串“We”
+	//%p产生一个地址,
+	//%c则产生这个指针指向的值，即字符串“family”的第一个字符。
+	~~~
 
 - 字符串数组的初始化：
 
-		const char str[32] = "hello world";
-		const char str[] = "hello world"; //让编译器决定数组的大小
-
+	~~~c
+	const char str[32] = "hello world";
+	const char str[] = "hello world"; //让编译器决定数组的大小
+	~~~
 
 ### 1、字符数组和字符串指针的区别
 
 - **数组初始化是从静态存储区把一个字符串复制给数组，而指针初始化只是复制字符串的地址**。
 - 字符串数组的数组名是个常量，而指针名是一个变量。因此：数组名可以赋值给指针，反之则不行。例如：
 
-		chat a1[] = "i love you";
-		char *a2 = "i hate you"; //注意：这种方式等价于 const char *a2;不允许修改a2指向的内容
-		a2 = a1; //正确，类似于x=3
-		a1 = a2; //错误，类似于3=x
+	~~~c
+	chat a1[] = "i love you";
+	char *a2 = "i hate you"; //注意：这种方式等价于 const char *a2;不允许修改a2指向的内容
+	a2 = a1; //正确，类似于x=3
+	a1 = a2; //错误，类似于3=x
+	~~~
 
 - 矩形字符串数组和不规则字符串数组的区别
 
@@ -438,55 +457,61 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 - 声明结构的过程和定义结构变量的过程可以被合并成一步。
 
-		struct book {
-			char title[20];
-			char author[10];
-			float value;
-		} library;
+	~~~c
+	struct book {
+		char title[20];
+		char author[10];
+		float value;
+	} library;
 
-		// 忽略结构体名称亦可
-		struct book {
-			char title[20];
-			char author[10];
-			float value;
-		} library;
+	// 忽略结构体名称亦可
+	struct book {
+		char title[20];
+		char author[10];
+		float value;
+	} library;
+	~~~
 
 - 结构体的初始化：
 
 	- 顺序初始化: 按照成员定义的顺序，从前到后逐个初始化；允许只初始化部分成员；在被初始化的成员之前，不能有未初始化的成员。 
 
-			struct book library = {"c primer plus","domicat",1.23};
+		~~~c
+		struct book library = {"c primer plus","domicat",1.23};
+		~~~
 	- 乱序初始化（C99），语法与数组指定初始化项目相似。可以只初始化部分成员。
 	
-			struct name {
-				char first[10];
-				char second[10];
-			};
+		~~~c
+		struct name {
+			char first[10];
+			char second[10];
+		};
 
-			struct book library = {
-				.value = 3.14,
-				.title = "c primer plus",
-				.author = "domi"
-			}
+		struct book library = {
+			.value = 3.14,
+			.title = "c primer plus",
+			.author = "domi"
+		}
 
-			// 如果是嵌套结构体
-			struct book library = {
-				.value = 3.14,
-				.title = "c primer plus",
-				.author = "domi",
-				.player.first = "domi",
-				.player.second = "cat"
+		// 如果是嵌套结构体
+		struct book library = {
+			.value = 3.14,
+			.title = "c primer plus",
+			.author = "domi",
+			.player.first = "domi",
+			.player.second = "cat"
+		}
+		//或者
+		struct book library = {
+			.value = 3.14,
+			.title = "c primer plus",
+			.author = "domi",
+			.player = {
+				first = "domi",
+				second = "cat"
 			}
-			//或者
-			struct book library = {
-				.value = 3.14,
-				.title = "c primer plus",
-				.author = "domi",
-				.player = {
-					first = "domi",
-					second = "cat"
-				}
-			}
+		}
+		~~~
 
 - 和数组不同，一个结构的名字并不是该结构的地址，所以，获取一个结构的地址时，必须使用`&`运算符。
 
@@ -501,23 +526,27 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 	- 伸缩型数组成员必须是最后一个数组成员。
 	- 伸缩型数组就像普通数组一样被声明，除了它的方括号内是空的。
 
-			struct flex{
-				int count;
-				double average;
-				double scors[];	//伸缩型数组成员
-			}
+		~~~c
+		struct flex{
+			int count;
+			double average;
+			double scors[];	//伸缩型数组成员
+		}
+		~~~
 
 - 有伸缩型数组成员的结构体需要和`malloc`配合使用。c99的意图并不是申明结构体类型的变量，而是需要声明一个指向该结构体类型的指针，然后配合`malloc`来分配该结构体实际需要的内存。
 
-		struct flex *pf;
-		pf = malloc(sizeof(struct flex) + 5*sizeof(double));
-		pf->count = 5;
-	
-		int i;
-		for(i=0;i<5;++i){
-			pf->scors[i] = 10;
-		}
-		pf->average = 10;
+	~~~c
+	struct flex *pf;
+	pf = malloc(sizeof(struct flex) + 5*sizeof(double));
+	pf->count = 5;
+
+	int i;
+	for(i=0;i<5;++i){
+		pf->scors[i] = 10;
+	}
+	pf->average = 10;
+	~~~
 
 ### 联合
 - 联合与结构体类似，区别在于：结构体的各个成员会占用不同的内存，互相之间没有影响；而联合体的所有成员占用同一段内存，修改一个成员会影响其余所有成员。
@@ -527,20 +556,26 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 ### 枚举
 - 通过使用关键字enum，可以创建一个新“类型”并指定它可以具有的值，**实际上**，enum常量是int类型的，因此在使用int类型的任何地方都可以使用它）。枚举类型的目的是提高程序的可读性。它的语法与结构的语法相同。
 
-		// 枚举的声明和定义
-		enum eColor {red,orange,yellow,green,blue};
-		enum eColor color;
+	~~~c
+	// 枚举的声明和定义
+	enum eColor {red,orange,yellow,green,blue};
+	enum eColor color;
+	~~~
 
 - C允许对枚举变量使用运算符++,而C++不允许。
 
-		for(color=red;color<=blue;color++){
-			// TODO ...
-		}
+	~~~c
+	for(color=red;color<=blue;color++){
+		// TODO ...
+	}
+	~~~
 
 - 默认时，枚举列表中的常量被指定为整数值 **0、1、2**等等，当然也可以指定其他值。
 
-		enum eColor {red=100,orange=101};		//此时yellow=102,green=103,blue=104
-		enum eColor {red,orange=100,green=500};	//此时red=0,yellow=101,blue=501
+	~~~c
+	enum eColor {red=100,orange=101};		//此时yellow=102,green=103,blue=104
+	enum eColor {red,orange=100,green=500};	//此时red=0,yellow=101,blue=501
+	~~~
 
 ### typedef
 
