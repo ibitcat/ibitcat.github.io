@@ -52,7 +52,7 @@ comments: true
 | :!command      		| 运行vim外部环境命令（注意 “!”），如 :!ls -l，表示显示当前目录文件				|
 | :tabnew	xxx      	| 新建名为xxx的标签,tab类的其他命令请自行百度。									|
 | gt, gT     			| 可以直接在tab之间切换      													|
-| gg		      		| 跳到文件开头（小写的g连续按两次）												|
+| gg		      		| 跳到文件开头（小写的g连续按两次）											|
 | G		      			| 调到文件尾部（大写G） 														|
 | xxx + g     			| 调到xxx行（在一般模式下先按xxx行，再按g）      								|
 | ctrl+s 和 ctlr+q      	| 这一组快捷键需要注意，其实是linux锁/解屏的快捷键，但是会导致vim僵死				|
@@ -77,64 +77,71 @@ comments: true
 常用快捷键，参考[这里](http://www.cnblogs.com/wangkangluo1/archive/2012/04/12/2444952.html)
 另外我自己定义了一些我自己习惯用的快捷键。
 
-	F2		--资源管理器
-	F3		--TagbarToggle 开关
-	F4		--关闭窗口快捷键
-	F5		--C,C++编译运行
-	F7		--生成Tags文件
-	F8		--C,C++ GDB调试
-	F10		--编辑模式下，切换paste模式，解决vim复制缩进的问题
-	F11		--上一个窗口
-	F12 	--vim窗口切换
-	Shift+l	--svn log
-	Shift+d	--svn diff
-	Shift+u	--svn update
-	Shift+c	--svn commit
-	Shift+r	--svn revert 
+| 快捷键或命令        	| 备注           		|
+| --------------------- |:---------------------	|
+|F2						|资源管理器				|
+|F3						|TagbarToggle 开关		|
+|F4						|关闭窗口快捷键			|
+|F5						|C,C++编译运行			|
+|F7						|生成Tags文件			|
+|F8						|C,C++ GDB调试			|
+|F10					|编辑模式下，切换paste模式，解决vim复制缩进的问题|
+|F11					|上一个窗口				|
+|F12 					|vim窗口切换				|
+|Shift+l				|svn log				|
+|Shift+d				|svn diff				|
+|Shift+u				|svn update				|
+|Shift+c				|svn commit				|
+|Shift+r				|svn revert				|
+{: rules="all"}
 
 ### 常用插件的快捷键
 
-	有些需要配置leader键，vim默认的leader键为 “\”（enter键上面的那个键）
-	
-	scrooloose/nerdcommenter 快速 加减注释插件：
-	\cc		注释
-	\ci		取消注释
+有些需要配置leader键，vim默认的leader键为 “\”（enter键上面的那个键）
 
-	fatih/vim-go 插件：
-	\dt		转到定义（新的标签页打开）
-	\ds		转到定义（水平分割窗口）
-	\dv		转到定义（垂直分割窗口）
+- scrooloose/nerdcommenter 快速 加减注释插件：
 
-	kien/ctrlp.vim 插件：
-	ctrl+p 	打开文件搜素。
-	ctrl+d 	在全路径搜索和文件名搜索间切换。
-	ctrl+r 	在字符串搜索模式和正则表达式模式之间切换
+	`\cc`		注释  
+	`\ci`		取消注释
 
-	关于切换搜索路径：
-	ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下输入cd .. or cd /path/to/youwant/ 就可以了。
-	参考 https://ruby-china.org/topics/12417  以及 http://blog.codepiano.com/pages/ctrlp-cn.light.html（中文帮助文档）
+- fatih/vim-go 插件：
+
+	`\dt`		转到定义（新的标签页打开）  
+	`\ds`		转到定义（水平分割窗口）  
+	`\dv`		转到定义（垂直分割窗口）
+
+- kien/ctrlp.vim 插件：
+
+	`ctrl+p` 	打开文件搜素。  
+	`ctrl+d` 	在全路径搜索和文件名搜索间切换。  
+	`ctrl+r` 	在字符串搜索模式和正则表达式模式之间切换
+
+- 关于切换搜索路径：
+
+	ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下输入`cd ..` or `cd /path/to/youwant/` 就可以了。
+	参考 <u>https://ruby-china.org/topics/12417</u>  以及 <u>http://blog.codepiano.com/pages/ctrlp-cn.light.html</u>（中文帮助文档）
 
 ### 插件管理
 使用[vundle](http://github.com/VundleVim/Vundle.Vim)管理插件，具体安装方法不在赘述。
 
 比较实用的插件：  
 
-- Plugin 'scrooloose/nerdtree'  			<u>**以树形结构浏览文件夹中的文件**</u>  
-- Plugin 'fatih/vim-go'  					<u>**golang的vim插件**</u>  
-- Plugin 'fatih/molokai'  					<u>**molokai主题**</u>  
-- Plugin 'Shougo/neocomplete.vim'  		<u>**实时代码补全提示，支持golang**</u>  
-- Plugin 'SirVer/ultisnips'  				<u>**代码模板，支持golang**</u>  
-- Plugin 'majutsushi/tagbar' 				<u>**Tagbar 比 taglist 更现代的代码结构浏览工具**</u>   
-- Plugin 'kien/rainbow_parentheses.vim' 	<u>**括号显示增强**</u>   
-- Plugin 'scrooloose/nerdcommenter' 		<u>**快速 加减注释**</u>   
-- Plugin 'Raimondi/delimitMate' 			<u>**输入引号,括号时,自动补全**</u>  
-- Plugin 'kien/ctrlp.vim' 					<u>**文件查找**</u>  
-- Plugin 'altercation/vim-colors-solarized'<u>**主题配色插件**</u>  
-- Plugin 'vim-scripts/AutoComplPop' 		<u>**自动补全，与neocomplete有点冲突，推荐使用neocomplete**</u>  
-- Plugin 'vim-scripts/OmniCppComplete' 	<u>**OmniCppComplete 自动补全，推荐使用**</u>  
-- Plugin 'vim-scripts/taglist.vim' 		<u>**标签导航 要装ctags**</u>  
-- Plugin 'Lokaltog/vim-powerline'		<u>**状态栏插件**</u>
-- Plugin 'vim-scripts/vcscommand.vim'		<u>**svn插件**</u>
+- Plugin 'scrooloose/nerdtree'  			**以树形结构浏览文件夹中的文件**  
+- Plugin 'fatih/vim-go'  					**golang的vim插件**  
+- Plugin 'fatih/molokai'  					**molokai主题**  
+- Plugin 'Shougo/neocomplete.vim'  			**实时代码补全提示，支持golang**  
+- Plugin 'SirVer/ultisnips'  				**代码模板，支持golang**  
+- Plugin 'majutsushi/tagbar' 				**Tagbar 比 taglist 更现代的代码结构浏览工具**   
+- Plugin 'kien/rainbow_parentheses.vim' 	**括号显示增强**   
+- Plugin 'scrooloose/nerdcommenter' 		**快速 加减注释**   
+- Plugin 'Raimondi/delimitMate' 			**输入引号,括号时,自动补全**  
+- Plugin 'kien/ctrlp.vim' 					**文件查找**  
+- Plugin 'altercation/vim-colors-solarized'	**主题配色插件**  
+- Plugin 'vim-scripts/AutoComplPop' 		**自动补全，与neocomplete有点冲突，推荐使用neocomplete**  
+- Plugin 'vim-scripts/OmniCppComplete' 		**OmniCppComplete 自动补全，推荐使用**  
+- Plugin 'vim-scripts/taglist.vim' 			**标签导航 要装ctags**  
+- Plugin 'Lokaltog/vim-powerline'			**状态栏插件**  
+- Plugin 'vim-scripts/vcscommand.vim'		**svn插件**
 
 ### 出现的问题
 
@@ -149,34 +156,38 @@ lua前面有个“-”说明还没支持lua。
 解决方法：	
 1、重新编译vim，添加lua支持，请参考[这篇文章](http://blog.angluca.com/post/69566488641/%E7%BC%96%E8%AF%91vim%E5%92%8Cmacvim%E5%B8%A6python%E5%92%8Clua%E6%94%AF%E6%8C%81)
 
->编译vim和macvim带python和lua支持
->首先编译lua安装
->
-> cd vim  
-> ./configure --with-features=huge --enable-rubyinterp \    
-> --enable-pythoninterp --enable-luainterp --enable-perlinterp \    
-> --enable-multibyte --enable-sniff  --enable-fontset --enable-cscope \    
-> --disable-gui --prefix=/usr  
->
->
-> (a) --with-features=huge：支持最大特性  
-> (b) --enable-rubyinterp：启用Vim对ruby的支持  
-> (c) --enable-pythoninterp：启用Vim对python的支持  
-> (d) --enable-luainterp：启用Vim对lua的支持  
-> (e) --enable-perlinterp：启用Vim对perl的支持  
-> (f) --enable-multibyte：多字节支持 可以在Vim中输入中文  
-> (g) --enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
-> (h) --enable-cscope：Vim对cscope支持  
-> (i) --disable-gui：不用编译生成图形界面版gvim  
-> (j) --prefix=/usr：编译安装路径  
-> (k) 更多参数执行./configure --help查看  
->编译vim
->
->./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff >–with-luajit
->
->编译macvim
->
->./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local>
+编译vim和macvim带python和lua支持
+首先，编译lua安装:
+
+```shell
+cd vim  
+ ./configure --with-features=huge --enable-rubyinterp \    
+ --enable-pythoninterp --enable-luainterp --enable-perlinterp \    
+ --enable-multibyte --enable-sniff  --enable-fontset --enable-cscope \    
+ --disable-gui --prefix=/usr  
+```
+
+相关参数:
+
+ (a) --with-features=huge：支持最大特性  
+ (b) --enable-rubyinterp：启用Vim对ruby的支持  
+ (c) --enable-pythoninterp：启用Vim对python的支持  
+ (d) --enable-luainterp：启用Vim对lua的支持  
+ (e) --enable-perlinterp：启用Vim对perl的支持  
+ (f) --enable-multibyte：多字节支持 可以在Vim中输入中文  
+ (g) --enable-sniff：Vim状态提示 提示Vim当前处于INSERT、NORMAL、VISUAL哪种模式  
+ (h) --enable-cscope：Vim对cscope支持  
+ (i) --disable-gui：不用编译生成图形界面版gvim  
+ (j) --prefix=/usr：编译安装路径  
+ (k) 更多参数执行./configure --help查看  
+
+然后，编译vim：
+
+`./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff –with-luajit`
+
+编译mac vim
+
+`./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local`
 
 2、参考：[https://github.com/Shougo/neocomplete.vim](https://github.com/Shougo/neocomplete.vim)
 
@@ -205,14 +216,3 @@ google了一下，参考：
 
 然而我发现我傻逼了，还是需要仔细读帮助文档：
 在.vimrc 里面直接设置 `let g:EasyGrepWindowPosition = "botright"` 就OK了
-
-
-### 彩蛋
-
-最后，附上两张vim快捷键图，都是从网上扣下来的。
-
-**图一**  
-![图1](/images/posts/vim1.png) 
-
-**图二**  
-![图1](/images/posts/vim2.png) 

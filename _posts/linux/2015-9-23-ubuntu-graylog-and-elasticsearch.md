@@ -30,7 +30,7 @@ comments: true
 打开终端，使用下面的命令：**`java -version`**
 
 如果你看到像下面的输出，这就意味着你并没有安装过Java:
-	
+
 	The program ‘java’ can be found in the following packages:
 	*default-jre
 	* gcj-4.6-jre-headless
@@ -45,7 +45,8 @@ comments: true
 
 在Ubuntu和Linux Mint上安装JRE，打开终端，使用下面的命令安装JRE：**`sudo apt-get install default-jre`**  
 在Ubuntu和Linux Mint上安装OpenJDK，在终端，使用下面的命令安装OpenJDK Java开发工具包：**`sudo apt-get install default-jdk`**  
-特殊地，如果你想要安装Java 7或者Java 6等等，你可以使用openjdk-7-jdk/openjdk-6jdk，但是记住在此之前安装openjdk-7-jre/openjdk-6-jre。                                                                                                                                                                                              
+特殊地，如果你想要安装Java 7或者Java 6等等，你可以使用openjdk-7-jdk/openjdk-6jdk，但是记住在此之前安装openjdk-7-jre/openjdk-6-jre。
+
 
 #### 2-2 安装mongodb
 
@@ -68,17 +69,17 @@ comments: true
 		#根据官网的教程：
 		# 安装key
 		wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-		
+
 		# 添加软件源
 		echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" >> /etc/apt/sources.list
-		
+
 		# 更新apt-get软件源
 		sudo apt-get update
-	
+
 		# 安装
 		sudo apt-get install elasticsearch
 
-<font color=#FF090f>**小知识：**</font>
+<font color="#FF090f">小知识：</font>
 
 ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163、阿里等。[ubuntu源列表](http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8)
 
@@ -116,7 +117,7 @@ ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163
 
 >If you installed using a packet manager like yum or apt-get you should not start elasticsearch this way.Try to use the service: for instance /etc/init.d/elasticsearch.
 
-<font color=#FF090f>**小知识：**</font>
+<font color="#FF090f">小知识：</font>
 
 	关于 /etc/init.d/ 目录，里面放的是启动脚本，类似于windows的开机启动项， 该命令的结构大致如下所示：
 	     /etc/init.d/command 选项
@@ -158,7 +159,7 @@ ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163
 
 另外，也可以通过查看日志来检测ES是否成功启动（注意：log文件的名字是你在 es配置文件内配置的**cluster.name**字段的名字）：  
 
-	root@st-B85M-DS3H:/etc/graylog/server# cat /var/log/elasticsearch/graylog-production.log                                                                                                         
+	root@st-B85M-DS3H:/etc/graylog/server# cat /var/log/elasticsearch/graylog-production.log
 	[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] version[1.7.2], pid[21881], build[e43676b/2015-09-14T09:49:53Z]
 	[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] initializing ...
 	[2015-09-22 17:34:21,455][INFO ][plugins                  ] [Morgan Le Fay] loaded [], sites []
@@ -188,7 +189,7 @@ glaylog-server的配置可以参考：
 
 
 ### 5、启动/关闭 graylog-server
->注意：最新版本的graylog-1.2已经重命名为graylog，而不再叫之前的graylog2了。所以，需要注意路径名称的问题。
+**注意：** 最新版本的graylog-1.2已经重命名为graylog，而不再叫之前的graylog2了。所以，需要注意路径名称的问题。
 
 两种操作方式：
 
@@ -222,7 +223,7 @@ web端配置路径 ： `/etc/graylog/web/web.conf`
 
 然后，在浏览器中输入， http://192.168.1.112:9000（web的默认端口为 9000），输入server配置里面的 root_username 和 root_password_sha2 ，注意，密码是hash之后的值。登陆成功，如图。
 
-![pic](/images/posts/graylog-web.png)
+![graylog-web](/images/posts/graylog-web.png)
 
 ### 8、使用GELF写日志
 

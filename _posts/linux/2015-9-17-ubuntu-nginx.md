@@ -15,15 +15,15 @@ comments: true
 <!-- more -->
 
 ### 1、nginx 的安装
-> 安装环境 ubuntu Release: 14.04  
+安装环境：ubuntu Release: 14.04  
 
-<font color=#FF090f>**小知识：**</font>
+<font color="#FF090f"> 小知识：</font>
  
 	如何查看ubuntu版本号？
 	1、cat /etc/issue
 	2、lsb_release -a (此方法显示内容更详细)
 
->安装方法百度很多，这里我只实践了在线安装部分，也推荐在线安装。
+*安装方法百度很多，这里我只实践了在线安装部分，也推荐在线安装。*
 
 #### 1-1 在线安装，推荐
 `$sudo apt-get install nginx`
@@ -36,7 +36,7 @@ comments: true
   默认的虚拟主机的目录设置在了`/usr/share/nginx/www`  
 
 #### 1-2 源代码安装
->下载地址：http://nginx.org/download/
+  [下载地址：http://nginx.org/download/](http://nginx.org/download/)
 
   安装过程很简单，如下：
 
@@ -46,9 +46,9 @@ comments: true
   安装成功之后，nginx放置在/usr/local/nginx目录下，主要的配置文件为conf目录下的nginx.conf，nginx的启动文件在sbin目录下的nginx文件。
 
 ### 2、nginx 启动
->注意：nginx 默认监听80端口，如果无法启动，请查看80端口是否被占用，请检查是否安装了apache，或者修改ngnix的配置文件，将ngnix的监听端口改为8080。有关nginx配置会在下面详细说明。
+**注意**：nginx 默认监听80端口，如果无法启动，请查看80端口是否被占用，请检查是否安装了apache，或者修改ngnix的配置文件，将ngnix的监听端口改为8080。有关nginx配置会在下面详细说明。
 
-<font color=#FF090f>**小知识：**</font>
+<font color="#FF090f">小知识：</font>
 	
 	查看端口占用情况：
 	netstat -nltp|grep 80  t表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态
@@ -77,38 +77,39 @@ Nginx的配置文件是/etc/nginx/nginx.conf
 - 修改其他，待后面来搞
 
 #### 3-2 反向代理配置
-	
+
 http反向代理：
 
-	server{                 
-         listen 80;          
-         server_name 192.168.1.112:8080;
-         charset utf-8;      
-         location / {        
-             proxy_redirect off;
-             proxy_set_header Host $host;
-             proxy_set_header X-Real-IP $remote_addr;
-             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-             proxy_pass http://192.168.1.112:8080;
-         }                   
-     }
+    server{
+		listen 80;
+		server_name 192.168.1.112:8080;
+		charset utf-8;
+		location / {
+			proxy_redirect off;
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_pass http://192.168.1.112:8080;
+       }
+    }
+
 
 https反向代理：
 
-	server{                 
-         listen 443;         
-         server_name 192.168.1.106:8087;
-         ssl on;             
-         ssl_certificate  /root/tools/cert.pem;
-         ssl_certificate_key  /root/tools/key.pem;
-         location / {        
-             proxy_redirect off;
-             proxy_set_header Host $host;
-             proxy_set_header X-Real-IP $remote_addr;
-             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-             proxy_pass https://192.168.1.106:8087;
-         }                   
-     }
+	server{
+		listen 443;
+		server_name 192.168.1.106:8087;
+		ssl on;
+		ssl_certificate  /root/tools/cert.pem;
+		ssl_certificate_key  /root/tools/key.pem;
+		location / {
+			proxy_redirect off;
+			proxy_set_header Host $host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_pass https://192.168.1.106:8087;
+		}
+	}
 
 #### 3-3 负载均衡配置
 nginx的负载均衡配置放在 upsteam 字段，例如：
@@ -171,6 +172,6 @@ vim打开 /etc/nginx/nginx.conf，这里的配置属于nginx的高层配置，�
 
 >参考：
 
-[参考1](http://www.cnblogs.com/languoliang/archive/2013/04/01/nginx.html "这里")  
-[参考2](http://freeloda.blog.51cto.com/2033581/1288553 "这里")  
+[参考1](http://www.cnblogs.com/languoliang/archive/2013/04/01/nginx.html "这里")
+[参考2](http://freeloda.blog.51cto.com/2033581/1288553 "这里")
 [参考3](http://www.cnblogs.com/xiaogangqq123/archive/2011/03/02/1969006.html "这里")  
