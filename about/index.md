@@ -3,6 +3,7 @@ layout: page
 title: About
 date: 2017-01-01
 comments: true
+feature: http://domicat.me/images/posts/about.jpg
 
 ---
     
