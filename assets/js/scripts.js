@@ -46,12 +46,12 @@ $(document).ready(function() {
           if (alt) $(this).after('<span class="pic-title">' + alt + '</span>');
           $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
         });
-        $(this).find('.fancybox').each(function(){
-          $(this).attr('rel', 'article' + i);
-        });
+        // $(this).find('.fancybox').each(function(){
+        //   $(this).attr('rel', 'article' + i);
+        // });
     });
     if($.fancybox){
-        $('.fancybox').fancybox();
+        $('.fancybox').fancybox({helpers: {overlay: {locked: false}} });
     };
 
     //Search sidebar active
