@@ -40,13 +40,68 @@ comments: true
 	{: rules="all" frame="border"}
 
 
-
 ## 2、开源项目
+
+### 2-1 redis
+
+1. redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字`redis`。
+2. 关于**Redis ae事件驱动库**的讲解，网上有比较多的教程，例如：[教程1](http://www.wzxue.com/%E8%A7%A3%E8%AF%BBredis-ae%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%BA%93/) 和 [教程2](https://m.oschina.net/blog/161077)
+
+### 2-2 libev
+
+1. windows下visual studio编译libev:
+
+	1. 在vs下添加已存在的项目;
+	2. 从vs中移除`ev_epoll.c`, `ev_kqueue.c`, `ev_poll.c`, `ev_select.c`, `ev_win32.c`几个文件;
+	3. event.c中要包含winsock2.h头文件; config.h.in复制为config.h, 定义`HAVE_SELECT`和`HAVE_SYS_SELECT_H`
+	4. 加上ws2_32.lib
+
+	具体参考：[https://github.com/xmulyj/libev 里面的README](https://github.com/xmulyj/libev/blob/master/readme.txt)
+
+2. libev 教程：可以参考这个[大神的博客](http://dirtysalt.info/)，里面搜索关键字`libev`
 
 ## 3、计算机原理
 
+1. 10进制转16进制计算方法：
+
+	注意：**所有除法都要取整。**  
+	从右数第一位：`1610%16 = 10`(表示16进制的A),结果： `_ _ A`  
+	从右数第二位：`1610/16 = 100`；`100%16 = 4`,结果：`_ 4 A`  
+	从右数第三位：`100/16  = 6`；`6%16 = 4`,结果：`6 4 A`  
+	最后： 6/100 =0 结束运算，最后 转换结果 为: `0x64A`
+
+2. 进制与位元：因为 6个bit就能表示64，所以64进制的**位元=6**，同理 16进制**位元=4**，因为2^4=16。
+3. 计算机中原码、反码、补码：
+
+	正数的原码、反码、补码都等于原码。  
+	负数的反码=除了最高位的符号位不变，其他位取反。  
+	负数的补码=它的反码+1。
+
+	可以看看[这篇文章](http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html)，讲解的比较通俗易懂。
+4. 负数在计算机中是以**补码**的形式存在，例如有这样一个二进制（`1111 1111`，其实就是-1），它的最高位是1，所以它是一个负数，
+所以它应该是某个负数的反码形式，转换反码为 `1111 1110` （补码-1），转换为原码为`1000 0001`（符号位不变，其他位取反），即`1111 1111` 表示-1，`1000 0000` = -128的补码。
+
+	关于补码的计算，在我之前的[C primer笔记中有提到](http://domicat.me/c-primer-plus/#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%E4%BD%8D%E6%93%8D%E4%BD%9C)。
+
+5. 
+
+
 ## 4、linux
+
+1. Linux链接分两种，一种被称为**硬链接**（Hard Link），另一种被称为**符号链接（也称软连接）**（Symbolic Link）。默认情况下，ln命令产生硬链接。`ln -s a b`创建一个软连接（就像windows系统的快捷方式），即给a创建了一个快捷方式b。
+2. centos 6.0系统升级gcc：因为centos 6.0系统默认的gcc版本是很早的4.4.7，如果需要升级到更高的版本，需要自行下载源码，编译安装。
+
+	可以参考[这个教程](https://www.cnblogs.com/lzpong/p/5755678.html)，里面有详细的步骤。另外，除了教程中出现的动态库问题，还需要注意**gcc版本冲突**的问题，因为自行编译安装的二进制，一般放在`/usr/local/bin`，而系统自带的放在`/usr/bin`，所以可能存在两个版本的gcc。解决的办法：可以yum remove 删除老版本，也可以参考**[这篇教程](https://www.cnblogs.com/cynchanpin/p/6807239.html)**，用软连接的方式解决。
 
 ## 5、版本控制（git、svn）
 
 ## 6、lua
+1. lua 获取本机ip：`os.execute("ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d \"addr:\"")`，其实就是一个shell命令。
+2. 
+
+## 7、其他
+
+### C语言
+
+1. 关于打印long long类型的变量：主要的区分在于操作系统，如果在win系统下，那么无论什么编译器，一律用`%I64d`；如果在linux系统，一律用`%lld`。
+2. 指针长度问题：如果64位处理器上运行的是64位操作系统，那么几乎可以肯定应该是**8字节**。如果运行的是32位操作系统，那么应该是**4字节**。
