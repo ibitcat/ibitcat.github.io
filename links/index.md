@@ -15,3 +15,4 @@ comments: false
 * [skywind](http://www.skywind.me/blog/)
 * [skynetclub](http://skynetclub.github.io/)
 * [ai分享站](http://www.aisharing.com/)
+* [dirtysalt](http://dirtysalt.info/html/index.html)

@@ -16,14 +16,13 @@ comments: true
 先来一张预览图：  
 ![预览](/images/posts/vim.png) 
 
-<!-- more -->
-
 ### 安装步骤
 
 	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 	2、git clone https://github.com/shuimu98/domi-dotfile.git
 	3、cp domi-dotfile/.vimrc ~/
 	4、打开vim，输入命令 :PluginInstall
+
 
 这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
 
@@ -32,15 +31,17 @@ comments: true
 这部分主要包括vim的一些基础配置，例如显示行号、括号配对等，**大部分的设置在我的配置里面已经有了注释，不详细说明**。
 另外，tagbar等插件需要ctags支持，自行安装。
 
-	<CR> 在vimrc配置中表示回车的意思
-	<C-w> 表示ctrl + v
-	<S-a> 表示shift + a
-	<A-w><Left> 表示 alt+w+ <--
-
 一些小技巧：
 
 - 输入 vim --version 可以查看vim支持的特性，如果支持会有 "(+)"
 - 目前的vim版本的7.4，7.2升级到7.4尽量不要直接卸载vim，否则会出现很多蛋疼的问题，最好自己拉源码编译
+
+一些按键注释：
+
+- `<CR>` 在vimrc配置中表示回车的意思
+- `<C-w>` 表示`ctrl + v`
+- `<S-a>` 表示`shift + a`
+- `<A-w><Left>` 表示 `alt+w+ <--`
 
 
 ### vim默认的常用快捷键、命令
@@ -52,12 +53,14 @@ comments: true
 | :!command      		| 运行vim外部环境命令（注意 “!”），如 :!ls -l，表示显示当前目录文件				|
 | :tabnew	xxx      	| 新建名为xxx的标签,tab类的其他命令请自行百度。									|
 | gt, gT     			| 可以直接在tab之间切换      													|
-| gg		      		| 跳到文件开头（小写的g连续按两次）											|
+| gg		      		| 跳到文件开头（小写的g连续按两次）												|
 | G		      			| 调到文件尾部（大写G） 														|
 | xxx + g     			| 调到xxx行（在一般模式下先按xxx行，再按g）      								|
 | ctrl+s 和 ctlr+q      	| 这一组快捷键需要注意，其实是linux锁/解屏的快捷键，但是会导致vim僵死				|
-| Ctrl+f和Ctrl+b  		| 上下翻页			 														|
-| Ctrl+u和Ctrl+d      	| 上下翻半页			      													|
+| Ctrl+f 和 Ctrl+b  		| 上下翻页			 														|
+| Ctrl+u 和 Ctrl+d      	| 上下翻半页			      													|
+| Ctrl+d 和 Ctrl+t     	| **插入模式下**，向前和向后缩进												|
+| Ctrl+o 和 Ctrl+i      	| **正常模式下**，回到上次位置和回到最后位置										|
 | /xxx		      		| 在一般模式下，先按"/"，再输入要搜素的xxx，在按enter							|
 | #				     	| 反向查找																	|
 | *     				| 正向查找			      													|
@@ -69,7 +72,7 @@ comments: true
 | ctrl+r		      	| 恢复撤销																	|
 | >>				    | 右缩进（英文键盘模式下，按住 shift+>(连续按两次>键)）							|
 | <<     				| 左缩进				      													|
-| 多行选中缩进      		|  按住shift+v,进入VISUAL LINE模式，选中多行，再 >> 缩进						|
+| 多行选中缩进      		| 按住shift+v,进入VISUAL LINE模式，选中多行，再 >> 缩进							|
 {: rules="all"}
 
 
@@ -99,27 +102,17 @@ comments: true
 
 有些需要配置leader键，vim默认的leader键为 “\”（enter键上面的那个键）
 
-- scrooloose/nerdcommenter 快速 加减注释插件：
+| 插件		        		| 快捷键或命令        		|
+| -------------------------	| ------------------------- |
+|scrooloose/nerdcommenter	|`\cc`：注释<br>`\ci`：取消注释	|
+|fatih/vim-go				|`\dt`：转到定义（新的标签页打开）<br>`\ds`：转到定义（水平分割窗口）<br>`\dv`：转到定义（垂直分割窗口）|
+|kien/ctrlp.vim				|`ctrl+p`：打开文件搜素<br>`ctrl+d`：在全路径搜索和文件名搜索间切换<br>`ctrl+r`：在字符串搜索模式和正则表达式模式之间切换<br>|
+{: rules="all" frame="border"}
 
-	`\cc`		注释  
-	`\ci`		取消注释
+>关于插件`ctrlp`切换搜索路径：
 
-- fatih/vim-go 插件：
+ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下输入`cd ..` or `cd /path/to/youwant/` 就可以了。参考[https://ruby-china.org/topics/12417](https://ruby-china.org/topics/12417)以及[ctrlp中文帮助文档](http://blog.codepiano.com/pages/ctrlp-cn.light.html)
 
-	`\dt`		转到定义（新的标签页打开）  
-	`\ds`		转到定义（水平分割窗口）  
-	`\dv`		转到定义（垂直分割窗口）
-
-- kien/ctrlp.vim 插件：
-
-	`ctrl+p` 	打开文件搜素。  
-	`ctrl+d` 	在全路径搜索和文件名搜索间切换。  
-	`ctrl+r` 	在字符串搜索模式和正则表达式模式之间切换
-
-- 关于切换搜索路径：
-
-	ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下输入`cd ..` or `cd /path/to/youwant/` 就可以了。
-	参考 <u>https://ruby-china.org/topics/12417</u>  以及 <u>http://blog.codepiano.com/pages/ctrlp-cn.light.html</u>（中文帮助文档）
 
 ### 插件管理
 使用[vundle](http://github.com/VundleVim/Vundle.Vim)管理插件，具体安装方法不在赘述。
