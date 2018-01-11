@@ -98,3 +98,5 @@ comments: true
 
 
 	关于尾调用以及尾递归可参考[尾调用优化](http://www.ruanyifeng.com/blog/2015/04/tail-call.html)和[Lua 函数、闭包、尾调用总结](https://www.tuicool.com/articles/uiUnMn)
+
+12. 

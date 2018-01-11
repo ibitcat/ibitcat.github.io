@@ -39,4 +39,17 @@ comments: true
 
 ## 2、sublime text3
 
-1. todo
+1. lua语法高亮修改，sublime text是可以让lua函数高亮的，但是遇到类似于function AA3AA:BB() end（即函数名带有数字）这样类名中带有数字的函数，便无法高亮。
+
+	解决办法：找到安装目录下的Lua.sublime-package，用解压软件打开，打开文件Lua.sublime-syntax，找到
+
+	```yaml
+	<key>match</key>
+	<string>\b(function)\s+([a-zA-Z_.:]+[.:])?([a-zA-Z_]\w*)\s*(\()([^)]*)(\))</string>
+	<key>name</key>
+	<string>meta.function.lua</string>
+	```
+	将<string>节点的内容修改为:
+	```yaml
+	<string>\b(function)\s+([a-zA-Z_]+[0-9a-zA-Z_]*[.:])?([a-zA-Z_]\w*)\s*(\()([^)]*)(\))</string>
+	```
