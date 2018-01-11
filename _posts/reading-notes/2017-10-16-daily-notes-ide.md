@@ -35,3 +35,8 @@ comments: true
 	|正常模式	|命令模式	|按 `:` （英文冒号）|
 	|正常模式	|可视模式	|按 `v` 可视模式<br> 按 `V` 可视块模式|
 	{: rules="all" frame="border"}
+
+
+## sublime text3
+
+1. todo
