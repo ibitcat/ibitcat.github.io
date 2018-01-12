@@ -97,6 +97,6 @@ comments: true
 
 ## 5、sysbench
 
-	一款开源的多线程性能测试工具，可以执行CPU/内存/线程/IO/数据库等方面的性能测试。
+一款开源的多线程性能测试工具，可以执行CPU/内存/线程/IO/数据库等方面的性能测试。
 
 1. 目前我还没有熟练使用这个工具，只是收集了网上的一些教程：[sysbench的一点整理](http://int64.me/2017/sysbench%E7%9A%84%E4%B8%80%E7%82%B9%E6%95%B4%E7%90%86.html)、[howto sysbench](https://www.centoshowtos.org/commands/sysbench/)、[sysbench1.0.5安装以及使用其对mysql5.5.32压力测试](https://www.601849.com/post/90.html)。
