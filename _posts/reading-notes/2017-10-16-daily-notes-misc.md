@@ -57,7 +57,44 @@ comments: true
 4. 修改linux `date`命令的显示格式：编辑`.bash_profile`文件， 添加下面一行 `alias date='date "+%Y-%m-%d %H:%M:%S"'`。
 5. [语义化版本](http://semver.org/lang/zh-CN/)，教你如何定义软件的版本。
 6. linux开启tcp bbr：[Linux 升级内核开启 TCP BBR 实现高效单边加速](https://www.mf8.biz/linux-kernel-with-tcp-bbr/)。
+7. `alias grep='grep --color=auto'`，grep 高亮。
+8. `alias = 'ls -lshF --color|sort'`，linux ls 按类型排列。
+9. linux Epoll两种触发模式：LT水平触发（常用模式）、ET边缘触发。参考[这个项目的examples（已star）](https://github.com/yedf/handy)。
+10. linux挂载（mount 和 umount），这里主要记录linux挂载网络共享文件系统，例如：在linux挂载windows系统上的共享文件夹。
 
+	举例说明：
+	```shell
+	mount -t cifs //192.168.1.113/share /dir -o username=administrator,password=111111,rw,uid=500,gid=500,dir_mode=0777,file_mode=0777
+	```
+
+	-t cifs指定文件系统类型，-o 指定相关权限等。需要注意：mount挂载cifs需要先安装网络共享服务， `yum install -y cifs-utils`，windows系统需要开启**445**端口。[挂载windows共享文件后的权限问题参考这里](http://www.jianshu.com/p/a631045d410d)。
+
+	**开机自动挂载**，其中一种方式：编辑 `/etc/rc.d/rc.local` 将上面的命令插入，重启即可。  
+	umount卸载，如果出现device is busy报错，表示该文件系统正在被使用；使用命令`fuser -mv /dir`查看此文件系统正在被哪些进程访问。
+
+11. [Linux下用户组、文件权限详解](http://www.cnblogs.com/123-/p/4189072.html)，讲解干净利落，**推荐**。
+12. ngrok 内网穿透，ngnix 反向代理。
+	
+	假设：在路由器是先做一个内网穿透，开个隧道，穿透到80端口，再用ngnix做一个反向代理，代理内网某台电脑的8080端口，那这样是否可以做一个私有云呢？
+
+13. 正则表达式，参考这篇文章:[正则表达式](http://wubaoguo.com/2016/03/21/Linux/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/)。
+14. `ss`命令显示linux系统socket状态。例如：`ss -s `列出当前socket详细信息。
+15. centos开启zsh：[centos开启zsh之旅](https://my.oschina.net/shyann/blog/426004)。
+
+	普通用户用vim打开某文件在按tab键补全时出现报错：`function definition file not found`，解决办法：删除了`~/.zcompdump`，然后执行`exec zsh`。
+16. centos 添加新用户并授权，[参考](http://www.cnblogs.com/woshimrf/p/5906084.html)。
+
+	~~~
+	adduser zhangbiao
+	passwd zhangbiao
+	vim /etc/sudoers
+
+	## 找到以下内容，并添加新用户
+	## Allow root to run any commands anywher  
+	root    ALL=(ALL)       ALL  
+	zhangbiao  ALL=(ALL)       ALL  #这个是新增的用户
+	~~~
+	
 
 ## 3、版本控制（git、svn）
 
@@ -105,7 +142,7 @@ comments: true
 
 	例如：  
 
-	~~~C
+	~~~c
 	#include <stdio.h>
 
 	typedef int (*fp_t)(char c);
@@ -121,6 +158,11 @@ comments: true
 	} 
 	~~~
 
+8. [c语言一维数组做参数传递给函数](http://blog.csdn.net/tianjizheng/article/details/46314567)：
+
+	- 1、C语言中，当一维数组做函数参数时，编译器总是把它解析成一个指向其首元素的指针。
+	- 2、实际传递的数组大小与函数形参指定的数组大小没有关系。
+
 ### 4-2、golang
 
 1. 使用`go build`编译go文件时，go文件必须**放在最后**，不然会有`named files must be .go files`的报错。
@@ -132,6 +174,8 @@ comments: true
 1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
 2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
 3. 一个比较简洁实用的[jekyll 主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)，已star。
+4. CSS的优先级顺序: tag中的style > id > class > tag > 继承的属性。
+5. [前端构建工具gulpjs的使用介绍及技巧](http://www.cnblogs.com/2050/p/4198792.html)。
 
 ## 6、小众软件
 
@@ -140,3 +184,9 @@ comments: true
 - Sublime Text插件，[下载地址](https://packagecontrol.io/)。
 - everything，[下载地址](http://www.voidtools.com/downloads/)。
 
+## 7、游戏开发
+
+1. 游戏常用的编程设计模式：[游戏编程模式](http://gpp.tkchu.me/)。
+2. 行为树：
+
+	- [行为树的理解和学习](http://www.cnblogs.com/hammerc/p/5044815.html)

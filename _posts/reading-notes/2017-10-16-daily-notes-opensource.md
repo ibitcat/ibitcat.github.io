@@ -24,7 +24,15 @@ comments: true
 
 	具体参考：[https://github.com/xmulyj/libev 里面的README](https://github.com/xmulyj/libev/blob/master/readme.txt)
 
-2. libev 教程：可以参考这个[大神的博客](http://dirtysalt.info/)，里面搜索关键字`libev`
+2. 关于windows下编译libev的问题:
+	- 1. cygwin下编译正常,有backend;
+	- 2. visual studio中编译的话:
+
+	(1)把config.h.in复制一份改为config.h,然后HAVE_SELECT和HAVE_SYS_SELECT_H都定义为1后;  
+	(2)在event.c中包含winsock2.h头文件  
+	编译ok, 有backend(select), 运行libev官网上的例子(去掉io watcher,只保留timer watcher)正常.
+
+3. libev 教程：可以参考这个[大神的博客](http://dirtysalt.info/)，里面搜索关键字`libev`
 
 
 ## 3、Snowflake算法
@@ -33,4 +41,11 @@ comments: true
 )。
 
 2. Snowflake算法，[C语言实现](https://github.com/korialuo/skynet/blob/master/lualib-src/lua-snowflake.c)。
+
+
+## skynet
+
+1. [skynet架构](http://www.cnblogs.com/ychellboy/archive/2012/10/15/2723470.html)，基本的框架介 以及 [Skynet 设计综述](https://my.oschina.net/zengjs275/blog/719663)。
+
+
 
