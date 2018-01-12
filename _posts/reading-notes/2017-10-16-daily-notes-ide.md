@@ -76,3 +76,11 @@ comments: true
 		}
 	}
 	~~~
+
+3. Sublime Text 查找时排除指定的文件夹或文件，在`where`处设置。例如：`D:\server\l-src\,D:\server\c-src,*.c,*.h,*.lua,*.txt,-*.xlsx`。
+
+	- `D:\server\l-src\`和`D:\server\c-src` 表示要寻找的目录，可以多个
+	- `*.c,*.h,*.lua,*.txt,` 表示查找指定后缀的文件
+	- `-*.xlsx`，`-/Debug/*` 表示排除查找指定的后缀文件和指定的目录
+
+

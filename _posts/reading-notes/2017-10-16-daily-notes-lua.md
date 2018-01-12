@@ -148,4 +148,16 @@ comments: true
 	LuaLanes: Not found
 	~~~
 
-18、[lua——在C函数中保存状态](http://blog.csdn.net/shimazhuge/article/details/44309251)，包括:注册表（类似全局变量）、环境表（适用于lua5.1，类似static变量）、upvalue（类似局部静态变量）。
+18. [lua——在C函数中保存状态](http://blog.csdn.net/shimazhuge/article/details/44309251)，包括:注册表（类似全局变量）、环境表（适用于lua5.1，类似static变量）、upvalue（类似局部静态变量）。
+
+19. lua 5.1可变参数`...`和`arg`的区别，[参考](http://www.cnblogs.com/cbscan/articles/2022164.html)，在代码块中两者只能用其一。
+
+	~~~lua
+	function test(a,b,...)
+		-- 要么用for，要么直接print(...)，不能同时存在
+		for i = 1, arg.n do
+			print(arg[i])
+		end
+		-- print(...)
+	end
+	~~~
