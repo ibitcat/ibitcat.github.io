@@ -99,7 +99,9 @@ Go语言提供了recover内置函数，前面提到，一旦panic，逻辑就会
 
 
 ### const 和 iota
-[参考：http://ju.outofmemory.cn/entry/52177](http://ju.outofmemory.cn/entry/52177)  
+
+参考：[Go语言iota与const](http://ju.outofmemory.cn/entry/52177)、[golang枚举类型 - iota用法拾遗](http://www.cnblogs.com/zsy/p/5812676.html)
+
 1、const：用来定义常量，和c++是一样的道理；  
 const 里面声明常量，有如下要求：  
 

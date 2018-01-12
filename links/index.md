@@ -14,5 +14,7 @@ comments: false
 * [服务器运维](http://www.ha97.com/)
 * [skywind](http://www.skywind.me/blog/)
 * [skynetclub](http://skynetclub.github.io/)
-* [ai分享站](http://www.aisharing.com/)
+* [ai分享站（行为树）](http://www.aisharing.com/)
 * [dirtysalt](http://dirtysalt.info/html/index.html)
+* [Tony Bai(golang)](http://tonybai.com/)
+* [dpull（skynet windows）](http://www.dpull.com/)

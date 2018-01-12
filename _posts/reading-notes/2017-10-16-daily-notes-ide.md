@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "每日笔记 —— 编辑器"
+title:  "每日笔记 —— 编辑器、工具"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。编辑器部分。"
+excerpt: "记录了工作中，每天的笔记，分类整理。编辑器、工具部分。"
 tag:
 - 读书笔记
 comments: true
@@ -36,6 +36,8 @@ comments: true
 	|正常模式	|可视模式	|按 `v` 可视模式<br> 按 `V` 可视块模式|
 	{: rules="all" frame="border"}
 
+2. vim升级到8.0教程：[轻松学会源码编译Vim 8.0](http://www.linuxprobe.com/easymake-vim8.html)。
+3. 普通用户用vim打开某文件在按tab键补全时出现报错：`_arguments:448: _vim_files: function definition file not found`，解决办法：删除了`~/.zcompdump`，然后执行`exec zsh`。
 
 ## 2、sublime text3
 
@@ -84,3 +86,17 @@ comments: true
 	- `-*.xlsx`，`-/Debug/*` 表示排除查找指定的后缀文件和指定的目录
 
 
+## 3、Tmux
+
+1. tmux复制：`bind-key+[`（组合键）进入在tmux的copy-mode下，按空格键进入选中模式，按Enter复制并退出，按q不复制并退出。**这种复制不会在windows剪贴板上**。可以通过`tmux show-buffer`（简写命令`tmux showb`）显示。
+2. 解决tmux启动「tmux can't create socket: No such file or directory」的问题：`rm /tmp/tmux-* -R`。
+
+## 4、Shadowsockets
+
+1. 自定义用户规则:[shadowsocks自定义代理规则user-rule设置方法](https://www.duoluodeyu.com/1337.html)。
+
+## 5、sysbench
+
+	一款开源的多线程性能测试工具，可以执行CPU/内存/线程/IO/数据库等方面的性能测试。
+
+1. 目前我还没有熟练使用这个工具，只是收集了网上的一些教程：[sysbench的一点整理](http://int64.me/2017/sysbench%E7%9A%84%E4%B8%80%E7%82%B9%E6%95%B4%E7%90%86.html)、[howto sysbench](https://www.centoshowtos.org/commands/sysbench/)、[sysbench1.0.5安装以及使用其对mysql5.5.32压力测试](https://www.601849.com/post/90.html)。

@@ -161,3 +161,5 @@ comments: true
 		-- print(...)
 	end
 	~~~
+
+20. 如何编写高性能lua代码，[原版](http://www.lua.org/gems/sample.pdf)和中文译文版[高性能 Lua 技巧（译）](https://segmentfault.com/a/1190000004372649)。

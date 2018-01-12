@@ -27,7 +27,12 @@ keywords: Mysql, Mysql Command
 | 命令行修改root密码           	| update mysql.user SET password=PASSWORD('新密码') WHERE User='root';<br>FLUSH PRIVILEGES;|
 | 显示当前use的数据库名			| select database();							|
 | 显示当前的user					| select user();								|
+| 简单描述表结构，字段类型			| desc tabl_name;								|
+| 查询表中的结构信息				| select * from information_schema.columns where table_schema='dbname' and table_name='tablename';|
+| 查看表生成的DDL 				| show create table table_name;;				|
 {: rules="all"}
+
+
 
 ### 数据库操作示例
 
@@ -98,6 +103,22 @@ alter table player change `test` `createTime` int(11) unsigned NOT NULL COMMENT 
 alter table player modify column `entryId` int(11) UNSIGNED NOT NULL COMMENT '职业' after `server`; #更改字段位置
 alter table player CHANGE `entryId` `entryId` int(11) UNSIGNED NOT NULL COMMENT '职业'; #修改字段注释
 ```
+
+- **检查库或者表是否存在**
+
+```sql
+DROP DATABASE IF EXISTS db;
+CREATE DATABASE IF NOT EXISTS db;
+DROP TABLE IF EXISTS tb;
+```
+
+- **多表数据删除**
+
+~~~sql
+delete from t1 where 条件;
+delete t1 from t1 where 条件;
+delete t1 from t1,t2 where 条件;
+~~~
 
 >脚注：
 

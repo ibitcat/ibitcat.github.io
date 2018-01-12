@@ -89,9 +89,7 @@ comments: true
 	`TIME+`：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
 	`COMMAND`：进程启动命令名  
 
-	参考：  
-	[http://www.cnblogs.com/gaojun/p/3406096.html](http://www.cnblogs.com/gaojun/p/3406096.html)  
-	[http://www.jb51.net/LINUXjishu/34604.html](http://www.jb51.net/LINUXjishu/34604.html)
+	参考：[查看LINUX进程内存占用情况](http://www.cnblogs.com/gaojun/p/3406096.html) 、[Top 命令详解](http://www.cnblogs.com/cherishry/p/5886041.html)
 
 21. chmod更改文件权限 : `chmod u+r xxx` 或者 `chmod u=rwx,g=r xxx` [^footer2]
 22. 查看文件类型： `file xxx` 
@@ -116,6 +114,21 @@ comments: true
 | .lha格式			| lha -e FileName.lha										|lha -a FileName.lha FileName|
 | .rar格式			| rar a FileName.rar										|rar e FileName.rar|
 {: rules="all" frame="box"}
+
+26. 环境变量设置与删除:
+
+	- `export -l` 查看环境变量
+	- `export 变量名=变量值` 设置环境变量
+	- `unset xxx` 删除环境变量
+
+27. 查看linux系统的cpu核心的简单方法：`top`命令后按 **`数字键 1`**。
+28. inux查看用户所属组：
+
+	- 命令`groups`查看当前用户所属组
+	- groups 用户（查看用户所属组），例如：`groups root`
+	- id 用户(查看用户所属组），例如：`whoami`，然后`id xxx`(xxx为whoami的返回值)
+	- 直接查看组文件，`more /etc/group`
+29. `cat /etc/passwd`查看所有的用户信息。
 
 ### 第二部分 - 稍微复杂的命令
 
@@ -145,16 +158,21 @@ proc文件系统是一个伪文件系统，它只存在内存当中，而不占�
 `ls -l /proc/{pid}/exe`   # 链接到进程的执行命令文件  
 `ls -l /proc/{pid}/exe |grep -w "xxx" | awk '{print $11}'`  # 查看进程可执行文件的绝对路径  
 
-#### 3、grep详解
+#### 3、grep详解，可参考[grep 的或与非操作](http://www.cnblogs.com/franjia/p/4384362.html)
 
 - **或操作：**  
 `grep -E '123|abc' filename`    #找出文件（filename）中包含123或者包含abc的行  
+`grep '123\|abc' filename`		#通过使用 `\|` 来分割多个pattern，以此实现OR的操作  
+`grep -e pattern1 -e pattern2 filename ` #`-e` 选项，只能传递一个参数  
 `egrep '123|abc' filename`      #用egrep同样可以实现   
 `awk '/123|abc/' filename`      #awk 的实现方式  
 
 
 - **与操作：**  
-`shell grep pattern1 files | grep pattern2`   显示既匹配 pattern1 又匹配 pattern2 的行
+`grep pattern1 files | grep pattern2`   显示既匹配 pattern1 又匹配 pattern2 的行
+
+- **非操作：**  
+`grep -v pattern1 files`   `-v`选项用来实现反选匹配的
 
 - **其他操作:**  
 `grep -i pattern files`           # 不区分大小写地搜索。默认情况区分大小写  

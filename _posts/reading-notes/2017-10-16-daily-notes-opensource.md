@@ -47,5 +47,16 @@ comments: true
 
 1. [skynet架构](http://www.cnblogs.com/ychellboy/archive/2012/10/15/2723470.html)，基本的框架介 以及 [Skynet 设计综述](https://my.oschina.net/zengjs275/blog/719663)。
 
+## 5、raft(分布式系统 RAFT 一致性算法)
 
+1. [raft 简单介绍](http://thesecretlivesofdata.com/raft/)。 
+
+## 6、groupcache
+
+1. [groupcache（已star）](https://github.com/golang/groupcache)是一个分布式缓存 go 语言库,支持多节点互备热数据,有良好的稳定性和较高的并发性。寥寥2000来行代码完成了个lru cache库，核心只用一个list和一个map，出自brad大神之手（memcached作者）。
+
+
+## 7、UUID生成
+
+1. [**rfc4122**](https://tools.ietf.org/html/rfc4122)详细介绍了UUID的生成。在我自己的游戏服务器中有[简单的实现](https://github.com/shuimu98/game_server/blob/master/src/lualib-src/lbase64.c)并对生成的uuid进行了base64。
 
