@@ -43,7 +43,7 @@ comments: true
 2. Snowflake算法，[C语言实现](https://github.com/korialuo/skynet/blob/master/lualib-src/lua-snowflake.c)。
 
 
-## skynet
+## 4、skynet
 
 1. [skynet架构](http://www.cnblogs.com/ychellboy/archive/2012/10/15/2723470.html)，基本的框架介 以及 [Skynet 设计综述](https://my.oschina.net/zengjs275/blog/719663)。
 
