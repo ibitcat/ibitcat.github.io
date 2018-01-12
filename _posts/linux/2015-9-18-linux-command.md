@@ -186,9 +186,6 @@ proc文件系统是一个伪文件系统，它只存在内存当中，而不占�
 `sudo apt-get install graphviz graphviz-doc`   安装graphviz绘图工具
 
 
-### 第三部分 - 实用的shell脚本
- TODO
-
 > 脚注
 
 [^footer1]: 常用的命令（输入top后）：P：按%CPU使用率排行  T：按MITE+排行  M：按%MEM排行
