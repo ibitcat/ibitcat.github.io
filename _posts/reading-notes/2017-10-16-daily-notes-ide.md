@@ -53,3 +53,26 @@ comments: true
 	```yaml
 	<string>\b(function)\s+([a-zA-Z_]+[0-9a-zA-Z_]*[.:])?([a-zA-Z_]\w*)\s*(\()([^)]*)(\))</string>
 	```
+
+2. 修改sublime text工程：
+
+	- project_name.sumlime-project：包含工程定义，该文件会被记录到版本控制里。
+	- project_name.sublim-workspace：包含了用户的工程数据，例如打开的文件和修改等，该文件不会被记录到版本控制里。
+
+	自定义工程配置：
+	~~~json
+	{
+		"folders":
+		[
+			{
+				"path": ".",
+				"folder_exclude_patterns": ["php"], //排除php这个文件夹
+				"file_exclude_patterns": ["*.sublime-project"]//排除.sublime-project后缀的文件
+			},
+		],
+		"settings":
+		{
+			"tab_size":8
+		}
+	}
+	~~~

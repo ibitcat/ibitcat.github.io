@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "每日笔记 —— 开源项目"
+title:  "每日笔记 —— 开源项目、算法"
 date:   2017-10-16
 excerpt: "记录了工作中，每天的笔记，分类整理。开源项目学习部分。"
 tag:
@@ -25,3 +25,12 @@ comments: true
 	具体参考：[https://github.com/xmulyj/libev 里面的README](https://github.com/xmulyj/libev/blob/master/readme.txt)
 
 2. libev 教程：可以参考这个[大神的博客](http://dirtysalt.info/)，里面搜索关键字`libev`
+
+
+## 3、Snowflake算法
+
+1. Twitter-Snowflake算法，64位自增ID算法，可以用来替换UUID算法。关于该算法的介绍，可以参考[这篇文章](http://www.lanindex.com/twitter-snowflake%EF%BC%8C64%E4%BD%8D%E8%87%AA%E5%A2%9Eid%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/
+)。
+
+2. Snowflake算法，[C语言实现](https://github.com/korialuo/skynet/blob/master/lualib-src/lua-snowflake.c)。
+

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Markdown Syntax"
+title:  "Markdown 语法"
 date:   2016-03-15
 excerpt: "Markdown 语法"
 tag:
@@ -9,6 +9,8 @@ comments: true
 ---
 
 文章转载自[Markdown Syntax](https://taylantatli.github.io/Moon/markdown-syntax/)
+
+另外，可以参考：[Markdown，你只需要掌握这几个](http://www.cnblogs.com/crazyant007/p/4220066.html?utm_source=tuicool&utm_medium=referral)。
 
 ## HTML Elements
 

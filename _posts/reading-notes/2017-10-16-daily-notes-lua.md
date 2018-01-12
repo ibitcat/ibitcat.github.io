@@ -8,6 +8,8 @@ tag:
 comments: true
 ---
 
+记录从2015年至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。
+
 1. lua 获取本机ip：`os.execute("ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d \"addr:\"")`，其实就是一个shell命令。
 2. lua的元表和元方法：**元表**像是一个“操作指南”，里面包含了一系列操作的解决方案，每一个操作的解决方案就是元方法（以`__`开头的key），例如：__index元方法。
 3. __index元方法，引用自[这篇文章](http://blog.csdn.net/xocoder/article/details/9028347)：  
@@ -99,4 +101,51 @@ comments: true
 
 	关于尾调用以及尾递归可参考[尾调用优化](http://www.ruanyifeng.com/blog/2015/04/tail-call.html)和[Lua 函数、闭包、尾调用总结](https://www.tuicool.com/articles/uiUnMn)
 
-12. 
+12. lua协程，类似于线程的概念，但是又有所区别，lua协程的核心是`resume`和`yeild`，它们的工作方式类似于CPU的**保护现场和恢复现场**。yeild的参数是调用者resume的返回值，而下一次resume的参数又是被还原的那个yeild的返回值。具体参考[这篇文章](https://www.tuicool.com/articles/AnAVJbu)。
+
+	![resume和yeild关系](/images/posts/lua-coroutine.png)
+
+13. 一个[lua版本的屏蔽字处理](http://www.cnblogs.com/zhangfeitao/p/6378458.html)，采用字典树算法，以及一个lua版的[DFA屏蔽字算法](http://blog.csdn.net/u010223072/article/details/50542531)。
+14. lua[官方FAQ](http://www.luafaq.org/)以及云风的[lua5.3帮助文档](https://github.com/cloudwu/lua53doc)翻译。
+15. lua弱表，即**表中的元素为弱引用的表**。它是相对于普通的强引用的表，对于普通的强引用表，**当你把对象放进表中的时候，就产生了一个引用，那么即使其他地方没有对表中元素的任何引用，gc也不会被回收这些对象**。 引用自[Lua中的weak表——weak table](http://www.cnblogs.com/sifenkesi/p/3850760.html)。
+
+	`__mode`字段可以取以下三个值：k、v、kv。
+
+	- k表示table.key是weak的，也就是table的keys能够被自动gc；
+	- v表示table.value是weak的，也就是table的values能被自动gc；
+	- kv就是二者的组合。任何情况下，只要key和value中的一个被gc，那么这个key-value pair就被从表中移除了
+	
+	关于弱表和普通表的个人理解：普通的强引用表可以想象成一根**网线**，而弱表就相当于**无线WiFi**。
+16. lua和c相互调用，关于lua和C之间的相互调用，有两种方式：
+
+	- 1、程序主体在C中运行，C函数注册到Lua中。C调用Lua，Lua调用C注册的函数，C得到函数的执行结果。 
+	- 2、程序主体在Lua中运行，C函数作为库函数供Lua使用。 
+
+	相比于第一种方式（通常是用lua做配置），第二种方式使用的更加普遍。有一个**比较重要的点**：第一种方式的调用，用的是lua的全局栈，当C调用完lua的函数后，C需要维护好lua栈索引；而第二种方式的调用，**用来交互的栈不是全局栈**，每一个C函数都有他自己的私有栈。当Lua调用C函数的时候，第一个参数总是在这个私有栈的index=1的位置。
+
+	参考：[Lua5.3 与C交互学习(lua调用c函数)](http://blog.csdn.net/bbhe_work/article/details/48950175)、[lua 与 C 交互](http://wudaijun.com/2014/12/lua-C/)、[从Lua中调用C函数](http://blog.csdn.net/vermilliontear/article/details/50947379)
+
+17. lua语法静态检查工具——`luacheck`，参考[这里](http://blog.csdn.net/mycwq/article/details/52589415)，顺便一提，关于skynet和lua的相关知识，可以参考这个博主的[skynet技术与应用](http://blog.csdn.net/column/details/13019.html)系列文章。
+
+	**lua check的安装:**
+
+	~~~shell
+	wget https://github.com/mpeterv/luacheck/archive/0.21.1.zip
+	unzip 0.21.1.zip
+	cd luacheck-0.21.1
+	mkdir /usr/local/luacheck
+	lua install.lua /usr/local/luacheck
+	vim .bash_profile
+	export LUACHECK=/usr/local/luacheck/bin
+	export PATH="$LUACHECK:$PATH"
+	source .bash_profile
+	luacheck --version
+	
+	#显示如下：
+	Luacheck: 0.21.1
+	Lua: Lua 5.1
+	LuaFileSystem: Not found
+	LuaLanes: Not found
+	~~~
+
+18、[lua——在C函数中保存状态](http://blog.csdn.net/shimazhuge/article/details/44309251)，包括:注册表（类似全局变量）、环境表（适用于lua5.1，类似static变量）、upvalue（类似局部静态变量）。

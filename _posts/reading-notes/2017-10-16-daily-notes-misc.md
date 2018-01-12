@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "每日笔记 —— 计算机原理、linux等等"
+title:  "每日笔记 —— 计算机原理、操作系统、编程语言等"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理、版本控制（git、svn）等等。"
+excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理、版本控制（git、svn）以及各种语言需要注意的细节等等。"
 tag:
 - 读书笔记
 comments: true
@@ -39,6 +39,55 @@ comments: true
 
 	可以参考[这个教程](https://www.cnblogs.com/lzpong/p/5755678.html)，里面有详细的步骤。另外，除了教程中出现的动态库问题，还需要注意**gcc版本冲突**的问题，因为自行编译安装的二进制，一般放在`/usr/local/bin`，而系统自带的放在`/usr/bin`，所以可能存在两个版本的gcc。解决的办法：可以yum remove 删除老版本，也可以参考**[这篇教程](https://www.cnblogs.com/cynchanpin/p/6807239.html)**，用软连接的方式解决。
 
+3. linux修改时间和时区：[linux 修改时间 date](http://www.cnblogs.com/hjslovewcl/archive/2011/06/28/2314323.html)。
+
+	- 将日期转换为Unix时间戳，[参考](http://www.opstool.com/article/224)： 
+		~~~ 
+		date +%s #将当前时间以Unix时间戳
+		date -d '2013-2-22 22:14' +%s # 转换指定日期为Unix时间戳
+		~~~
+	
+	- 将Unix时间戳转换为日期时间
+		~~~
+		date -d @1361542596 #不指定日期时间的格式
+		date -d @1361542596 +"%Y-%m-%d %H:%M:%S" #指定日期格式的转换
+		~~~
+
+4. 修改linux `date`命令的显示格式：编辑`.bash_profile`文件， 添加下面一行 `alias date='date "+%Y-%m-%d %H:%M:%S"'`。
+5. [语义化版本](http://semver.org/lang/zh-CN/)，教你如何定义软件的版本。
+
+
 ## 3、版本控制（git、svn）
 
-1. todo
+1. svn 回滚本地代码，[参考](http://blog.sina.com.cn/s/blog_6ad5907b0102uyqy.html)：
+    ~~~
+	1. svn update -r 200   (回退到200版本)  
+    2. svn up -r 18278 QOfficial/tpl/part/paidV1.tpl 
+	~~~
+
+## 4、编程语言
+
+### 4-1、 C语言
+
+1. 关于打印long long类型的变量：主要的区分在于操作系统，如果在win系统下，那么无论什么编译器，一律用`%I64d`；如果在linux系统，一律用`%lld`。
+2. 指针长度问题：如果64位处理器上运行的是64位操作系统，那么几乎可以肯定应该是**8字节**。如果运行的是32位操作系统，那么应该是**4字节**。
+
+### 4-2、golang
+
+1. 使用`go build`编译go文件时，go文件必须**放在最后**，不然会有`named files must be .go files`的报错。
+
+	例如：`go build -ldflags "-w" -o ./xlsx2lua.exe ./xlsx2lua.go`
+
+## 5、静态博客（jekyll等）
+
+1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
+2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
+3. 一个比较简洁实用的[jekyll 主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)，已star。
+
+## 6、小众软件
+
+- LICEcap，GIF 屏幕录制工具，[下载地址](https://www.appinn.com/licecap/)。
+- Chrome商店Crx离线安装包下载，[下载地址](https://yurl.sinaapp.com/crx.php)。
+- Sublime Text插件，[下载地址](https://packagecontrol.io/)。
+- everything，[下载地址](http://www.voidtools.com/downloads/)。
+
