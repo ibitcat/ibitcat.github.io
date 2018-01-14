@@ -97,23 +97,23 @@ comments: true
 24. 将指定的时间戳按日期格式显示 ： `date -d @1361542596`
 25. linux解压缩文件：
 
-| 压缩包格式			| 解压														| 压缩			|
-| :----------------	|:----------------------------------------------------------|:--------------|
-| **.tar格式**		| tar xvf FileName.tar 										|tar cvf FileName.tar DirName（注：tar是打包，不是压缩！）|
-| .gz格式			| 解压1：gunzip FileName.gz <br>解压2：gzip -d FileName.gz	|gzip FileName|
-| .tar.gz格式		| tar zxvf FileName.tar.gz									|tar zcvf FileName.tar.gz DirName|
-| .bz2格式			| bzip2 -d FileName.bz2  <br>解压2：bunzip2 FileName.bz2		|bzip2 -z FileName|
-| .tar.bz2格式		| tar jxvf FileName.tar.bz2									|tar jcvf FileName.tar.bz2 DirName|
-| .bz格式			| bzip2 -d FileName.bz										|bunzip2 FileName.bz|
-| .tar.bz格式		| 															|tar jxvf FileName.tar.bz|
-| .Z格式				| uncompress FileName.Z										|compress FileName|
-| .tar.Z格式			| tar Zxvf FileName.tar.Z									|tar Zcvf FileName.tar.Z DirName|
-| .tgz格式			| tar Zxvf FileName.tar.Z									|tar zxvf FileName.tgz|
-| .tar.tgz格式		| tar zxvf FileName.tar.tgz									|tar zcvf FileName.tar.tgz FileName|
-| **.zip格式**		| unzip FileName.zip										|zip FileName.zip DirName|
-| .lha格式			| lha -e FileName.lha										|lha -a FileName.lha FileName|
-| .rar格式			| rar a FileName.rar										|rar e FileName.rar|
-{: rules="all" frame="box"}
+	| 压缩包格式			| 解压														| 压缩			|
+	| :----------------	|:----------------------------------------------------------|:--------------|
+	| **.tar格式**		| tar xvf FileName.tar 										|tar cvf FileName.tar DirName（注：tar是打包，不是压缩！）|
+	| .gz格式			| 解压1：gunzip FileName.gz <br>解压2：gzip -d FileName.gz	|gzip FileName|
+	| .tar.gz格式		| tar zxvf FileName.tar.gz									|tar zcvf FileName.tar.gz DirName|
+	| .bz2格式			| bzip2 -d FileName.bz2  <br>解压2：bunzip2 FileName.bz2		|bzip2 -z FileName|
+	| .tar.bz2格式		| tar jxvf FileName.tar.bz2									|tar jcvf FileName.tar.bz2 DirName|
+	| .bz格式			| bzip2 -d FileName.bz										|bunzip2 FileName.bz|
+	| .tar.bz格式		| 															|tar jxvf FileName.tar.bz|
+	| .Z格式				| uncompress FileName.Z										|compress FileName|
+	| .tar.Z格式			| tar Zxvf FileName.tar.Z									|tar Zcvf FileName.tar.Z DirName|
+	| .tgz格式			| tar Zxvf FileName.tar.Z									|tar zxvf FileName.tgz|
+	| .tar.tgz格式		| tar zxvf FileName.tar.tgz									|tar zcvf FileName.tar.tgz FileName|
+	| **.zip格式**		| unzip FileName.zip										|zip FileName.zip DirName|
+	| .lha格式			| lha -e FileName.lha										|lha -a FileName.lha FileName|
+	| .rar格式			| rar a FileName.rar										|rar e FileName.rar|
+	{: rules="all" frame="box"}
 
 26. 环境变量设置与删除:
 
