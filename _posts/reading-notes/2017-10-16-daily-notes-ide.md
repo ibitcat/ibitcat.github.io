@@ -61,23 +61,7 @@ comments: true
 	- project_name.sumlime-project：包含工程定义，该文件会被记录到版本控制里。
 	- project_name.sublim-workspace：包含了用户的工程数据，例如打开的文件和修改等，该文件不会被记录到版本控制里。
 
-	自定义工程配置：
-	~~~json
-	{
-		"folders":
-		[
-			{
-				"path": ".",
-				"folder_exclude_patterns": ["php"], //排除php这个文件夹
-				"file_exclude_patterns": ["*.sublime-project"]//排除.sublime-project后缀的文件
-			},
-		],
-		"settings":
-		{
-			"tab_size":8
-		}
-	}
-	~~~
+	自定义工程配置请参考我的笔记：[我的工作环境分享](http://domicat.me/my-working-env/)。
 
 3. Sublime Text 查找时排除指定的文件夹或文件，在`where`处设置。例如：`D:\server\l-src\,D:\server\c-src,*.c,*.h,*.lua,*.txt,-*.xlsx`。
 
