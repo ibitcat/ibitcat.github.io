@@ -758,3 +758,54 @@ int (*pz)[2] = zippo;//pz指向一个包含2个int值的数组
 ## 附录
 
 - C++中的布尔类型是bool，并且true和false都是关键字。在C中，布尔类型是_Bool，但是包含了stdbool.h头文件就可以使用bool、true和false。
+
+## 其他
+
+1. 关于打印long long类型的变量：主要的区分在于操作系统，如果在win系统下，那么无论什么编译器，一律用`%I64d`；如果在linux系统，一律用`%lld`。
+2. 指针长度问题：如果64位处理器上运行的是64位操作系统，那么几乎可以肯定应该是**8字节**。如果运行的是32位操作系统，那么应该是**4字节**。
+3. C语言中：`char s[];`与`char* s`效果等级，但是有一点需要注意：`char *s = "hello";`在声明的同时进行赋值，它其实等价于`const char *s = "hello";`，因为字符串`hello`是常量，不能被改变。这就决定了 char数组（char a[]）的数组名可以赋值给s，但是反过来s不能赋值给数组a。可以参考我的[C Primer plus笔记](http://domicat.me/c-primer-plus/#1%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB)。
+4. 多维数组不存在到多级指针的转化规则，强转只会导致问题，所以`int a[2][3];`不等价于`int **p;`，**务必注意**。所有有以下结论：**假设T为任意类型，不管是T类型的几维数组，数组名就是一个该类型的指针**。因此`int a[2][3];`等价于`int *p;`。
+
+	但是为什么`char [][]`又等价于`char**`呢？这是因为C语言中操作字符串是通过它在内存中的存储单元的首地址进行的，这是字符串的终极本质。所以`char [][] == char *a[] == char**`。
+
+
+5. 关于`char []、char*、char *[]、char**`，可参考[这篇文章](http://blog.csdn.net/daiyutage/article/details/8604720)。
+
+6. 关于结构体的typedef:
+	~~~c
+	typedef struct a{
+	    int id;
+	    int idx;
+	} Sa,*pSa; 
+	~~~
+	上面这个typedef的意义：
+	- 1、给结构体a取一个别名 Sa;
+	- 2、给结构体a的指针类型取一个别名pSa（它是个指针类型），即 pSa 就是 a* 的一个替代(**不推荐**)；
+
+7. typedef 定义函数类型：
+
+	- tpyedef自定义函数指针类型
+	- typedef自定义函数类型
+
+	例如：  
+
+	~~~c
+	#include <stdio.h>
+
+	typedef int (*fp_t)(char c);
+	typedef int f_t(char c);
+
+	int func(char c) { printf("f0, c = %c\n", c); return 0;}
+	int main() {
+		fp_t fp;
+		fp = func;
+		f_t *fp1;
+		fp1 = func;
+	    return 0;
+	} 
+	~~~
+
+8. [c语言一维数组做参数传递给函数](http://blog.csdn.net/tianjizheng/article/details/46314567)：
+
+	- 1、C语言中，当一维数组做函数参数时，编译器总是把它解析成一个指向其首元素的指针。
+	- 2、实际传递的数组大小与函数形参指定的数组大小没有关系。

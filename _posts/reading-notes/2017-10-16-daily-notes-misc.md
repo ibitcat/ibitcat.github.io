@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "每日笔记 —— 计算机原理、操作系统、编程语言等"
+title:  "每日笔记 —— 计算机原理、操作系统等"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理、版本控制（git、svn）以及各种语言需要注意的细节等等。"
+excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理、版本控制（git、svn）等等。"
 tag:
 - 读书笔记
 comments: true
@@ -152,88 +152,8 @@ comments: true
 
 1. github秘笈点[这里](http://blog.csdn.net/x805433354/article/details/41214895)。
 
-## 4、编程语言
 
-### 4-1、 C语言
-
-1. 关于打印long long类型的变量：主要的区分在于操作系统，如果在win系统下，那么无论什么编译器，一律用`%I64d`；如果在linux系统，一律用`%lld`。
-2. 指针长度问题：如果64位处理器上运行的是64位操作系统，那么几乎可以肯定应该是**8字节**。如果运行的是32位操作系统，那么应该是**4字节**。
-3. C语言中：`char s[];`与`char* s`效果等级，但是有一点需要注意：`char *s = "hello";`在声明的同时进行赋值，它其实等价于`const char *s = "hello";`，因为字符串`hello`是常量，不能被改变。这就决定了 char数组（char a[]）的数组名可以赋值给s，但是反过来s不能赋值给数组a。可以参考我的[C Primer plus笔记](http://domicat.me/c-primer-plus/#1%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8C%87%E9%92%88%E7%9A%84%E5%8C%BA%E5%88%AB)。
-4. 多维数组不存在到多级指针的转化规则，强转只会导致问题，所以`int a[2][3];`不等价于`int **p;`，**务必注意**。所有有以下结论：**假设T为任意类型，不管是T类型的几维数组，数组名就是一个该类型的指针**。因此`int a[2][3];`等价于`int *p;`。
-
-	但是为什么`char [][]`又等价于`char**`呢？这是因为C语言中操作字符串是通过它在内存中的存储单元的首地址进行的，这是字符串的终极本质。所以`char [][] == char *a[] == char**`。
-
-
-5. 关于`char []、char*、char *[]、char**`，可参考[这篇文章](http://blog.csdn.net/daiyutage/article/details/8604720)。
-
-6. 关于结构体的typedef:
-	~~~c
-	typedef struct a{
-	    int id;
-	    int idx;
-	} Sa,*pSa; 
-	~~~
-	上面这个typedef的意义：
-	- 1、给结构体a取一个别名 Sa;
-	- 2、给结构体a的指针类型取一个别名pSa（它是个指针类型），即 pSa 就是 a* 的一个替代(**不推荐**)；
-
-7. typedef 定义函数类型：
-
-	- tpyedef自定义函数指针类型
-	- typedef自定义函数类型
-
-	例如：  
-
-	~~~c
-	#include <stdio.h>
-
-	typedef int (*fp_t)(char c);
-	typedef int f_t(char c);
-
-	int func(char c) { printf("f0, c = %c\n", c); return 0;}
-	int main() {
-		fp_t fp;
-		fp = func;
-		f_t *fp1;
-		fp1 = func;
-	    return 0;
-	} 
-	~~~
-
-8. [c语言一维数组做参数传递给函数](http://blog.csdn.net/tianjizheng/article/details/46314567)：
-
-	- 1、C语言中，当一维数组做函数参数时，编译器总是把它解析成一个指向其首元素的指针。
-	- 2、实际传递的数组大小与函数形参指定的数组大小没有关系。
-
-### 4-2、golang
-
-1. 使用`go build`编译go文件时，go文件必须**放在最后**，不然会有`named files must be .go files`的报错。
-
-	例如：`go build -ldflags "-w" -o ./xlsx2lua.exe ./xlsx2lua.go`
-
-2. 所有的goroutine执行完毕的方式主要有两种：
-
-	- 使用 `sync.WaitGroup`
-	- 使用 `channel`
-
-3. golang map的key：只有function、map和slice三个kind不能作为map的key，struct能不能作为key，要看结构体中的字段是否存在前面所提到的三个类型，如果没有则可以作为key。
-4. [Go语言中的Array、Slice、Map和Set使用详解](http://www.jb51.net/article/56828.htm)。
-	
-	append函数返回值必须有变量接收，因为append操作可能会导致原来的slice底层内存发生改变。
-
-5. **推荐**使用`fmt.Printf("%+v\n", p)`，打印变量。
-6. **golang 中只要有一个goroutine发生panic整个进程都挂了**。所以，golang中goroutine里面的panic应该在goroutine自己内部recover，别的goroutine是不能捕获到这个panic的。
-7. [golang map数据结构不能并发读写问题](http://blog.yiyun.pro/golang-map%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8D%E8%83%BD%E5%B9%B6%E5%8F%91%E8%AF%BB%E5%86%99%E9%97%AE%E9%A2%98/)，最新版本的golang 1.9已经支持了并发安全的map(`sync.map`)。
-8. golang发布闭源的.a文件（静态库），参考[官方文档 Binary-Only Packages](https://golang.org/pkg/go/build/#hdr-Binary_Only_Packages)。
-9. golang的字符串，主要注意`rune`类型和`byte`类型的区别。参考：[学习Golang语言(4):类型--字符串](https://www.zybuluo.com/codemanship/note/21183)。
-10. [**Go by Example（有中文版）**](https://github.com/mmcgrana/gobyexample)和[GO 命令教程(**主要是go tool部分**)](https://github.com/hyper0x/go_command_tutorial)以及[astaxie 的 **Go 命令**](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/01.3.md)。
-11. 减小golang编译的二进制文件大小：`go build -ldflags "-s -w"`，如果想进一步减小，可以使用**upx**对编译的二进制加壳压缩。
-
-	- `s`去掉符号表（然后panic时候的stack trace就没有任何文件名/行号信息了，这个等价于普通C/C++程序被strip的效果）
-	- `w`去掉DWARF调试信息，得到的程序就不能用gdb调试了。
-
-
-## 5、静态博客（jekyll等）
+## 4、静态博客（jekyll等）
 
 1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
 2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
@@ -242,14 +162,14 @@ comments: true
 5. [前端构建工具gulpjs的使用介绍及技巧](http://www.cnblogs.com/2050/p/4198792.html)。
 
 
-## 6、小众软件
+## 5、小众软件
 
 - LICEcap，GIF 屏幕录制工具，[下载地址](https://www.appinn.com/licecap/)。
 - Chrome商店Crx离线安装包下载，[下载地址](https://yurl.sinaapp.com/crx.php)。
 - Sublime Text插件，[下载地址](https://packagecontrol.io/)。
 - everything，[下载地址](http://www.voidtools.com/downloads/)。
 
-## 7、游戏开发
+## 6、游戏开发
 
 1. 游戏常用的编程设计模式：[游戏编程模式](http://gpp.tkchu.me/)。
 2. 行为树：
