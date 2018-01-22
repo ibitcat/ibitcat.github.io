@@ -129,6 +129,7 @@ comments: true
 	- id 用户(查看用户所属组），例如：`whoami`，然后`id xxx`(xxx为whoami的返回值)
 	- 直接查看组文件，`more /etc/group`
 29. `cat /etc/passwd`查看所有的用户信息。
+30.  获取本机ip：`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d \"addr:\"`
 
 ### 第二部分 - 稍微复杂的命令
 
