@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "每日笔记 —— lua"
+title:  "每日笔记 —— lua篇"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。lua 部分"
+excerpt: "记录了工作中，每天的笔记，分类整理。lua的笔记相对较多，本篇文章将单独记录lua部分"
 tag:
 - 读书笔记
 comments: true
