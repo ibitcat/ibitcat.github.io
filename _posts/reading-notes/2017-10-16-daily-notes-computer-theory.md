@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "每日笔记 —— 计算机原理、操作系统等"
+title:  "每日笔记 —— 计算机原理和操作系统"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理、版本控制（git、svn）等等。"
+excerpt: "记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理。"
 tag:
 - 读书笔记
 comments: true
@@ -134,56 +134,6 @@ comments: true
 	- user32.dll是Windows用户界面相关应用程序接口，用于包括Windows处理，基本用户界面等特性，如创建窗口和发送消息。
    	- gdi32.dll是Windows GDI图形用户界面相关程序，包含的函数用来绘制图像和显示文字。
 
-## 3、版本控制（git、svn）
 
-### 3-1、svn
-1. svn 回滚本地代码，[参考](http://blog.sina.com.cn/s/blog_6ad5907b0102uyqy.html)：
-
-    ~~~
-	1. svn update -r 200   (回退到200版本)  
-    2. svn up -r 18278 QOfficial/tpl/part/paidV1.tpl 
-	~~~
-
-2. svn查看某人某段时间所有修改的文件: `svn log -v -r '{2012-10-01}:{2012-11-10}'|sed -n '1p; 2,/^-/d; /username/,/^-/p' > 1.txt`
-
-	-v显示文件详情, -r控制某段时间, sed做筛选
-
-### 3-2、git
-
-1. github秘笈点[这里](http://blog.csdn.net/x805433354/article/details/41214895)。
-
-
-## 4、静态博客（jekyll等）
-
-1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
-2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
-3. 一个比较简洁实用的[jekyll 主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)，已star。
-4. CSS的优先级顺序: tag中的style > id > class > tag > 继承的属性。
-5. [前端构建工具gulpjs的使用介绍及技巧](http://www.cnblogs.com/2050/p/4198792.html)。
-
-
-## 5、小众软件
-
-- LICEcap，GIF 屏幕录制工具，[下载地址](https://www.appinn.com/licecap/)。
-- Chrome商店Crx离线安装包下载，[下载地址](https://yurl.sinaapp.com/crx.php)。
-- Sublime Text插件，[下载地址](https://packagecontrol.io/)。
-- everything，[下载地址](http://www.voidtools.com/downloads/)。
-
-## 6、游戏开发
-
-1. 游戏常用的编程设计模式：[游戏编程模式](http://gpp.tkchu.me/)。
-2. 行为树：
-
-	- [行为树的理解和学习](http://www.cnblogs.com/hammerc/p/5044815.html)
-	- [行为树及其实现](http://godorz.info/2015/10/behaviourtree/)
-	- [使用行为树(Behavior Tree)实现游戏AI](http://blog.csdn.net/kenkao/article/details/6099966)
-3. 棋牌游戏开发：
-
-	- [棋牌游戏感悟](https://zhuanlan.zhihu.com/cronlygames)
-
-4. [基于Lua的游戏服务端框架简介](http://blog.csdn.net/lalate/article/details/51498869)，是以C/C++为底层，lua为上次的游戏框架为基础，做了比较全面的介绍。
-5. 游戏的同步方式：**帧同步**和**状态同步**。前者适用于FPS/RTS游戏，后者适用于mmorpg游戏。
-
-	参考： [状态同步与帧同步](http://www.cnblogs.com/sevenyuan/p/5283265.html)和[动作手游实时PVP帧同步方案（客户端）](https://www.cnblogs.com/shown/p/6108617.html)
 
 
