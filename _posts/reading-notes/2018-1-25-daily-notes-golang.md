@@ -2,7 +2,7 @@
 layout: post
 title: 每日笔记 —— golang篇
 excerpt: "go语言的学习笔记。"
-date: 2015-01-21 16:30:44
+date: 2018-01-25 15:15:15
 tag: [golang,读书笔记]
 comments: true
 
