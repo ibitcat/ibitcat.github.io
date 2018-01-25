@@ -1,9 +1,9 @@
 ---
 layout: post
-title: go语言学习笔记
+title: 每日笔记 —— golang篇
 excerpt: "go语言的学习笔记。"
 date: 2015-01-21 16:30:44
-tag: [golang]
+tag: [golang,读书笔记]
 comments: true
 
 ---
@@ -12,6 +12,20 @@ comments: true
 
 * TOC
 {:toc}
+
+
+### go编译
+
+1. 使用`go build`编译go文件时，go文件必须**放在最后**，不然会有`named files must be .go files`的报错。
+
+	例如：`go build -ldflags "-w" -o ./xlsx2lua.exe ./xlsx2lua.go`
+
+2. 减小golang编译的二进制文件大小：`go build -ldflags "-s -w"`，如果想进一步减小，可以使用**upx**对编译的二进制加壳压缩。
+
+	- `s`去掉符号表（然后panic时候的stack trace就没有任何文件名/行号信息了，这个等价于普通C/C++程序被strip的效果）
+	- `w`去掉DWARF调试信息，得到的程序就不能用gdb调试了。
+
+3. golang发布闭源的.a文件（静态库），参考[官方文档 Binary-Only Packages](https://golang.org/pkg/go/build/#hdr-Binary_Only_Packages)。
 
 ### package 别名
    
@@ -214,19 +228,53 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 - 2.类型 T 的可调用方法集包含接受者为 T 的所有方法,但不包含接受者为 *T 的方法  
 这条规则说的是如果我们用来调用特定接口方法的接口变量是一个值类型，那么方法的接受者必须也是值类型该方法才可以被调用。
 
-### go编译
 
-1. 使用`go build`编译go文件时，go文件必须**放在最后**，不然会有`named files must be .go files`的报错。
+**在golang中，万物皆interface{}**，所以golang中可以将任意类型赋值给interface{}，包括nil也可以赋值给interface{}，interface{}有点像c艹中的**纯虚基类**，只包含了方法的集合。
 
-	例如：`go build -ldflags "-w" -o ./xlsx2lua.exe ./xlsx2lua.go`
+interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对lua比较熟，这点上类似lua的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。_type表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？……  data存储变量的真实值。
 
-2. 减小golang编译的二进制文件大小：`go build -ldflags "-s -w"`，如果想进一步减小，可以使用**upx**对编译的二进制加壳压缩。
+例如： var value interface{} = int32(100)  
+那么value在底层的结构就是：{_type:int32,data=100}
 
-	- `s`去掉符号表（然后panic时候的stack trace就没有任何文件名/行号信息了，这个等价于普通C/C++程序被strip的效果）
-	- `w`去掉DWARF调试信息，得到的程序就不能用gdb调试了。
+关于普通类型与interface{}的转换：  
+1、普通类型转换到interface{}是隐式转换；例如 fmt.Println(),我们可以传入任意类型的值，Println都会把传入的值转换成interface{}类型  
+2、interface{}转换成普通类型需要显式转换；
 
-3. golang发布闭源的.a文件（静态库），参考[官方文档 Binary-Only Packages](https://golang.org/pkg/go/build/#hdr-Binary_Only_Packages)。
+关于接口的实现：  
+假如有一个接口 type interface{} T, *T包含了定义在T和*T上的所有方法，而T只包含定义在T上的方法。
 
+### nil值
+在golang中，nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。
+
+如何判断一个interface{} 是否是 nil？
+
+根据上面对interface{}的介绍，判断interface{}是否为nil的规则：  
+>只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
+
+那么思考如下问题：  
+
+```golang
+type T struct{
+	Age int
+	Name string
+}
+
+func main(){
+	t1:= &T{20,"kaka"}
+	fmt.Printf("%p\n", t1)
+	fmt.Println(t1==nil)
+	//fmt.Println(*t1 == nil) //cannot convert nil to type test
+}
+```
+
+为什么注释的那行会报错？我的分析是：  
+t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
+
+关于**接口和nil**主要参考：  
+
+- [http://my.oschina.net/chai2010/blog/117923](http://my.oschina.net/chai2010/blog/117923 "Go中error类型的nil值和nil")  
+- [http://my.oschina.net/goal/blog/194233](http://my.oschina.net/goal/blog/194233 "详解interface和nil")  
+- [http://my.oschina.net/goal/blog/194308](http://my.oschina.net/goal/blog/194308 "golang类型转换")
 
 ### 字符(byte、rune)、字符串(string)
 1. **推荐**使用`fmt.Printf("%+v\n", p)`，打印变量。
@@ -249,6 +297,29 @@ type identifier = Type // identifier是Type类型的一个别名
 - 防止出现类型循环
 - 类型别名能改变原类型的可导出性
 
+### 指针
+
+#### 指针转换
+
+golang指针可以分为三种：
+
+- `*类型`，例如：`*byte`，表示一个byte指针，用于传递对象的指针，**不能进行指针运算**
+- `unsafe.Pointer`，类似于C语言中的 `void*`，表示通用类型指针（无类型指针），用于转换不同类型的指针，**不能进行指针运算**
+- `uintptr`，指针的地址值，用于指针运算。
+
+unsafe.Pointer 底层实际是一个`*int`，而uintptr底层是`type uintptr uintptr`，是一个无符号int值。
+
+通俗的说：unsafe.Pointer是可以与普通类型指针进行转换，也可以和uintptr进行转换，即它是普通类型指针和uintptr之间的桥梁。**可以让任意类型的指针实现相互转换，也可以将任意类型的指针转换为 uintptr 进行指针运算**。
+
+GC 不把 uintptr 当指针，也就是说 uintptr 无法持有对象，uintptr类型的目标会被回收，因为对于GC来说，uintptr就是一个无符号int值，上面也提到了uintptr的底层实现。
+
+#### unsafe 包
+
+三个函数：
+
+1. `func Alignof(x ArbitraryType) uintptr`，返回变量对齐字节数量 
+2. `func Offsetof(x ArbitraryType) uintptr`，返回变量指定属性的偏移量，这个函数虽然接收的是任何类型的变量，但是这个又一个前提，就是变量要是一个struct类型，且还不能直接将这个struct类型的变量当作参数，只能将这个struct类型变量的属性当作参数。 
+3. `func Sizeof(x ArbitraryType) uintptr`，返回变量在内存中占用的字节数，切记，如果是slice，则不会返回这个slice在内存中的实际占用长度。
 
 ### 学习资料
 
