@@ -315,6 +315,8 @@ GC 不把 uintptr 当指针，也就是说 uintptr 无法持有对象，uintptr�
 
 #### unsafe 包
 
+参考官方文档[Pointer](https://golang.org/pkg/unsafe/#Pointer)。
+
 三个函数：
 
 1. `func Alignof(x ArbitraryType) uintptr`，返回变量对齐字节数量 
