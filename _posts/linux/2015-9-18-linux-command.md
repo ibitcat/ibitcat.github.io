@@ -130,6 +130,7 @@ comments: true
 	- 直接查看组文件，`more /etc/group`
 29. `cat /etc/passwd`查看所有的用户信息。
 30.  获取本机ip：`ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d \"addr:\"`
+31.  `nc`命令，需要安装`netcat`
 
 ### 第二部分 - 稍微复杂的命令
 
