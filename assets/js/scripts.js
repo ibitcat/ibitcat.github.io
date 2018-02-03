@@ -62,6 +62,7 @@ $(document).ready(function() {
           break;
       }
     };
+    /*
     $(document).keyup(function(e){
       if($('.search-form').hasClass('active')){
         $(".search-form").find('input').focus();
@@ -69,6 +70,7 @@ $(document).ready(function() {
         $(".search-form").find('input').blur();
       }
     });
+    */
 
     // Search
     var bs = {
