@@ -5,7 +5,7 @@ $(function() {
   });
 });
 // Need this to show animation when go back in browser
-window.onunload = function() {};
+//window.onunload = function() {};
 
 // Add lightbox class to all image links
 //$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
@@ -24,10 +24,12 @@ $(document).ready(function() {
     if ($(".wrapper").hasClass('fadeOut')) {
         $(".wrapper").removeClass("fadeOut").addClass("fadeIn");
     }
+    /*
     $(".zoombtn").click(function() {
         $(".container").removeClass("fadeIn").addClass("fadeOut");
         $(".wrapper").removeClass("fadeIn").addClass("fadeOut");
     });
+    */
     // go up button
     $.goup({
         trigger: 500,
@@ -55,14 +57,16 @@ $(document).ready(function() {
     };
 
     //Search sidebar active
-    if($('.search-form').hasClass('active')){
-      switch(e.key) {
-        case "Escape":
-          $('.icon-remove-sign').trigger('click');
-          break;
+    //Keys
+    $(document).keydown(function(e){
+      if($('.search-form').hasClass('active') && e.key === "Escape"){
+        $('.icon-remove-sign').trigger('click');
       }
-    };
-    /*
+    });
+
+    //Key release
+    //Fix : extra character 's' is entered to the input field when s
+    //      witching to the search form by using keypress
     $(document).keyup(function(e){
       if($('.search-form').hasClass('active')){
         $(".search-form").find('input').focus();
@@ -70,7 +74,6 @@ $(document).ready(function() {
         $(".search-form").find('input').blur();
       }
     });
-    */
 
     // Search
     var bs = {
