@@ -105,7 +105,10 @@ a {
   &:link {
   	color: $color_shark;
   }
-  &:visited {
+  //&:visited {
+  //	color: $color_tuatara;
+  //}
+  &:focus {
   	color: $color_tuatara;
   }
   &:hover {
