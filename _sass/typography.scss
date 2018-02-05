@@ -120,6 +120,22 @@ a {
   }
 }
 
+// tags
+.article-tag a {
+    color: $color_shark;
+    &:link {
+  	  color: $color_shark;
+    }
+    &:hover {
+  	  color: $red;
+  	}
+    &:active {
+  	  transition: color .3s;
+  	  color: $maroon;
+  	}
+}
+
+
 // pre and code
 pre, code {
 	font-family: $font2;
