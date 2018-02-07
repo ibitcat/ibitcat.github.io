@@ -5,7 +5,7 @@ $(function() {
   });
 });
 // Need this to show animation when go back in browser
-//window.onunload = function() {};
+window.onunload = function() {};
 
 // Add lightbox class to all image links
 //$("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
