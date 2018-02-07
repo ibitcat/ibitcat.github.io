@@ -323,6 +323,33 @@ GC 不把 uintptr 当指针，也就是说 uintptr 无法持有对象，uintptr�
 2. `func Offsetof(x ArbitraryType) uintptr`，返回变量指定属性的偏移量，这个函数虽然接收的是任何类型的变量，但是这个又一个前提，就是变量要是一个struct类型，且还不能直接将这个struct类型的变量当作参数，只能将这个struct类型变量的属性当作参数。 
 3. `func Sizeof(x ArbitraryType) uintptr`，返回变量在内存中占用的字节数，切记，如果是slice，则不会返回这个slice在内存中的实际占用长度。
 
+### go tool pprof
+
+关于`go tool pprof`性能分析工具的`flat`和`cum(cumulative)`的理解：
+
+	- `flat`：函数自身执行所用的时间
+	- `cum`：执行函数自身和其调用的函数所用的时间和
+
+以一个例子说明：设有这样的函数调用关系 `a()-->b()-->(c()、d())`，类似代码如下：
+
+	~~~go
+	func a(){
+    	b() // 调用b()
+	}
+	
+	func b(){
+	    c() // c()函数花费 1s
+
+	    // do something //没有函数调用，但是执行发生了5s
+	    // ...
+
+		d() // d函数花费 2s
+	}
+	~~~~
+
+`b()`函数的cum（累计调用时间）= `1+5+2` = 8s
+`b()`函数的flat=5s，也就是b()函数自身执行自己代码的时间，没有发生函数调用
+
 ### 学习资料
 
 1. [**Go by Example（有中文版）**](https://github.com/mmcgrana/gobyexample)
