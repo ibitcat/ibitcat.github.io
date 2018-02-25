@@ -163,3 +163,5 @@ comments: true
 	~~~
 
 19. 如何编写高性能lua代码，[原版](http://www.lua.org/gems/sample.pdf)和中文译文版[高性能 Lua 技巧（译）](https://segmentfault.com/a/1190000004372649)。
+20. Lua和C/C++语言通信的主要方法是一个无处不在的虚拟栈。栈的特点是**先进后出**。  
+在Lua中，Lua堆栈就是一个struct，堆栈索引的方式可是是正数也可以是负数，区别是：**<font color="red">正数索引1永远表示栈底，负数索引-1永远表示栈顶</font>**。
