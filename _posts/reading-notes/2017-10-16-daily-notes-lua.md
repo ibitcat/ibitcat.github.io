@@ -76,7 +76,7 @@ comments: true
 
 	~~~lua
 	print( ('"hello" "hello"'):find('"(.+)"') ) --输出hello" "hello
-	print( ('"hello" "hello"'):find('"(.*)"') ) --输出hello
+	print( ('"hello" "hello"'):find('"(.-)"') ) --输出hello
 	~~~
 
 8. 关于lua的取模运算，有两种方式`%运算符`和`math.mod`，推荐使用**`math.mod`**：
