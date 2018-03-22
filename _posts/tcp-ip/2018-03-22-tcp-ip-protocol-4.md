@@ -40,7 +40,7 @@ comments: true
 
 ICMP本身是网络层协议。但是，**它的报文不是如设想的那样直接传送给数据链路层**，实际上，ICMP报文首先**封装成IP数据报**，然后再传送给下一层。在IP数据报中的协议字段值是1就表示其IP数据是ICMP报文。通过抓包可以证实这一点。
 
-1、通过ping www.baidu.com命令，使计算机产生ICMP报文；
+1、通过`ping www.baidu.com`命令，使计算机产生ICMP报文；
 2、通过wireshark抓包，筛选ICMP协议，此时抓包的结果如下图所示：
 
 ![ICMP的封装](/images/posts/tcp-ip/icmp-wireshark-1.png)
@@ -56,6 +56,8 @@ ICMP本身是网络层协议。但是，**它的报文不是如设想的那样�
 - 类型5：路由重定向，例如：当路由器发现数据报走的不是最佳路由，就会返回一个ICMP报告，让发送方下次不要走这里了
 - 类型11：超时，例如：发生了路由环路，从而导致TTL变为0值
 - 类型12：参数问题，例如：数据报的首部被篡改或者丢失
-	
+
+我们使用`tracert www.baidu.com`这个命令，然后抓一些ICMP包，如下图，可以看到很多黑色的结果，即差错报告。
+![ICMP的差错报告](/images/posts/tcp-ip/icmp-wireshark-2.png)
 
 ### 查询报文
