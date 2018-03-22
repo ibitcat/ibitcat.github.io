@@ -23,6 +23,8 @@ comments: true
 
 本文主要介绍TCP/IP网络体系四层结构，以及每层的作用。
 
+在介绍TCP/IP四层结构之前，先介绍一下OSI七层参考模型。
+
 ## 1、ISO/OSI
 
 英文全称为**Open Systems Interconnection Reference Model**(开放式通信系统互联参考模型)，它是国际标准化组织ISO(International Organization for Standardization)提出的一个框架，注意的是，OSI只是一个参考模型，现在的厂商并不是完全按照这个标准，而是参考了这个标准，所以才有现在比较常用的TCP/IP四层网络体系结构，它简化了OSI模型。
