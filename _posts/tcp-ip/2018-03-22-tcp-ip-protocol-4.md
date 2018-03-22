@@ -87,6 +87,7 @@ ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的�
 ![ICMP的查询报文头部格式](/images/posts/tcp-ip/icmp-head-2.png)
 
 通过抓包证实一下：
+
 1、运行`ping www.baidu.com`，开始抓包
 
 2、筛选ICMP协议包，结果如下：
@@ -106,6 +107,7 @@ ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的�
 
 
 ICMP差错报文头部格式如下：
+
 ![ICMP的差错报文头部格式](/images/posts/tcp-ip/icmp-head-3.png)
 
 通过抓包证实一下：
@@ -115,3 +117,5 @@ ICMP差错报文头部格式如下：
 ![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-4.png)
 
 3、我们发现后4个字节全部为0。
+
+关于查询报文和差错报文的type和code字段所代表的具体信息，这里不做详细的介绍，如果需要，可以查看本教程的课件。
