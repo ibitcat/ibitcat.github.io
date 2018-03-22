@@ -24,8 +24,8 @@ comments: true
 
 英文全称为**Open Systems Interconnection Reference Model**(开放式通信系统互联参考模型)，它是国际标准化组织ISO(International Organization for Standardization)提出的一个框架，注意的是，OSI只是一个参考模型，现在的厂商并不是完全按照这个标准，而是参考了这个标准，所以才有现在比较常用的TCP/IP四层网络体系结构，它简化了OSI模型。
 
-OSI标准分为7层，如下图所示：
-![OIS/RM 七层模型](/images/posts/tcp-ip/osi.png)
+OSI标准分为7层，从下往上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，同时规定了这个7层结构需要遵循的一些准则。见下图：
+![OIS/RM 七层模型](/images/posts/tcp-ip/osi-layer.png)
 
 ## 2、TCP/IP四层结构
 
