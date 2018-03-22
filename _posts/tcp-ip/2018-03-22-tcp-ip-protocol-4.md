@@ -40,8 +40,7 @@ comments: true
 
 ICMP本身是网络层协议。但是，**它的报文不是如设想的那样直接传送给数据链路层**，实际上，ICMP报文首先**封装成IP数据报**，然后再传送给下一层。在IP数据报中的协议字段值是1就表示其IP数据是ICMP报文。通过抓包可以证实这一点。
 
-1、通过`ping www.baidu.com`命令，使计算机产生ICMP报文；
-
+1、通过`ping www.baidu.com`命令，使计算机产生ICMP报文；  
 2、通过wireshark抓包，筛选ICMP协议，此时抓包的结果如下图所示：
 
 ![ICMP的封装](/images/posts/tcp-ip/icmp-wireshark-1.png)
@@ -88,14 +87,11 @@ ICMP两种报文种类有着不同的头部格式，但区别不大，前4个字
 ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的数据。格式如下图：
 ![ICMP的查询报文头部格式](/images/posts/tcp-ip/icmp-head-2.png)
 
-通过抓包证实一下：
-
-1、运行`ping www.baidu.com`，开始抓包
-
+通过抓包证实一下：  
+1、运行`ping www.baidu.com`，开始抓包  
 2、筛选ICMP协议包，结果如下：
 ![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-3.png)
-
-3、字段解释：
+3、字段解释：  
 
 - 第1个字节：值为08，表示这是一个查询报文
 - 第2个字节：值为00
@@ -112,12 +108,10 @@ ICMP差错报文头部格式如下：
 
 ![ICMP的差错报文头部格式](/images/posts/tcp-ip/icmp-head-3.png)
 
-通过抓包证实一下：
-1、运行`tracert www.baidu.com`，开始抓包（注意：这里用的是**tracert命令**）
-
+通过抓包证实一下：  
+1、运行`tracert www.baidu.com`，开始抓包（注意：这里用的是**tracert命令**）  
 2、筛选ICMP协议包，结果如下：
-![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-4.png)
-
+![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-4.png)  
 3、我们发现后4个字节全部为0。
 
 关于查询报文和差错报文的type和code字段所代表的具体信息，这里不做详细的介绍，如果需要，可以查看本教程的课件。
