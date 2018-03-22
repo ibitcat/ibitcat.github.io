@@ -79,13 +79,19 @@ ICMP本身是网络层协议。但是，**它的报文不是如设想的那样�
 
 ## 4、ICMP头部格式
 
-ICMP头部格式如下，主要包括两个部分：8byte+32byte的数据。格式如下图：
-![ICMP的头部格式](/images/posts/tcp-ip/icmp-head-2.png)
+ICMP两种报文种类有着不同的头部格式，但区别不大，前4个字节是一样的，不同的只有后面4个字节。
+
+### 查询报文头部格式
+
+ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的数据。格式如下图：
+![ICMP的查询报文头部格式](/images/posts/tcp-ip/icmp-head-2.png)
 
 通过抓包证实一下：
 1、运行`ping www.baidu.com`，开始抓包
+
 2、筛选ICMP协议包，结果如下：
 ![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-3.png)
+
 3、字段解释：
 
 - 第1个字节：值为08，表示这是一个查询报文
@@ -94,3 +100,18 @@ ICMP头部格式如下，主要包括两个部分：8byte+32byte的数据。格�
 - 第5、6个字节：值为0x0001，注意：这里要分大端和小端格式，一般windows和linux都是小端，所以，这里应该看：`Identifier(LE):256(0x0100)`
 - 第7、8个字节：值为0x4700，同上，也需要分大小端。
 - 后面的32个字节为测试数据
+
+
+### 差错报文头部格式
+
+
+ICMP差错报文头部格式如下：
+![ICMP的差错报文头部格式](/images/posts/tcp-ip/icmp-head-3.png)
+
+通过抓包证实一下：
+1、运行`tracert www.baidu.com`，开始抓包（注意：这里用的是**tracert命令**）
+
+2、筛选ICMP协议包，结果如下：
+![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-4.png)
+
+3、我们发现后4个字节全部为0。
