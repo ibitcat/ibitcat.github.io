@@ -54,9 +54,9 @@ IP协议头部格式可以分为两个部分：固定部分（20byte）和可变
 下面，我结合wireshark抓包工具，介绍下IP协议头部固定部分的每个字段的详细意义：
 
 1、使用wireshark抓一个http包，访问的是: http://www.qq.com，结果如下图所示
-![抓包结果](/images/posts/tcp-ip/ip-wireshark-1.png.png)
+![抓包结果](/images/posts/tcp-ip/ip-wireshark-1.png)
 
-可以看到后面的二进制数据![抓包结果](/images/posts/tcp-ip/ip-wireshark-2.png.png)，一共20个字节，表示没有可选部分。
+可以看到后面的二进制数据![抓包结果](/images/posts/tcp-ip/ip-wireshark-2.png)，一共20个字节，表示没有可选部分。
 
 2、详细解释每个字段的意义
 
