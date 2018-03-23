@@ -45,7 +45,7 @@ comments: true
 
 因为**ARP是为IP协议提供服务的**，所以，把ARP划分到了网络层。
 
-所以，IP协议与ARP协议的关系就是，ARP是为IP协议提供服务，他比IP协议要稍微第一个层次。
+因此，IP协议与ARP协议的关系就是，ARP是为IP协议提供服务，他比IP协议要稍微低一个层次。
 
 ![ARP协议与IP协议的关系](/images/posts/tcp-ip/arp-ip.png)
 
