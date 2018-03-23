@@ -30,7 +30,7 @@ comments: true
 
 例如：当IP数据报在网络中超过了它的TTL，那么路由器就会将这个数据报丢弃，但是没有对这个丢弃操作返回错误报告。
 
-因为弥补IP协议的这些缺点，所以就产生了ICMP协议。需要注意的是：**ICMP没有纠正错误的机制**。
+为了弥补IP协议的这些缺点，所以就产生了ICMP协议。需要注意的是：**ICMP没有纠正错误的机制**。
 
 
 ## 2、ICMP协议的数据封装格式
@@ -141,10 +141,12 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 	- 时间表示包的**往返时间（一去一来所用的时间）**
 	- TTL为54（请求包的TTL为64），也就是回复的包进过了10个路由器。
 
-通过抓包，可以证实上面的流程。
+通过抓包，可以证实上面的流程（我使用的是`ping -l 1024 www.baidu.com`）。
 ![ping抓包结果1](/images/posts/tcp-ip/ping-wireshark-1.png) 
 ![ping抓包结果2](/images/posts/tcp-ip/ping-wireshark-2.png) 
 
-注意上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？因为我使用的是`ping -l 1024 www.baidu.com`，所以1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
+注意上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
 
 ## 6、tracert命令详解
+
+linux下的命令是`traceroute`，windows下使用	`tracert`。tracert可以解决ping的不足，它能定位到某一个具体的某一台设备。
