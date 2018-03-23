@@ -145,8 +145,13 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 ![ping抓包结果1](/images/posts/tcp-ip/ping-wireshark-1.png) 
 ![ping抓包结果2](/images/posts/tcp-ip/ping-wireshark-2.png) 
 
-注意上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
+注意：上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
 
 ## 6、tracert命令详解
 
 linux下的命令是`traceroute`，windows下使用	`tracert`。tracert可以解决ping的不足，它能定位到某一个具体的某一台设备。
+
+先介绍一下tracert命令的工作原理：命令发起方会**依次**对到达目的主机的路由路径中的路由节点发起**一轮**ping请求，**三次ping为一轮**，每一轮的TTL值加以（第一轮为1，第二轮为2...依次类推），逐个检查这条路由路径上每个路由节点。
+
+大概流程如下图所示：
+![tracert流程](/images/posts/tcp-ip/tracert-1.png) 
