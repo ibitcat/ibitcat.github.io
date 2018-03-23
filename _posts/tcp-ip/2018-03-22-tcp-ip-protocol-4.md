@@ -134,7 +134,7 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 	    最短 = 7ms，最长 = 8ms，平均 = 7ms
 
 详细介绍下上面的过程：
-1. 首先通过dns符文，将域名解析成IP地址，也就是上面的`www.a.shifen.com [14.215.177.39]`
+1. 首先通过dns服务，将域名解析成IP地址，也就是上面的`www.a.shifen.com [14.215.177.39]`
 2. 然后ping命令发送一个带有32字节数据的ICMP请求包，收到回复后显示结果，也就是上面的`来自 14.215.177.39 的回复: 字节=32 时间=7ms TTL=54`，
 
 	- 其中字节表示测试数据长度（可以通过-l参数指定测试数据的大小，例如`ping -l 1024 www.baidu.com`）
@@ -145,5 +145,6 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 ![ping抓包结果1](/images/posts/tcp-ip/ping-wireshark-1.png) 
 ![ping抓包结果2](/images/posts/tcp-ip/ping-wireshark-2.png) 
 
+注意上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？因为我使用的是`ping -l 1024 www.baidu.com`，所以1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
 
 ## 6、tracert命令详解
