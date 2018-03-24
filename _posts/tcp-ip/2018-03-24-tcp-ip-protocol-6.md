@@ -23,3 +23,33 @@ comments: true
 本文主要介绍TCP/IP网络体系中网络层的UDP协议。
 
 
+## 1、UDP协议详解
+
+它是与TCP协议相对的，它有两个特点：
+
+- 无连接
+- 不可靠
+
+TCP像一个细心的小女子，UDP像一个糙汉子。
+
+UDP协议的功能：
+- 创建进程到进程间的通信（由端口号完成）
+- 有限的差错控制，出现差错悄悄丢弃报文分组
+
+
+## 2、UDP首部格式
+
+UDP数据包报包含两个部分：UDP首部+数据
+
+![UDP数据报](/images/posts/tcp-ip/udp-datagram.png)
+![UDP首部格式](/images/posts/tcp-ip/udp-head.png)
+
+UDP首部非常简单，占8个byte，下面是一个UDP报文的抓包结果：
+![UDP首部抓吧](/images/posts/tcp-ip/udp-wireshark-1.png)
+
+字段解释：
+
+- 第1、2字节：源端口
+- 第3、4字节：目的端口
+- 第5、6字节：报文长度，包括头部+数据，例如上图`Length:664`，单位为字节，即：Data(656+8首部)= 664byte
+- 第7、8字节：校验和，同理TCP
