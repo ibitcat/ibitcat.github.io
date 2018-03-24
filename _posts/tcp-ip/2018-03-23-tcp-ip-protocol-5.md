@@ -116,7 +116,10 @@ comments: true
 ![TCP首部格式](/images/posts/tcp-ip/tcp-head.png)
 
 和前面一样，通过抓包来逐个解释每个字段。这里访问一个网站，抓包结果如下：
-![TCP首部抓包结果](/images/posts/tcp-ip/tcp-wireshark-1.png)
+![TCP首部抓包结果1](/images/posts/tcp-ip/tcp-wireshark-1.png)
+{: .image-left}
+![TCP首部抓包结果2](/images/posts/tcp-ip/tcp-wireshark-2.png)
+{: .image-right}
 
 字段解释：
 
@@ -125,4 +128,7 @@ comments: true
 - 第5到8个字节：值为，表示报文段序号
 - 第9到12个字节：值为，表示确认号
 - 第13、14个字节：这里需要特殊处理一下，前4bit表示首部长度，和IP首部一样，也是以4字节为单位；后12个bit
-- 
+
+
+
+MSS = MTU-TCP首部-IP首部，
