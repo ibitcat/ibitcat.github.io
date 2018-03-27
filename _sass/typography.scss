@@ -23,6 +23,11 @@
     content: "";
 }
 
+.content b,strong {
+  font-weight: bolder;
+  color: red;
+}
+
 // titles
 .title {
 	text-align: center;
