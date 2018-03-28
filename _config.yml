@@ -35,9 +35,9 @@ sass:
   sass_dir:         _sass
   style:            compressed #开发环境不压缩
 collections:
-    wiki:
-        output: true
-        permalink: /wiki/:path/
+  wiki:
+    output: true
+    permalink: /wiki/:path/
 
 # Comments
 #disqus_shortname:   shuimu98
@@ -55,27 +55,6 @@ weibo:              shuimu98
   #verify:
   #ad-client:
   #ad-slot:
-#bing-verify:
-#twitter:            username
-#facebook:           username
-#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
-#linkedin:          username
-#xing:              username
-#instagram:          username
-#lastfm:            username
-#tumblr:            username
-#medium:            '@username'
-#pinterest:         username
-#foursquare:        username
-#steam:              username
-#dribbble:          username
-#youtube:           username
-#soundcloud:        username
-#flickr:            username
-#codepen:           username
-#keybase:           username
-#xmpp:              username@server.com
-#hackernews:        username
 
 # Gems
 gems:

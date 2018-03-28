@@ -4,7 +4,7 @@ title:  "Markdown 语法"
 date:   2016-03-15
 excerpt: "Markdown 语法"
 tag:
-- markdown 
+- markdown
 comments: true
 ---
 
