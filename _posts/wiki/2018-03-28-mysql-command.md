@@ -1,8 +1,7 @@
 ---
 layout: post
-title: Mysql Command
+title: Mysql 常用命令
 date: 2016-09-13
-categories: Mysql
 excerpt: Mysql 常用命令
 tag: [数据库]
 ---
