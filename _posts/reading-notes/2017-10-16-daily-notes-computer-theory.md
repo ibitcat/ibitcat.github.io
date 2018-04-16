@@ -125,6 +125,8 @@ comments: true
 
 20. linuix禁止root用户开机登陆：修改`/etc/ssh/sshd_config`里面有一个配置选项`PermitRootLogin no`，这样就可以不让root直接登录了。另外，设置AllowUsers允许指定用户通过ssh登陆，如`AllowUsers domi`。
 
+21. centos6.x切换图形界面和命令行界面：修改`/etc/inittab`文件中的`id:3:initdefault`，将3改为5则为图形界面 ，反之则为命令行界面，修改完后重新启动系统生效；
+
 
 ### 2-2、windows
 
