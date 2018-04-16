@@ -128,17 +128,11 @@ comments: true
 21. centos6.x切换图形界面和命令行界面：修改`/etc/inittab`文件中的`id:3:initdefault`，将3改为5则为图形界面 ，反之则为命令行界面，修改完后重新启动系统生效；
 
 22. centos6.x VMware虚拟机网络设置（桥接方式）：
-
-**设置VMware:**
 	
 	1. 在 VMware 中打开【编辑】->【虚拟网络编辑器】，添加 VMnet0，并选择桥接模式。需要注意的是，需要选择“桥接到”的网卡，使用无线网卡就选无线网卡，使用有线网卡就选有线网卡
 	2. 在虚拟机系统上右键，进入【设置】界面，在【硬件】选项卡中，找到【网络适配器】，设置为桥接模式
-
-**设置虚拟机**
-
-	1. 编辑文件`/etc/sysconfig/network-scripts/ifcfg-eth0`，没有就创建一个
-
-	2. 如果使用的是静态IP，则配置如下：
+	3. 在虚拟机中编辑文件`/etc/sysconfig/network-scripts/ifcfg-eth0`，没有就创建一个
+	4. 如果使用的是静态IP，则配置如下：
 	~~~
 	BOOTPROTO="static"
 	HWADDR="00:0C:29:9D:5D:24"
@@ -153,9 +147,10 @@ comments: true
 	IPADDR=192.168.22.172  #静态IP地址，与宿主机在同一网段内，不能被其他设备占用该IP
 	NETMASK=255.255.254.0  #子网掩码，与宿主机一致
 	GATEWAY=192.168.23.254 #网关，与宿主机一致
+	DNS1=114.114.114.114   #如果是静态IP，需要在这里配置dns，在etc/resolv.conf的dns在重启网络后会丢失
+	DNS2=202.96.128.166
 	~~~
-
-	3. 若使用 dhcp的方式获得IP，则配置如下：
+	5. 若使用 dhcp的方式获得IP，则配置如下：
 	~~~
 	DEVICE=eth0
 	HWADDR=00:0C:29:F4:F5:D6
@@ -165,8 +160,11 @@ comments: true
 	NM_CONTROLLED=yes
 	BOOTPROTO=dhcp #修改
 	~~~
+	6. 输出命令`service network restart`，重启网络
 
-> #DEVICE是网卡编号，HWADDR是MAC地址，TYPE、UUID和NM_CONTROLLED这五项无需更改，#ONBOOT是设置在启动network服务时是否启用该网卡，需要将其改为ONBOOT=yes，否则以后每次都要使用ifup eth0启动网卡，#BOOTPROTO是设置获得IP方式，可选为staic(静态IP)、dhcp(动态分配)、none(不使用)
+	#DEVICE是网卡编号，HWADDR是MAC地址，TYPE、UUID和NM_CONTROLLED这五项无需更改  
+	#ONBOOT是设置在启动network服务时是否启用该网卡，需要将其改为ONBOOT=yes，否则以后每次都要使用ifup eth0启动网卡  
+	#BOOTPROTO是设置获得IP方式，可选为staic(静态IP)、dhcp(动态分配)、none(不使用)
 
 
 ### 2-2、windows
