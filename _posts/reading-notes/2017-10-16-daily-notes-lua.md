@@ -43,7 +43,7 @@ comments: true
     lua_settop(svr->vm, st); // 调用后，恢复栈
 	~~~
 
-7. lua正则匹配，主要参考：[lua匹配模式](http://www.cnblogs.com/whiteyun/archive/2009/09/02/1541043.html)和[Lua 字符串查找函数](http://blog.csdn.net/zhangxaochen/article/details/8084396)
+7. lua正则匹配，主要参考：[lua匹配模式](http://www.cnblogs.com/whiteyun/archive/2009/09/02/1541043.html)和[Lua 字符串查找函数](http://blog.csdn.net/zhangxaochen/article/details/8084396)以及[Step By Step(Lua字符串库)](http://www.cnblogs.com/stephen-liu74/archive/2012/07/11/2425233.html)。
 
 	|字符		| 备注		|
 	|:-------:	|:---------	|
