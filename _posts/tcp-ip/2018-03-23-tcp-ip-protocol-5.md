@@ -20,7 +20,7 @@ comments: true
 - 5、TCP协议详解
 - 6、UDP协议详解
 
-本文主要介绍TCP/IP网络体系中网络层的TCP协议。
+本文主要介绍TCP/IP网络体系中网络层的TCP协议。另外推荐[一篇文章](https://www.cnblogs.com/kzloser/articles/2582957.html)，写得很不错。
 
 在介绍TCP协议之前，让我们先了解一下传输层。
 

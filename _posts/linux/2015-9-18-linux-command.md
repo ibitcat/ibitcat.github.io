@@ -76,20 +76,23 @@ comments: true
 	- `netstat -anp|grep 80`
 
 20. top命令  [^footer1]  
-	*字段解释：*  
-	`PID`：进程的ID  
-	`USER`：进程所有者  
-	`PR`：进程的优先级别，越小越优先被执行   
-	`VIRT`：进程占用的虚拟内存  
-	`RES`：进程占用的物理内存  
-	`SHR`：进程使用的共享内存  
-	`S`：进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数  
-	`%CPU`：进程占用CPU的使用率  
-	`%MEM`：进程使用的物理内存和总内存的百分比  
-	`TIME+`：该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。  
-	`COMMAND`：进程启动命令名  
 
-	参考：[查看LINUX进程内存占用情况](http://www.cnblogs.com/gaojun/p/3406096.html) 、[Top 命令详解](http://www.cnblogs.com/cherishry/p/5886041.html)
+	| 字段			| 备注											|
+	| :-------------|:----------------------------------------------|
+	| `PID`			|进程的ID										|
+	|`USER`			|进程所有者										|
+	|`PR`			|进程的优先级别，越小越优先被执行   				|
+	|`VIRT`			|进程占用的虚拟内存  								|
+	|`RES`			|进程占用的物理内存  								|
+	|`SHR`			|进程使用的共享内存  								|
+	|`S`			|进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数 |
+	|`%CPU`			|进程占用CPU的使用率  							|
+	|`%MEM`			|进程使用的物理内存和总内存的百分比  				|
+	|`TIME+`		|该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。 |
+	|`COMMAND`		|进程启动命令名  									|
+	{: rules="all" frame="box"}
+
+	参考：[查看LINUX进程内存占用情况](http://www.cnblogs.com/gaojun/p/3406096.html) 、[Top 命令详解](http://www.cnblogs.com/cherishry/p/5886041.html)、[linux top命令VIRT,RES,SHR,DATA的含义](https://javawind.net/p131 
 
 21. chmod更改文件权限 : `chmod u+r xxx` 或者 `chmod u=rwx,g=r xxx` [^footer2]
 22. 查看文件类型： `file xxx` 
