@@ -560,7 +560,7 @@ int (*pz)[2] = zippo;//pz指向一个包含2个int值的数组
 	pf->average = 10;
 	~~~
 
-  	注意：sizeof(struct flex)中的的大小并没有包含`double scors[]`的大小，也就是说`double scors[]`没有占用内存空间。
+注意：sizeof(struct flex)中的的大小并没有包含`double scors[]`的大小，也就是说`double scors[]`没有占用内存空间。
 
 ### 联合
 - 联合与结构体类似，区别在于：结构体的各个成员会占用不同的内存，互相之间没有影响；而联合体的所有成员占用同一段内存，修改一个成员会影响其余所有成员。
