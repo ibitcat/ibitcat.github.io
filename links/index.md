@@ -5,9 +5,8 @@ excerpt: 我的博客收藏夹
 comments: false
 ---
 
-> 烂笔头的远行
+> 烂笔头的远行，遇见code的美。
 
-* [我的每日笔记(有道云笔记)](http://note.youdao.com/noteshare?id=d945a209f997c0c9e2f788881e6c800e&sub=BCACDA50FFA44279B36302C911B8CE89)
 * [云风](http://codingnow.com/)
 * [酷壳](http://coolshell.cn/)
 * [程序人生](http://www.programlife.net/)
@@ -21,3 +20,11 @@ comments: false
 * [廖雪峰的官方网站](https://www.liaoxuefeng.com/)
 * [zhust](http://www.zhust.com/)
 * [落格](https://www.logcg.com/)
+* [moon's blog™](http://www.92csz.com/)
+* [荒野无灯](http://80x86.io/)
+* [Vimer的程序世界](http://www.vimer.cn/)
+* [Cyeam(很多golang文章)](http://blog.cyeam.com/)
+* [sniperHW](http://www.cnblogs.com/sniperHW/)
+* [漫漫路](https://www.lanindex.com/)
+* [淘宝褚霸](http://blog.yufeng.info/)
+* [观尔腾](http://zqted.com/)

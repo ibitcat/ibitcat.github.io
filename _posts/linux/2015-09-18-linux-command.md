@@ -14,8 +14,6 @@ comments: true
 <font color="#FF090f">小知识：</font> markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 
 {: .notice}
 
-命令列表：
-
 1. 重命名文件文件夹 ： `mv file1 file2`
 2. 移动文件文件夹 ： `mv file1 dir1` 
 3. 新建文件夹 ： `mkdir dirname`
@@ -92,7 +90,7 @@ comments: true
 	|`COMMAND`		|进程启动命令名  									|
 	{: rules="all" frame="box"}
 
-	参考：[查看LINUX进程内存占用情况](http://www.cnblogs.com/gaojun/p/3406096.html) 、[Top 命令详解](http://www.cnblogs.com/cherishry/p/5886041.html)、[linux top命令VIRT,RES,SHR,DATA的含义](https://javawind.net/p131 
+	参考：[查看LINUX进程内存占用情况](http://www.cnblogs.com/gaojun/p/3406096.html) 、[Top 命令详解](http://www.cnblogs.com/cherishry/p/5886041.html)、[linux top命令VIRT,RES,SHR,DATA的含义](https://javawind.net/p131)
 
 21. chmod更改文件权限 : `chmod u+r xxx` 或者 `chmod u=rwx,g=r xxx` [^footer2]
 22. 查看文件类型： `file xxx` 

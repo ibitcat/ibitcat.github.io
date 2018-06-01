@@ -120,3 +120,5 @@ comments: true
 - 一个不错的ICO图标资源网站，[地址](https://www.easyicon.net/)。
 - Processon，在线作图网站，[地址](https://www.processon.com/)。
 - Mockplus，APP UI原型设计，[下载地址](https://www.mockplus.cn/)。
+- 去广告类软件分享站：[地址](http://www.zdfans.com/)
+- 去广告下载站点：[地址](https://www.nocmd.com/)

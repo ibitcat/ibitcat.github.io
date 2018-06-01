@@ -19,7 +19,7 @@ feature: http://domicat.me/images/posts/about.jpg
 
 ## 联系
 
-* E-mail : [shui_mu98@163.com]()
+* E-mail : [shui_mu98(at)163.com]()
 * GitHub：[shuimu98](https://github.com/shuimu98)
 * 博客：[{{ site.title }}]({{ site.url }})
 
