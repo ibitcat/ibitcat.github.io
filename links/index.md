@@ -7,7 +7,7 @@ comments: false
 
 > 烂笔头的远行
 
-
+* [我的每日笔记(有道云笔记)](http://note.youdao.com/noteshare?id=d945a209f997c0c9e2f788881e6c800e&sub=BCACDA50FFA44279B36302C911B8CE89)
 * [云风](http://codingnow.com/)
 * [酷壳](http://coolshell.cn/)
 * [程序人生](http://www.programlife.net/)
