@@ -98,14 +98,14 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04.4 LTS"
 #### 1、修改源
 在安装这些组件之前，首要修改下载源为阿里云(**一定义要注意ubuntu版本代号与源的代号一致，不然apt的时候各种奇葩错误**)：
 
-首先，备份
+首先，备份。
 ~~~
 cd /etc/apt/
 sudo cp sources.list sources.list.backup
 sudo vim sources.list
 ~~~
 
-然后，清空之前的源，然后添加阿里云源
+然后，清空之前的源，然后添加阿里云源。
 ~~~
 #deb
 deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
@@ -113,16 +113,15 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe m
 deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
-
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
-
 deb http://archive.canonical.com/ubuntu/ xenial partner
+~~~
 
-最后update
+最后update。
 ~~~
 sudo apt update
 ~~~
@@ -223,3 +222,10 @@ sudo apt install libreadline-dev
 注意：在安装的过程中，可能某些更改没有立即生效，而子系统又没有重启这种操作，所以，可以重启windows系统，一般我遇到的问题重启后都OK了。
 
 例如： gcc链接stdc++.a的时候，明明已经安装了g++，但是链接的时候依然报错，尝试很多办法都无法解决，重启windows系统后就解决了。
+
+
+- 软连接(因为默认路径太长了，搜索文件不太好查找，所以将项目的目录软链接到其他目录)
+
+~~~
+mklink /J d:\h5-server C:\Users\Domi\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\domi\server
+~~~
