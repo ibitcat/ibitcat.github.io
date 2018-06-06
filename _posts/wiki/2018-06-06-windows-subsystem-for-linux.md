@@ -219,13 +219,13 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 	sudo apt install libreadline-dev
 	~~~
 
-注意：在安装的过程中，可能某些更改没有立即生效，而子系统又没有重启这种操作，所以，可以重启windows系统，一般我遇到的问题重启后都OK了。
-
-例如： gcc链接stdc++.a的时候，明明已经安装了g++，但是链接的时候依然报错，尝试很多办法都无法解决，重启windows系统后就解决了。
-
 
 - 软连接(因为默认路径太长了，搜索文件不太好查找，所以将项目的目录软链接到其他目录)
 
-~~~
-mklink /J d:\h5-server C:\Users\Domi\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\domi\server
-~~~
+	~~~
+	mklink /J d:\h5-server C:\Users\Domi\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\home\domi\server
+	~~~
+
+**最后**，在安装的过程中，可能某些更改没有立即生效，而子系统又没有重启这种操作，所以，可以重启windows系统，一般我遇到的问题重启后都OK了。
+
+例如： gcc链接stdc++.a的时候，明明已经安装了g++，但是链接的时候依然报错，尝试很多办法都无法解决，重启windows系统后就解决了。
