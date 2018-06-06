@@ -155,69 +155,69 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 
 - svn
 
-~~~
-sudo apt install subversion
-svn --version
+	~~~
+	sudo apt install subversion
+	svn --version
 
-svn，版本 1.9.3 (r1718519)
-   编译于 Aug 10 2017，16:59:15 在 x86_64-pc-linux-gnu
-~~~
+	svn，版本 1.9.3 (r1718519)
+	   编译于 Aug 10 2017，16:59:15 在 x86_64-pc-linux-gnu
+	~~~
 
 - ssh，安装好的子系统默认已经安装了ssh组件
 
 - git
 
-~~~
-sudo apt install git
-gi --version #git version 2.7.4
-~~~
+	~~~
+	sudo apt install git
+	gi --version #git version 2.7.4
+	~~~
 
 - msyql & sqlite3
 
-~~~
-sudo apt autorem
-sudo apt install mysql-server #注意：安装过程中会提示你输入root用户的密码
-sudo apt install sqlite3
-~~~
+	~~~
+	sudo apt autorem
+	sudo apt install mysql-server #注意：安装过程中会提示你输入root用户的密码
+	sudo apt install sqlite3
+	~~~
 ![mysql 5.7](/images/posts/sublinux/mysql5.7.png)
 
 - gcc & g++ & make
 
-~~~
-sudo apt install gcc
-sudo apt install g++
-sudo apt install make
-gcc --version #gcc (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609
-g++ --version #g++ (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609
-make --version #GNU Make 4.1
-~~~
+	~~~
+	sudo apt install gcc
+	sudo apt install g++
+	sudo apt install make
+	gcc --version #gcc (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609
+	g++ --version #g++ (Ubuntu 5.4.0-6ubuntu1~16.04.9) 5.4.0 20160609
+	make --version #GNU Make 4.1
+	~~~
 
 - vim & tmux，默认已经安装了
 
 - dash换成bash
 
-参考[这篇文章](https://blog.csdn.net/gatieme/article/details/52136411)。
-因为ubuntu默认的shell是`dash`，而我已经习惯了bash，所以换成了bash。
+	参考[这篇文章](https://blog.csdn.net/gatieme/article/details/52136411)。
+	因为ubuntu默认的shell是`dash`，而我已经习惯了bash，所以换成了bash。
 
-~~~
-ls -l /bin/sh #查看shell
-sudo dpkg-reconfigure dash #选择否
-ls -l /bin/sh #此时已经切换成bash
-~~~
+	~~~
+	ls -l /bin/sh #查看shell
+	sudo dpkg-reconfigure dash #选择否
+	ls -l /bin/sh #此时已经切换成bash
+	~~~
 
 - sysv-rc-conf
 
-参考[这篇文章](http://blog.51cto.com/12058118/1858680)，具体不再赘述。
-~~~
-sudo apt install sysv-rc-conf
-sudo ln -s /usr/sbin/sysv-rc-conf /usr/sbin/chkconfig #因为已经习惯了centos的chkconfig
-~~~
+	参考[这篇文章](http://blog.51cto.com/12058118/1858680)，具体不再赘述。
+	~~~
+	sudo apt install sysv-rc-conf
+	sudo ln -s /usr/sbin/sysv-rc-conf /usr/sbin/chkconfig #因为已经习惯了centos的chkconfig
+	~~~
 
 - readline
 
-~~~
-sudo apt install libreadline-dev
-~~~
+	~~~
+	sudo apt install libreadline-dev
+	~~~
 
 注意：在安装的过程中，可能某些更改没有立即生效，而子系统又没有重启这种操作，所以，可以重启windows系统，一般我遇到的问题重启后都OK了。
 
