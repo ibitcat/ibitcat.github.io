@@ -95,8 +95,6 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04.4 LTS"
 - sysv-rc-conf（ubuntu下的chkconfig）
 - readline
 
-sudo apt-get install language-pack-zh language-pack-zh-base
-
 #### 1、修改源
 在安装这些组件之前，首要修改下载源为阿里云(**一定义要注意ubuntu版本代号与源的代号一致，不然apt的时候各种奇葩错误**)：
 
