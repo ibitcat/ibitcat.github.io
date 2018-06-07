@@ -252,3 +252,8 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 另外，为了在linux子系统下快速访问共享文件夹，可以将`/mnt`下的目录软链接到linux下的用户目录，例如:  
 
 `domi@Domicat:~$ ln -s /mnt/d/proj-h5/trunk/server ~/h5-server`
+
+
+最后来一张截图，项目成功运行在linux子系统下：
+
+![项目运行中](/images/posts/sublinux/project.png)
