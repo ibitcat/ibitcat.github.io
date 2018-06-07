@@ -22,13 +22,13 @@ comments: true
 
 在我尝试使用NFS来共享linux文件夹时，我搜到了一些关于windows 的linux系统相关的教程，所以，我也打算尝试使用一下这个win10的新特性。
 
-	#### 1、开启开发者模式
+#### 1、开启开发者模式
 
 我的win10版本：win 10 家庭中文版，版本1803，系统版本：17134.81，算是最新的版本了。
 
 开启步骤：设置 --> 更新和安全 --> 开发者选项 --> 选择开发者模式，然后重启系统。
 
-	#### 2、安装linux 子系统
+#### 2、安装linux 子系统
 
 ~~**提醒：**在这之前，先改变一下应用的安装路径，因为在应用商城安装的应用，默认是放在c盘下的`C:\Users\YourName\AppData\Local\Packages`，这样会占用很多C盘空间，所以，要先更改下应用的安装位置。~~
 ~~设置 --> 搜索【存储】 --> 点击【更改新内容的保存位置】 --> 修改【新的应用将保存到：】，然后选择一个盘后应用。~
@@ -102,11 +102,13 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04.4 LTS"
 ~~~
 cd /etc/apt/
 sudo cp sources.list sources.list.backup
-sudo vim sources.list
 ~~~
 
 然后，清空之前的源，然后添加阿里云源。
 ~~~
+sudo vim sources.list
+
+# 输入阿里云源
 #deb
 deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
 deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
@@ -172,7 +174,7 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 	gi --version #git version 2.7.4
 	~~~
 
-- msyql & sqlite3
+- msyql & sqlite3 （**注意：** mysqld服务需要手动启动，无法开机自启）
 
 	~~~
 	sudo apt autorem
@@ -234,24 +236,19 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 ### windows与linux子系统之间的文件共享
 
 最开始，我修改linux子系统的项目源代码文件时，直接就是在windows下修改、新建文件。
-
 但是，这里就出现了问题，仅仅是修改已经存在的文件，确实能够操作成功，但是如果是在windows下新建文件，在linux系统下却无法看到文件。
-
 经过google后，原来上面这种操作是不允许的。
 
 
-正确的文件共享方式是：
+**正确的文件共享方式是**：
 
 通过linux子系统下的`mnt目录`（挂载目录）来实现两个系统之间的文件共享，[微软官方的博客](https://blogs.msdn.microsoft.com/commandline/2016/11/17/do-not-change-linux-files-using-windows-apps-and-tools/)有明确的说明，并且给出了正确的方式。
-
-主要原则就是：不要在windows下直接修改或者新建linux子系统内的文件。
+主要原则就是：**不要在windows下直接修改或者新建linux子系统内的文件**。
 
 举个栗子：
 
 我的项目文件夹在`D:\proj-h5\trunk\server`，我在windows下新建一个文本`哈哈.txt`，此时在linux系统下，进入路径`/mnt/d/proj-h5/trunk/server`，此时就能看见新建的文件。
-
 同样的，我在linux下修改这个文件，在windows下查看，修改也是成功的。
-
 另外，为了在linux子系统下快速访问共享文件夹，可以将`/mnt`下的目录软链接到linux下的用户目录，例如:  
 
 `domi@Domicat:~$ ln -s /mnt/d/proj-h5/trunk/server ~/h5-server`
