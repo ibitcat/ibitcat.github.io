@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 在win10 linux子系统下搭建开发环境
+title: 在win10的linux子系统下搭建开发环境
 date: 2018-06-06 19:16:00 +0800
 excerpt: "在win10系统下，安装ubuntu linux子系统，并搭建linux开发环境。"
 tag: [环境搭建]
@@ -12,23 +12,23 @@ comments: true
 
 在很久很久之前（也就三五年前- - ），我所有的跨平台开发的套路都是：在windows系统系统搞一个虚拟机，然后装个linux系统，再接着就是各种yum、make...，永无止境。最后就是windows和linux之间文件共享的搞法了，最初我用的是linux mount windows系统下的共享文件夹，在很长一段时间内都用得挺满意，但是渐渐的问题就出现了，在linux下面make的时候，经常会出现`cannot allocate memory`，我猜想是linux在快速创建文件时，无法及时在windows共享文件夹下生成文件。
 
-为了解决上面的问题，我尝试才有samba服务，把linux下面的文件映射到windows系统下，但是这种方式也有缺点：
+为了解决上面的问题，我尝试采用samba服务，把linux下面的文件映射到windows系统下，但是这种方式也有缺点：
 
 - 一是samba服务的安装比较繁琐，不管是linux还是windows
 - 二是windows下访问文件有时候速度会比较卡顿，经常导致sublime无法及时打开文件而卡顿
 
 
-### win10 linux子系统
+### linux子系统
 
 在我尝试使用NFS来共享linux文件夹时，我搜到了一些关于windows 的linux系统相关的教程，所以，我也打算尝试使用一下这个win10的新特性。
 
-#### 1、开启开发者模式
+	#### 1、开启开发者模式
 
 我的win10版本：win 10 家庭中文版，版本1803，系统版本：17134.81，算是最新的版本了。
 
 开启步骤：设置 --> 更新和安全 --> 开发者选项 --> 选择开发者模式，然后重启系统。
 
-#### 2、安装linux 子系统
+	#### 2、安装linux 子系统
 
 ~~**提醒：**在这之前，先改变一下应用的安装路径，因为在应用商城安装的应用，默认是放在c盘下的`C:\Users\YourName\AppData\Local\Packages`，这样会占用很多C盘空间，所以，要先更改下应用的安装位置。~~
 ~~设置 --> 搜索【存储】 --> 点击【更改新内容的保存位置】 --> 修改【新的应用将保存到：】，然后选择一个盘后应用。~
@@ -40,7 +40,7 @@ comments: true
 首先，打开powershell，输入`bash`，或者按`win+q`快捷键后搜索bash
 
 ![打开powershell](/images/posts/sublinux/powershell.png)
-![打开powershell](/images/posts/sublinux/winq.png)
+![Win+Q](/images/posts/sublinux/winq.png)
 
 
 然后，按照提示，在浏览器输入网址`https://aka.ms/wslstore`，会打开应用商城，然后选择一个linux系统安装，这里我选择我比较熟悉的ubuntu。
@@ -50,10 +50,10 @@ comments: true
 
 下载安装成功后，启动ubuntu，第一次启动时，需要等待几分钟，ubuntu系统初始化需要一些时间。接着会提示你输入一个账号名，并给你的用户名一个密码（注意：这里不是输入windows系统的账号和密码，是要给你的ubuntu子系统创建一个账号，另外需要注意的是，这个子系统的root密码在每次启动时随机生成的，所以一般我们用sudo就可以了，尽量不用root账号。）
 
-![打开powershell](/images/posts/sublinux/installing.png)
+![ubuntu 安装](/images/posts/sublinux/installing.png)
 
 安装好的子系统路径如图所示：
-![打开powershell](/images/posts/sublinux/ubuntu.png)
+![ubuntu 安装路径](/images/posts/sublinux/ubuntu.png)
 
 
 好了，到这里为止，linux子系统就已经安装完成了。安装的ubuntu版本如下：
@@ -76,7 +76,7 @@ DISTRIB_DESCRIPTION="Ubuntu 16.04.4 LTS"
 ~~~
 
 我们可以在powershell输入命令`wslconfig /list`，查看已安装的linux子系统。
-![打开powershell](/images/posts/sublinux/wslconfig.png)
+![wlsconfig](/images/posts/sublinux/wslconfig.png)
 
 
 ### 配置开发环境
@@ -151,7 +151,7 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 `sudo dpkg-reconfigure locales`
 
 
-#### 2、安装各种组件
+#### 3、安装各种组件
 
 - svn
 
@@ -229,3 +229,29 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 **最后**，在安装的过程中，可能某些更改没有立即生效，而子系统又没有重启这种操作，所以，可以重启windows系统，一般我遇到的问题重启后都OK了。
 
 例如： gcc链接stdc++.a的时候，明明已经安装了g++，但是链接的时候依然报错，尝试很多办法都无法解决，重启windows系统后就解决了。
+
+
+### windows与linux子系统之间的文件共享
+
+最开始，我修改linux子系统的项目源代码文件时，直接就是在windows下修改、新建文件。
+
+但是，这里就出现了问题，仅仅是修改已经存在的文件，确实能够操作成功，但是如果是在windows下新建文件，在linux系统下却无法看到文件。
+
+经过google后，原来上面这种操作是不允许的。
+
+
+正确的文件共享方式是：
+
+通过linux子系统下的`mnt目录`（挂载目录）来实现两个系统之间的文件共享，[微软官方的博客](https://blogs.msdn.microsoft.com/commandline/2016/11/17/do-not-change-linux-files-using-windows-apps-and-tools/)有明确的说明，并且给出了正确的方式。
+
+主要原则就是：不要在windows下直接修改或者新建linux子系统内的文件。
+
+举个栗子：
+
+我的项目文件夹在`D:\proj-h5\trunk\server`，我在windows下新建一个文本`哈哈.txt`，此时在linux系统下，进入路径`/mnt/d/proj-h5/trunk/server`，此时就能看见新建的文件。
+
+同样的，我在linux下修改这个文件，在windows下查看，修改也是成功的。
+
+另外，为了在linux子系统下快速访问共享文件夹，可以将`/mnt`下的目录软链接到linux下的用户目录，例如:  
+
+`domi@Domicat:~$ ln -s /mnt/d/proj-h5/trunk/server ~/h5-server`
