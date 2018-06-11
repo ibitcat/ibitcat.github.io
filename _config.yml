@@ -41,7 +41,6 @@ collections:
 
 # Comments
 #disqus_shortname:   shuimu98
-#duoshuo_username:   domicat
 #netease_username:   domicat
 
 # Social
@@ -49,12 +48,6 @@ collections:
 email:              shui_mu98@163.com
 github-url:         shuimu98
 #weibo:              shuimu98
-#google:
-  #plus:            #username
-  #analytics:
-  #verify:
-  #ad-client:
-  #ad-slot:
 
 # Gems
 gems:
