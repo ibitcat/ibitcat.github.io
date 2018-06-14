@@ -254,6 +254,22 @@ export LANGUAGE="zh_CN:zh:en_US:en"
 `domi@Domicat:~$ ln -s /mnt/d/proj-h5/trunk/server ~/h5-server`
 
 
+### ConEmu作为linux子系统终端
+
+ConEmu支持分屏，也支持多标签，这对开发来说是很方便的。我现在使用的版本是：`180528 preview`。这个版本已经支持了中文，下面就是ConEmu的设置了。
+
+![ConEmu](/images/posts/sublinux/conemu.png)
+
+这里有一个小问题，方向键会失效，在某些情况下无法使用方向键移动光标，比如在上面的`sysv-rc-conf`工作界面中，无法使用方向键。但是旧的版本可以，
+不过旧的版本有一个更蛋疼的问题，粘贴时无法粘贴全部的内容，而且粘贴后内容顺序会被打断，所以，建议使用新的版本。
+
+为了解决方向键失效的问题，官方给了一些解决方案，具体请参考[这里](https://conemu.github.io/en/BashOnWindows.html#connector)，这里贴一下我的配置。
+
+![ConEmu](/images/posts/sublinux/conemu1.png)
+
+不过，还是有一些小瑕疵，比如tmux分屏后，分屏的分割线会莫名其妙消失或者重叠。所以，我还是采用了第一种方式，在需要使用方向键的时候直接用默认的wsl终端。
+
+
 最后来一张截图，项目成功运行在linux子系统下：
 
 ![项目运行中](/images/posts/sublinux/project.png)
