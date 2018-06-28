@@ -50,12 +50,12 @@ comments: true
 根据我自己的项目经验，目前我们的游戏服务器内部采用的就是简单的不分层时间轮，模型如下：
 
 ```
-                            |-- user_t[0]
-            |-slot_t[0] --- |-- ……
-            |-slot_t[1]     |-- user_t[n]
+							|-- user_t[0]
+			|-slot_t[0]	---	|-- ……
+			|-slot_t[1]		|-- user_t[n]
 tw.slots  = |-……
-            |-……
-            |-slot_t[6400-1]
+			|-……
+			|-slot_t[6400-1]
 
 tw.lslot  = 留一个槽，存放那些超时时间大于一轮的超时事件
 ```
@@ -71,17 +71,17 @@ slotlen = 6000  -- 刻度数量
 
 --下面用lua的table表示这个时间轮的数据结构：
 time_wheel = {
-    slots = {
-        [1] = {timeobj1,timeobj2,…} -- 刻度1上的定时对象
-        [2] = {timeobj1,timeobj2,…} -- 刻度2上的定时对象
-    },
-    lslot = {t1,t2,…}   -- 这里存放的是tick超过一圈的定时对象
-    curTick = 0,        -- 当前走了多少个tick  
+	slots = {
+		[1] = {timeobj1,timeobj2,…} -- 刻度1上的定时对象
+		[2] = {timeobj1,timeobj2,…} -- 刻度2上的定时对象
+	},
+	lslot = {t1,t2,…}   -- 这里存放的是tick超过一圈的定时对象
+	curTick = 0,        -- 当前走了多少个tick  
 }
 
 timeObj = {
-    tick=10,        -- 表示这个定时对象需要10个tick，
-    tickout = 1230, -- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件
+	tick=10,        -- 表示这个定时对象需要10个tick，
+	tickout = 1230, -- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件
 }
 ```
 >ps：
