@@ -26,6 +26,7 @@ comments: true
 #### 2-1、ftp三种用户
 
 vsftpd支持三类用户：
+
 1. 匿名用户，也就是不需要输入密码就可登录ftp服务器的用户，这个用户名通常是ftp或anonymous; 与匿名用户有关的设置多以 anon_选项开头。
 2. 本地用户，也就是你Linux系统上可登录到系统的用户，这些用户是在系统上实实在在存在的用户。通常会有自己的home，shell等。与本地用户有关的设置多以local_开头或包含local_的选项。
 3. 虚拟用户，只对ftp有效的用户。这些用户不可以登录Linux系统，只可以登录ftp服务器。其实就是一个本地用户映射成多个只对ftp服务器有效的虚拟用户。虚拟用户可以有自己的ftp配置文件，因此通常利用虚拟用户来对ftp系统的不同用户制定不同的权限，以达到安全控制的目的。与虚拟用户有关的设置以guest_开头。
@@ -38,12 +39,9 @@ vsftpd支持三类用户：
 #### 2-2、安装vsftpd
 
 我的linux版本：centos 6.9 64位
+
 运行命令：`yum install vsftpd`
-
-然后，测试是否正常：
-
-`sudo service vsftpd start`
-
+然后，测试是否正常：`sudo service vsftpd start`，
 如果服务能启动，尝试登陆ftp，此时应该是可以匿名登陆的。
 
 #### 2-3、创建vsftpd服务的宿主用户
@@ -72,11 +70,8 @@ sudo chown guest:guest -R /var/ftp/guest/
 
 vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
-1. 备份默认配置
-	`cp vsftpd.conf vsftpd.conf.backup`
-
-2. 修改核心配置
-	这里我已经把我自己的配置在的了[github](https://github.com/shuimu98/domi-dotfile/tree/master/vsftpd)上。
+1. 备份默认配置：`cp vsftpd.conf vsftpd.conf.backup`
+2. 修改核心配置：这里我已经把我自己的配置在的了[github](https://github.com/shuimu98/domi-dotfile/tree/master/vsftpd)上。
 
 #### 2-5、虚拟用户配置
 
@@ -93,15 +88,15 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
 3. 生成虚拟用户数据文件：`db_load -T -t hash -f /etc/vsftpd/virtusers /etc/vsftpd/virtusers.db`
 
-	需要安装：
 	~~~
+	#可能需要安装
 	yum -y install pam*
 	yum -y install db4*
 	~~~
 
 4. 设定PAM验证文件，并指定虚拟用户数据库文件进行读取
 
-	在/etc/pam.d/vsftpd的文件头部加入以下信息（其他注释）
+	在/etc/pam.d/vsftpd的文件头部加入以下信息（**其他注释**）
 	~~~
 	#%PAM-1.0
 	auth       required /lib64/security/pam_userdb.so db=/etc/vsftpd/virtusers
@@ -115,11 +110,14 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 	#session    include     password-auth
 	~~~
 
-	注意：64位系统，必须是`/lib64/security/pam_userdb.so`，32位系统则为：`/lib/security/pam_userdb.so`
+	注意：
+	64位系统：`/lib64/security/pam_userdb.so`  
+	32位系统：`/lib/security/pam_userdb.so`
 
 5. 配置虚拟用户
 
 - 私有账户kgogame的配置如下：
+
 ~~~
 #指定虚拟用户的具体主路径
 local_root=/var/ftp/guest
@@ -132,6 +130,7 @@ virtual_use_local_privs=YES
 ~~~
 
 - 公共账户配置如下：
+
 ~~~
 local_root=/var/ftp/pub
 virtual_use_local_privs=YES
