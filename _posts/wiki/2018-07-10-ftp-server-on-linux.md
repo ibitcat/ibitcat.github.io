@@ -23,9 +23,7 @@ comments: true
 
 ### 2、搭建FTP服务器
 
-#### 2-1、ftp三种用户
-
-vsftpd支持三类用户：
+#### 2-1、vsftpd支持三类用户
 
 1. 匿名用户，也就是不需要输入密码就可登录ftp服务器的用户，这个用户名通常是ftp或anonymous; 与匿名用户有关的设置多以 anon_选项开头。
 2. 本地用户，也就是你Linux系统上可登录到系统的用户，这些用户是在系统上实实在在存在的用户。通常会有自己的home，shell等。与本地用户有关的设置多以local_开头或包含local_的选项。
@@ -110,7 +108,7 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 	#session    include     password-auth
 	~~~
 
-	注意：
+	注意：  
 	64位系统：`/lib64/security/pam_userdb.so`  
 	32位系统：`/lib/security/pam_userdb.so`
 
@@ -118,37 +116,37 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
 - 私有账户kgogame的配置如下：
 
-~~~
-#指定虚拟用户的具体主路径
-local_root=/var/ftp/guest
+	~~~
+	#指定虚拟用户的具体主路径
+	local_root=/var/ftp/guest
 
-#设定不允许匿名用户访问
-anonymous_enable=NO
+	#设定不允许匿名用户访问
+	anonymous_enable=NO
 
-#虚拟用户具有写权限（上传、下载、删除、重命名）
-virtual_use_local_privs=YES
-~~~
+	#虚拟用户具有写权限（上传、下载、删除、重命名）
+	virtual_use_local_privs=YES
+	~~~
 
 - 公共账户配置如下：
 
-~~~
-local_root=/var/ftp/pub
-virtual_use_local_privs=YES
-~~~
+	~~~
+	local_root=/var/ftp/pub
+	virtual_use_local_privs=YES
+	~~~
 
 6. 用户登陆限制进其它的目录，只能进它的主目录
 
-~~~
-#设置所有的本地用户都执行chroot
-chroot_local_user=yes （本地所有帐户都只能在自家目录）
+	~~~
+	#设置所有的本地用户都执行chroot
+	chroot_local_user=yes （本地所有帐户都只能在自家目录）
 
-#设置指定用户执行chroot
-#新建文件 chroot_list
-#在这个配置文件中添加用户，每个用户一行，则在这个文件里的用户登录ftp后，可以访问上级目录。
-#而不在这个配置文件中的用户只能访问自己的home目录。
-chroot_list_enable=yes
-chroot_list_file=/etc/vsftpd/chroot_list
-~~~
+	#设置指定用户执行chroot
+	#新建文件 chroot_list
+	#在这个配置文件中添加用户，每个用户一行，则在这个文件里的用户登录ftp后，可以访问上级目录。
+	#而不在这个配置文件中的用户只能访问自己的home目录。
+	chroot_list_enable=yes
+	chroot_list_file=/etc/vsftpd/chroot_list
+	~~~
 
 #### 2-6、注意点
 
