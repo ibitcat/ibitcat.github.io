@@ -114,7 +114,7 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
 5. 配置虚拟用户
 
-1、私有账户kgogame的配置如下：
+	1、私有账户kgogame的配置如下：
 
 	~~~
 	#指定虚拟用户的具体主路径
@@ -127,7 +127,7 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 	virtual_use_local_privs=YES
 	~~~
 
-2、公共账户配置如下：
+	2、公共账户配置如下：
 
 	~~~
 	local_root=/var/ftp/pub
