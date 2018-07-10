@@ -78,10 +78,10 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
 	然后一行账号，一行密码，例如：
 	~~~
-	ftpuser1
-	user1passwd
-	ftpuser2
-	user2passwd
+	kgogame
+	123
+	public
+	123
 	~~~
 
 3. 生成虚拟用户数据文件：`db_load -T -t hash -f /etc/vsftpd/virtusers /etc/vsftpd/virtusers.db`
@@ -113,6 +113,19 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 	32位系统：`/lib/security/pam_userdb.so`
 
 5. 配置虚拟用户
+
+	首先创建一个文件夹来存放虚拟用户的个人配置，例如：`mkdir /etc/vsftpd/vconf`，同时，在配置`/etc/vsftpd/vsftpd.conf`中，
+	设置配置字段`user_config_dir=/etc/vsftpd/vconf`，然后在`vconf`文件夹下创建每个虚拟用户的个人配置文件，文件名必须与`/etc/vsftpd/virtusers`中的
+	用户名相同。例如：
+
+	~~~
+	[root@localhost vconf]# pwd
+	/etc/vsftpd/vconf
+	[root@localhost vconf]# ll
+	total 8
+	-rw-r--r-- 1 root root 220 Jul  9 21:06 kgogame
+	-rw-r--r-- 1 root root  52 Jul  9 21:50 public
+	~~~
 
 	1、私有账户kgogame的配置如下：
 
