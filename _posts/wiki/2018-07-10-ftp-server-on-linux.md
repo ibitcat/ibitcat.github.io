@@ -114,25 +114,25 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 
 5. 配置虚拟用户
 
-- 私有账户kgogame的配置如下：
+	- 私有账户kgogame的配置如下：
 
-	~~~
-	#指定虚拟用户的具体主路径
-	local_root=/var/ftp/guest
+		~~~
+		#指定虚拟用户的具体主路径
+		local_root=/var/ftp/guest
 
-	#设定不允许匿名用户访问
-	anonymous_enable=NO
+		#设定不允许匿名用户访问
+		anonymous_enable=NO
 
-	#虚拟用户具有写权限（上传、下载、删除、重命名）
-	virtual_use_local_privs=YES
-	~~~
+		#虚拟用户具有写权限（上传、下载、删除、重命名）
+		virtual_use_local_privs=YES
+		~~~
 
-- 公共账户配置如下：
+	- 公共账户配置如下：
 
-	~~~
-	local_root=/var/ftp/pub
-	virtual_use_local_privs=YES
-	~~~
+		~~~
+		local_root=/var/ftp/pub
+		virtual_use_local_privs=YES
+		~~~
 
 6. 用户登陆限制进其它的目录，只能进它的主目录
 
