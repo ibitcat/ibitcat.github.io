@@ -138,7 +138,7 @@ comments: true
 
 	- 编写脚本：`touch rsync_svn.sh`
 
-	~~~shell
+	~~~
 	#!/bin/bash
 	rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
 	~~~
