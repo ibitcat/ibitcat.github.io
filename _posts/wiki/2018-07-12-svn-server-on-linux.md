@@ -40,6 +40,7 @@ comments: true
 
 	**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，
 	Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
+	
 6. 权限管理
 
 	编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读(r)、写(w)、无访问权限(空)。
@@ -55,6 +56,7 @@ comments: true
 	~~~
 
 	- 版本权限（举例说明）
+	
 	~~~
 	# repos根目录权限，也就是`/var/svn/repos`
 	# * = 表示所有人都没有权限
