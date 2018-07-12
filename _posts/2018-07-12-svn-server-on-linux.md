@@ -22,6 +22,7 @@ comments: true
 
 	编辑passwd文件，在`[user]`节点下，添加用户和密码。
 
+<<<<<<< HEAD
 5. 版本仓库配置：编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
 	~~~
 	anon-access = none  	#进制匿名用户访问
@@ -30,6 +31,13 @@ comments: true
 	authz-db = authz 		#权限文件
 	realm = proj-test 		#认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
 	~~~
+=======
+5. 版本仓库配置
+
+	编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
+
+	
+>>>>>>> 90c4b16210f2dbe02ba20e25db5a489de1d1e4ad
 
 	**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
 
@@ -109,10 +117,17 @@ comments: true
 
 	- 编写脚本：`touch rsync_svn.sh`
 
+<<<<<<< HEAD
 		~~~shell
 		#!/bin/bash
 		rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
 		~~~
+=======
+	~~~
+	#!/bin/bash
+	rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
+	~~~
+>>>>>>> 90c4b16210f2dbe02ba20e25db5a489de1d1e4ad
 
 	- 写入定时任务：`crontab -e`
 
