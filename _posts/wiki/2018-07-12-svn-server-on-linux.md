@@ -13,12 +13,8 @@ comments: true
 
 1. 安装subversion：`yum -y install subversion`
 2. 创建版本库目录：`mkdir /var/svn/repos`
-3. 创建一个仓库：`svnadmin create proj-test`
-
-	此时，在版本库目录下（/var/svn/repos），产生一个仓库目录**proj-test**
-4. 创建用户密码
-
-	在生成的仓库目录下，会有一个conf文件夹，里面有三个文件：
+3. 创建一个仓库：`svnadmin create proj-test`。此时，在版本库目录下（/var/svn/repos），产生一个仓库目录**proj-test**
+4. 创建用户密码：在生成的仓库目录下，会有一个conf文件夹，里面有三个文件：
 
 	- svnserve.conf，版本仓库的配置文件
 	- passwd，用户账号和密码（明文）
@@ -26,10 +22,7 @@ comments: true
 
 	编辑passwd文件，在`[user]`节点下，添加用户和密码。
 
-5. 版本仓库配置
-
-	编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
-
+5. 版本仓库配置：编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
 	~~~
 	anon-access = none  	#进制匿名用户访问
 	auth-access = write 	#认证用户具有写权限
@@ -38,49 +31,21 @@ comments: true
 	realm = proj-test 		#认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
 	~~~
 
-**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
-	
-6. 权限管理
+	**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
 
-	编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读(r)、写(w)、无访问权限(空)。
+6. 权限管理：编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读(r)、写(w)、无访问权限(空)。
 
-	- 分组
-	在节点`[groups]`下面添加分组，例如：
-
-	~~~
+	- 分组，在节点`[groups]`下面添加分组，例如：
+	```
 	# 一个用户可以同时存在于不同的组中
 	[groups]
 	harry_and_sally = harry,sally
 	harry_sally_and_joe = harry,sally,&joe
-	~~~
+	```
 
 	- 版本权限（举例说明）
-	
-	~~~
-	# repos根目录权限，也就是`/var/svn/repos`
-	# * = 表示所有人都没有权限
- 	[/]
- 	@admin=rw
- 	harry=rw
- 	* =
 
- 	# proj-test仓库根目录，即`svn://ip/proj-test`
- 	[proj-test:/]
- 	@admin=rw
- 	@client=rw
- 	* =
-
- 	# proj-test仓库子目录，即`svn://ip/proj-test/trunk/docs`
- 	[proj-test:/trunk/docs]
- 	@admin=rw
- 	@client=rw
- 	* =
-
- 	[proj-test:/trunk/server]
- 	@admin=rw
- 	@server=rw
- 	* =
-	~~~
+	![权限配置](/images/posts/svn_auth.png)
 
 ### svn备份
 
@@ -90,8 +55,8 @@ comments: true
 
 	命令语法：`svnadmin dump REPOS_PATH [-r LOWER[:UPPER]] [--incremental]`， `--incremental`表示支持增量备份，需要配合`-r`参数一起使用。
 
-	例如：
-	`svnadmin dump /var/svn/repes/proj-test -r 0:100 --incremental > svn_inc_dump`，表示备份0到100版本直接的所有修订版。
+	例如：  
+	`svnadmin dump /var/svn/repes/proj-test -r 0:100 --incremental > svn_inc_dump`，表示备份0到100版本直接的所有修订版。  
 	`svnadmin dump /var/svn/repes/proj-test > svn_full_dump`，表示全量备份
 
 
@@ -99,8 +64,8 @@ comments: true
 
 	命令语法：`svnadmin load REPOS_PATH`
 
-	例如：
-	`svnadmin create newrepos`
+	例如：  
+	`svnadmin create newrepos`  
 	`svnadmin load newrepos < svn_full_dump`
 
 
@@ -118,25 +83,25 @@ comments: true
 	- 新建配置文件：`touch /etc/rsyncd.conf`
 	- 编辑配置，如下：
 
-	~~~
-	uid=root
-	gid=root
-	max connections=400
-	log file=/var/log/rsyncd.log
-	pid file=/var/run/rsyncd.pid
-	lock file=/var/run/rsyncd.lock
-	secrets file=/etc/rsyncd.passwd #服务端密码文件，例如：root:123456
+		~~~
+		uid=root
+		gid=root
+		max connections=400
+		log file=/var/log/rsyncd.log
+		pid file=/var/run/rsyncd.pid
+		lock file=/var/run/rsyncd.lock
+		secrets file=/etc/rsyncd.passwd #服务端密码文件，例如：root:123456
 
-	# svn 备份文件的路径
-	[svn_repos]
-	comment= svn repos backup
-	path=/var/svn/backup
-	use chroot=no
-	read only=ye
-	auth users=root
-	hosts allow=192.168.2.251
-	hosts deny=*
-	~~~
+		# svn 备份文件的路径
+		[svn_repos]
+		comment= svn repos backup
+		path=/var/svn/backup
+		use chroot=no
+		read only=ye
+		auth users=root
+		hosts allow=192.168.2.251
+		hosts deny=*
+		~~~
 
 	- 启动rysnc服务：`/usr/bin/rsync --daemon --config=/etc/rsyncd.conf`，可以写入到`/etc/rc.local`实现开机启动。
 
@@ -144,17 +109,17 @@ comments: true
 
 	- 编写脚本：`touch rsync_svn.sh`
 
-	~~~shell
-	#!/bin/bash
-	rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
-	~~~
+		~~~shell
+		#!/bin/bash
+		rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
+		~~~
 
 	- 写入定时任务：`crontab -e`
 
-	~~~
-	# 每日凌晨3点执行一次同步脚本
-	* 3 * * * /usr/sh /root/rsync_svn.sh
-	~~~
+		~~~
+		# 每日凌晨3点执行一次同步脚本
+		* 3 * * * /usr/sh /root/rsync_svn.sh
+		~~~
 
 ### svn迁移
 
