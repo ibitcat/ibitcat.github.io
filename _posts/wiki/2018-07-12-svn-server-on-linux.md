@@ -30,13 +30,7 @@ comments: true
 
 	编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
 
-	~~~
-	anon-access = none  	#进制匿名用户访问
-	auth-access = write 	#认证用户具有写权限
-	password-db = passwd 	#密码文件
-	authz-db = authz 		#权限文件
-	realm = proj-test 		#认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
-	~~~
+	
 
 **注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
 	
