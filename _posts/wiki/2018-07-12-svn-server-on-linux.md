@@ -38,8 +38,7 @@ comments: true
 	realm = proj-test 		#认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
 	~~~
 
-	**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，
-	Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
+**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
 	
 6. 权限管理
 
