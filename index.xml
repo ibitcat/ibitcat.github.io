@@ -12,21 +12,21 @@
     
     
     <item>
-      <title>About</title>
-      <link>http://shuimu98.gitHub.io/about/</link>
-      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
-      
-      <guid>http://shuimu98.gitHub.io/about/</guid>
-      <description>Domicat 烂笔头的一生. 关于我 &amp;emsp;&amp;emsp;游戏后端开发，水B一个。 &amp;emsp;&amp;emsp;「以大多数人的努力程度之低,根本轮不到拼天赋」</description>
-    </item>
-    
-    <item>
       <title>Links</title>
       <link>http://shuimu98.gitHub.io/links/</link>
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
       <guid>http://shuimu98.gitHub.io/links/</guid>
       <description>烂笔头的远行，遇见code的美。 我的每日书签 云风 酷壳 程序人生 服务器运维 skywind skynetclub ai分享站（行为树） dirtysalt Tony Bai(golang) dpull（skynet windows）</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://shuimu98.gitHub.io/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/about/</guid>
+      <description>Domicat 烂笔头的一生. 关于我 &amp;emsp;&amp;emsp;游戏后端开发，水B一个。 &amp;emsp;&amp;emsp;「以大多数人的努力程度之低,根本轮不到拼天赋」</description>
     </item>
     
     <item>

@@ -3,14 +3,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://shuimu98.gitHub.io/about/</loc>
+    <loc>http://shuimu98.gitHub.io/links/</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://shuimu98.gitHub.io/links/</loc>
+    <loc>http://shuimu98.gitHub.io/about/</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -310,15 +310,15 @@
   </url>
   
   <url>
-    <loc>http://shuimu98.gitHub.io/tags/linux/</loc>
-    <lastmod>2015-09-18T09:56:00+00:00</lastmod>
+    <loc>http://shuimu98.gitHub.io/categories/linux/</loc>
+    <lastmod>2015-07-28T15:08:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://shuimu98.gitHub.io/categories/linux/</loc>
-    <lastmod>2015-07-28T15:08:00+00:00</lastmod>
+    <loc>http://shuimu98.gitHub.io/tags/linux/</loc>
+    <lastmod>2015-09-18T09:56:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
