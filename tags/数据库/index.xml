@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 13 Sep 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mysql 常用命令</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</link>
+      <pubDate>Tue, 13 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</guid>
+      <description>Mysql常用命令1 | 功能 | 命令 | |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;|:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;| | 连接远程数据库 | mysql -h192.168.2.172 -uroot -p123456; | | 添加密码/修改密码 | mysqladmin -u用户名 -p旧密码 password 新密码; | | 显示所有库 | show databases; |</description>
+    </item>
+    
+    <item>
+      <title>mongoDB 常用命令</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</link>
+      <pubDate>Wed, 04 Mar 2015 21:43:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</guid>
+      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●) 1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `</description>
+    </item>
+    
+  </channel>
+</rss>

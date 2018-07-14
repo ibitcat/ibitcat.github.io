@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/linux/</link>
+    <description>Recent content in Linux on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 18 Sep 2015 09:56:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>linux 常用命令</title>
+      <link>http://shuimu98.gitHub.io/post/linux/2015-09-18-linux-command/</link>
+      <pubDate>Fri, 18 Sep 2015 09:56:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-18-linux-command/</guid>
+      <description>第一部分 - 常用简单命令 小知识： markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 {: .notice} 重命名文件文件夹 ： mv file1 file2 移动文件</description>
+    </item>
+    
+    <item>
+      <title>vim配置以及使用vundle管理vim插件</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</link>
+      <pubDate>Tue, 28 Jul 2015 15:08:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</guid>
+      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，</description>
+    </item>
+    
+  </channel>
+</rss>

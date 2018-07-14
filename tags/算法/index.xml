@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 08 Apr 2016 23:33:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>时间轮定时器</title>
+      <link>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-game-server-timer/</link>
+      <pubDate>Fri, 08 Apr 2016 23:33:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-game-server-timer/</guid>
+      <description>定时器实现一般常见的有两种方式： 时间轮（time_wheel） 最小堆 就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的mud</description>
+    </item>
+    
+    <item>
+      <title>常见的排序算法解析</title>
+      <link>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-sort-alg/</link>
+      <pubDate>Fri, 08 Apr 2016 23:35:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-sort-alg/</guid>
+      <description>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。 比较常用</description>
+    </item>
+    
+    <item>
+      <title>这些年，我遇到的哈希、加密算法</title>
+      <link>http://shuimu98.gitHub.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</link>
+      <pubDate>Tue, 24 Nov 2015 16:50:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</guid>
+      <description>最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-cn">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,10 +16,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="DomiCat" />
-  <meta name="description" content="interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括" />
+<meta name="author" content="Domicat" /><meta name="description" content="详解golang的interface接口，以及介绍nil与 error类型的nil的区别." />
 
-  <meta name="keywords" content="Hugo, theme, DomiCat" />
+  <meta name="keywords" content="Domi的个人站点, domicat" />
 
 
 
@@ -29,7 +28,7 @@
 <meta name="generator" content="Hugo 0.44" />
 
 
-<link rel="canonical" href="http://shuimu98.github.io/post/reading-notes/2015-03-14-golang-interface-and-nil/" />
+<link rel="canonical" href="http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -50,14 +49,15 @@
 
 
 <meta property="og:title" content="golang：interface 和 nil 以及 error nil" />
-<meta property="og:description" content="interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括" />
+<meta property="og:description" content="详解golang的interface接口，以及介绍nil与 error类型的nil的区别." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://shuimu98.github.io/post/reading-notes/2015-03-14-golang-interface-and-nil/" />
+<meta property="og:url" content="http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/" />
 
 
 
+<meta property="article:published_time" content="2015-03-14T15:16:00&#43;00:00"/>
 
-
+<meta property="article:modified_time" content="2015-03-14T15:16:00&#43;00:00"/>
 
 
 
@@ -70,18 +70,19 @@
 
 
 <meta itemprop="name" content="golang：interface 和 nil 以及 error nil">
-<meta itemprop="description" content="interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括">
+<meta itemprop="description" content="详解golang的interface接口，以及介绍nil与 error类型的nil的区别.">
 
 
-
+<meta itemprop="datePublished" content="2015-03-14T15:16:00&#43;00:00" />
+<meta itemprop="dateModified" content="2015-03-14T15:16:00&#43;00:00" />
 <meta itemprop="wordCount" content="1029">
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="golang," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="golang：interface 和 nil 以及 error nil"/>
-<meta name="twitter:description" content="interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括"/>
+<meta name="twitter:description" content="详解golang的interface接口，以及介绍nil与 error类型的nil的区别."/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -112,8 +113,8 @@
         <li class="mobile-menu-item">Archives</li>
       </a><a href="/tags/">
         <li class="mobile-menu-item">Tags</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">Categories</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
       </a>
   </ul>
 </nav>
@@ -132,7 +133,7 @@
       </li><li class="menu-item">
         <a class="menu-item-link" href="/tags/">Tags</a>
       </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">Categories</a>
+        <a class="menu-item-link" href="/about/">About</a>
       </li>
   </ul>
 </nav>
@@ -147,7 +148,7 @@
       <h1 class="post-title">golang：interface 和 nil 以及 error nil</h1>
 
       <div class="post-meta">
-        <span class="post-time"> 0001-01-01 </span>
+        <span class="post-time"> 2015-03-14 </span>
         
         
         
@@ -157,9 +158,9 @@
     
     
 <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title"></h2>
+  <h2 class="post-toc-title">文章目录</h2>
   
-  <div class="post-toc-content always-active">
+  <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
 <li>
@@ -243,12 +244,12 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
     
     <div class="post-copyright">
   <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">DomiCat</span>
+    <span class="item-title">文章作者</span>
+    <span class="item-content">Domicat</span>
   </p>
   <p class="copyright-item">
-    <span class="item-title"></span>
-    <span class="item-content">0001-01-01</span>
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2015-03-14</span>
   </p>
   
   
@@ -258,7 +259,11 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
     
 
     <footer class="post-footer">
-      
+      <div class="post-tags">
+          
+          <a href="/tags/golang/">golang</a>
+          
+        </div>
 
       
       <nav class="post-nav">
@@ -266,12 +271,12 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
           <a class="prev" href="/post/wiki/2015-03-23-cocos2dx3.3-build-apk/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default">cocos2dx3.3发布apk</span>
-            <span class="prev-text nav-mobile"></span>
+            <span class="prev-text nav-mobile">上一篇</span>
           </a>
         
-          <a class="next" href="/post/linux/2015-09-18-linux-command/">
-            <span class="next-text nav-default">linux 常用命令</span>
-            <span class="next-text nav-mobile"></span>
+          <a class="next" href="/post/wiki/2015-03-11-big-endian-and-little-endian/">
+            <span class="next-text nav-default">大端与小端</span>
+            <span class="next-text nav-mobile">下一篇</span>
             <i class="iconfont icon-right"></i>
           </a>
       </nav>
@@ -279,7 +284,25 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
   </article>
         </div>
         
-  
+  <div id="comments-gitment"></div>
+  <link rel="stylesheet" href="/lib/gitment/gitment-0.0.3.min.css">
+    <script src="/lib/gitment/gitment-0.0.3.min.js"></script>
+  <script type="text/javascript">
+  const gitment = new Gitment({
+    id: '2015-03-14 15:16:00 \x2b0000 UTC',
+    title: 'golang：interface 和 nil 以及 error nil',
+    link: decodeURI(location.href),
+    desc: 'interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括',
+    owner: 'shuimu98',
+    repo: 'shuimu98.github.io',
+    oauth: {
+      client_id: 'af5065a1372570c7babc',
+      client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+    }
+  })
+  gitment.render('comments-gitment')
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 
@@ -288,29 +311,18 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
 
     <footer id="footer" class="footer">
       <div class="social-links">
-      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
-      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
-      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
-      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
-      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
-      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
-      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
-      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
-      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
-      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
-      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
-      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
-  <a href="http://shuimu98.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+      <a href="mailto:shui_mu98@163.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/shuimu98" class="iconfont icon-github" title="github"></a>
+  <a href="http://shuimu98.gitHub.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
 </div>
 
 <div class="copyright">
   <span class="power-by">
-    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
   </span>
   <span class="division">|</span>
   <span class="theme-info">
-     - 
+    主题 - 
     <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
   </span>
 
@@ -324,7 +336,7 @@ t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil�
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">DomiCat</span>
+    <span class="author">Domicat</span>
   </span>
 </div>
     </footer>

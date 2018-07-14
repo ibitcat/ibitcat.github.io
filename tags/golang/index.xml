@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Golang on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/golang/</link>
+    <description>Recent content in Golang on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>读书笔记 ——《Go语言圣经》</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</guid>
+      <description>本书中文版，点这里。 接触golang也有两三年了，一直没有系统把它过一遍，正好通过这本书系统性的复习一次，掌握golang的细节。 第1章：入</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— golang篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</link>
+      <pubDate>Thu, 25 Jan 2018 15:15:15 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</guid>
+      <description>目录 TOC {:toc} go编译 使用go build编译go文件时，go文件必须放在最后，不然会有named files must be .go files的报错。 例如：go build -ldflags &amp;quot;-w&amp;quot; -o ./xlsx2lua.exe ./xlsx2lua.go 减</description>
+    </item>
+    
+    <item>
+      <title>golang：interface 和 nil 以及 error nil</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</link>
+      <pubDate>Sat, 14 Mar 2015 15:16:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</guid>
+      <description>interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括</description>
+    </item>
+    
+  </channel>
+</rss>

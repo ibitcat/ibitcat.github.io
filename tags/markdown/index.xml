@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Markdown on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/markdown/</link>
+    <description>Recent content in Markdown on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 15 Mar 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Markdown 语法</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</link>
+      <pubDate>Tue, 15 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</guid>
+      <description>文章转载自Markdown Syntax 另外，可以参考：Markdown，你只需要掌握这几个。 HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html</description>
+    </item>
+    
+  </channel>
+</rss>

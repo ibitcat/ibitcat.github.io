@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>环境搭建 on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+    <description>Recent content in 环境搭建 on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 10 Jul 2018 14:21:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>svn服务器搭建、迁移、备份、容灾</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2018-07-12-svn-server-on-linux/</link>
+      <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2018-07-12-svn-server-on-linux/</guid>
+      <description>svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在</description>
+    </item>
+    
+    <item>
+      <title>在linux下搭建ftp服务</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2018-07-10-ftp-server-on-linux/</link>
+      <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2018-07-10-ftp-server-on-linux/</guid>
+      <description>1、需求 公司要一个ftp服务器，用来存储一些常用软件以及公司内部的一些资料，因此至少需要两个用户，一个是需要密码登陆的私有账户，其他的匿名用</description>
+    </item>
+    
+    <item>
+      <title>在win10的linux子系统下搭建开发环境</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</link>
+      <pubDate>Wed, 06 Jun 2018 19:16:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</guid>
+      <description>故事的起因 在很久很久之前（也就三五年前- - ），我所有的跨平台开发的套路都是：在windows系统系统搞一个虚拟机，然后装个linux系统，再</description>
+    </item>
+    
+    <item>
+      <title>我的工作环境分享</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2016-08-27-my-working-env/</link>
+      <pubDate>Sat, 27 Aug 2016 15:08:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2016-08-27-my-working-env/</guid>
+      <description>古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。 本文将分享我自己这么多年用得</description>
+    </item>
+    
+    <item>
+      <title>ubuntu elasticsearch和graylog安装与使用</title>
+      <link>http://shuimu98.gitHub.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</link>
+      <pubDate>Wed, 23 Sep 2015 11:25:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</guid>
+      <description>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。 1、起因 从游戏服务器转到app服务器，</description>
+    </item>
+    
+    <item>
+      <title>ubuntu下supervisor安装与使用笔记</title>
+      <link>http://shuimu98.gitHub.io/post/linux/2015-09-18-ubuntu-supervisor/</link>
+      <pubDate>Fri, 18 Sep 2015 09:10:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-18-ubuntu-supervisor/</guid>
+      <description>1、supervisor 介绍 它是个什么东东？用来干嘛的？ supervisor是linux下的进程管理工具，python编写。用来监控进程的运</description>
+    </item>
+    
+    <item>
+      <title>ubuntu下nginx安装与使用笔记</title>
+      <link>http://shuimu98.gitHub.io/post/linux/2015-09-17-ubuntu-nginx/</link>
+      <pubDate>Thu, 17 Sep 2015 15:37:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-17-ubuntu-nginx/</guid>
+      <description>最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。 这一篇主要记录关于ngnix在ubun</description>
+    </item>
+    
+    <item>
+      <title>cocos2dx3.3发布apk</title>
+      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</link>
+      <pubDate>Mon, 23 Mar 2015 20:24:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</guid>
+      <description>如何编译安装的apk，有很多种方法，一种是使用第三方编译器，例如：eclipse等，一种是纯命令行的方式。 因为对eclipse不熟悉，加上我</description>
+    </item>
+    
+  </channel>
+</rss>

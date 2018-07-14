@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plan on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/plan/</link>
+    <description>Recent content in Plan on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 31 Jan 2018 21:37:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/plan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2018年度计划</title>
+      <link>http://shuimu98.gitHub.io/post/plan/2018-01-31-2018-yearly-plan/</link>
+      <pubDate>Wed, 31 Jan 2018 21:37:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/plan/2018-01-31-2018-yearly-plan/</guid>
+      <description>2018年已经到来，回顾去年一年，有开心，有不满，也有遗憾。去年也做了一个年度计划，完成了一些，但是大部分都没有达到自己的预想，果然自己还是</description>
+    </item>
+    
+    <item>
+      <title>2017年度计划</title>
+      <link>http://shuimu98.gitHub.io/post/plan/2017-02-06-2017-yearly-plan/</link>
+      <pubDate>Mon, 06 Feb 2017 11:50:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/plan/2017-02-06-2017-yearly-plan/</guid>
+      <description>2017年年度计划。 1、工作 深入学习C，把《C Primer Plus第五版》这本书仔细啃完； 把skynet的代码详细过一遍，弄清楚整个框架流程，顺便加强</description>
+    </item>
+    
+  </channel>
+</rss>

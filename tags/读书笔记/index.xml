@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>读书笔记 on Domi●Cat</title>
+    <link>http://shuimu98.gitHub.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in 读书笔记 on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.gitHub.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>读书笔记 ——《Go语言圣经》</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</guid>
+      <description>本书中文版，点这里。 接触golang也有两三年了，一直没有系统把它过一遍，正好通过这本书系统性的复习一次，掌握golang的细节。 第1章：入</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— golang篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</link>
+      <pubDate>Thu, 25 Jan 2018 15:15:15 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</guid>
+      <description>目录 TOC {:toc} go编译 使用go build编译go文件时，go文件必须放在最后，不然会有named files must be .go files的报错。 例如：go build -ldflags &amp;quot;-w&amp;quot; -o ./xlsx2lua.exe ./xlsx2lua.go 减</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— lua篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-lua/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-lua/</guid>
+      <description>记录从工作至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。 lua的元表和元方法：元表像是一个“操作指南”，里面包含</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 工具篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</guid>
+      <description>1、编辑器 1-1、vim vim的4种模式，以及模式的切换 Vim常用模式： 命令模式(command-mode) 插入模式(insert-mode</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 开源项目和学习资料篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-opensource/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-opensource/</guid>
+      <description>1、开源项目 1-1、redis redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 计算机原理和操作系统篇</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</guid>
+      <description>1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 ——《Unix环境高级编程》</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-12-apue-3rd/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-12-apue-3rd/</guid>
+      <description>本书一共21章。 第1章：UNIX基础知识 /etc/passwd文件为unix的口令文件，口令文件中的登陆项由7个以冒号分隔的字段组成，依次是</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 ——《C Primer Plus》(第5版)</title>
+      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-03-24-c-primer-plus/</link>
+      <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-03-24-c-primer-plus/</guid>
+      <description>本笔记是以c99作为标准，而不是最新的c11标准。 c语言关键字 ANSI C一共只有32个关键字，加上ISO推出的C99标准，新增了5个关键字，一共有</description>
+    </item>
+    
+  </channel>
+</rss>
