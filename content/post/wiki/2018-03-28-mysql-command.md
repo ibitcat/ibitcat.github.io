@@ -9,9 +9,9 @@ tags: [数据库]
 
 ### Mysql常用命令[^footer2]
 
-| 功能                         | 命令                                         | 
-|:-----------------------------|:---------------------------------------------|
-| 连接远程数据库                	| mysql -h192.168.2.172 -uroot -p123456;		| 
+| 功能                         	| 命令                                         	|
+| :-----------------------------|:---------------------------------------------	|
+| 连接远程数据库                	| mysql -h192.168.2.172 -uroot -p123456;		|
 | 添加密码/修改密码             	| mysqladmin -u用户名 -p旧密码 password 新密码;  	|
 | 显示所有库                    	| show databases;  								|
 | 切换库                       	| use 库名; 	 									|
@@ -29,7 +29,6 @@ tags: [数据库]
 | 简单描述表结构，字段类型			| desc tabl_name;								|
 | 查询表中的结构信息				| select * from information_schema.columns where table_schema='dbname' and table_name='tablename';|
 | 查看表生成的DDL 				| show create table table_name;;				|
-{: rules="all"}
 
 
 
