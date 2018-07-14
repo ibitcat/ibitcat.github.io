@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Links</title>
+      <link>http://shuimu98.gitHub.io/links/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/links/</guid>
+      <description>烂笔头的远行，遇见code的美。 我的每日书签 云风 酷壳 程序人生 服务器运维 skywind skynetclub ai分享站（行为树） dirtysalt Tony Bai(golang) dpull（skynet windows）</description>
+    </item>
+    
+    <item>
       <title>svn服务器搭建、迁移、备份、容灾</title>
       <link>http://shuimu98.gitHub.io/post/wiki/2018-07-12-svn-server-on-linux/</link>
       <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
