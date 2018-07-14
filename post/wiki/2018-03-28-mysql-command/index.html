@@ -75,7 +75,7 @@
 
 <meta itemprop="datePublished" content="2016-09-13T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2016-09-13T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="981">
+<meta itemprop="wordCount" content="923">
 
 
 
@@ -189,27 +189,106 @@
 
 <h3 id="mysql常用命令-footer2">Mysql常用命令<sup class="footnote-ref" id="fnref:footer2"><a href="#fn:footer2">1</a></sup></h3>
 
-<p>| 功能                         | 命令                                         |
-|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;|:&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;|
-| 连接远程数据库                   | mysql -h192.168.2.172 -uroot -p123456;        |
-| 添加密码/修改密码                 | mysqladmin -u用户名 -p旧密码 password 新密码;      |
-| 显示所有库                     | show databases;                               |
-| 切换库                           | use 库名;                                       |
-| 显示表结构                     | desc 表名;                                      |
-| 创建数据库                     | create database 库名;                           |
-| 删除数据库                     | drop database 库名;                             |
-| 创建表                           | create table 表名(字段&hellip;);  <sup class="footnote-ref" id="fnref:footer1"><a href="#fn:footer1">2</a></sup>       |
-| 删除表                           | drop table 表名;                                |
-| 清空表数据                     | delete from 表名;                               |
-| 显示表中的记录                   | select * from 表名;                         |
-| 导入.sql文件命令                | use 库名;<br>source d:/mysql.sql;               |
-| 命令行修改root密码               | update mysql.user SET password=PASSWORD(&lsquo;新密码&rsquo;) WHERE User=&lsquo;root&rsquo;;<br>FLUSH PRIVILEGES;|
-| 显示当前use的数据库名          | select database();                            |
-| 显示当前的user                 | select user();                                |
-| 简单描述表结构，字段类型          | desc tabl_name;                               |
-| 查询表中的结构信息             | select * from information_schema.columns where table_schema=&lsquo;dbname&rsquo; and table_name=&lsquo;tablename&rsquo;;|
-| 查看表生成的DDL                 | show create table table_name;;                |
-{: rules=&ldquo;all&rdquo;}</p>
+<table>
+<thead>
+<tr>
+<th align="left">功能</th>
+<th align="left">命令</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">连接远程数据库</td>
+<td align="left">mysql -h192.168.2.172 -uroot -p123456;</td>
+</tr>
+
+<tr>
+<td align="left">添加密码/修改密码</td>
+<td align="left">mysqladmin -u用户名 -p旧密码 password 新密码;</td>
+</tr>
+
+<tr>
+<td align="left">显示所有库</td>
+<td align="left">show databases;</td>
+</tr>
+
+<tr>
+<td align="left">切换库</td>
+<td align="left">use 库名;</td>
+</tr>
+
+<tr>
+<td align="left">显示表结构</td>
+<td align="left">desc 表名;</td>
+</tr>
+
+<tr>
+<td align="left">创建数据库</td>
+<td align="left">create database 库名;</td>
+</tr>
+
+<tr>
+<td align="left">删除数据库</td>
+<td align="left">drop database 库名;</td>
+</tr>
+
+<tr>
+<td align="left">创建表</td>
+<td align="left">create table 表名(字段&hellip;);  <sup class="footnote-ref" id="fnref:footer1"><a href="#fn:footer1">2</a></sup></td>
+</tr>
+
+<tr>
+<td align="left">删除表</td>
+<td align="left">drop table 表名;</td>
+</tr>
+
+<tr>
+<td align="left">清空表数据</td>
+<td align="left">delete from 表名;</td>
+</tr>
+
+<tr>
+<td align="left">显示表中的记录</td>
+<td align="left">select * from 表名;</td>
+</tr>
+
+<tr>
+<td align="left">导入.sql文件命令</td>
+<td align="left">use 库名;<br>source d:/mysql.sql;</td>
+</tr>
+
+<tr>
+<td align="left">命令行修改root密码</td>
+<td align="left">update mysql.user SET password=PASSWORD(&lsquo;新密码&rsquo;) WHERE User=&lsquo;root&rsquo;;<br>FLUSH PRIVILEGES;</td>
+</tr>
+
+<tr>
+<td align="left">显示当前use的数据库名</td>
+<td align="left">select database();</td>
+</tr>
+
+<tr>
+<td align="left">显示当前的user</td>
+<td align="left">select user();</td>
+</tr>
+
+<tr>
+<td align="left">简单描述表结构，字段类型</td>
+<td align="left">desc tabl_name;</td>
+</tr>
+
+<tr>
+<td align="left">查询表中的结构信息</td>
+<td align="left">select * from information_schema.columns where table_schema=&lsquo;dbname&rsquo; and table_name=&lsquo;tablename&rsquo;;</td>
+</tr>
+
+<tr>
+<td align="left">查看表生成的DDL</td>
+<td align="left">show create table table_name;;</td>
+</tr>
+</tbody>
+</table>
 
 <h3 id="数据库操作示例">数据库操作示例</h3>
 
@@ -372,7 +451,7 @@ delete t1 from t1,t2 where 条件;
     id: '2016-09-13 00:00:00 \x2b0000 UTC',
     title: 'Mysql 常用命令',
     link: decodeURI(location.href),
-    desc: 'Mysql常用命令1 | 功能 | 命令 | |:\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26ndash;|:\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;\x26mdash;| | 连接远程数据库 | mysql -h192.168.2.172 -uroot -p123456; | | 添加密码\/修改密码 | mysqladmin -u用户名 -p旧密码 password 新密码; | | 显示所有库 | show databases; |',
+    desc: 'Mysql常用命令1 功能 命令 连接远程数据库 mysql -h192.168.2.172 -uroot -p123456; 添加密码\/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码; 显示所有库 show databases; 切换库 use 库名; 显示表结构 desc',
     owner: 'shuimu98',
     repo: 'shuimu98.github.io',
     oauth: {
