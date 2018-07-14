@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="https://shuimu98.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2018-07-12-svn-server-on-linux/</loc>
+    <lastmod>2018-07-10T14:21:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2018-07-10-ftp-server-on-linux/</loc>
+    <lastmod>2018-07-10T14:21:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</loc>
+    <lastmod>2018-06-06T19:16:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2018-03-28-mysql-command/</loc>
+    <lastmod>2016-09-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2016-03-20-markdown-syntax/</loc>
+    <lastmod>2016-03-15T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/</loc>
+    <lastmod>2018-07-10T14:21:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/</loc>
+    <lastmod>2018-07-10T14:21:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/tags/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2015-03-04-mongodb_command/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2015-07-28-vim-config-and-plugin/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2015-03-11-big-endian-and-little-endian/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://shuimu98.github.io/post/wiki/2016-08-27-my-working-env/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>
