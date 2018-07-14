@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>每日笔记 —— 计算机原理和操作系统篇 - Domi●Cat</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DomiCat" />
+  <meta name="description" content="1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数" />
+
+  <meta name="keywords" content="Hugo, theme, DomiCat" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.44" />
+
+
+<link rel="canonical" href="http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="每日笔记 —— 计算机原理和操作系统篇" />
+<meta property="og:description" content="1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/" />
+
+
+
+<meta property="article:published_time" content="2017-10-16T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2017-10-16T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="每日笔记 —— 计算机原理和操作系统篇">
+<meta itemprop="description" content="1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数">
+
+
+<meta itemprop="datePublished" content="2017-10-16T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2017-10-16T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="3347">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="每日笔记 —— 计算机原理和操作系统篇"/>
+<meta name="twitter:description" content="1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DomiCat</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DomiCat</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">每日笔记 —— 计算机原理和操作系统篇</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2017-10-16 </span>
+        
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#1-计算机原理">1、计算机原理</a></li>
+<li><a href="#2-操作系统">2、操作系统</a>
+<ul>
+<li><a href="#2-1-linux">2-1、linux</a></li>
+<li><a href="#2-2-windows">2-2、windows</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<h2 id="1-计算机原理">1、计算机原理</h2>
+
+<ol>
+<li><p>10进制转16进制计算方法：</p>
+
+<p>注意：<strong>所有除法都要取整。</strong><br />
+从右数第一位：<code>1610%16 = 10</code>(表示16进制的A),结果： <code>_ _ A</code><br />
+从右数第二位：<code>1610/16 = 100</code>；<code>100%16 = 4</code>,结果：<code>_ 4 A</code><br />
+从右数第三位：<code>100/16  = 6</code>；<code>6%16 = 4</code>,结果：<code>6 4 A</code><br />
+最后： <sup>6</sup>&frasl;<sub>100</sub> =0 结束运算，最后 转换结果 为: <code>0x64A</code></p></li>
+
+<li><p>进制与位元：因为 6个bit就能表示64，所以64进制的<strong>位元=6</strong>，同理 16进制<strong>位元=4</strong>，因为2^4=16。</p></li>
+
+<li><p>计算机中原码、反码、补码：</p>
+
+<p>正数的原码、反码、补码都等于原码。<br />
+负数的反码=除了最高位的符号位不变，其他位取反。<br />
+负数的补码=它的反码+1。</p>
+
+<p>可以看看<a href="http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html">这篇文章</a>，讲解的比较通俗易懂。</p></li>
+
+<li><p>负数在计算机中是以<strong>补码</strong>的形式存在，例如有这样一个二进制（<code>1111 1111</code>，其实就是-1），它的最高位是1，所以它是一个负数，
+所以它应该是某个负数的反码形式，转换反码为 <code>1111 1110</code> （补码-1），转换为原码为<code>1000 0001</code>（符号位不变，其他位取反），即<code>1111 1111</code> 表示-1，<code>1000 0000</code> = -128的补码。</p>
+
+<p>关于补码的计算，在我之前的<a href="http://domicat.me/c-primer-plus/#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%E4%BD%8D%E6%93%8D%E4%BD%9C">C primer笔记中有提到</a>。</p></li>
+
+<li><p><strong>总线和寻址范围以及和内存的关系</strong>：</p>
+
+<p>假设是32位的总线，那么cpu可以寻址的范围为2的32次方，这里的一根总线代表一个二进制的bit位，注意，这里的bit不是对应的内存bit。这个总线其实可以看成一个索引生成器，它可以给cpu生成2^32个索引。</p>
+
+<p>内存的存储单位为byte，即一个字节 。<strong>假如内存是一盒奥利奥，那每一块奥利奥就是一个存储单位，它有8个bit，即一个字节</strong>。</p>
+
+<p>通过总线产生的索引，去内存寻址。比如 cpu要寻址的地址 = 0x00000010，那么cpu就会去内存找到索引为 0x00000010 那个存储单元存储的值（一个字节）。</p></li>
+
+<li><p>算术右移：在汇编中，可以用算术右移来进行有符号数据的除法。把一个数右移n位，相当于该数除以2的n次方。</p>
+
+<p>比如，汇编语言中的：
+ASR R3,1
+其意义相当于R3=R3/2</p>
+
+<p>关于逻辑右移和算术右移的区别，可以参考<a href="http://domicat.me/c-primer-plus/#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%E4%BD%8D%E6%93%8D%E4%BD%9C">我的C笔记 第15章</a>。</p></li>
+</ol>
+
+<h2 id="2-操作系统">2、操作系统</h2>
+
+<h3 id="2-1-linux">2-1、linux</h3>
+
+<ol>
+<li>Linux链接分两种，一种被称为<strong>硬链接</strong>（Hard Link），另一种被称为<strong>符号链接（也称软连接）</strong>（Symbolic Link）。默认情况下，ln命令产生硬链接。<code>ln -s a b</code>创建一个软连接（就像windows系统的快捷方式），即给a创建了一个快捷方式b。</li>
+
+<li><p>centos 6.0系统升级gcc：因为centos 6.0系统默认的gcc版本是很早的4.4.7，如果需要升级到更高的版本，需要自行下载源码，编译安装。</p>
+
+<p>可以参考<a href="https://www.cnblogs.com/lzpong/p/5755678.html">这个教程</a>，里面有详细的步骤。另外，除了教程中出现的动态库问题，还需要注意<strong>gcc版本冲突</strong>的问题，因为自行编译安装的二进制，一般放在<code>/usr/local/bin</code>，而系统自带的放在<code>/usr/bin</code>，所以可能存在两个版本的gcc。解决的办法：可以yum remove 删除老版本，也可以参考<strong><a href="https://www.cnblogs.com/cynchanpin/p/6807239.html">这篇教程</a></strong>，用软连接的方式解决。</p></li>
+
+<li><p>linux修改时间和时区：<a href="http://www.cnblogs.com/hjslovewcl/archive/2011/06/28/2314323.html">linux 修改时间 date</a>。</p>
+
+<ul>
+<li><p>将日期转换为Unix时间戳，<a href="http://www.opstool.com/article/224">参考</a>：</p>
+
+<pre><code>date +%s #将当前时间以Unix时间戳
+date -d '2013-2-22 22:14' +%s # 转换指定日期为Unix时间戳
+</code></pre></li>
+
+<li><p>将Unix时间戳转换为日期时间</p>
+
+<pre><code>date -d @1361542596 #不指定日期时间的格式
+date -d @1361542596 +&quot;%Y-%m-%d %H:%M:%S&quot; #指定日期格式的转换
+</code></pre></li>
+</ul></li>
+
+<li><p>修改linux <code>date</code>命令的显示格式：编辑<code>.bash_profile</code>文件， 添加下面一行 <code>alias date='date &quot;+%Y-%m-%d %H:%M:%S&quot;'</code>。</p></li>
+
+<li><p><a href="http://semver.org/lang/zh-CN/">语义化版本</a>，教你如何定义软件的版本。</p></li>
+
+<li><p>linux开启tcp bbr：<a href="https://www.mf8.biz/linux-kernel-with-tcp-bbr/">Linux 升级内核开启 TCP BBR 实现高效单边加速</a>。</p></li>
+
+<li><p><code>alias grep='grep --color=auto'</code>，grep 高亮。</p></li>
+
+<li><p><code>alias = 'ls -lshF --color|sort'</code>，linux ls 按类型排列。</p></li>
+
+<li><p><code>alias rm='rm -i'</code>，rm删除前询问是否真正要删除（对root用户无效）。</p></li>
+
+<li><p>linux Epoll两种触发模式：LT水平触发（常用模式）、ET边缘触发。参考<a href="https://github.com/yedf/handy">这个项目的examples（已star）</a>。</p></li>
+
+<li><p>linux挂载（mount 和 umount），这里主要记录linux挂载网络共享文件系统，例如：在linux挂载windows系统上的共享文件夹。</p>
+
+<p>举例说明：</p>
+
+<pre><code class="language-shell">mount -t cifs //192.168.1.113/share /dir -o username=administrator,password=111111,rw,uid=500,gid=500,dir_mode=0777,file_mode=0777
+</code></pre>
+
+<p>-t cifs指定文件系统类型，-o 指定相关权限等。需要注意：mount挂载cifs需要先安装网络共享服务， <code>yum install -y cifs-utils</code>，windows系统需要开启<strong>445</strong>端口。<a href="http://www.jianshu.com/p/a631045d410d">挂载windows共享文件后的权限问题参考这里</a>。</p>
+
+<p><strong>开机自动挂载</strong>，其中一种方式：编辑 <code>/etc/rc.d/rc.local</code> 将上面的命令插入，重启即可。<br />
+umount卸载，如果出现device is busy报错，表示该文件系统正在被使用；使用命令<code>fuser -mv /dir</code>查看此文件系统正在被哪些进程访问。</p></li>
+
+<li><p><a href="http://www.cnblogs.com/123-/p/4189072.html">Linux下用户组、文件权限详解</a>，讲解干净利落，<strong>推荐</strong>。</p></li>
+
+<li><p>ngrok 内网穿透，ngnix 反向代理。</p>
+
+<p>假设：在路由器是先做一个内网穿透，开个隧道，穿透到80端口，再用ngnix做一个反向代理，代理内网某台电脑的8080端口，那这样是否可以做一个私有云呢？</p></li>
+
+<li><p>正则表达式，参考这篇文章:<a href="http://wubaoguo.com/2016/03/21/Linux/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>。</p></li>
+
+<li><p><code>ss</code>命令显示linux系统socket状态。例如：<code>ss -s</code>列出当前socket详细信息。</p></li>
+
+<li><p>centos开启zsh：<a href="https://my.oschina.net/shyann/blog/426004">centos开启zsh之旅</a>。</p></li>
+
+<li><p>centos 添加新用户并授权，<a href="http://www.cnblogs.com/woshimrf/p/5906084.html">参考</a>。</p>
+
+<pre><code>adduser zhangbiao
+passwd zhangbiao
+vim /etc/sudoers
+
+## 找到以下内容，并添加新用户
+## Allow root to run any commands anywher  
+root    ALL=(ALL)       ALL  
+zhangbiao  ALL=(ALL)       ALL  #这个是新增的用户
+</code></pre></li>
+
+<li><p><a href="http://www.cnblogs.com/lightnear/archive/2012/10/03/2710952.html"><strong>CentOS更改yum源与更新系统</strong></a>，改为网易源镜像。</p></li>
+
+<li><p>解决mysql报错[<code>can't create/write to file '/tmp/#sql_23e6_0MYI'</code>]：</p>
+
+<pre><code class="language-bash">$mkdir /var/lib/mysql/tmp
+$chown  mysql:mysql /var/lib/mysql/tmp
+$vim /etc/my.cnf
+$tmpdir = /var/lib/mysql/tmp
+$service mysqd restart
+</code></pre></li>
+
+<li><p>linuix禁止root用户开机登陆：修改<code>/etc/ssh/sshd_config</code>里面有一个配置选项<code>PermitRootLogin no</code>，这样就可以不让root直接登录了。另外，设置AllowUsers允许指定用户通过ssh登陆，如<code>AllowUsers domi</code>。</p></li>
+
+<li><p>centos6.x切换图形界面和命令行界面：修改<code>/etc/inittab</code>文件中的<code>id:3:initdefault</code>，将3改为5则为图形界面 ，反之则为命令行界面，修改完后重新启动系统生效；</p></li>
+
+<li><p>centos6.x VMware虚拟机网络设置（桥接方式），参考<a href="http://www.jb51.net/article/105110.htm">VMware中让CentOS利用桥接上网的方法教程</a>：</p>
+
+<ol>
+<li>在 VMware 中打开【编辑】-&gt;【虚拟网络编辑器】，添加 VMnet0，并选择桥接模式。需要注意的是，需要选择“桥接到”的网卡，使用无线网卡就选无线网卡，使用有线网卡就选有线网卡</li>
+<li>在虚拟机系统上右键，进入【设置】界面，在【硬件】选项卡中，找到【网络适配器】，设置为桥接模式</li>
+<li>在虚拟机中编辑文件<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>，没有就创建一个</li>
+<li>如果使用的是静态IP，则配置如下：
+~~~
+BOOTPROTO=&ldquo;static&rdquo;
+HWADDR=&ldquo;00:0C:29:9D:5D:24&rdquo;
+DEVICE=&ldquo;eth0&rdquo;
+BOOTPROTO=&ldquo;static&rdquo;
+HWADDR=&ldquo;00:0C:29:9D:5D:24&rdquo;
+IPV6INIT=&ldquo;yes&rdquo;
+NM_CONTROLLED=&ldquo;yes&rdquo;
+ONBOOT=&ldquo;yes&rdquo;
+TYPE=&ldquo;Ethernet&rdquo;
+UUID=&ldquo;4f3f8c86-2041-40de-afbc-4a9056ad1d2e&rdquo;
+IPADDR=192.168.22.172  #静态IP地址，与宿主机在同一网段内，不能被其他设备占用该IP
+NETMASK=255.255.254.0  #子网掩码，与宿主机一致
+GATEWAY=192.168.23.254 #网关，与宿主机一致
+DNS1=114.114.114.114   #如果是静态IP，需要在这里配置dns，在etc/resolv.conf的dns在重启网络后会丢失
+DNS2=202.96.128.166
+~~~</li>
+<li>若使用 dhcp的方式获得IP，则配置如下：
+~~~
+DEVICE=eth0
+HWADDR=00:0C:29:F4:F5:D6
+TYPE=Ethernet
+UUID=&ldquo;4f3f8c86-2041-40de-afbc-4a9056ad1d2e&rdquo;
+ONBOOT=yes #修改
+NM_CONTROLLED=yes
+BOOTPROTO=dhcp #修改
+~~~</li>
+<li>输出命令<code>service network restart</code>，重启网络</li>
+</ol>
+
+<p>#DEVICE是网卡编号，HWADDR是MAC地址，TYPE、UUID和NM_CONTROLLED这五项无需更改<br />
+#ONBOOT是设置在启动network服务时是否启用该网卡，需要将其改为ONBOOT=yes，否则以后每次都要使用ifup eth0启动网卡<br />
+#BOOTPROTO是设置获得IP方式，可选为staic(静态IP)、dhcp(动态分配)、none(不使用)</p></li>
+</ol>
+
+<h3 id="2-2-windows">2-2、windows</h3>
+
+<ol>
+<li><p>链接器中三个最重要的动态链接库<code>kernel32.dll、user32.dll、gdi32.dll</code>的作用：</p>
+
+<ul>
+<li><p><code>kernel32.dll</code>是Windows9x/Me中非常重要的32位动态链接库文件，属于内核级文件。它控制着系统的内存管理、数据的输入输出操作和中断处理，当Windows启动时，kernel32.dll就驻留在内存中特定的写保护区域，使别的程序无法占用这个内存区域。</p></li>
+
+<li><p><code>user32.dll</code>是Windows用户界面相关应用程序接口，用于包括Windows处理，基本用户界面等特性，如创建窗口和发送消息。</p></li>
+
+<li><p><code>gdi32.dll</code>是Windows GDI图形用户界面相关程序，包含的函数用来绘制图像和显示文字。</p></li>
+</ul></li>
+
+<li><p>TODO</p></li>
+</ol>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">DomiCat</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">2017-10-16</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/reading-notes/2017-10-16-daily-notes-opensource/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">每日笔记 —— 开源项目和学习资料篇</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        
+          <a class="next" href="/post/reading-notes/2017-10-12-apue-3rd/">
+            <span class="next-text nav-default">读书笔记 ——《Unix环境高级编程》</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="http://shuimu98.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2014 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">DomiCat</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

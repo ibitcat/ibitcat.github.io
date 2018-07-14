@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>svn服务器搭建、迁移、备份、容灾 - Domi●Cat</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DomiCat" />
+  <meta name="description" content="svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在" />
+
+  <meta name="keywords" content="Hugo, theme, DomiCat" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.44" />
+
+
+<link rel="canonical" href="http://shuimu98.github.io/post/wiki/2018-07-12-svn-server-on-linux/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="svn服务器搭建、迁移、备份、容灾" />
+<meta property="og:description" content="svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://shuimu98.github.io/post/wiki/2018-07-12-svn-server-on-linux/" />
+
+
+
+<meta property="article:published_time" content="2018-07-10T14:21:00&#43;08:00"/>
+
+<meta property="article:modified_time" content="2018-07-10T14:21:00&#43;08:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="svn服务器搭建、迁移、备份、容灾">
+<meta itemprop="description" content="svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在">
+
+
+<meta itemprop="datePublished" content="2018-07-10T14:21:00&#43;08:00" />
+<meta itemprop="dateModified" content="2018-07-10T14:21:00&#43;08:00" />
+<meta itemprop="wordCount" content="1498">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="svn服务器搭建、迁移、备份、容灾"/>
+<meta name="twitter:description" content="svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DomiCat</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DomiCat</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">svn服务器搭建、迁移、备份、容灾</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2018-07-10 </span>
+        
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#svn服务搭建">svn服务搭建</a></li>
+<li><a href="#svn备份">svn备份</a></li>
+<li><a href="#svn容灾">svn容灾</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#每日凌晨3点执行一次同步脚本">每日凌晨3点执行一次同步脚本</a>
+<ul>
+<li>
+<ul>
+<li><a href="#svn迁移">svn迁移</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<h3 id="svn服务搭建">svn服务搭建</h3>
+
+<ol>
+<li>安装subversion：<code>yum -y install subversion</code></li>
+<li>创建版本库目录：<code>mkdir /var/svn/repos</code></li>
+<li>创建一个仓库：<code>svnadmin create proj-test</code>。此时，在版本库目录下（/var/svn/repos），产生一个仓库目录<strong>proj-test</strong></li>
+
+<li><p>创建用户密码：在生成的仓库目录下，会有一个conf文件夹，里面有三个文件：</p>
+
+<ul>
+<li>svnserve.conf，版本仓库的配置文件</li>
+<li>passwd，用户账号和密码（明文）</li>
+<li>authz，仓库权限管理</li>
+</ul>
+
+<p>编辑passwd文件，在<code>[user]</code>节点下，添加用户和密码。</p></li>
+
+<li><p>版本仓库配置：编辑svnserve.conf， 在节点<code>[general]</code>下，取消一下字段的注释：</p>
+
+<pre><code>anon-access = none      #进制匿名用户访问
+auth-access = write     #认证用户具有写权限
+password-db = passwd    #密码文件
+authz-db = authz        #权限文件
+realm = proj-test       #认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
+</code></pre>
+
+<p><strong>注意</strong>，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 <code>anon-access=read</code> 并且某个目录有被设置上 <code>* =</code> 标记，则会出现上述问题。</p></li>
+
+<li><p>权限管理：编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读&reg;、写(w)、无访问权限(空)。</p>
+
+<ul>
+<li><p>分组，在节点<code>[groups]</code>下面添加分组，例如：</p>
+
+<pre><code># 一个用户可以同时存在于不同的组中
+[groups]
+harry_and_sally = harry,sally
+harry_sally_and_joe = harry,sally,&amp;joe
+</code></pre></li>
+
+<li><p>版本权限（举例说明）</p></li>
+</ul>
+
+<p><img src="/images/posts/svn_auth.png" alt="权限配置" /></p></li>
+</ol>
+
+<h3 id="svn备份">svn备份</h3>
+
+<p>为了增强仓库的安全性，最好每天都将仓库备份一下，svn是支持备份和还原。另外，可以写一个脚本，用crontab每日定时备份一次svn仓库。</p>
+
+<ul>
+<li><p>备份：svnadmin dump</p>
+
+<p>命令语法：<code>svnadmin dump REPOS_PATH [-r LOWER[:UPPER]] [--incremental]</code>， <code>--incremental</code>表示支持增量备份，需要配合<code>-r</code>参数一起使用。</p>
+
+<p>例如：<br />
+<code>svnadmin dump /var/svn/repes/proj-test -r 0:100 --incremental &gt; svn_inc_dump</code>，表示备份0到100版本直接的所有修订版。<br />
+<code>svnadmin dump /var/svn/repes/proj-test &gt; svn_full_dump</code>，表示全量备份</p></li>
+
+<li><p>还原：svnadmin load</p>
+
+<p>命令语法：<code>svnadmin load REPOS_PATH</code></p>
+
+<p>例如：<br />
+<code>svnadmin create newrepos</code><br />
+<code>svnadmin load newrepos &lt; svn_full_dump</code></p></li>
+</ul>
+
+<p>另外，还有另外两种方式可以实现备份：<code>svnadmin hotcopy</code>和<code>svnsync</code>，具体参考<a href="http://www.cnblogs.com/itech/archive/2011/10/11/2206988.html">源码管理 - SVN的备份和还原</a>。</p>
+
+<h3 id="svn容灾">svn容灾</h3>
+
+<p>使用rsync，将svn dump下来的备份文件，同步到另外一台机器上，实现svn的容灾处理。这里涉及到了rsync的安装和启动，下面简单描述下这个过程。</p>
+
+<p>源服务器A：即svn服务器，假设IP：192.168.2.250<br />
+备份服务器B：用于拉取A的svn备份文件，假设IP：192.168.2.251</p>
+
+<ul>
+<li><p>首先，配置A服务器，也就是rsync的服务端：</p>
+
+<ul>
+<li>新建配置文件：<code>touch /etc/rsyncd.conf</code></li>
+
+<li><p>编辑配置，如下：</p>
+
+<pre><code>uid=root
+gid=root
+max connections=400
+log file=/var/log/rsyncd.log
+pid file=/var/run/rsyncd.pid
+lock file=/var/run/rsyncd.lock
+secrets file=/etc/rsyncd.passwd #服务端密码文件，例如：root:123456
+
+# svn 备份文件的路径
+[svn_repos]
+comment= svn repos backup
+path=/var/svn/backup
+use chroot=no
+read only=ye
+auth users=root
+hosts allow=192.168.2.251
+hosts deny=*
+</code></pre></li>
+
+<li><p>启动rysnc服务：<code>/usr/bin/rsync --daemon --config=/etc/rsyncd.conf</code>，可以写入到<code>/etc/rc.local</code>实现开机启动。</p></li>
+</ul></li>
+
+<li><p>然后，配置B服务器，写一个脚本，并配合cron实现每日定时同步。</p>
+
+<ul>
+<li><p>编写脚本：<code>touch rsync_svn.sh</code></p>
+
+<pre><code class="language-shell">#!/bin/bash
+rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
+</code></pre></li>
+
+<li><p>写入定时任务：<code>crontab -e</code></p>
+
+<p>~~~</p>
+
+<h1 id="每日凌晨3点执行一次同步脚本">每日凌晨3点执行一次同步脚本</h1>
+
+<ul>
+<li>3 * * * /usr/sh /root/rsync_svn.sh
+~~~</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="svn迁移">svn迁移</h3>
+
+<p>因为项目需要，需要将原本在<code>192.168.2.251</code>这台服务器上的svn仓库（svn仓库路径：<code>/var/svn/repos/proj-h5</code>），迁移到<code>192.168.2.250</code>这台机器上。</p>
+
+<ul>
+<li>首先，停止svn服务：<code>killall svnserve</code></li>
+<li>全量备份svn仓库：<code>cd /var/svn/repos</code>，<code>svnadmin dump proj-h5 &gt; svn_dump</code></li>
+<li>在<code>192.168.2.250</code>这台机器上，拷贝备份文件：<code>scp root@192.168.2.251:/var/svn/repos/svn_dump /var/svn/repos</code></li>
+<li>还原仓库：<code>svnadmin load proj-h5 &lt; svn_dump</code></li>
+</ul>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">DomiCat</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">2018-07-10</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/post/wiki/2018-07-10-ftp-server-on-linux/">
+            <span class="next-text nav-default">在linux下搭建ftp服务</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="http://shuimu98.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2014 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">DomiCat</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

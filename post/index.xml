@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Domi●Cat</title>
+    <link>http://shuimu98.github.io/post/</link>
+    <description>Recent content in Posts on Domi●Cat</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 10 Jul 2018 14:21:00 +0800</lastBuildDate>
+    
+	<atom:link href="http://shuimu98.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>svn服务器搭建、迁移、备份、容灾</title>
+      <link>http://shuimu98.github.io/post/wiki/2018-07-12-svn-server-on-linux/</link>
+      <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2018-07-12-svn-server-on-linux/</guid>
+      <description>svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在</description>
+    </item>
+    
+    <item>
+      <title>在linux下搭建ftp服务</title>
+      <link>http://shuimu98.github.io/post/wiki/2018-07-10-ftp-server-on-linux/</link>
+      <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2018-07-10-ftp-server-on-linux/</guid>
+      <description>1、需求 公司要一个ftp服务器，用来存储一些常用软件以及公司内部的一些资料，因此至少需要两个用户，一个是需要密码登陆的私有账户，其他的匿名用</description>
+    </item>
+    
+    <item>
+      <title>在win10的linux子系统下搭建开发环境</title>
+      <link>http://shuimu98.github.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</link>
+      <pubDate>Wed, 06 Jun 2018 19:16:00 +0800</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</guid>
+      <description>故事的起因 在很久很久之前（也就三五年前- - ），我所有的跨平台开发的套路都是：在windows系统系统搞一个虚拟机，然后装个linux系统，再</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（六）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-24-tcp-ip-protocol-6/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-24-tcp-ip-protocol-6/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（五）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-23-tcp-ip-protocol-5/</link>
+      <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-23-tcp-ip-protocol-5/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（一）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-1/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-1/</guid>
+      <description>写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（三）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-3/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-3/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（二）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-2/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-2/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+    </item>
+    
+    <item>
+      <title>TCP/IP协议族详解（四）</title>
+      <link>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-4/</link>
+      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-4/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 ——《Go语言圣经》</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2018-01-27-gopl-zh/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2018-01-27-gopl-zh/</guid>
+      <description>本书中文版，点这里。 接触golang也有两三年了，一直没有系统把它过一遍，正好通过这本书系统性的复习一次，掌握golang的细节。 第1章：入</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— golang篇</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2018-01-25-daily-notes-golang/</link>
+      <pubDate>Thu, 25 Jan 2018 15:15:15 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2018-01-25-daily-notes-golang/</guid>
+      <description>目录 TOC {:toc} go编译 使用go build编译go文件时，go文件必须放在最后，不然会有named files must be .go files的报错。 例如：go build -ldflags &amp;quot;-w&amp;quot; -o ./xlsx2lua.exe ./xlsx2lua.go 减</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— lua篇</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-lua/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-lua/</guid>
+      <description>记录从工作至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。 lua的元表和元方法：元表像是一个“操作指南”，里面包含</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 工具篇</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</guid>
+      <description>1、编辑器 1-1、vim vim的4种模式，以及模式的切换 Vim常用模式： 命令模式(command-mode) 插入模式(insert-mode</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 开源项目和学习资料篇</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-opensource/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-opensource/</guid>
+      <description>1、开源项目 1-1、redis redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，</description>
+    </item>
+    
+    <item>
+      <title>每日笔记 —— 计算机原理和操作系统篇</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</guid>
+      <description>1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 ——《Unix环境高级编程》</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-10-12-apue-3rd/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-10-12-apue-3rd/</guid>
+      <description>本书一共21章。 第1章：UNIX基础知识 /etc/passwd文件为unix的口令文件，口令文件中的登陆项由7个以冒号分隔的字段组成，依次是</description>
+    </item>
+    
+    <item>
+      <title>行为树及其实现</title>
+      <link>http://shuimu98.github.io/post/behaviortree/2017-03-24-behavior-tree-1/</link>
+      <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/behaviortree/2017-03-24-behavior-tree-1/</guid>
+      <description>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻</description>
+    </item>
+    
+    <item>
+      <title>读书笔记 ——《C Primer Plus》(第5版)</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2017-03-24-c-primer-plus/</link>
+      <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2017-03-24-c-primer-plus/</guid>
+      <description>本笔记是以c99作为标准，而不是最新的c11标准。 c语言关键字 ANSI C一共只有32个关键字，加上ISO推出的C99标准，新增了5个关键字，一共有</description>
+    </item>
+    
+    <item>
+      <title>Mysql 常用命令</title>
+      <link>http://shuimu98.github.io/post/wiki/2018-03-28-mysql-command/</link>
+      <pubDate>Tue, 13 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2018-03-28-mysql-command/</guid>
+      <description>Mysql常用命令1 | 功能 | 命令 | |:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;ndash;|:&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;| | 连接远程数据库 | mysql -h192.168.2.172 -uroot -p123456; | | 添加密码/修改密码 | mysqladmin -u用户名 -p旧密码 password 新密码; | | 显示所有库 | show databases; |</description>
+    </item>
+    
+    <item>
+      <title>Markdown 语法</title>
+      <link>http://shuimu98.github.io/post/wiki/2016-03-20-markdown-syntax/</link>
+      <pubDate>Tue, 15 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2016-03-20-markdown-syntax/</guid>
+      <description>文章转载自Markdown Syntax 另外，可以参考：Markdown，你只需要掌握这几个。 HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html</description>
+    </item>
+    
+    <item>
+      <title>git 操作手册</title>
+      <link>http://shuimu98.github.io/post/git/2015-12-16-git-doc/</link>
+      <pubDate>Wed, 16 Dec 2015 11:54:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/git/2015-12-16-git-doc/</guid>
+      <description>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误</description>
+    </item>
+    
+    <item>
+      <title>这些年，我遇到的哈希、加密算法</title>
+      <link>http://shuimu98.github.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</link>
+      <pubDate>Tue, 24 Nov 2015 16:50:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</guid>
+      <description>最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非</description>
+    </item>
+    
+    <item>
+      <title>入住github pages</title>
+      <link>http://shuimu98.github.io/post/blog/2014-12-13-first-blog/</link>
+      <pubDate>Sat, 13 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/blog/2014-12-13-first-blog/</guid>
+      <description>一番折腾，我的github pages 终于搭建完成。 一共经历了n个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，再到hexo，最后又迁</description>
+    </item>
+    
+    <item>
+      <title>2017年度计划</title>
+      <link>http://shuimu98.github.io/post/plan/2017-02-06-2017-yearly-plan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/plan/2017-02-06-2017-yearly-plan/</guid>
+      <description>2017年年度计划。 1、工作 深入学习C，把《C Primer Plus第五版》这本书仔细啃完； 把skynet的代码详细过一遍，弄清楚整个框架流程，顺便加强</description>
+    </item>
+    
+    <item>
+      <title>2018年度计划</title>
+      <link>http://shuimu98.github.io/post/plan/2018-01-31-2018-yearly-plan/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/plan/2018-01-31-2018-yearly-plan/</guid>
+      <description>2018年已经到来，回顾去年一年，有开心，有不满，也有遗憾。去年也做了一个年度计划，完成了一些，但是大部分都没有达到自己的预想，果然自己还是</description>
+    </item>
+    
+    <item>
+      <title>cocos2dx3.3发布apk</title>
+      <link>http://shuimu98.github.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</guid>
+      <description>如何编译安装的apk，有很多种方法，一种是使用第三方编译器，例如：eclipse等，一种是纯命令行的方式。 因为对eclipse不熟悉，加上我</description>
+    </item>
+    
+    <item>
+      <title>golang：interface 和 nil 以及 error nil</title>
+      <link>http://shuimu98.github.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</guid>
+      <description>interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括</description>
+    </item>
+    
+    <item>
+      <title>linux 常用命令</title>
+      <link>http://shuimu98.github.io/post/linux/2015-09-18-linux-command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/linux/2015-09-18-linux-command/</guid>
+      <description>第一部分 - 常用简单命令 小知识： markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 {: .notice} 重命名文件文件夹 ： mv file1 file2 移动文件</description>
+    </item>
+    
+    <item>
+      <title>linux 源码升级git</title>
+      <link>http://shuimu98.github.io/post/git/2016-04-22-linux-update-git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/git/2016-04-22-linux-update-git/</guid>
+      <description>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用</description>
+    </item>
+    
+    <item>
+      <title>mongoDB 常用命令</title>
+      <link>http://shuimu98.github.io/post/wiki/2015-03-04-mongodb_command/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2015-03-04-mongodb_command/</guid>
+      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●) 1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `</description>
+    </item>
+    
+    <item>
+      <title>ubuntu elasticsearch和graylog安装与使用</title>
+      <link>http://shuimu98.github.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</guid>
+      <description>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。 1、起因 从游戏服务器转到app服务器，</description>
+    </item>
+    
+    <item>
+      <title>ubuntu下nginx安装与使用笔记</title>
+      <link>http://shuimu98.github.io/post/linux/2015-09-17-ubuntu-nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/linux/2015-09-17-ubuntu-nginx/</guid>
+      <description>最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。 这一篇主要记录关于ngnix在ubun</description>
+    </item>
+    
+    <item>
+      <title>ubuntu下supervisor安装与使用笔记</title>
+      <link>http://shuimu98.github.io/post/linux/2015-09-18-ubuntu-supervisor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/linux/2015-09-18-ubuntu-supervisor/</guid>
+      <description>1、supervisor 介绍 它是个什么东东？用来干嘛的？ supervisor是linux下的进程管理工具，python编写。用来监控进程的运</description>
+    </item>
+    
+    <item>
+      <title>vim配置以及使用vundle管理vim插件</title>
+      <link>http://shuimu98.github.io/post/wiki/2015-07-28-vim-config-and-plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2015-07-28-vim-config-and-plugin/</guid>
+      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，</description>
+    </item>
+    
+    <item>
+      <title>大端与小端</title>
+      <link>http://shuimu98.github.io/post/wiki/2015-03-11-big-endian-and-little-endian/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2015-03-11-big-endian-and-little-endian/</guid>
+      <description>高内存地址和低内存地址 内存布局大致如下： -----------------------最高内存地址0xffffffff 栈底 栈 栈顶 ----------------------- NULL (空洞)</description>
+    </item>
+    
+    <item>
+      <title>常见的排序算法解析</title>
+      <link>http://shuimu98.github.io/post/algorithm/2016-04-08-sort-alg/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/algorithm/2016-04-08-sort-alg/</guid>
+      <description>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。 比较常用</description>
+    </item>
+    
+    <item>
+      <title>我的工作环境分享</title>
+      <link>http://shuimu98.github.io/post/wiki/2016-08-27-my-working-env/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/wiki/2016-08-27-my-working-env/</guid>
+      <description>古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。 本文将分享我自己这么多年用得</description>
+    </item>
+    
+    <item>
+      <title>时间轮定时器</title>
+      <link>http://shuimu98.github.io/post/algorithm/2016-04-08-game-server-timer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.github.io/post/algorithm/2016-04-08-game-server-timer/</guid>
+      <description>定时器实现一般常见的有两种方式： 时间轮（time_wheel） 最小堆 就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的mud</description>
+    </item>
+    
+  </channel>
+</rss>

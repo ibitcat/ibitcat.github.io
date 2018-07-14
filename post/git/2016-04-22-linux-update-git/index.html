@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>linux 源码升级git - Domi●Cat</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="DomiCat" />
+  <meta name="description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用" />
+
+  <meta name="keywords" content="Hugo, theme, DomiCat" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.44" />
+
+
+<link rel="canonical" href="http://shuimu98.github.io/post/git/2016-04-22-linux-update-git/" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+<link href="/dist/even.min.css?v=3.2.0" rel="stylesheet">
+<link href="/lib/fancybox/jquery.fancybox-3.1.20.min.css" rel="stylesheet">
+
+
+
+
+<meta property="og:title" content="linux 源码升级git" />
+<meta property="og:description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://shuimu98.github.io/post/git/2016-04-22-linux-update-git/" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="linux 源码升级git">
+<meta itemprop="description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用">
+
+
+
+<meta itemprop="wordCount" content="516">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="linux 源码升级git"/>
+<meta name="twitter:description" content="centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">DomiCat</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">DomiCat</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">linux 源码升级git</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title"></h2>
+  
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#1-卸载之前的git">(1) 卸载之前的git</a></li>
+<li><a href="#2-安装依赖的包">(2) 安装依赖的包</a></li>
+<li><a href="#3-下载git源码并解压缩">(3) 下载git源码并解压缩</a></li>
+<li><a href="#4-编译安装">(4) 编译安装</a></li>
+<li><a href="#5-将git安装路径添加到path变量">(5) 将git安装路径添加到PATH变量</a></li>
+<li><a href="#6-验证是否安装成功">(6) 验证是否安装成功</a></li>
+<li><a href="#7-配置git">(7) 配置git</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    
+
+    
+    <div class="post-content">
+      
+
+<p>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。</p>
+
+<p>另外一个原因是在centos 使用git push的时候，出现错误：</p>
+
+<pre><code>error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98/domi-vimrc/info/refs
+</code></pre>
+
+<p>而根据网上找的<a href="http://houzhiqingjava.blog.163.com/blog/static/167399507201472343324562/">解决方案</a>会导致提交到github上的commit记录有问题（提交者信息为<code>invalid-email-address</code>），如图：
+<img src="/images/posts/gitpush.png" alt="图1" /></p>
+
+<!-- more -->
+
+<p>虽然可以正常提交，但是总是感觉别扭，网上说需要升级git版本，所以顺手就源码升级下git。</p>
+
+<p>这里参照了这篇<a href="http://www.centoscn.com/image-text/install/2015/0225/4735.html">教程</a>，另外记录了在实践中出现的问题以及解决方案。</p>
+
+<p>具体步骤：</p>
+
+<h3 id="1-卸载之前的git">(1) 卸载之前的git</h3>
+
+<pre><code>git --version
+git version 1.7.1
+yum remove git
+</code></pre>
+
+<h3 id="2-安装依赖的包">(2) 安装依赖的包</h3>
+
+<pre><code>sudo yum update
+sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel 
+</code></pre>
+
+<p>如果Git在make的时候报错：<code>Can't locate ExtUtils/MakeMaker.pm in @INC</code></p>
+
+<p>解决方法如下：</p>
+
+<pre><code class="language-shell">yum -y install perl-devel
+yum -y install perl-CPAN
+</code></pre>
+
+<p>或者安装<strong>ExtUtils-MakeMaker</strong></p>
+
+<pre><code class="language-shell">wget http://files.directadmin.com/services/9.0/ExtUtils-MakeMaker-6.31.tar.gz
+tar xvzf ExtUtils-MakeMaker-6.31.tar.gz
+cd ExtUtils-MakeMaker-6.31
+perl Makefile.PL
+make
+make install
+</code></pre>
+
+<h3 id="3-下载git源码并解压缩">(3) 下载git源码并解压缩</h3>
+
+<pre><code>wget https://github.com/git/git/archive/v2.8.1.tar.gz
+tar -zxvf git-2.3.0.tar.gz
+cd git-2.8.1
+</code></pre>
+
+<h3 id="4-编译安装">(4) 编译安装</h3>
+
+<pre><code>make prefix=/usr/local/git all
+sudo make prefix=/usr/local/git install
+</code></pre>
+
+<h3 id="5-将git安装路径添加到path变量">(5) 将git安装路径添加到PATH变量</h3>
+
+<pre><code>sudo vim /etc/bashrc
+</code></pre>
+
+<p>在最后一行添加 <code>export PATH=/usr/local/git/bin:$PATH</code> 保存退出</p>
+
+<h3 id="6-验证是否安装成功">(6) 验证是否安装成功</h3>
+
+<pre><code>source /etc/bashrc
+git --version
+git clone https://github.com/shuimu98/domi-vimrc.git
+</code></pre>
+
+<p>如果在clone过程中出现错误：<code>Failed connect to github.com:443; Operation now in progress</code>，不用担心，ctrl+c后再试一次，一般是网络的问题。</p>
+
+<h3 id="7-配置git">(7) 配置git</h3>
+
+<pre><code>git config --global user.name &quot;username&quot;
+git config --global user.email &quot;user@mail.com&quot;
+</code></pre>
+
+    </div>
+
+    
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">DomiCat</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title"></span>
+    <span class="item-content">0001-01-01</span>
+  </p>
+  
+  
+</div>
+
+    
+    
+
+    <footer class="post-footer">
+      
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/linux/2015-09-18-linux-command/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">linux 常用命令</span>
+            <span class="prev-text nav-mobile"></span>
+          </a>
+        
+          <a class="next" href="/post/wiki/2015-03-04-mongodb_command/">
+            <span class="next-text nav-default">mongoDB 常用命令</span>
+            <span class="next-text nav-mobile"></span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://localhost:1313" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="http://localhost:1313" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="http://localhost:1313" class="iconfont icon-facebook" title="facebook"></a>
+      <a href="http://localhost:1313" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="http://localhost:1313" class="iconfont icon-google" title="google"></a>
+      <a href="http://localhost:1313" class="iconfont icon-github" title="github"></a>
+      <a href="http://localhost:1313" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="http://localhost:1313" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="http://localhost:1313" class="iconfont icon-douban" title="douban"></a>
+      <a href="http://localhost:1313" class="iconfont icon-pocket" title="pocket"></a>
+      <a href="http://localhost:1313" class="iconfont icon-tumblr" title="tumblr"></a>
+      <a href="http://localhost:1313" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="http://shuimu98.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    %!(EXTRA string=<a class="hexo-link" href="https://gohugo.io">Hugo</a>)
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+     - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    
+      2014 - 
+    2018
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">DomiCat</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+<script src="/lib/highlight/highlight.pack.js?v=20171001"></script><script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+  <script type="text/javascript" src="/lib/fancybox/jquery.fancybox-3.1.20.min.js"></script>
+
+
+<script type="text/javascript" src="/dist/even.min.js?v=3.2.0"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
