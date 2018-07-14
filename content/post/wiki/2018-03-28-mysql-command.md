@@ -2,8 +2,8 @@
 layout: post
 title: Mysql 常用命令
 date: 2016-09-13
-excerpt: Mysql 常用命令
-tag: [数据库]
+description: Mysql 常用命令
+tags: [数据库]
 ---
 
 

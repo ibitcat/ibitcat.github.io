@@ -2,7 +2,7 @@
 layout: post
 title: "入住github pages"
 date: 2014-12-13
-tag: [生活]
+tags: [生活]
 comments: false
 feature: http://domicat.me/images/posts/githubpages.jpg
 

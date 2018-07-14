@@ -2,8 +2,8 @@
 layout: post
 title:  "行为树及其实现"
 date:   2017-03-24
-excerpt: "主要介绍行为树的概念、行为树节点，以及行为树的实现"
-tag:
+description: "主要介绍行为树的概念、行为树节点，以及行为树的实现"
+tags:
 - 行为树 
 comments: true
 ---

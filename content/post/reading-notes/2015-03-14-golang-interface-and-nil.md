@@ -1,10 +1,10 @@
 ---
 layout: post
 title: golang：interface 和 nil 以及 error nil
-date: 2015-3-14 15:16:00
+date: 2015-03-14 15:16:00
 updated: 2015-11-05 17:19:00
-excerpt: "详解golang的interface接口，以及介绍nil与 error类型的nil的区别."
-tag: [golang]
+description: "详解golang的interface接口，以及介绍nil与 error类型的nil的区别."
+tags: [golang]
 comments: true
 
 ---

@@ -1,9 +1,9 @@
 ---
 layout: post
 title: ubuntu下nginx安装与使用笔记
-date: 2015-9-17 15:37:00
+date: 2015-09-17 15:37:00 +0800
 updated: 2015-11-05 17:25:00
-tag: [环境搭建]
+tags: [环境搭建]
 comments: true
 
 ---

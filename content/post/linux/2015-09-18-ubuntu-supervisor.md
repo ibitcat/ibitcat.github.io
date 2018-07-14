@@ -1,9 +1,9 @@
 ---
 layout: post
 title: ubuntu下supervisor安装与使用笔记
-date: 2015-9-18 09:10:00
+date: 2015-09-18 09:10:00 +0800
 updated: 2015-11-05 17:26:00
-tag: [环境搭建]
+tags: [环境搭建]
 comments: true
 
 ---

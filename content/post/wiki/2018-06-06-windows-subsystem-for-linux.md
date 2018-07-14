@@ -2,8 +2,8 @@
 layout: post
 title: 在win10的linux子系统下搭建开发环境
 date: 2018-06-06 19:16:00 +0800
-excerpt: "在win10系统下，安装ubuntu linux子系统，并搭建linux开发环境。"
-tag: [环境搭建]
+description: "在win10系统下，安装ubuntu linux子系统，并搭建linux开发环境。"
+tags: [环境搭建]
 comments: true
 
 ---

@@ -2,8 +2,8 @@
 layout: post
 title:  "每日笔记 —— 工具篇"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。主要介绍编辑器（vim、sublime text）、相关工具使用介绍以及收集的一些小众软件或者在线工具等"
-tag:
+description: "记录了工作中，每天的笔记，分类整理。主要介绍编辑器（vim、sublime text）、相关工具使用介绍以及收集的一些小众软件或者在线工具等"
+tags:
 - 读书笔记
 comments: true
 ---

@@ -1,8 +1,8 @@
 ---
 layout: post
 title: linux 源码升级git
-date: 2016-4-22 22:05:00
-tag: [Git]
+date: 2016-04-22 22:05:00 +0800
+tags: [Git]
 comments: true
 
 ---

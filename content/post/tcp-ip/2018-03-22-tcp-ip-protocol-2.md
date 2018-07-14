@@ -2,8 +2,8 @@
 layout: post
 title:  "TCP/IP协议族详解（二）"
 date:   2018-03-22
-excerpt: "这个系列的文章主要详细了解TCP/IP协议族，本篇主要介绍IP协议"
-tag:
+description: "这个系列的文章主要详细了解TCP/IP协议族，本篇主要介绍IP协议"
+tags:
 - TCP/IP
 comments: true
 ---

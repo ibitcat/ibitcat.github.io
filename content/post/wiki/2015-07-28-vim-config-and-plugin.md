@@ -1,10 +1,12 @@
 ---
 layout: post
 title: vim配置以及使用vundle管理vim插件
-date: 2015-7-28 15:08:00
+date: 2015-07-28 15:08:00
 updated: 2015-11-05 17:22:00
-tag: [Linux]
+tags: ["Linux"]
+categories: ["Linux"]
 comments: true
+author: "Wikipedia"
 
 ---
 

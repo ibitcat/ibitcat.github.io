@@ -1,10 +1,10 @@
 ---
 layout: post
 title: linux 常用命令
-date: 2015-9-18 09:56:00
+date: 2015-09-18 09:56:00
 updated: 2015-11-05 17:26:00
-excerpt: "linux下常用的命令以及配置"
-tag: [Linux]
+description: "linux下常用的命令以及配置"
+tags: [Linux]
 comments: true
 
 ---

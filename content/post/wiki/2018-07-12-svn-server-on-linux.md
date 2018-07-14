@@ -3,7 +3,7 @@ layout: post
 title: svn服务器搭建、迁移、备份、容灾
 date: 2018-07-10 14:21:00 +0800
 excerpt: "在linux下（centos 6.9）下搭建svn服务，并将svn仓库做每日备份，同时将仓库备份同步到其他主机，做容灾处理。另外，本文也记录如何将仓库从一台机器迁移到另外一台机器。"
-tag: [环境搭建]
+tags: [环境搭建]
 comments: true
 
 ---
@@ -45,7 +45,37 @@ comments: true
 
 	- 版本权限（举例说明）
 
-	![权限配置](/images/posts/svn_auth.png)
+	~~~
+	# repos根目录权限
+	[/]
+	@admin=rw
+	* =
+
+	[proj-h5:/trunk/docs]
+	@admin=rw
+	@client=rw
+	@cehua=rw
+	@meishu=rw
+	* =
+
+	[proj-h5:/trunk/server]
+	@admin=rw
+	@server=rw
+	* =
+
+	[proj-h5:/trunk/client]
+	@admin=rw
+	@client=rw
+	* =
+
+	[proj-h5:/trunk/config]
+	@admin=rw
+	@client=rw
+	@cehua=rw
+	@ceshi=rw
+	* =
+	~~~
+
 
 ### svn备份
 
@@ -114,13 +144,12 @@ comments: true
 		rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
 		~~~
 
-
 	- 写入定时任务：`crontab -e`
 
-		~~~
-		# 每日凌晨3点执行一次同步脚本
-		* 3 * * * /usr/sh /root/rsync_svn.sh
-		~~~
+	~~~shell
+	# 每日凌晨3点执行一次同步脚本
+	* 3 * * * /usr/sh /root/rsync_svn.sh
+	~~~
 
 ### svn迁移
 

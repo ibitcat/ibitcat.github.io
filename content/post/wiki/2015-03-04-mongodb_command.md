@@ -1,10 +1,10 @@
 ---
 layout: post
-date: 2015-3-4 21:43:00
+date: 2015-03-04 21:43:00
 title: mongoDB 常用命令
-excerpt: "mongoDB 比较常用的命令以及示例."
+description: "mongoDB 比较常用的命令以及示例."
 updated: 2015-3-4 21:43:00
-tag: [数据库]
+tags: [数据库]
 comments: true
 ---
 
