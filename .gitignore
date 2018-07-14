@@ -1,7 +1,0 @@
-_site/
-.sass-cache/
-.jekyll-metadata
-.git-credentials
-*.sublime*
-.git-credentials
-Gemfile.lock
