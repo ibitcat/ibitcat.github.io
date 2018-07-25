@@ -1,0 +1,50 @@
+{{ partial "header" . }}
+
+<main>
+
+    {{ partial "item" . }}
+
+    <br> <div class="text-justify">{{ .Content }}</div>
+
+    <!-- related posts with the same tags 
+    {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+
+    {{ if $related }}
+
+        <h4 class="page-header">Related</h4>
+
+        {{ range $related }} {{ partial "list-item" . }} {{ end }}
+
+    {{ end }}
+    -->
+
+    <hr>
+    <div class="text-justify">
+    {{ if and .IsPage (ne .Params.comment false) }}
+        <!-- gitment -->
+        {{- if .Site.Params.gitment.owner -}}
+            <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '{{ .Date }}',
+              title: '{{ .Title }}',
+              link: decodeURI(location.href),
+              desc: '{{ .Summary }}',
+              owner: '{{ .Site.Params.gitment.owner }}',
+              repo: '{{ .Site.Params.gitment.repo }}',
+              oauth: {
+                client_id: '{{ .Site.Params.gitment.clientId }}',
+                client_secret: '{{ .Site.Params.gitment.clientSecret }}'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+        {{- end }}
+    {{ end }}
+    </div>
+
+</main>
+
+{{ partial "footer.html" . }}
