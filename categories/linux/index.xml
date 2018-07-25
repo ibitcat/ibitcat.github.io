@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/categories/linux/</link>
     <description>Recent content in Linux on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 28 Jul 2015 15:08:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,18 @@
     
     <item>
       <title>vim配置以及使用vundle管理vim插件</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</link>
+      <link>http://shuimu98.gitHub.io/2015-07-28/vim%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8vundle%E7%AE%A1%E7%90%86vim%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Tue, 28 Jul 2015 15:08:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</guid>
-      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，</description>
+      <guid>http://shuimu98.gitHub.io/2015-07-28/vim%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8vundle%E7%AE%A1%E7%90%86vim%E6%8F%92%E4%BB%B6/</guid>
+      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。
+vimrc下载地址：传送门 另外推荐一个:k-vim
+先来一张预览图：
+安装步骤 1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2、git clone https://github.com/shuimu98/domi-dotfile.git 3、cp domi-dotfile/.vimrc ~/ 4、打开vim，输入命令 :PluginInstall  这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
+vim基础配置 这部分主要包括vim的一些基础配置，例如显示行号、括号配对等，大部分的设置在我的配置里面已经有了注释，不详细说明。 另外，tagbar等插件需要ctags支持，自行安装。
+一些小技巧：
+ 输入 vim &amp;ndash;version 可以查看vim支持的特性，如果支持会有 &amp;ldquo;(+)&amp;rdquo; 目前的vim版本的7.4，7.2升级到7.4尽量不要直接卸载vim，否则会出现很多蛋疼的问题，最好自己拉源码编译  一些按键注释：
+ &amp;lt;CR&amp;gt; 在vimrc配置中表示回车的意思 &amp;lt;C-w&amp;gt; 表示ctrl + v &amp;lt;S-a&amp;gt; 表示shift + a &amp;lt;A-w&amp;gt;&amp;lt;Left&amp;gt; 表示 alt+w+ &amp;lt;--  vim默认的常用快捷键、命令    快捷键或命令 备注     :vsplit 分割屏幕（垂直分割）   :split 分割屏幕（水平分割）   :!command 运行vim外部环境命令（注意 “!”），如 :!</description>
     </item>
     
   </channel>

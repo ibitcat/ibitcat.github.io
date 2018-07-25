@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/tags/markdown/</link>
     <description>Recent content in Markdown on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 15 Mar 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,19 @@
     
     <item>
       <title>Markdown 语法</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</link>
+      <link>http://shuimu98.gitHub.io/2016-03-15/markdown-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Tue, 15 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</guid>
-      <description>文章转载自Markdown Syntax 另外，可以参考：Markdown，你只需要掌握这几个。 HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html</description>
+      <guid>http://shuimu98.gitHub.io/2016-03-15/markdown-%E8%AF%AD%E6%B3%95/</guid>
+      <description>文章转载自Markdown Syntax
+另外，可以参考：Markdown，你只需要掌握这几个。
+HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html 内容，也可以是纯文本内容。
+Heading 1（标题1） 两个&amp;rdquo;#&amp;ldquo;表示用&amp;lt;h2&amp;gt;标签，这里需要注意的是：我修改的文章目录，只支持从两个&amp;rdquo;#&amp;ldquo;开始，不支持一个&amp;rdquo;#&amp;ldquo;,因为&amp;lt;h1&amp;gt;字太大了。
+Heading 2（标题2） Heading 3（子标题3） Heading 4 Heading 5 Heading 6 Body text （内容） 文本内容，这里是加粗， 这里是斜体.
+{: .image-right}
+这里是删除线
+Blockquotes（引用）  这里是引用。
+ List Types（列表） Ordered Lists（有序列表）  Item one  sub item one sub item two sub item three  Item two  Unordered Lists（无序列表）  Item one Item two Item three  Tables（表格）    Header1 Header2 Header3     cell1 cell2 cell3   cell4 cell5 cell6   &amp;mdash;-     cell1 cell2 cell3   cell4 cell5 cell6   =====     Foot1 Foot2 Foot3    {: rules=&amp;ldquo;groups&amp;rdquo;}</description>
     </item>
     
   </channel>

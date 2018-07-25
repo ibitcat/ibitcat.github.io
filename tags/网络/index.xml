@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/tags/%E7%BD%91%E7%BB%9C/</link>
     <description>Recent content in 网络 on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Wed, 11 Mar 2015 15:36:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,19 @@
     
     <item>
       <title>大端与小端</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-11-big-endian-and-little-endian/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-11/%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF/</link>
       <pubDate>Wed, 11 Mar 2015 15:36:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-11-big-endian-and-little-endian/</guid>
-      <description>高内存地址和低内存地址 内存布局大致如下： -----------------------最高内存地址0xffffffff 栈底 栈 栈顶 ----------------------- NULL (空洞)</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-11/%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF/</guid>
+      <description>高内存地址和低内存地址 内存布局大致如下：
+-----------------------最高内存地址0xffffffff 栈底 栈 栈顶 ----------------------- NULL (空洞) ----------------------- 堆 ----------------------- 未初始 化的数据 ----------------------- 统称数据段 初始化的数据 ----------------------- 正 文段(代码段) ----------------------- 最低内存地址 0x00000000  假如有一个4字节的数组 char[4] szBuf; 那么szBuf在内容中的分布如下：
+栈底 （高地址） ---------- szBuf[3] szBuf[2] szBuf[1] szBuf[0] ---------- 栈顶 （低地址）  高字节和低字节 在十进制中我们都说靠左边的是高位，靠右边的是低位，在其他进制也是如此。
+比如有一个16进制的数： 0x12345678，一共占用4个字节的内存空间，从左到右表示：高字节 &amp;ndash;&amp;gt; 低字节，分别是：
+&amp;gt;0x12，0x34，0x56，0x78
+在内存中的分布根据大小端的不同，顺序就相反：
+大端：
+栈底 （高地址） --------------- 0x78 -- 低位字节 0x56 0x34 0x12 -- 高位字节 --------------- 栈顶 （低地址）  小端：
+栈底 （高地址） --------------- 0x12 -- 高位字节 0x34 0x56 0x78 -- 低位字节 -------------- 栈 顶 （低地址）  大端和小端 简单点来说：</description>
     </item>
     
   </channel>

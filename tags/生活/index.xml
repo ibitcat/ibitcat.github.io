@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/tags/%E7%94%9F%E6%B4%BB/</link>
     <description>Recent content in 生活 on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Sat, 13 Dec 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/tags/%E7%94%9F%E6%B4%BB/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,14 @@
     
     <item>
       <title>入住github pages</title>
-      <link>http://shuimu98.gitHub.io/post/blog/2014-12-13-first-blog/</link>
+      <link>http://shuimu98.gitHub.io/2014-12-13/%E5%85%A5%E4%BD%8Fgithub-pages/</link>
       <pubDate>Sat, 13 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/blog/2014-12-13-first-blog/</guid>
-      <description>一番折腾，我的github pages 终于搭建完成。 一共经历了n个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，再到hexo，最后又迁</description>
+      <guid>http://shuimu98.gitHub.io/2014-12-13/%E5%85%A5%E4%BD%8Fgithub-pages/</guid>
+      <description>一番折腾，我的github pages 终于搭建完成。
+一共经历了n个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，再到hexo，最后又迁移回jekyll。
+一路下来，也是耗费了很多心血。但是感觉很值得。
+ </description>
     </item>
     
   </channel>

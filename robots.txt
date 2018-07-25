@@ -1,2 +1,0 @@
-User-agent: *
-Sitemap: http://shuimu98.gitHub.io/sitemap.xml

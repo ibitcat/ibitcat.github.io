@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
     <description>Recent content in 数据库 on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 13 Sep 2016 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
@@ -13,20 +13,24 @@
     
     <item>
       <title>Mysql 常用命令</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</link>
+      <link>http://shuimu98.gitHub.io/2016-09-13/mysql-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Tue, 13 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</guid>
-      <description>Mysql常用命令1 功能 命令 连接远程数据库 mysql -h192.168.2.172 -uroot -p123456; 添加密码/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码; 显示所有库 show databases; 切换库 use 库名; 显示表结构 desc</description>
+      <guid>http://shuimu98.gitHub.io/2016-09-13/mysql-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>Mysql常用命令1    功能 命令     连接远程数据库 mysql -h192.168.2.172 -uroot -p123456;   添加密码/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码;   显示所有库 show databases;   切换库 use 库名;   显示表结构 desc 表名;   创建数据库 create database 库名;   删除数据库 drop database 库名;   创建表 create table 表名(字段&amp;hellip;); 2   删除表 drop table 表名;   清空表数据 delete from 表名;   显示表中的记录 select * from 表名;   导入.</description>
     </item>
     
     <item>
       <title>mongoDB 常用命令</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-04/mongodb-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Wed, 04 Mar 2015 21:43:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</guid>
-      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●) 1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-04/mongodb-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●)
+1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `#用户认证` db.removeUser(&#39;mongodb&#39;) `#删除用户` show users `#查看所有用户` show dbs `#查看所有数据库` show collections `#查看所有的collection` db.printCollectionStats() `#查看各collection的状态` db.printReplicationInfo() `#查看主从复制状态` db.repairDatabase() `#修复数据库` db.setProfilingLevel(1) `#设置记录profiling，0=off 1=slow 2=all` show profile `#查看profiling` db.copyDatabase(&#39;mail_addr&#39;,&#39;mail_addr_tmp&#39;) `#拷贝数据库` db.mail_addr.drop() `#删除collection` db.dropDatabase() `#删除当前的数据库`  2、客户端连接 MongoDB连接远程服务器的命令格式如下:
+mongo 远程主机ip或DNS:MongoDB端口号/数据库名 -u user -p password
+例子：
+mongo 192.168.1.200:27017/test -u user -p password /usr/local/mongodb/bin/mongo 192.168.1.100:27017/testdb -u test -p &#39;pwd&#39;  3、增删改 db.foo.save({&#39;name&#39;:&#39;ysz&#39;,&#39;address&#39;:{&#39;city&#39;:&#39;beijing&#39;,&#39;post&#39;:100096},&#39;phone&#39;:[138,139]}) `#存储嵌套的对象` db.user_addr.save({&#39;Uid&#39;:&#39;yushunzhi@sohu.com&#39;,&#39;Al&#39;:[&#39;test-1@sohu.com&#39;,&#39;test-2@sohu.com&#39;]}) `#存储数组对象` db.</description>
     </item>
     
   </channel>

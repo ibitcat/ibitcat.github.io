@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/tags/%E8%A1%8C%E4%B8%BA%E6%A0%91/</link>
     <description>Recent content in 行为树 on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Fri, 24 Mar 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/tags/%E8%A1%8C%E4%B8%BA%E6%A0%91/index.xml" rel="self" type="application/rss+xml" />
@@ -13,11 +13,28 @@
     
     <item>
       <title>行为树及其实现</title>
-      <link>http://shuimu98.gitHub.io/post/behaviortree/2017-03-24-behavior-tree-1/</link>
+      <link>http://shuimu98.gitHub.io/2017-03-24/%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/behaviortree/2017-03-24-behavior-tree-1/</guid>
-      <description>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻</description>
+      <guid>http://shuimu98.gitHub.io/2017-03-24/%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</guid>
+      <description>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻思将之前的ai改为行为树的方式。
+在动手之前，自己也参考了网上很多关于行为树的介绍，以及行为树相关项目。
+关于行为树的介绍：
+主要参考了育碧大神finney关于行为树介绍的文章。大神的博客里面有很多关于ai设计的文章，干货十足。
+另外，可以参考资料《The Behavior Tree Starter Kit》，出自《Game AI Pro》第一版第二部分（Section 2: Architecture）的第六章节。 对应的代码在github上。我会抽个时间翻译一下。
+行为树的相关项目：
+我看过的项目主要有两个： - 饥荒的ai实现 - 腾讯的开源项目Tencent Behaviac
+饥荒的脚本是lua实现，而且是未编译成字节码的，所以可以看到整个游戏的lua层代码，其中就包括了饥荒整个ai框架。
+ai相关的主要代码在：behaviours、brains和stategraphs 这三个文件夹，其中stategraphs是状态机的实现，也有参考意义。 我也是将里面行为树部分移除出来，并做了一些修改运用到我们的游戏中。
+什么是行为树 先看一个简单的怪物行为树： 行为树是一种树形结构，它其实可以看成是一个分层状态机从网状图拉成了一个树。一颗树包含了中间节点和叶子节点， 中间节点控制决策的走向，叶子节点则负责展现行为。
+行为树的节点 行为树节点主要分为： 1. 组合节点（序列节点、选择节点、并行节点等） 2. 装饰节点（有且仅有一个子节点） 3. 条件节点 4. 动作节点
+组合节点和装饰节点只能作为行为树的中间节点，而条件节点和动作节点作为树的叶子节点。 所以，条件和动作节点称为行为节点（Behavior Node），组合和装饰节点称为决策节点（Decider Node）。
+在详细介绍每个节点之前，首先要了解节点的状态。行为树的每个节点的运行状态只会有两种： - 运行中（running） - 运行完毕（success/failed）
+父节点通过每个子节点的运行状态，来决定自己的状态。
+如何理解running状态？
+举个例子，假如人吃饭是一个行为，但是吃饭需要花一段时间，所以当人执行吃饭的行为时，这个吃饭的节点就处于running中， 直到吃完后，才会变成success状态（吃饭成功），或者吃到一半时发现菜里有屎，变成failed状态（吃饭失败）。
+当然，如果是瞬时动作，可以不需要running。
+组合节点  序列节点  它实现的是and的逻辑，例如：r = x and y and z,则先执行x，如果x为true，则继续执行y，如果x为false，则直接返回false，以此类推 执行该节点时，它会一个接一个运行， 如果子节点状态为success，则执行下一个子节点； 如果子节点状态为running，则把自身设置为running，并等待返回其他结果（success或failed）； 如果子节点状态为failed，则把自身设置为failed，并返回； 如果所有节点都为success，则把自身设置为success并返回。 原则：只要一个子节点返回&amp;rdquo;失败&amp;rdquo;或&amp;rdquo;运行中&amp;rdquo;，则返回；若返回&amp;rdquo;成功&amp;rdquo;，则执行下一个子节点。</description>
     </item>
     
   </channel>

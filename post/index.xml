@@ -5,7 +5,7 @@
     <link>http://shuimu98.gitHub.io/post/</link>
     <description>Recent content in Posts on Domi●Cat</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-cn</language>
     <lastBuildDate>Tue, 10 Jul 2018 14:21:00 +0800</lastBuildDate>
     
 	<atom:link href="http://shuimu98.gitHub.io/post/index.xml" rel="self" type="application/rss+xml" />
@@ -13,344 +13,788 @@
     
     <item>
       <title>svn服务器搭建、迁移、备份、容灾</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2018-07-12-svn-server-on-linux/</link>
+      <link>http://shuimu98.gitHub.io/2018-07-10/svn%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%BF%81%E7%A7%BB%E5%A4%87%E4%BB%BD%E5%AE%B9%E7%81%BE/</link>
       <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2018-07-12-svn-server-on-linux/</guid>
-      <description>svn服务搭建 安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在</description>
+      <guid>http://shuimu98.gitHub.io/2018-07-10/svn%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA%E8%BF%81%E7%A7%BB%E5%A4%87%E4%BB%BD%E5%AE%B9%E7%81%BE/</guid>
+      <description>svn服务搭建  安装subversion：yum -y install subversion 创建版本库目录：mkdir /var/svn/repos 创建一个仓库：svnadmin create proj-test。此时，在版本库目录下（/var/svn/repos），产生一个仓库目录proj-test 创建用户密码：在生成的仓库目录下，会有一个conf文件夹，里面有三个文件：
+ svnserve.conf，版本仓库的配置文件 passwd，用户账号和密码（明文） authz，仓库权限管理  编辑passwd文件，在[user]节点下，添加用户和密码。
+ 版本仓库配置：编辑svnserve.conf， 在节点[general]下，取消一下字段的注释：
+anon-access = none #进制匿名用户访问 auth-access = write #认证用户具有写权限 password-db = passwd #密码文件 authz-db = authz #权限文件 realm = proj-test #认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同  注意，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 anon-access=read 并且某个目录有被设置上 * = 标记，则会出现上述问题。
+ 权限管理：编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读&amp;reg;、写(w)、无访问权限(空)。
+ 分组，在节点[groups]下面添加分组，例如：
+# 一个用户可以同时存在于不同的组中 [groups] harry_and_sally = harry,sally harry_sally_and_joe = harry,sally,&amp;amp;joe  版本权限（举例说明）</description>
     </item>
     
     <item>
       <title>在linux下搭建ftp服务</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2018-07-10-ftp-server-on-linux/</link>
+      <link>http://shuimu98.gitHub.io/2018-07-10/%E5%9C%A8linux%E4%B8%8B%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Tue, 10 Jul 2018 14:21:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2018-07-10-ftp-server-on-linux/</guid>
-      <description>1、需求 公司要一个ftp服务器，用来存储一些常用软件以及公司内部的一些资料，因此至少需要两个用户，一个是需要密码登陆的私有账户，其他的匿名用</description>
+      <guid>http://shuimu98.gitHub.io/2018-07-10/%E5%9C%A8linux%E4%B8%8B%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1/</guid>
+      <description>1、需求 公司要一个ftp服务器，用来存储一些常用软件以及公司内部的一些资料，因此至少需要两个用户，一个是需要密码登陆的私有账户，其他的匿名用户。 因为，匿名用户静止上传，所以为了上传文件，又额外加了一个public的虚拟用户，用来上传文件，但是这个public是不能访问私有用户的用户目录的。
+ 一般情况下，ftp最好不要提供匿名用户上传的权限，当然非要匿名上传也是可以的，网上有教程，这里我还是倾向于建立一个公用的虚拟用户来实现上传。
+ 例如： - 私有账户kgogame，密码：123，这是个虚拟用户，它的主目录为：/var/ftp/guest - 公共账户public，密码：123，也是一个虚拟用户，它的主目录：/var/ftp/pub，可以匿名访问
+2、搭建FTP服务器 2-1、vsftpd支持三类用户  匿名用户，也就是不需要输入密码就可登录ftp服务器的用户，这个用户名通常是ftp或anonymous; 与匿名用户有关的设置多以 anon_选项开头。 本地用户，也就是你Linux系统上可登录到系统的用户，这些用户是在系统上实实在在存在的用户。通常会有自己的home，shell等。与本地用户有关的设置多以local_开头或包含local_的选项。 虚拟用户，只对ftp有效的用户。这些用户不可以登录Linux系统，只可以登录ftp服务器。其实就是一个本地用户映射成多个只对ftp服务器有效的虚拟用户。虚拟用户可以有自己的ftp配置文件，因此通常利用虚拟用户来对ftp系统的不同用户制定不同的权限，以达到安全控制的目的。与虚拟用户有关的设置以guest_开头。  如果你只是想用ftp实现对自己的共享，你可以开启本地用户； 如果你想对很多人共享，那你可以用匿名用户； 如果你需要针对不同的用户群给予不同的权限，那你就要设置更复杂的虚拟用户了。
+2-2、安装vsftpd 我的linux版本：centos 6.9 64位
+运行命令：yum install vsftpd 然后，测试是否正常：sudo service vsftpd start， 如果服务能启动，尝试登陆ftp，此时应该是可以匿名登陆的。
+2-3、创建vsftpd服务的宿主用户 在安装完vsftpd后，会创建一个名为ftp的系统用户，可以通过cat /etc/passwd查看。例如:
+ftp:x:14:50:FTP User:/var/ftp/pub:/sbin/nologin
+/sbin/nologin表示这个用户是不能用来登陆的，该用户仅用来支持Vsftpd服务用，因此没有许可他登陆系统的必要，并设定他为不能登陆系统的用户。
+注意：默认的主目录是/var/ftp，因为我的需求，所以，我把这个账户的主目录改成了/var/ftp/pub，使用命令usermod -d /var/ftp/pub ftp。
+2-3、创建虚拟用户的宿主用户 为了和默认ftp系统用户区分开，我这里额外创建了一个系统用户，用来支持私有ftp账户。
+mkdir /var/ftp/guest mkdir /var/ftp/guest/kgogame sudo useradd guest -d /var/ftp/guest -s /bin/nologin sudo chown guest:guest -R /var/ftp/guest/  2-4、核心配置 vsftpd的配置：/etc/vsftpd/vsftpd.conf。
+ 备份默认配置：cp vsftpd.conf vsftpd.</description>
     </item>
     
     <item>
       <title>在win10的linux子系统下搭建开发环境</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</link>
+      <link>http://shuimu98.gitHub.io/2018-06-06/%E5%9C%A8win10%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
       <pubDate>Wed, 06 Jun 2018 19:16:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2018-06-06-windows-subsystem-for-linux/</guid>
-      <description>故事的起因 在很久很久之前（也就三五年前- - ），我所有的跨平台开发的套路都是：在windows系统系统搞一个虚拟机，然后装个linux系统，再</description>
+      <guid>http://shuimu98.gitHub.io/2018-06-06/%E5%9C%A8win10%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>故事的起因 在很久很久之前（也就三五年前- - ），我所有的跨平台开发的套路都是：在windows系统系统搞一个虚拟机，然后装个linux系统，再接着就是各种yum、make&amp;hellip;，永无止境。最后就是windows和linux之间文件共享的搞法了，最初我用的是linux mount windows系统下的共享文件夹，在很长一段时间内都用得挺满意，但是渐渐的问题就出现了，在linux下面make的时候，经常会出现cannot allocate memory，我猜想是linux在快速创建文件时，无法及时在windows共享文件夹下生成文件。
+为了解决上面的问题，我尝试采用samba服务，把linux下面的文件映射到windows系统下，但是这种方式也有缺点：
+ 一是samba服务的安装比较繁琐，不管是linux还是windows 二是windows下访问文件有时候速度会比较卡顿，经常导致sublime无法及时打开文件而卡顿  linux子系统 在我尝试使用NFS来共享linux文件夹时，我搜到了一些关于windows 的linux系统相关的教程，所以，我也打算尝试使用一下这个win10的新特性。
+1、开启开发者模式 我的win10版本：win 10 家庭中文版，版本1803，系统版本：17134.81，算是最新的版本了。
+开启步骤：设置 &amp;ndash;&amp;gt; 更新和安全 &amp;ndash;&amp;gt; 开发者选项 &amp;ndash;&amp;gt; 选择开发者模式，然后重启系统。
+2、安装linux 子系统 提醒：在这之前，先改变一下应用的安装路径，因为在应用商城安装的应用，默认是放在c盘下的C:\Users\YourName\AppData\Local\Packages，这样会占用很多C盘空间，所以，要先更改下应用的安装位置。 ~~设置 &amp;ndash;&amp;gt; 搜索【存储】 &amp;ndash;&amp;gt; 点击【更改新内容的保存位置】 &amp;ndash;&amp;gt; 修改【新的应用将保存到：】，然后选择一个盘后应用。~ 会弹出一个提示框，点击确定就可以了。 linux子系统必须安装到系统盘，所以上面的方法只能对普通应用有效。
+下面就要开始安装linux子系统了：
+首先，打开powershell，输入bash，或者按win+q快捷键后搜索bash
+然后，按照提示，在浏览器输入网址https://aka.ms/wslstore，会打开应用商城，然后选择一个linux系统安装，这里我选择我比较熟悉的ubuntu。
+下载安装成功后，启动ubuntu，第一次启动时，需要等待几分钟，ubuntu系统初始化需要一些时间。接着会提示你输入一个账号名，并给你的用户名一个密码（注意：这里不是输入windows系统的账号和密码，是要给你的ubuntu子系统创建一个账号，另外需要注意的是，这个子系统的root密码在每次启动时随机生成的，所以一般我们用sudo就可以了，尽量不用root账号。）
+安装好的子系统路径如图所示： 好了，到这里为止，linux子系统就已经安装完成了。安装的ubuntu版本如下：
+# 内核版本 domi@Domicat:~$ uname -a Linux Domicat 4.4.0-17134-Microsoft #81-Microsoft Sun May 20 01:14:00 PST 2018 x86_64 x86_64 x86_64 GNU/Linux # ubuntu版本 domi@Domicat:~$ cat /etc/issue Ubuntu 16.</description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（六）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-24-tcp-ip-protocol-6/</link>
+      <link>http://shuimu98.gitHub.io/2018-03-24/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E5%85%AD/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-24-tcp-ip-protocol-6/</guid>
-      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-24/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E5%85%AD/</guid>
+      <description> 本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系中网络层的UDP协议。
+1、UDP协议详解 它是与TCP协议相对的，它有两个特点：
+ 无连接 不可靠  TCP像一个细心的小女子，UDP像一个糙汉子。
+UDP协议的功能： - 创建进程到进程间的通信（由端口号完成） - 有限的差错控制，出现差错悄悄丢弃报文分组
+2、UDP首部格式 UDP数据包报包含两个部分：UDP首部+数据
+UDP首部非常简单，占8个byte，下面是一个UDP报文的抓包结果： 字段解释：
+ 第1、2字节：源端口 第3、4字节：目的端口 第5、6字节：报文长度，包括头部+数据，例如上图Length:664，单位为字节，即：Data(656+8首部)= 664byte 第7、8字节：校验和，同理TCP  3、应用层 最后，顺便提一下应用层常用的协议，以及它们所使用的传输层协议：
+ 网页浏览
+ HTTP，使用TCP协议，端口80 SSL，建立在http基础上，端口443  文件传输
+ FTP，使用TCP协议，端口为20、21 TFTP，使用UDP，传送小文件  E-Mail
+ SMTP，使用TCP，端口25 POP3，使用TCP，端口110  远程登录
+ Telnet，使用TCP，端口23 SSH，使用TCP，端口22  域名服务（DNS），使用UDP协议，端口53
+ 网络管理（SNMP），使用UDP协议，端口161、162
+  </description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（五）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-23-tcp-ip-protocol-5/</link>
+      <link>http://shuimu98.gitHub.io/2018-03-23/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%BA%94/</link>
       <pubDate>Fri, 23 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-23-tcp-ip-protocol-5/</guid>
-      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-23/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%BA%94/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系中网络层的TCP协议。另外推荐一篇文章，写得很不错。
+在介绍TCP协议之前，让我们先了解一下传输层。
+1、网络层与传输层关系 先举一个生活中的例子，假如我在京东上购买了一个物品，发货方为上海的某个商家，收货方就是我的公司地址，比如说是：双击省老铁市666区没毛病软件园A座。但是A座这栋楼很大，快递员不知道我具体在哪一层哪个室，这里就需要一个门牌号，比如说666号。
+那么，套路上面的例子，双击省老铁市666区没毛病软件园A座这个地址就类似IP地址，它工作于网络层，它能定位到一块具体的位置，也是就A座这台电脑，在A座这栋楼里面的各个公司就是计算机中的各个进程，每个公司（进程）都占有一个门牌号，这个门牌号就是端口号，端口号这个概念就属于传输层。
+两台主机间通信条件：
+ 本地主机 IP 远程主机 IP  两台主机进程间通信条件：
+ 本地主机 IP 本地进程 端口 远程主机 IP 远程进程 端口  因此，可以简单的理解：网络层（这里指IP协议）提供主机之间的逻辑通信，传输层（这里指TCP或者UDP协议）提供提供进程之间的逻辑通信。
+2、传输层协议详解 传输层功能  分段及封装应用层送来的数据
+例如：我们运送水果，不可能一个一个的运送，一般都是将大堆苹果装车后一车一车的运送，每一车装多少个就是分段数据，装车后要用布封起来保鲜就是封装数据
+ 提供端到端的传输服务
+即源主机端口到目的主机端口进行通信
+ 在发送主机与接收主机之间构建逻辑通信
+如果源主机分别开启Telnet、http访问远程主机的telnet服务和http服务，那么传输层就提供这样一个机制，它构建了两个对应的逻辑通道。
+  关于端口 端口的范围
+端口的大小目前是2个byte，也就是说最大有65536个端口，在0~65535这个范围内，我们又把它分成三个部分：
+ 熟知端口(著名端口)：0-1023，由ICANN指派和控制（例如：80端口、22端口等） 注册端口：1024-49151,IANA不指派也不控制，但须注册（例如：3306端口，即mysql端口） 动态端口(短暂端口)：49152-65535，IANA不指派也不控制，无须注册，可以分配给你自己的应用  3、TCP协议详解 核心：TCP协议负责将数据分段成TCP报文段(每一段报文作为传递给IP层的数据)、重组TCP报文段将数据还原。
+TCP协议的特点  面向连接：通讯双方交换数据之前必须要先建立连接 可靠性：提供了多种确保可靠性的机制 字节流服务：8bit（1byte）为最小单位构成的字节流（所以不存在粘包的概念）  套接字 套接字（socket）它是ip地址和端口号的一个组合（例如：192.168.2.172:80），它是TCP连接的最基本的、抽象化的一个对象，也就是TCP连接的端点，一个TCP连接有两个端点。
+TCP数据传输过程 在底层的实现中，TCP发送端和接收端都有对应的缓存，分别是发送缓存、接收缓存，应用层传递给传输层的数据并不一定立即就发送出去了，而是先放入缓存中，然后等待最合适的时机（网络通畅、对端用空闲等等）再把数据发送出去。同理，接收端也是一样的道理。
+另外，需要注意，传输层在向IP层传递数据是，是以分组为单位的，而不是按整个字节流来发送，TCP协议把若干字节构成一个分组后，再投递给IP层，这种的分组就称为报文段（Segment），因此，我们常常说TCP报文段就是这样来的。
+举例来说：我去菜市场买了一根很长的黄瓜（现在的黄瓜怎么都长那么长- -），太长不好切，那就先把黄瓜切成一段一段的，然后再对每一段切片。这个切成一段的过程就类似TCP数据分段，分段后再交给IP层。</description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（一）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-1/</link>
-      <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
+      <link>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%B8%80/</link>
+      <pubDate>Thu, 22 Mar 2018 14:21:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-1/</guid>
-      <description>写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%B8%80/</guid>
+      <description>写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏这一行，而且还是服务器，网络方便的知识多少还是要掌握一下，遂依照网易云课堂上的教程又重新复习了一遍TCP/IP结构。
+本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系四层结构，以及每层的作用。
+在介绍TCP/IP四层结构之前，先介绍一下OSI七层参考模型。
+1、ISO/OSI 英文全称为Open Systems Interconnection Reference Model(开放式通信系统互联参考模型)，它是国际标准化组织ISO(International Organization for Standardization)提出的一个框架，注意的是，OSI只是一个参考模型，现在的厂商并不是完全按照这个标准，而是参考了这个标准，所以才有现在比较常用的TCP/IP四层网络体系结构，它简化了OSI模型。
+7层模型的功能 OSI标准分为7层，从下往上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，同时规定了这个7层结构需要遵循的一些准则。见下图： 下面介绍下OSI七层模型每层的作用：
+ 应用层：是应用程序访问网络服务的窗口，提供应用程序运行的环境、负责管理和执行应用程序，它是直接面向应用程序的 表示层：确定计算机之间交换数据的格式，为数据在传输之前，对加密、解密、压缩、解压缩以及终端数据格式提供一套规则和约定（它不对数据做操作，只是提供一套规则） 会话层：允许不同计算机上的两个应用程序建立、使用和结束会话，对对话的双方进行资格审查和验证的规则，同时规定发送时的单双工模式，用来使不同应用程序的数据与其他应用程序的数据保持隔离 传输层：确保报文无差错、有序、不丢失、无重复的传输，它主要负责分割与重组数据、按端口号寻址、连接管理、差错控制和流量控制
+传输层在7层体系中起到了一个承上启下的作用，它相当于一个纽带，连接上面三层（偏软件）与下面三层（偏硬件），它是七层中最重要、最关键的一层。它传输的数据称为数据段（Segment）
+ 网络层：负责信息寻址（IP协议）和将逻辑地址和名字转换为物理地址（ARP协议），负责建立、保持、终止通过中间设备的连接，同时负责通讯子网内路径选择和拥挤控制，它传输的数据称为数据包（Packet）
+ 数据链路层：负责从网络层向物理层发送数据帧，它将数据组装成帧，处理数据在传输过程中出现的差错，调节发送速率，它传输的数据称为数据帧（Frame）
+ 物理层：发送和接收比特流
+  注意要区别点到点和端到端这两个概念： - 点到点，是物理层面的概念，比如上图中，两个中间结点就是点到点的连接 - 端到端，是逻辑层面的概念，可以理解是设备A的某个端口与远程设备B的某个端口的连接
+7层模型的使用 加入计算机A通过一个进程向计算机B发送数据，那么发送的数据每经过一层（发送方从上到下），就会在数据的头部加上该层的头部，到达计算机B后，每过一层（从下到上），又减去该层头部，最后计算机B收到A发送的原始数据。
+注意：数据链路层，除了会加上头部，还会在数据末尾加上尾部，而其他层，只会加上头部。
+2、TCP/IP四层结构 因为OSI七层参考模型也有缺点，比如开发成本大、功能重叠，实现复杂等，所以TCP/IP协议体系在OSI的基础上做了一些简化，它分为四层，从上到下分别为：应用层、传输层、网络层、网络接口层（或者叫数据链路层）。 它与OSI七层模型的对应关系如下图： 另外，TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此说，TCP/IP是一个协议族而不是一种协议。
+TCP/IP协议族主要协议  应用层：各种服务及应用程序通过该层利用网络。常用协议：HTTP（基于TCP）、FTP(文件传输，基于TCP)、SMTP、TELNET(终端仿真,基于TCP)、DNS(域名解析)等。 传输层：确认数据传输及进行纠错处理，常用协议：TCP、UDP。 网络层：负责数据的传输，路径及地址选择。常用协议：IP、ICMP(互联网控制消息协议)、ARP(地址解析协议)、RARP(反向地址解析协议，已不常用)。 网络接口层：是针对不同物理网络的连接形式的协议。例如：Ethernet(以太网，目前最常用的局域网中使用网络接口层协议)、FDDI、ATM、PPP(点对点协议，广域网)。  每层对应的主要协议： 网络接口层 这里顺便介绍一下网络接口层（数据链路层），因为我主要想学习的并非偏硬件层的知识，所以，也不作过多的学习和研究。
+在早期，IEEE 802委员会（1980年2月，所以称为802委员会）将局域网的数据链路层拆分了两个子层：
+ MAC子层（Media Access Control），介质访问控制 LLC子层（Logical Link Control），逻辑链路控制  现在已经不再使用了，取而代之的是以太网（Ethernet）。</description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（三）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-3/</link>
+      <link>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%B8%89/</link>
       <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-3/</guid>
-      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%B8%89/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系中网络层的ARP协议。
+1、IP地址和MAC地址 一般，我们知道网络中的计算机，会有ip地址和mac地址（物理地址），那么这两个地址有什么区别和联系？
+逻辑地址（IP地址）：它工作在网络层，全局唯一（全球范围内，公网IP地址是唯一的），用软件实现。
+物理地址（MAC地址）：它工作在网络接口层，本地范围唯一（同一个通讯子网内，可以均指以太网），用硬件实现(路由器，计算机bios芯片)，一般为48位，一般在设备出厂是，就已经将Mac地址烧录进入了设备中。
+简单说就是一个在子网里面，MAC地址可以在这个子网络里面定位到不同的网络设备，IP地址可以在整个因特网中定位到不同的子网。
+注：MAC地址长度为6byte（48bit），前24位为厂家代码，后24位为序列号，例如我现在的mac地址为：FC-AA-14-95-BC-xx，可以通过Mac地址查询网址，知道我的网卡生产厂商为：GIGA-BYTE TECHNOLOGY CO.,LTD，也就是技嘉主板，因为网卡直接集成在了主板中。
+2、IP协议和ARP协议的关系 首先，我们想象这样一个生活中的场景，在新生入学时，一堆学生分配到一个教室，大家彼此不知道名字（无重名），但是每个人都有座位号，此时，如果学生A想要和学生B交流，A知道B的座位号（假如为10号），但是他不知道B的名字，那么A就开始大喊：“我是A，我坐在2号，座位号为10号的同学，你叫什么名字？”，然后B听到后，发现找的就是我，就回复A说：“我是B，我坐在10号”，后面，两人都知道名字后，就成为了好基友。
+套用上面的例子，可以把这个教室认为是一个通讯子网，把座位号认为是IP地址（座位号是可以随意变动的），把名字认为是MAC地址（名字在这个教室内是唯一的），如果通过座位号找到名字，就是ARP协议负责的内容。
+也就是说，ARP协议可以动态地在三层IP地址和二层MAC地址之间建立一种映射关系，用来获取目标IP地址所对应的MAC地址的。如果所要找的主机和源主机不在同一个局域网上，那么就要通过ARP 找到一个位于本局域网上的某个路由器的硬件地址，然后把分组发送给这个路由器，让这个路由器分组转发给下一个网络。剩下的工作就由下一个网络来做。
+因为ARP是为IP协议提供服务的，所以，把ARP划分到了网络层。
+因此，IP协议与ARP协议的关系就是，ARP是为IP协议提供服务，他比IP协议要稍微低一个层次。
+3、为什么有了IP地址还要使用Mac地址？  IP地址容易修改和变动，不能在网络上固定标示一台设备 Mac地址一般在出厂时被烧录到硬件中，不易修改，能在局域网中定位唯一一台设备 从拓扑结构和分层上分析，IP地址属于网络层，主要功能是在广域网范围内路由寻址，选择最佳路由，而Mac地址是网络接口层要形成适合于在网络媒体上传输的数据帧。  4、ARP头部结构 下图为ARP协议头部格式（分组格式，28字节的ARP请求/应答）： 同IP协议一样，我依然结合抓包来解释每个字段的意义。
+1、使用wireshark抓一对(请求和应答)ARP包，本机IP地址为：192.168.2.103，虚拟机IP地址为：192.168.2.172，结果如下图所示 可以看到后面的二进制数据，这就是ARP协议报文的首部，一共28个字节。 2、详细解释每个字段的意义
+ 第1、2个字节（2byte）：值为0001，表示硬件类型为以太网，如图所示：Hardware Type: Ethernet(1) 第3、4个字节（2byte）：值为0800，表示协议类型为IPV4，如图所示：Protocol Type: IPV4(0x0800) 第5个字节：值为06，表示Mac地址长度，也就是6byte（单位为字节），如图所示：Hardware Size:6 第6个字节：值为04，表示IP地址长度，也就是4字节，同上，如图所示：Protocol size:4 第7、8个字节（2byte）：值为0001，1表示请求，2表示应答，3表示RARP请求、4表示RARP应答，上面两个抓包结果该字段是不一样的，分别是：Opcode:request(1)、Opcode:reply(2)。 第9到14个字节（6byte）：表示发送者的Mac地址，两图字段值不一样。 第15到18个字节（4byte）：表示发送者的Ip地址，两图字段值不一样。 第19到24个字节（6byte）：表示接收者的Mac地址，两图字段值不一样，对于请求包，因为就是要知道对方的MAC地址，所以请求包的该字段为0值。 第25到28个字节（4byte）：表示接收者的Ip地址，两图字段值不一样。  需要注意的是：请求包是广播，而应答包是单播。
+3、ARP分组封装头部结构
+上面分析了ARP头部的结构，下图表示了ARP分组封装的结构，它是在ARP头部前再加了以太网首部字段信息： 详细的字段分析，就不再赘述，可以参考上面的抓包图。
+5、ARP缓存表以及ARP相关命令 ARP高速缓存表的作用： 为了减少网络上的通信量，主机 A 在发送其 ARP 请求分组时，就将自己的 IP 地址到硬件地址的映射写入 ARP 请求分组。当主机 B 收到 A 的 ARP 请求分组时，就将主机 A 的这一地址映射写入主机 B 自己的 ARP 高速缓存中。这对主机 B 以后向 A 发送数据报时就更方便了。</description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（二）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-2/</link>
+      <link>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%BA%8C/</link>
       <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-2/</guid>
-      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%BA%8C/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系中网络层的IP协议。
+1、IP协议的功能 IP协议属于网络层众多协议中，最核心的一个协议。它的主要功能有三个：
+ 寻址和路由 传递服务，有两个特点：不可靠（可靠性由上层协议提供，例如TCP协议）；无连接 数据报分段（Segment）和重组  什么是寻址和路由？
+举一个生活中的例子：假如我要坐火车从广州到北京，选择的路线有很多种，可以坐京广线、也可以先到南昌，然后再去上海，最后去北京等等。怎么选择路线就类似IP协议的寻址和路由。
+为什么传递数据不可靠？
+IP协议一个重要的原则就是：尽最大可能传递数据，但是数据能不能真的到达目的地，IP协议并没有保证。
+数据报分段和重组
+同样一个生活中的例子：如果要运送一个很大的机器，一次性无法运送完，通常的做法是，拆分后把零部件运送到目的地，当所有的零部件都到达目的地后，最后在目的地进行重新组装。
+2、IP协议头部格式 IP协议头部格式可以分为两个部分：固定部分（20byte）和可变部分（最大可以为40byte）。所以，IP协议的头部最大是60个字节，但是一般情况下都没有可变部分。
+下图为IP协议头部格式： 下面，我结合wireshark抓包工具，介绍下IP协议头部固定部分的每个字段的详细意义：
+1、使用wireshark抓一个http包，访问的是: http://www.qq.com，结果如下图所示 可以看到后面的二进制数据，这就是IP协议报文的首部，一共20个字节，其中没有可选部分。 2、详细解释每个字段的意义
+ 第1个字节：值为45(16进制，以下同理)，高四位用来表示IP协议的版本，这里也就是：0100 .... = Version 4,低四位用来表示头部长度（注意：单位是4byte），在这里为5(0101)，也就是：.... 0101 = Header Lenght: 20 bytes（5），即4(byte)*5=20(byte)
+ 第2个字节：值为00，也就是图中的：Differentiated Services Field:0x00，用来获得更好的服务，这个字段以前一直没有被人们使用，这个字段不作详细的解释，只需要知道DTRC，这几个标志只能同时存在一个。但是目前这个字段的使用有些变化，具体也不做详解。
+ 第3、4个字节(2byte)： 值为04 0e，也就是十进制1038，也就是图中的：Total Length: 1038，表示数据的总长度（IP头部+数据长度，单位为字节），同时，我们可以根据这个数值以及前面的头部长度，计算得出数据包的长度为：1038-20 = 1018byte。另外，也可以知道数据报的最大长度为 65535 字节。
+ 第5、6个字节：值4c9b，图中为:Identification: 0x4c9b(19611)，它是一个计数器，用来产生数据报的标识，它相当于是给IP报文的一个身份证。比如上面运送大型机器的例子，我们在每个运送零部件上贴一个标识，表示它是属于某个机器的（比如说是挖掘机），等所有的零部件都到了后，我们可以根据这个标示，就知道这一批零件是挖掘机的。
+ 第7、8个字节：值为4000，这里的16个比特要特殊分配下，高三位为标示字段(图中为：Flags:0x02 （Don&#39;t Fragment）)，低13位为片偏移（图中为：Fragment offset:0）。
+ 目前标示字段(Flags)只有后两个比特有意义。标志字段的最低位是 MF (More Fragment)。MF=1 表示后面“还有分片”。MF = 0 表示最后一个分片。标志字段中间的一位是 DF (Don&amp;rsquo;t Fragment) 。只有当 DF = 0 时才允许分片，DF=1表示不允许分片。这里的值为:010(二进制)，也就是没有分片，因为数据只有1038byte，一个IP报文就能运送完毕，所以，它不需要分片。 较长的分组在分片后某片在原分组中的相对位置。片偏移以 8个字节 为偏移单位。关于片偏移，下面会有一张图，会更加详细的描述其意义。这里值为00 0000，因为这里没有分片，所以它的片偏移也就是0。  第9个字节：值为40，也就是10进制的64，它表示TTL（Time to Live），图中为：Time to Live:64，也就是这个IP报文在网络中存在的时间，现在用“跳”作为TTL的单位，也就是说数据报每经过一个路由器，其TTL值就减一。为什么需要TTL？它主要是为了处理路由环路。</description>
     </item>
     
     <item>
       <title>TCP/IP协议族详解（四）</title>
-      <link>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-4/</link>
+      <link>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E5%9B%9B/</link>
       <pubDate>Thu, 22 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/tcp-ip/2018-03-22-tcp-ip-protocol-4/</guid>
-      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。 该系列大概分为下面几个部分： 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3</description>
+      <guid>http://shuimu98.gitHub.io/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E5%9B%9B/</guid>
+      <description>本系列文章是教程：TCP、IP协议族详解的学习笔记。
+该系列大概分为下面几个部分：
+ 1、TCP/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP/IP网络体系中网络层的ICMP协议。
+1、IP协议的缺点  无差错报告和差错纠正机制 缺少一种为主机和管理查询的机制  例如：当IP数据报在网络中超过了它的TTL，那么路由器就会将这个数据报丢弃，但是没有对这个丢弃操作返回错误报告。
+为了弥补IP协议的这些缺点，所以就产生了ICMP协议。需要注意的是：ICMP没有纠正错误的机制。
+2、ICMP协议的数据封装格式 它的大概封装格式如下： ICMP本身是网络层协议。但是，它的报文不是如设想的那样直接传送给数据链路层，实际上，ICMP报文首先封装成IP数据报，然后再传送给下一层。在IP数据报中的协议字段值是1就表示其IP数据是ICMP报文。通过抓包可以证实这一点。
+1、通过ping www.baidu.com命令，使计算机产生ICMP报文；
+2、通过wireshark抓包，筛选ICMP协议，此时抓包的结果如下图所示：
+3、ICMP报文种类 差错报告报文 可以理解成是错误信息error，它总是把差错报告返回给原始的数据源。常用的错误类型有：
+ 类型3：终点不可达，例如：无法到达目的地，可能是硬件错误、软件设置错误等等原因导致 类型4：源点抑制，例如：发送方发送速率太快，但是某个路由器接受速率过慢，那么这个路由器就会返回一个ICMP，通知发送方速率要慢一点 类型5：路由重定向，例如：当路由器发现数据报走的不是最佳路由，就会返回一个ICMP报告，让发送方下次不要走这里了 类型11：超时，例如：发生了路由环路，从而导致TTL变为0值 类型12：参数问题，例如：数据报的首部被篡改或者丢失  我们使用tracert www.baidu.com这个命令，然后抓一些ICMP包，如下图，可以看到很多黑色的结果，即差错报告。 差错报文的要点：
+ 对于携带ICMP差错报文的数据报，不再产生ICMP差错报文 对于分片的数据报，如果不是第一个分片，则不产生ICMP差错报文 对于具有多播地址（224.0.0.0-239.255.255.255）的数据报，不产生ICMP差错报文 对于具有特殊地址如（127.0.0.0或0.0.0.0）的数据报，不产生ICMP 差错报文  查询报文 常用的类型有：
+ 类型8或者0：返回请求或回到，例如常用的ping命令 类型13或14：时间戳请求或回答，注意：需要两方的时间必须与标准时间同步 类型17或18：地址码（掩码）请求或回答，不太常用（过时） 类型10或9：路由器查询通告  4、ICMP头部格式 ICMP两种报文种类有着不同的头部格式，但区别不大，前4个字节是一样的，不同的只有后面4个字节。
+查询报文头部格式 ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的数据。格式如下图： 通过抓包证实一下：
+1、运行ping www.baidu.com，开始抓包
+2、筛选ICMP协议包，结果如下： 3、字段解释：
+ 第1个字节：值为08，表示这是一个查询报文 第2个字节：值为00 第3、4个字节：值为0x4d14，表示头部校验和 第5、6个字节：值为0x0001，注意：这里要分大端和小端格式，一般windows和linux都是小端，所以，这里应该看：Identifier(LE):256(0x0100) 第7、8个字节：值为0x4700，同上，也需要分大小端。 后面的32个字节为测试数据  差错报告报文头部格式 ICMP差错报文头部格式如下（通用格式），这里需要注意的一点是，差错报告报文的格式除了前4个字节，后面的字节所对应的意义是根据type值和code值发生变化的。</description>
     </item>
     
     <item>
       <title>2018年度计划</title>
-      <link>http://shuimu98.gitHub.io/post/plan/2018-01-31-2018-yearly-plan/</link>
+      <link>http://shuimu98.gitHub.io/2018-01-31/2018%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</link>
       <pubDate>Wed, 31 Jan 2018 21:37:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/plan/2018-01-31-2018-yearly-plan/</guid>
-      <description>2018年已经到来，回顾去年一年，有开心，有不满，也有遗憾。去年也做了一个年度计划，完成了一些，但是大部分都没有达到自己的预想，果然自己还是</description>
+      <guid>http://shuimu98.gitHub.io/2018-01-31/2018%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</guid>
+      <description> 2018年已经到来，回顾去年一年，有开心，有不满，也有遗憾。去年也做了一个年度计划，完成了一些，但是大部分都没有达到自己的预想，果然自己还是自制力太差咯。
+过去一直去，未来一直来，2017年已经结束了，也不再过多在意，18年还是做个新一年的年度计划吧（我预感又要完不成了~但是总该有个计划吧）。
+1、工作&amp;amp;学习  《TCP、IP协议族详解》这个视频教程过一遍，毕竟花了钱的（优先，2018-3-24已完成）； 《linux内核分析》这个视频教程把它看一遍，做一个笔记； 自己的服务器项目要抽时间完善一下； 工作笔记有时间就继续整理(已完成)~； 17年还有两本书没有读完（《The Go Programming Language》(已完成)、《UNIX高级环境编程》），继续读完。 有空就过一下自己收集的资料，百度云地址：https://pan.baidu.com/s/1hucnVQc。  2、生活  理财记账还是要继续保持； 今年必须报名驾校，争取拿到本子（今年取消）; 坚持每周3天的健身、跑步；  </description>
     </item>
     
     <item>
       <title>读书笔记 ——《Go语言圣经》</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</link>
+      <link>http://shuimu98.gitHub.io/2018-01-27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-27-gopl-zh/</guid>
-      <description>本书中文版，点这里。 接触golang也有两三年了，一直没有系统把它过一遍，正好通过这本书系统性的复习一次，掌握golang的细节。 第1章：入</description>
+      <guid>http://shuimu98.gitHub.io/2018-01-27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/</guid>
+      <description>本书中文版，点这里。
+接触golang也有两三年了，一直没有系统把它过一遍，正好通过这本书系统性的复习一次，掌握golang的细节。
+第1章：入门  命令行参数
+os包以跨平台的方式，提供了一些与操作系统交互的函数和变量。程序的命令行参数可从os包的Args变量获取；os包外部使用os.Args访问该变量。os.Args的第一个元素，os.Args[0], 是命令本身的名字（例如：D:\Github\xlsxconv\xlsxconv.exe）。
+ bufio包，它使处理输入和输出方便又高效。Scanner类型是该包最有用的特性之一，它读取输入并将其拆成行或单词；通常是处理行形式的输入最简单的方法。它是按流模式读取输入，并根据需要拆分成多个行。理论上，可以处理任意数量的输入数据。还有另一个方法，就是一口气把全部输入数据读到内存中，一次分割为多行，然后处理它们，需要使用ReadFile（来自于io/ioutil）和strings.Split。
+input := bufio.NewScanner(os.Stdin) for input.Scan() { // TODO ... }  Printf格式字符串：
+   占位符 备注     %d 十进制整数   %x, %o, %b 十六进制，八进制，二进制整数。   %f, %g, %e 浮点数： 3.141593 3.141592653589793 3.141593e+00   %t 布尔：true或false   %c 字符（rune） (Unicode码点)   %s 字符串   %q 带双引号的字符串&amp;rdquo;abc&amp;rdquo;或带单引号的字符&amp;rsquo;c&amp;rsquo;   %v 变量的自然形式（natural format）,如果包含的#副词%#v，它表示用和Go语言类似的语法打印值   %T 变量的类型   %% 字面上的百分号标志（无操作数）    {: rules=&amp;ldquo;all&amp;rdquo; frame=&amp;ldquo;border&amp;rdquo;}</description>
     </item>
     
     <item>
       <title>每日笔记 —— golang篇</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</link>
+      <link>http://shuimu98.gitHub.io/2018-01-25/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--golang%E7%AF%87/</link>
       <pubDate>Thu, 25 Jan 2018 15:15:15 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2018-01-25-daily-notes-golang/</guid>
-      <description>目录 TOC {:toc} go编译 使用go build编译go文件时，go文件必须放在最后，不然会有named files must be .go files的报错。 例如：go build -ldflags &amp;quot;-w&amp;quot; -o ./xlsx2lua.exe ./xlsx2lua.go 减</description>
+      <guid>http://shuimu98.gitHub.io/2018-01-25/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--golang%E7%AF%87/</guid>
+      <description>目录
+ TOC {:toc}  go编译  使用go build编译go文件时，go文件必须放在最后，不然会有named files must be .go files的报错。
+例如：go build -ldflags &amp;quot;-w&amp;quot; -o ./xlsx2lua.exe ./xlsx2lua.go
+ 减小golang编译的二进制文件大小：go build -ldflags &amp;quot;-s -w&amp;quot;，如果想进一步减小，可以使用upx对编译的二进制加壳压缩。
+ s去掉符号表（然后panic时候的stack trace就没有任何文件名/行号信息了，这个等价于普通C/C++程序被strip的效果） w去掉DWARF调试信息，得到的程序就不能用gdb调试了。  golang发布闭源的.a文件（静态库），参考官方文档 Binary-Only Packages。
+  package 别名 import xxx &amp;ldquo;fmt&amp;rdquo; 表示xxx是系统包“fmt”的一个别名，在代码中可以使用 xxx.Println 来调用函数。 &amp;gt;注意，当用一个点 “.”来作为一个包的别名时，表示省略调用，在调用时可以不用写包名，类似c++ 中 using namespace std，以后就不用写std::method这样的格式，但是不推荐。
+go可见性规则 首字母大写表示public，小写表示private（注意：作用域是packge，即：在同一个包下，大小写都是可以访问的）。
+数组、切片（slice）、map  数组和切片的区别和联系
+数组：数组的容量和长度是一样的。cap() 函数和 len() 函数均输出数组的容量（即长度）。 切片：切片是长度可变、容量固定的相同的元素序列。Go语言的切片本质是一个数组。容量固定是因为数组的长度是固定的，切片的容量即隐藏数组的长度。长度可变指的是在数组长度的范围内可变。
+ golang map的key：只有function、map和slice三个kind不能作为map的key，struct能不能作为key，要看结构体中的字段是否存在前面所提到的三个类型，如果没有则可以作为key。
+ Go语言中的Array、Slice、Map和Set使用详解。
+append函数返回值必须有变量接收，因为append操作可能会导致原来的slice底层内存发生改变。
+ golang map数据结构不能并发读写问题，最新版本的golang 1.</description>
     </item>
     
     <item>
       <title>每日笔记 —— lua篇</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-lua/</link>
+      <link>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--lua%E7%AF%87/</link>
       <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-lua/</guid>
-      <description>记录从工作至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。 lua的元表和元方法：元表像是一个“操作指南”，里面包含</description>
+      <guid>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--lua%E7%AF%87/</guid>
+      <description>记录从工作至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。
+ lua的元表和元方法：元表像是一个“操作指南”，里面包含了一系列操作的解决方案，每一个操作的解决方案就是元方法（以__开头的key），例如：__index元方法。 index元方法，引用自这篇文章：
+很多人对此都有误解，这个误解是：*如果A的元表是B，那么如果访问了一个A中不存在的成员，就会访问查找B中有没有这个成员。*而这个理解是完全错误的，实际上，即使将A的元表设置为B，而且B中也确实有这个成员，返回结果仍然会是nil，原因就是B的index元方法没有赋值。别忘了我们之前说过的：“元表是一个操作指南”，定义了元表，只是有了操作指南，但不应该在操作指南里面去查找元素，而index方法则是“操作指南”的“索引失败时该怎么办”。
+~~~lua father = {
+house=1
+}
+father.index = father &amp;ndash;注意这一步：把father的__index方法指向自己
+son = {
+car=1
+}
+setmetatable(son, father)
+print(son.house) ~~~ __index元方法的工作流程：  1.在表中查找，如果找到，返回该元素，找不到则继续 2.判断该表是否有元表（操作指南），如果没有元表，返回nil，有元表则继续 3.判断元表（操作指南）中有没有关于索引失败的指南（即__index方法），如果没有（即__index方法为nil），则返回nil；如果__index方法是一个表，则重复1、2、3； 如果__index是一个函数，则以 table 和 key 作为参数调用它。
+  userdata的元表，参考，重点：在lua代码中的普通表，不能作为userdata的metatable。必须使用luaL_newmetatable创建的表才能作为userdata的metatable。luaL_newmetatable创建的元表仅在栈中被声明，并没有加入到lua代码中，所以在lua层是无法访问这个元表的。 lua调用C函数是，先将参数从左往右压栈，然后调用C函数，最后把返回值也压栈，并告诉lua返回了几个值。这个过程lua会自己维护栈。lua调用完C函数后，栈中只会有之前压入的参数，以及返回值，不应该存在其他的值在栈中。 c调用lua函数，要注意栈的变化，lua_pcall 之后，一定要将栈复原。
+int st = lua_gettop(svr-&amp;gt;vm); // 调用之前栈大小 lua_pushcfunction(svr-&amp;gt;vm, l_ecb); lua_pushvalue(svr-&amp;gt;vm, svr-&amp;gt;ev_handler[timer_out]); lua_pushinteger(svr-&amp;gt;vm, id); lua_pushboolean(svr-&amp;gt;vm, erased); lua_pcall(svr-&amp;gt;vm, 2, 0, -4); lua_settop(svr-&amp;gt;vm, st); // 调用后，恢复栈  lua正则匹配，主要参考：lua匹配模式和Lua 字符串查找函数以及Step By Step(Lua字符串库)。
+   字符 备注     .</description>
     </item>
     
     <item>
       <title>每日笔记 —— 工具篇</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</link>
+      <link>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E5%B7%A5%E5%85%B7%E7%AF%87/</link>
       <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-ide-and-tools/</guid>
-      <description>1、编辑器 1-1、vim vim的4种模式，以及模式的切换 Vim常用模式： 命令模式(command-mode) 插入模式(insert-mode</description>
+      <guid>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E5%B7%A5%E5%85%B7%E7%AF%87/</guid>
+      <description>1、编辑器 1-1、vim  vim的4种模式，以及模式的切换
+Vim常用模式：
+ 命令模式(command-mode) 插入模式(insert-mode) 可视模式(visual-mode) 正常模式(normal-mode)  Vim各个模式的进入：
+①.正常模式：主要用来浏览和修改文本内容的。一般的，打开Vim都是正常模式。在任何模式下，只要按下 Esc 键就可以返回正常模式。
+②.插入模式：用来向文本中添加内容的。在正常模式下，按i进入插入模式
+③.可视模式：相当于高亮选取文本后的普通模式。在正常模式下，按v进入可视模式，Shift+v进入可视行模式，Ctrl+v进入可视块模式。
+④.命令模式：在正常模式下，按:(英文冒号)进入命令模式。
+Vim模式的转换：
+   原来的模式 新的模式 操作     其它模式 正常模式 按 Esc键   其它模式 插入模式 按 i 在光标前插入
+按 I 在行首插入
+按 a 在光标后插入
+按 s 删除光标所在的字符再插入
+按 A 在行末插入
+按 o 在当前行之下新建行
+按 O 在当前行之上新建行
+按 S 删除光标所在行再插入   正常模式 命令模式 按 : （英文冒号）   正常模式 可视模式 按 v 可视模式</description>
     </item>
     
     <item>
       <title>每日笔记 —— 开源项目和学习资料篇</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-opensource/</link>
+      <link>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E7%AF%87/</link>
       <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-opensource/</guid>
-      <description>1、开源项目 1-1、redis redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，</description>
+      <guid>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E7%AF%87/</guid>
+      <description>1、开源项目 1-1、redis  redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字redis。 关于Redis ae事件驱动库的讲解，网上有比较多的教程，例如：教程1 和 教程2  1-2、libev  windows下visual studio编译libev:
+ 在vs下添加已存在的项目; 从vs中移除ev_epoll.c, ev_kqueue.c, ev_poll.c, ev_select.c, ev_win32.c几个文件; event.c中要包含winsock2.h头文件; config.h.in复制为config.h, 定义HAVE_SELECT和HAVE_SYS_SELECT_H 加上ws2_32.lib  具体参考：https://github.com/xmulyj/libev 里面的README
+ 关于windows下编译libev的问题:
+ 1. cygwin下编译正常,有backend; 2. visual studio中编译的话:  (1)把config.h.in复制一份改为config.h,然后HAVE_SELECT和HAVE_SYS_SELECT_H都定义为1后;
+(2)在event.c中包含winsock2.h头文件
+编译ok, 有backend(select), 运行libev官网上的例子(去掉io watcher,只保留timer watcher)正常.
+ libev 教程：可以参考这个大神的博客，里面搜索关键字libev
+  1-3、Snowflake算法  Twitter-Snowflake算法，64位自增ID算法，可以用来替换UUID算法。关于该算法的介绍，可以参考这篇文章。
+ Snowflake算法，C语言实现。
+  1-4、skynet  skynet架构，基本的框架介 以及 Skynet 设计综述。  1-5、raft(分布式系统 RAFT 一致性算法)  raft 简单介绍。  1-6、groupcache  groupcache（已star）是一个分布式缓存 go 语言库,支持多节点互备热数据,有良好的稳定性和较高的并发性。寥寥2000来行代码完成了个lru cache库，核心只用一个list和一个map，出自brad大神之手（memcached作者）。  1-7、UUID生成  rfc4122详细介绍了UUID的生成。在我自己的游戏服务器中有简单的实现并对生成的uuid进行了base64。  2、游戏开发  游戏常用的编程设计模式：游戏编程模式。 行为树：</description>
     </item>
     
     <item>
       <title>每日笔记 —— 计算机原理和操作系统篇</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</link>
+      <link>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</link>
       <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-16-daily-notes-computer-theory/</guid>
-      <description>1、计算机原理 10进制转16进制计算方法： 注意：所有除法都要取整。 从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A 从右数</description>
+      <guid>http://shuimu98.gitHub.io/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/</guid>
+      <description>1、计算机原理  10进制转16进制计算方法：
+注意：所有除法都要取整。
+从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A
+从右数第二位：1610/16 = 100；100%16 = 4,结果：_ 4 A
+从右数第三位：100/16 = 6；6%16 = 4,结果：6 4 A
+最后： 6&amp;frasl;100 =0 结束运算，最后 转换结果 为: 0x64A
+ 进制与位元：因为 6个bit就能表示64，所以64进制的位元=6，同理 16进制位元=4，因为2^4=16。
+ 计算机中原码、反码、补码：
+正数的原码、反码、补码都等于原码。
+负数的反码=除了最高位的符号位不变，其他位取反。
+负数的补码=它的反码+1。
+可以看看这篇文章，讲解的比较通俗易懂。
+ 负数在计算机中是以补码的形式存在，例如有这样一个二进制（1111 1111，其实就是-1），它的最高位是1，所以它是一个负数， 所以它应该是某个负数的反码形式，转换反码为 1111 1110 （补码-1），转换为原码为1000 0001（符号位不变，其他位取反），即1111 1111 表示-1，1000 0000 = -128的补码。
+关于补码的计算，在我之前的C primer笔记中有提到。
+ 总线和寻址范围以及和内存的关系：
+假设是32位的总线，那么cpu可以寻址的范围为2的32次方，这里的一根总线代表一个二进制的bit位，注意，这里的bit不是对应的内存bit。这个总线其实可以看成一个索引生成器，它可以给cpu生成2^32个索引。
+内存的存储单位为byte，即一个字节 。假如内存是一盒奥利奥，那每一块奥利奥就是一个存储单位，它有8个bit，即一个字节。
+通过总线产生的索引，去内存寻址。比如 cpu要寻址的地址 = 0x00000010，那么cpu就会去内存找到索引为 0x00000010 那个存储单元存储的值（一个字节）。
+ 算术右移：在汇编中，可以用算术右移来进行有符号数据的除法。把一个数右移n位，相当于该数除以2的n次方。</description>
     </item>
     
     <item>
       <title>读书笔记 ——《Unix环境高级编程》</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-10-12-apue-3rd/</link>
+      <link>http://shuimu98.gitHub.io/2017-10-12/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-10-12-apue-3rd/</guid>
-      <description>本书一共21章。 第1章：UNIX基础知识 /etc/passwd文件为unix的口令文件，口令文件中的登陆项由7个以冒号分隔的字段组成，依次是</description>
+      <guid>http://shuimu98.gitHub.io/2017-10-12/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</guid>
+      <description>本书一共21章。
+第1章：UNIX基础知识  /etc/passwd文件为unix的口令文件，口令文件中的登陆项由7个以冒号分隔的字段组成，依次是：登录名、加密口令、数字用户id(UID)、组id(GID)、注释字段、起始目录以及使用的shell程序。其中，真实的用户密码存放在/etc/shadow中，组名存放在/etc/group中。
+domi:x:500:500::/home/domi:/bin/zsh git:x:502:502::/home/git:/bin/bash  unix文件系统是目录和文件的一种层次结构，所有东西的起点是称为“根”（root）的目录，这个目录的名称是一个字符“/”。
+ 文件描述符是一个小的非负整数，内核用来标示一个特定进程正在访问（例如：读文件、写文件、新建文件）的文件。
+ 当运行一个新程序时，shell为其打开3个文件描述符，即标准输入（stdin）、标准输出（stdout）和标准错误（stderr）。可以重定向其中的一个或所有这3个描述符到某个文件。shell把文件描述符0与进程的标准输入关联，描述符1与进程的标注输出关联，描述符2与进程的标准错误关联。 ls &amp;gt; list.txt
+ 一个进程内的所有线程共享同一地址空间、文件描述符、栈以及进程相关属性。
+ 当unix系统函数出错时，通常会返回一个负值，而且整数变量errno通常被设置为具有特殊信息的值。
+ 系统调用（system call）和C库函数调用的区别：   第2章：UNIX标准及实现  两个比较常见的标准,参考这篇文章
+ ANSI C：这一标准是 ANSI（美国国家标准局）于 1989 年制定的 C 语言标准。 后来被 ISO（国际标准化组织）接受为标准，因此也称为 ISO C。它的目标是为各种操作系统上的 C 程序提供可移植性保证，而不仅仅限于 UNIX。 POSIX：该标准最初由 IEEE 开发的标准族，部分已经被 ISO 接受为国际标准。POSIX.1 和 POSIX.2 分别定义了 POSIX 兼容操作系统的 C 语言系统接口 以及 shell 和工具标准。这两个标准是通常提到的标准。POSIX 表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX 是为了读音更 像 UNIX）。塔的目标是为了提高 UNIX 环境下应用程序的可移植性，而不仅仅局限于UNIX。  头文件定义了某些与实现相关的数据类型，它们被称为基本系统数据类型。下表列出了常用的基本系统数据类型。  头文件列表</description>
     </item>
     
     <item>
       <title>行为树及其实现</title>
-      <link>http://shuimu98.gitHub.io/post/behaviortree/2017-03-24-behavior-tree-1/</link>
+      <link>http://shuimu98.gitHub.io/2017-03-24/%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</link>
       <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/behaviortree/2017-03-24-behavior-tree-1/</guid>
-      <description>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻</description>
+      <guid>http://shuimu98.gitHub.io/2017-03-24/%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/</guid>
+      <description>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻思将之前的ai改为行为树的方式。
+在动手之前，自己也参考了网上很多关于行为树的介绍，以及行为树相关项目。
+关于行为树的介绍：
+主要参考了育碧大神finney关于行为树介绍的文章。大神的博客里面有很多关于ai设计的文章，干货十足。
+另外，可以参考资料《The Behavior Tree Starter Kit》，出自《Game AI Pro》第一版第二部分（Section 2: Architecture）的第六章节。 对应的代码在github上。我会抽个时间翻译一下。
+行为树的相关项目：
+我看过的项目主要有两个： - 饥荒的ai实现 - 腾讯的开源项目Tencent Behaviac
+饥荒的脚本是lua实现，而且是未编译成字节码的，所以可以看到整个游戏的lua层代码，其中就包括了饥荒整个ai框架。
+ai相关的主要代码在：behaviours、brains和stategraphs 这三个文件夹，其中stategraphs是状态机的实现，也有参考意义。 我也是将里面行为树部分移除出来，并做了一些修改运用到我们的游戏中。
+什么是行为树 先看一个简单的怪物行为树： 行为树是一种树形结构，它其实可以看成是一个分层状态机从网状图拉成了一个树。一颗树包含了中间节点和叶子节点， 中间节点控制决策的走向，叶子节点则负责展现行为。
+行为树的节点 行为树节点主要分为： 1. 组合节点（序列节点、选择节点、并行节点等） 2. 装饰节点（有且仅有一个子节点） 3. 条件节点 4. 动作节点
+组合节点和装饰节点只能作为行为树的中间节点，而条件节点和动作节点作为树的叶子节点。 所以，条件和动作节点称为行为节点（Behavior Node），组合和装饰节点称为决策节点（Decider Node）。
+在详细介绍每个节点之前，首先要了解节点的状态。行为树的每个节点的运行状态只会有两种： - 运行中（running） - 运行完毕（success/failed）
+父节点通过每个子节点的运行状态，来决定自己的状态。
+如何理解running状态？
+举个例子，假如人吃饭是一个行为，但是吃饭需要花一段时间，所以当人执行吃饭的行为时，这个吃饭的节点就处于running中， 直到吃完后，才会变成success状态（吃饭成功），或者吃到一半时发现菜里有屎，变成failed状态（吃饭失败）。
+当然，如果是瞬时动作，可以不需要running。
+组合节点  序列节点  它实现的是and的逻辑，例如：r = x and y and z,则先执行x，如果x为true，则继续执行y，如果x为false，则直接返回false，以此类推 执行该节点时，它会一个接一个运行， 如果子节点状态为success，则执行下一个子节点； 如果子节点状态为running，则把自身设置为running，并等待返回其他结果（success或failed）； 如果子节点状态为failed，则把自身设置为failed，并返回； 如果所有节点都为success，则把自身设置为success并返回。 原则：只要一个子节点返回&amp;rdquo;失败&amp;rdquo;或&amp;rdquo;运行中&amp;rdquo;，则返回；若返回&amp;rdquo;成功&amp;rdquo;，则执行下一个子节点。</description>
     </item>
     
     <item>
       <title>读书笔记 ——《C Primer Plus》(第5版)</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2017-03-24-c-primer-plus/</link>
+      <link>http://shuimu98.gitHub.io/2017-03-24/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-c-primer-plus%E7%AC%AC5%E7%89%88/</link>
       <pubDate>Fri, 24 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2017-03-24-c-primer-plus/</guid>
-      <description>本笔记是以c99作为标准，而不是最新的c11标准。 c语言关键字 ANSI C一共只有32个关键字，加上ISO推出的C99标准，新增了5个关键字，一共有</description>
+      <guid>http://shuimu98.gitHub.io/2017-03-24/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-c-primer-plus%E7%AC%AC5%E7%89%88/</guid>
+      <description>本笔记是以c99作为标准，而不是最新的c11标准。
+c语言关键字 ANSI C一共只有32个关键字，加上ISO推出的C99标准，新增了5个关键字，一共有37个关键字（C99标准）。
+把这些关键字按照不同的类型分类，可以分成：数据类型关键字、控制语句关键字、存储类型关键字、函数说明关键字。
+数据类型关键字（共15个）    关键字 备注     char 字符类型   short 短整型   int 整型   long 长整型   float 单精度浮点数（6 位有效数字）   double 双精度浮点数（10位有效数字）   signed 声明为有符号类型   unsigned 声明为无符号类型   struct 结构体类型   union 联合类型   enum 枚举类型   void 空类型   _Bool 布尔类型（c99新增，需要包含stdbool.h）   _Complex 复数类型（c99新增）   _Imaginary 虚数类型（c99新增）    {: rules=&amp;ldquo;all&amp;rdquo; frame=&amp;ldquo;border&amp;rdquo;}</description>
     </item>
     
     <item>
       <title>2017年度计划</title>
-      <link>http://shuimu98.gitHub.io/post/plan/2017-02-06-2017-yearly-plan/</link>
+      <link>http://shuimu98.gitHub.io/2017-02-06/2017%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</link>
       <pubDate>Mon, 06 Feb 2017 11:50:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/plan/2017-02-06-2017-yearly-plan/</guid>
-      <description>2017年年度计划。 1、工作 深入学习C，把《C Primer Plus第五版》这本书仔细啃完； 把skynet的代码详细过一遍，弄清楚整个框架流程，顺便加强</description>
+      <guid>http://shuimu98.gitHub.io/2017-02-06/2017%E5%B9%B4%E5%BA%A6%E8%AE%A1%E5%88%92/</guid>
+      <description> 2017年年度计划。
+1、工作  深入学习C，把《C Primer Plus第五版》这本书仔细啃完； 把skynet的代码详细过一遍，弄清楚整个框架流程，顺便加强学习C； 闲暇之余，不能忘记golang的学习，整理学习笔记； 整理上一年工作中记录的每日笔记，集中起来； unix的6本圣经，慢慢过一遍；     书名 有无kindle电子书     《UNIX环境高级编程 第三版》 亚马逊有kindle电子书   《UNIX网络编程 卷1 套接字联网API（第3版）》 亚马逊有kindle电子书   《UNIX网络编程 卷1 套接字联网API（第2版）》 亚马逊有kindle电子书   《TCP/IP详解卷1:协议》 无kindle电子书，适合新手   《TCP/IP详解卷2:实现》 无kindle电子书   《TCP/IP详解卷3:TCP事务协议.HTTP和UNIX域协议》 无kindle电子书    {: rules=&amp;ldquo;all&amp;rdquo;}
+2、生活  继续保持记账理财的习惯； 考驾照的事情要提到日程上来; 照顾好老婆，比较重要； 周末多出去走走，锻炼身体，年中去体检一次； 工作日下午茶时间坚持走动，活动身体。  </description>
     </item>
     
     <item>
       <title>Mysql 常用命令</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</link>
+      <link>http://shuimu98.gitHub.io/2016-09-13/mysql-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Tue, 13 Sep 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2018-03-28-mysql-command/</guid>
-      <description>Mysql常用命令1 功能 命令 连接远程数据库 mysql -h192.168.2.172 -uroot -p123456; 添加密码/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码; 显示所有库 show databases; 切换库 use 库名; 显示表结构 desc</description>
+      <guid>http://shuimu98.gitHub.io/2016-09-13/mysql-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>Mysql常用命令1    功能 命令     连接远程数据库 mysql -h192.168.2.172 -uroot -p123456;   添加密码/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码;   显示所有库 show databases;   切换库 use 库名;   显示表结构 desc 表名;   创建数据库 create database 库名;   删除数据库 drop database 库名;   创建表 create table 表名(字段&amp;hellip;); 2   删除表 drop table 表名;   清空表数据 delete from 表名;   显示表中的记录 select * from 表名;   导入.</description>
     </item>
     
     <item>
       <title>我的工作环境分享</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2016-08-27-my-working-env/</link>
+      <link>http://shuimu98.gitHub.io/2016-08-27/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E5%88%86%E4%BA%AB/</link>
       <pubDate>Sat, 27 Aug 2016 15:08:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2016-08-27-my-working-env/</guid>
-      <description>古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。 本文将分享我自己这么多年用得</description>
+      <guid>http://shuimu98.gitHub.io/2016-08-27/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E5%88%86%E4%BA%AB/</guid>
+      <description>古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。 本文将分享我自己这么多年用得比较顺手的工作环境。
+1、编辑器&amp;amp;IDE sublime text 3 编辑器首推 sublime text 3，而且我也差不多用了3年的时间，期间也有收集了很多很好用的插件、主题等。
+ 插件      插件 备注     SideBarEnhancements 侧边栏增强插件   BracketHighlighter 匹配高亮插件（我使用默认的下划线显示，不刺眼）   ConvertToUTF8 中文必备插件   IMESupport 中文输入法鼠标跟随，在st3中如果使用中文输入法（搜狗、微软中文）等，输入法的框没办法跟随鼠标光标，特别是双屏的时候，特别不方便。   TortoiseSVN 小乌龟svn，设置快捷键后，update、commit、log、diff简直不能太舒心   HexViewer 16进制显示，有时候会用到   SublimeLinter-lua lua语法检查（其他语言也有对应的SublimeLinter）   Terminal 右键打开cmd，默认是打开powershell，太难看，更改配置可以打开git bash   SublimeTextTrans sublime text 3透明，仅限windows，可能更适合前端同学1   Theme - Nil 这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服   GoSublime golang 插件，有少许不足(第三方包不能转到定义)    {: rules=&amp;ldquo;all&amp;rdquo;}</description>
     </item>
     
     <item>
       <title>linux 源码升级git</title>
-      <link>http://shuimu98.gitHub.io/post/git/2016-04-22-linux-update-git/</link>
+      <link>http://shuimu98.gitHub.io/2016-04-22/linux-%E6%BA%90%E7%A0%81%E5%8D%87%E7%BA%A7git/</link>
       <pubDate>Fri, 22 Apr 2016 22:05:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/git/2016-04-22-linux-update-git/</guid>
-      <description>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。 另外一个原因是在centos 使用</description>
+      <guid>http://shuimu98.gitHub.io/2016-04-22/linux-%E6%BA%90%E7%A0%81%E5%8D%87%E7%BA%A7git/</guid>
+      <description>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。
+另外一个原因是在centos 使用git push的时候，出现错误：
+error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98/domi-vimrc/info/refs  而根据网上找的解决方案会导致提交到github上的commit记录有问题（提交者信息为invalid-email-address），如图： 虽然可以正常提交，但是总是感觉别扭，网上说需要升级git版本，所以顺手就源码升级下git。
+这里参照了这篇教程，另外记录了在实践中出现的问题以及解决方案。
+具体步骤：
+(1) 卸载之前的git git --version git version 1.7.1 yum remove git  (2) 安装依赖的包 sudo yum update sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel  如果Git在make的时候报错：Can&#39;t locate ExtUtils/MakeMaker.pm in @INC
+解决方法如下：
+yum -y install perl-devel yum -y install perl-CPAN  或者安装ExtUtils-MakeMaker
+wget http://files.directadmin.com/services/9.0/ExtUtils-MakeMaker-6.31.tar.gz tar xvzf ExtUtils-MakeMaker-6.31.tar.gz cd ExtUtils-MakeMaker-6.31 perl Makefile.</description>
     </item>
     
     <item>
       <title>时间轮定时器</title>
-      <link>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-game-server-timer/</link>
+      <link>http://shuimu98.gitHub.io/2016-04-08/%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
       <pubDate>Fri, 08 Apr 2016 23:33:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-game-server-timer/</guid>
-      <description>定时器实现一般常见的有两种方式： 时间轮（time_wheel） 最小堆 就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的mud</description>
+      <guid>http://shuimu98.gitHub.io/2016-04-08/%E6%97%B6%E9%97%B4%E8%BD%AE%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
+      <description>定时器实现一般常见的有两种方式：
+ 时间轮（time_wheel） 最小堆  就我自己的了解，使用时间轮的开源项目有：云风的skynet、陈硕的muduo；而经典的libevent库则使用的是最小堆。
+分别解释下最小堆和时间轮的简单概念：
+ 最小堆：最小堆是一个经过排序的完全二叉树,除开根节点，其他任意节点的值都要小于它两个左右孩子的值。  另外关于二叉树的分类，我会另外单独写个笔记整理一下。
+ 关于完全二叉树，一个n层的二叉树，除了第n-1层是满的（没有空位），第n层右边可以满可以不满，但是从左到右不能出现空位。可使用广度遍历来判断是否是完全二叉树。
+  时间轮：可以直接拿我们生活中的手边做例子，手表一共有三个分级，时钟、分针和秒针，我们把秒针的一个刻度称为一个tick，秒针每走一圈，分针就移动一个刻度， 时间轮的原理就跟手表的模型是一样的。  时间轮算法 时间轮 (Timing-Wheel) 算法类似于一以恒定速度旋转的左轮手枪，枪的撞针则撞击枪膛，如果枪膛中有子弹，则会被击发。下面我将由简入深介绍基于时间轮实现的定时器。
+时间轮算法的复杂程度跟你的分级层数有关，最简单的就是只有一轮，复杂一点的就是分层的时间轮，比如Hierarchy 时间轮（也就是linux系统下的时间轮实现方式）。
+不分层的时间轮 不分层的时间轮是最简单，也是很容易理解的时间轮模型了：
+ 假设有个N个槽（tick)的轮子，随着时间推进，每走一个tick的时间，指针指向到槽也往前推进一格，直到一个轮所有的槽都执行完毕。
+ 下图描述了一个不分层的时间时间轮模型：
+我们可以根据上面的模型，实现一个简单实用的时间轮定时器，一般的场景一层的时间轮已经够用了，比如游戏服务器，很少用到时间跨度非常大的定时器。 根据我自己的项目经验，目前我们的游戏服务器内部采用的就是简单的不分层时间轮，模型如下：
+	|-- user_t[0] |-slot_t[0]	---	|-- …… |-slot_t[1]	|-- user_t[n] tw.slots = |-…… |-…… |-slot_t[6400-1] tw.lslot = 留一个槽，存放那些超时时间大于一轮的超时事件  上面模型中，slots表示时间轮的槽位，每个槽位里面可能有多个定时器任务，用一个链表来存放这些定时器任务。
+该时间轮一共有6400个刻度，一个tick为10毫秒，那么每次走完一个转盘需要的时间等于 6400 * 10ms,即64s，差不多一分钟的时间走一轮。
+用lua表述下这个模型，大概如下：
+tick = 10 ms -- tick slotlen = 6000 -- 刻度数量 --下面用lua的table表示这个时间轮的数据结构： time_wheel = { slots = { [1] = {timeobj1,timeobj2,…} -- 刻度1上的定时对象 [2] = {timeobj1,timeobj2,…} -- 刻度2上的定时对象 }, lslot = {t1,t2,…} -- 这里存放的是tick超过一圈的定时对象 curTick = 0, -- 当前走了多少个tick } timeObj = { tick=10, -- 表示这个定时对象需要10个tick， tickout = 1230, -- 表示超时的tick，即当定时器tick了1230次后，就触发超时事件 }   ps：</description>
     </item>
     
     <item>
       <title>常见的排序算法解析</title>
-      <link>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-sort-alg/</link>
+      <link>http://shuimu98.gitHub.io/2016-04-08/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/</link>
       <pubDate>Fri, 08 Apr 2016 23:35:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/algorithm/2016-04-08-sort-alg/</guid>
-      <description>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。 比较常用</description>
+      <guid>http://shuimu98.gitHub.io/2016-04-08/%E5%B8%B8%E8%A7%81%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/</guid>
+      <description>关于排序算法，从大学到工作，一直都在接触，奈何老是学了忘，忘了学。很是蛋疼，索性就把我自己看过的几个排序算法做个笔记，加深一下记忆。
+比较常用的排序算法：
+ 冒泡排序 （面试常用 - -!） 快速排序 直接选择排序 红黑树排序  冒泡排序 这个排序算法，是比较基础的算法，该算法的核心在我自己的理解是： 两两交换。 只要记住这个算法就是依次比较相邻的两个元素的大小。
+假如要参与排序的元素个数为 n，那么需要排序的轮数为 n - 1。而在具体的每一轮 的排序中，只用排序上一轮剩下的。这里有一个可以优化的细节，在每一轮开始循环 比较大小的时候，给一个标示位，如果这一轮排序结束后，该标示位没有变化，说明 已经是有序的了，后面的轮数也可以跳过了。但是最坏的情况还是需要排玩 n -1 轮。
+具体的实现我用go实现了一遍，很简单，代码在这里 升序和降序只需要改下比较大小的顺序就OK了，很容易实现。
+快速排序 该算法的效率很高，所以敢称快速排序。它的思想是基于二分法。算法思想：从无序的 元素中选取一个基准元素，一般都选第一个元素，然后用这个基准与其他元素对比，大的 放一边（这一堆元素暂时是无序的，暂且称为大子队列），小的放另外一边（也是无序的，暂且称为小子队列）， 然后再分别对这两个队列进行同样的对比操作，一直递归下去，直到子队列的元素小于1。 其实就是基准元素不断归为的过程。
+balabala说了一堆，来个例子就明白了：
+无序队列： list = {5,2,3,7,9,1}  直接选择排序 这个是比较“笨”的一种算法，就是拿元素一个个比下去。 如果是想升序，就拿每一轮第一个元素和后面的元素比较大小，在每一轮结束后，把找到的最小的元素 交换到该轮起始位置。一共轮 n - 1次。
+代码在这里</description>
     </item>
     
     <item>
       <title>Markdown 语法</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</link>
+      <link>http://shuimu98.gitHub.io/2016-03-15/markdown-%E8%AF%AD%E6%B3%95/</link>
       <pubDate>Tue, 15 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2016-03-20-markdown-syntax/</guid>
-      <description>文章转载自Markdown Syntax 另外，可以参考：Markdown，你只需要掌握这几个。 HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html</description>
+      <guid>http://shuimu98.gitHub.io/2016-03-15/markdown-%E8%AF%AD%E6%B3%95/</guid>
+      <description>文章转载自Markdown Syntax
+另外，可以参考：Markdown，你只需要掌握这几个。
+HTML Elements 像写记事本一样，可以记录你想记录的内容，可以是html 内容，也可以是纯文本内容。
+Heading 1（标题1） 两个&amp;rdquo;#&amp;ldquo;表示用&amp;lt;h2&amp;gt;标签，这里需要注意的是：我修改的文章目录，只支持从两个&amp;rdquo;#&amp;ldquo;开始，不支持一个&amp;rdquo;#&amp;ldquo;,因为&amp;lt;h1&amp;gt;字太大了。
+Heading 2（标题2） Heading 3（子标题3） Heading 4 Heading 5 Heading 6 Body text （内容） 文本内容，这里是加粗， 这里是斜体.
+{: .image-right}
+这里是删除线
+Blockquotes（引用）  这里是引用。
+ List Types（列表） Ordered Lists（有序列表）  Item one  sub item one sub item two sub item three  Item two  Unordered Lists（无序列表）  Item one Item two Item three  Tables（表格）    Header1 Header2 Header3     cell1 cell2 cell3   cell4 cell5 cell6   &amp;mdash;-     cell1 cell2 cell3   cell4 cell5 cell6   =====     Foot1 Foot2 Foot3    {: rules=&amp;ldquo;groups&amp;rdquo;}</description>
     </item>
     
     <item>
       <title>git 操作手册</title>
-      <link>http://shuimu98.gitHub.io/post/git/2015-12-16-git-doc/</link>
+      <link>http://shuimu98.gitHub.io/2015-12-16/git-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</link>
       <pubDate>Wed, 16 Dec 2015 11:54:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/git/2015-12-16-git-doc/</guid>
-      <description>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误</description>
+      <guid>http://shuimu98.gitHub.io/2015-12-16/git-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</guid>
+      <description>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。
+分为四个部分：
+ 1、git学习资料； 2、git命令与常用操作； 3、git的设置； 4、错误解决方法；  第一部分 - git学习资料以及选项解释 这里是我收集的git学习资料：
+ GitHub秘籍 Git教程 Pro Git（中文版） Git Magic Git 简明指南 github秘笈。  另外，关于一些比较疑惑的git命令选项，我也收集了一部分，不是很全，目前就遇到了工作中不懂的一些命令选项。
+1-1： git 仓库内部结构 1-2： origin到底是什么意思？ 可以参考知乎的此问题，origin，译为起源，我个人理解为远程仓库在本地的一个别名或者标签，这个是约定俗成的，也可以改为其他名字。同时，要区分repository（仓库）和 master（主分支）这两个概率的区别，举个栗子：repository是一棵树的树根，master则是这个树的主干，其他枝叶都是从master分出去的。不论是主干还是枝干，它们通通都起源于树根。
+这样就很容易理解命令：git push origin master。
+1-3： git -u这个参数到底表示什么？ -u 参数即 &amp;ndash;set-upstream， 依然参考知乎的此问题，用来关联本地分支和远程分支。举一个非常简单的例子：
+我在本地新建了一个分支test，并提交到远程仓库，然后取回远程仓库的更新。
+git checkout -b test git push origin test git pull #此时就会报错，因为git不知道去拉取远程的哪个分支  但是，如果使用了git push -u origin test，等价于： git push origin test ; git branch --set-upstream test origin/test。</description>
     </item>
     
     <item>
       <title>这些年，我遇到的哈希、加密算法</title>
-      <link>http://shuimu98.gitHub.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</link>
+      <link>http://shuimu98.gitHub.io/2015-11-24/%E8%BF%99%E4%BA%9B%E5%B9%B4%E6%88%91%E9%81%87%E5%88%B0%E7%9A%84%E5%93%88%E5%B8%8C%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</link>
       <pubDate>Tue, 24 Nov 2015 16:50:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/algorithm/2015-11-24-hash-and-crypto-alg/</guid>
-      <description>最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非</description>
+      <guid>http://shuimu98.gitHub.io/2015-11-24/%E8%BF%99%E4%BA%9B%E5%B9%B4%E6%88%91%E9%81%87%E5%88%B0%E7%9A%84%E5%93%88%E5%B8%8C%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/</guid>
+      <description>最近接各种sdk，期间涉及到了很多hash算法、加密算法，虽然之前也一直有接触这些比较常用的算法，也算是熟悉一些常用的算法，起初也不觉得有非常大的必要记录下来，后面想想，还是整理下记录下来，有备无患嘛。
+1、hash算法 &amp;ldquo;哈希&amp;rdquo;在工作中常常被提起，主要是把任意长度的输入，通过散列算法，变换成固定长度的输出。比较常见的算法有：MD5、SHA1、HMAC、HMAC_SHA1 等。
+很多人将他们称之为加密算法，个人觉得其实他们算不算加密算法，除了其中的HMAC_SHA1需要输入秘钥，其他的都是不需要秘钥的，他们的作用都是计算输入内存的散列值，确保信息传输完整一致。例如很多软件，都会在官网放出软件的MD5、SHA值，主要是确保你下载的软件是否是原版的，确保没有被其他人破解、篡改。
+特别注意：哈希算法都是不可逆算法，也就是你无法根据给定的MD5反向解密得出hash前的数据。举个栗子：你可以计算出1G MP4文件的MD5值&amp;rdquo;123456&amp;rdquo;(假设的)，但是你肯定无法根据这个“123456”得到这个1G的MP4，如果可以，那该是多么牛逼的压缩技术，还需要等待漫长的下载吗?找AV得多么幸福啊……
+主要注意：SHA1和HMAC_SHA1是有区别的，前者无需秘钥，而后者需要输入秘钥，安全性更好。
+下面是用golang写的小代码片段：
+import ( &amp;quot;fmt&amp;quot; &amp;quot;crypto/hmac&amp;quot; &amp;quot;crypto/md5&amp;quot; &amp;quot;crypto/sha1&amp;quot; &amp;quot;encoding/hex&amp;quot; &amp;quot;io&amp;quot; ) // 计算md5 func Md5(value string) string { h := md5.New() h.Write([]byte(value)) return fmt.Sprintf(&amp;quot;%s&amp;quot;, hex.EncodeToString(h.Sum(nil))) } // sha1 func Sha1(){ h := sha1.New() io.WriteString(h, &amp;quot;hello,domi~&amp;quot;) signature := fmt.Sprintf(&amp;quot;%x&amp;quot;, h.Sum(nil)) } // hmac_sha1 func HmacSha1() string{ hasher := hmac.New(sha1.New, []byte(&amp;quot;key&amp;quot;)) hasher.Write([]byte(&amp;quot;hello,cat~&amp;quot;)) seg := hasher.Sum(nil) return base64.StdEncoding.EncodeToString(seg) }   Tips:
+ 关于golang MD5等计算的小问题：</description>
     </item>
     
     <item>
       <title>ubuntu elasticsearch和graylog安装与使用</title>
-      <link>http://shuimu98.gitHub.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</link>
+      <link>http://shuimu98.gitHub.io/2015-09-23/ubuntu-elasticsearch%E5%92%8Cgraylog%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Wed, 23 Sep 2015 11:25:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-23-ubuntu-graylog-and-elasticsearch/</guid>
-      <description>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。 1、起因 从游戏服务器转到app服务器，</description>
+      <guid>http://shuimu98.gitHub.io/2015-09-23/ubuntu-elasticsearch%E5%92%8Cgraylog%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+      <description>本文记录了如何在 ubuntu server 14.04下安装和使用elasticsearch-1.7、graylog-1.2。
+1、起因 从游戏服务器转到app服务器，发现好多东西需要学习，在给项目添加logger的时候，用到了golang的一个开源日志库logrus（注意：这个版本是国人fork的版本，添加了文件日志和graylog日志支持），考虑到app后端会有大量日志的产生，将日志写到文件中，可能会出问题，所有就看了下graylog是个什么东西，初步了解，发现比较强大，虽然我比较讨厌java，但是没办法，项目需要。so~ 开始动手搞起来。
+2、前期准备 从百度找了一堆的教程，都是很老以前的版本，最新的1.2界面更清新，于是，只能去官网找帮助文档。
+安装graylog之前，需要安装java环境、mongodb和 elasticsearch。
+2-1 安装java 这里参考了http://www.linuxidc.com/Linux/2014-09/106445.htm
+ 检查Java是否已经安装在Ubuntu上  打开终端，使用下面的命令：java -version
+如果你看到像下面的输出，这就意味着你并没有安装过Java:
+The program ‘java’ can be found in the following packages: *default-jre * gcj-4.6-jre-headless * openjdk-6-jre-headless * gcj-4.5-jre-headless * openjdk-7-jre-headless Try: sudo apt-get install   在Ubuntu和Linux Mint上安装Java  看了各种类型‘Java’的不同之后，让我们看如何安装他们。
+在Ubuntu和Linux Mint上安装JRE，打开终端，使用下面的命令安装JRE：sudo apt-get install default-jre
+在Ubuntu和Linux Mint上安装OpenJDK，在终端，使用下面的命令安装OpenJDK Java开发工具包：sudo apt-get install default-jdk
+特殊地，如果你想要安装Java 7或者Java 6等等，你可以使用openjdk-7-jdk/openjdk-6jdk，但是记住在此之前安装openjdk-7-jre/openjdk-6-jre。
+2-2 安装mongodb 因为之前已经安装了mongdb，就不在记录，个人感觉mongodb官方的帮助非常清新，一路下来，完全没错误。给个地址http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+2-3 安装elasticsearch 重点部分</description>
     </item>
     
     <item>
       <title>linux 常用命令</title>
-      <link>http://shuimu98.gitHub.io/post/linux/2015-09-18-linux-command/</link>
+      <link>http://shuimu98.gitHub.io/2015-09-18/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Fri, 18 Sep 2015 09:56:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-18-linux-command/</guid>
-      <description>第一部分 - 常用简单命令 小知识： markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 {: .notice} 重命名文件文件夹 ： mv file1 file2 移动文件</description>
+      <guid>http://shuimu98.gitHub.io/2015-09-18/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>第一部分 - 常用简单命令 小知识： markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 {: .notice}
+ 重命名文件文件夹 ： mv file1 file2 移动文件文件夹 ： mv file1 dir1 新建文件夹 ： mkdir dirname 删除非空目录 ： rm -rf dirname 实时打印文件变化 ： tail -f file.log 解压zip文件 ： unzip file.zip -d/temp 文件夹压缩成zip ： zip –q –r test.zip ~/test tar解压： tar zxvf zhcon-0.2.5.tar.gz
+x : 从 tar 包中把文件提取出来
+z : 表示tar包被gzip压缩过,需要用gunzip解压
+v : 显示详细信息
+f : xxx.tar.gz : 指定被处理的文件是 xxx.tar.gz
+ 文件夹压缩成zip ： zip –q –r xahot.</description>
     </item>
     
     <item>
       <title>ubuntu下supervisor安装与使用笔记</title>
-      <link>http://shuimu98.gitHub.io/post/linux/2015-09-18-ubuntu-supervisor/</link>
+      <link>http://shuimu98.gitHub.io/2015-09-18/ubuntu%E4%B8%8Bsupervisor%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 18 Sep 2015 09:10:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-18-ubuntu-supervisor/</guid>
-      <description>1、supervisor 介绍 它是个什么东东？用来干嘛的？ supervisor是linux下的进程管理工具，python编写。用来监控进程的运</description>
+      <guid>http://shuimu98.gitHub.io/2015-09-18/ubuntu%E4%B8%8Bsupervisor%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>1、supervisor 介绍 它是个什么东东？用来干嘛的？
+supervisor是linux下的进程管理工具，python编写。用来监控进程的运行。比如说你要一直运行进程A，使用supervisor后，如果A进程崩掉了， 或者意外被kill了，supervisor可以快速帮你重新启动A，当然还有其他功能。待我后面一一挖掘。
+2、supervisor 安装 安装环境：
+ ubuntu 14.04
+python 2.7.6
+ 这里我选择在线安装，可以参考官网的文档， 使用Setuptools在线安装。需要先安装Setuptools，这里，我尝试了两种方式安装：
+（1）、手动下载 ez_setup.py,下载地址,然后使用命令：
+root@st-B85M-DS3H:~/tools# python ez_setup.py  如果安装成功，会显示：
+Installed /usr/local/lib/python2.7/dist-packages/setuptools-18.2-py2.7.egg Processing dependencies for setuptools==18.2 Finished processing dependencies for setuptools==18.2  （2）、ubuntu下，直接使用apt-get安装
+root@st-B85M-DS3H:~/Projects# sudo apt-get install python-setuptools  如果安装成功，最后会显示：
+Unpacking python-setuptools (3.3-1ubuntu2) ... Setting up python-pkg-resources (3.3-1ubuntu2) ... Setting up python-setuptools (3.3-1ubuntu2) ...  输入命令：
+root@st-B85M-DS3H:~/Projects# easy_install --help  检查是否安装成功。
+安装好setuptools之后，使用命令easy_install supervisor ,开始安装supervisor。
+当然，也可以下载源码，解压后，使用命令 python setup.</description>
     </item>
     
     <item>
       <title>ubuntu下nginx安装与使用笔记</title>
-      <link>http://shuimu98.gitHub.io/post/linux/2015-09-17-ubuntu-nginx/</link>
+      <link>http://shuimu98.gitHub.io/2015-09-17/ubuntu%E4%B8%8Bnginx%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Thu, 17 Sep 2015 15:37:00 +0800</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/linux/2015-09-17-ubuntu-nginx/</guid>
-      <description>最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。 这一篇主要记录关于ngnix在ubun</description>
+      <guid>http://shuimu98.gitHub.io/2015-09-17/ubuntu%E4%B8%8Bnginx%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/</guid>
+      <description>最近转过来开发app，一番折腾+研究，发现真的是隔行如隔山，好多东西都不能按照游戏服务器开发的思路来。
+这一篇主要记录关于ngnix在ubuntu下搭建nginx环境以及过程中遇到的问题，暂时只是简单了解一部分皮毛，如果以后遇到更深入的知识，会持续更新。
+1、nginx 的安装 安装环境：ubuntu Release: 14.04
+小知识：
+如何查看ubuntu版本号？ 1、cat /etc/issue 2、lsb_release -a (此方法显示内容更详细)  安装方法百度很多，这里我只实践了在线安装部分，也推荐在线安装。
+1-1 在线安装，推荐 $sudo apt-get install nginx
+ubuntu安装Nginx之后的文件结构大致为：
+所有的配置文件都在 /etc/nginx 下，并且每个虚拟主机已经安排在了/etc/nginx/sites-available下
+启动程序文件在 /usr/sbin/nginx
+日志放在了 /var/log/nginx 中，分别是access.log和error.log
+并已经在 /etc/init.d/ 下创建了启动脚本nginx
+默认的虚拟主机的目录设置在了/usr/share/nginx/www
+1-2 源代码安装 下载地址：http://nginx.org/download/
+安装过程很简单，如下：
+$./configure $make $make install  安装成功之后，nginx放置在/usr/local/nginx目录下，主要的配置文件为conf目录下的nginx.conf，nginx的启动文件在sbin目录下的nginx文件。
+2、nginx 启动 注意：nginx 默认监听80端口，如果无法启动，请查看80端口是否被占用，请检查是否安装了apache，或者修改ngnix的配置文件，将ngnix的监听端口改为8080。有关nginx配置会在下面详细说明。
+小知识：
+查看端口占用情况： netstat -nltp|grep 80 t表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态 或者 netstat -anp|grep 80  2-1 在线安装的启动过程 $sudo /etc/init.d/nginx start
+2-2 源代码安装的启动过程 命令如下：</description>
     </item>
     
     <item>
       <title>vim配置以及使用vundle管理vim插件</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</link>
+      <link>http://shuimu98.gitHub.io/2015-07-28/vim%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8vundle%E7%AE%A1%E7%90%86vim%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Tue, 28 Jul 2015 15:08:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-07-28-vim-config-and-plugin/</guid>
-      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，</description>
+      <guid>http://shuimu98.gitHub.io/2015-07-28/vim%E9%85%8D%E7%BD%AE%E4%BB%A5%E5%8F%8A%E4%BD%BF%E7%94%A8vundle%E7%AE%A1%E7%90%86vim%E6%8F%92%E4%BB%B6/</guid>
+      <description>搬到linux后，需要使用装逼利器vim，奈何界面不够萌萌哒，于是上网搜索vim的配置以及插件，然后经过自己的一番折腾，找了一些不错的插件，自己弄了一个vim配置。
+vimrc下载地址：传送门 另外推荐一个:k-vim
+先来一张预览图：
+安装步骤 1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim 2、git clone https://github.com/shuimu98/domi-dotfile.git 3、cp domi-dotfile/.vimrc ~/ 4、打开vim，输入命令 :PluginInstall  这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
+vim基础配置 这部分主要包括vim的一些基础配置，例如显示行号、括号配对等，大部分的设置在我的配置里面已经有了注释，不详细说明。 另外，tagbar等插件需要ctags支持，自行安装。
+一些小技巧：
+ 输入 vim &amp;ndash;version 可以查看vim支持的特性，如果支持会有 &amp;ldquo;(+)&amp;rdquo; 目前的vim版本的7.4，7.2升级到7.4尽量不要直接卸载vim，否则会出现很多蛋疼的问题，最好自己拉源码编译  一些按键注释：
+ &amp;lt;CR&amp;gt; 在vimrc配置中表示回车的意思 &amp;lt;C-w&amp;gt; 表示ctrl + v &amp;lt;S-a&amp;gt; 表示shift + a &amp;lt;A-w&amp;gt;&amp;lt;Left&amp;gt; 表示 alt+w+ &amp;lt;--  vim默认的常用快捷键、命令    快捷键或命令 备注     :vsplit 分割屏幕（垂直分割）   :split 分割屏幕（水平分割）   :!command 运行vim外部环境命令（注意 “!”），如 :!</description>
     </item>
     
     <item>
       <title>cocos2dx3.3发布apk</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-23/cocos2dx3.3%E5%8F%91%E5%B8%83apk/</link>
       <pubDate>Mon, 23 Mar 2015 20:24:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-23-cocos2dx3.3-build-apk/</guid>
-      <description>如何编译安装的apk，有很多种方法，一种是使用第三方编译器，例如：eclipse等，一种是纯命令行的方式。 因为对eclipse不熟悉，加上我</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-23/cocos2dx3.3%E5%8F%91%E5%B8%83apk/</guid>
+      <description>如何编译安装的apk，有很多种方法，一种是使用第三方编译器，例如：eclipse等，一种是纯命令行的方式。 因为对eclipse不熟悉，加上我比较喜欢命令行的工作方式，所以我采用的是纯命令行来编译发布apk。不管是用 第三方工具还是命令行，我们都需要有一个安卓的环境。下面开始一步一步进行。
+ 提醒：系统为win8.1 x64，文中所给出的下载地址，可能需要自备翻墙工具，原因你懂的。 (●—●)
+ 安卓环境安装 下载 SDK
+安卓环境搭建需要4个东西，它们分别是：java JDK、android SDK、android NDK 和 apache ant。
+1)、下载java JDK
+关于java JDK 版本的选择，android开发可以选择 Java SE
+2)、下载android SDK
+注意：这里有两个选项，我选择 Stand-alone SDK Tools，只单独下载sdk，不需要用下载 android studio。
+3)、下载android NDK
+根据自己的系统下载相应的版本。
+4)、下载apache ant
+截止本文时间，最新的版本是 *Apache Ant 1.9.4*。
+安装
+这里是我的操作步骤，我把所有的需要的东西都放在 E:\Android 文件夹中，方便管理，当然你也可以随便放。
+除了java jdk需要安装，其他三个都是解压就可以用了。java jdk的详细安装我就不说那么多了，只需要记录 jdk 和 jre的路径，防止 自己装完后，记不住路径了 - -！
+配置环境变量
+安装完java jdk后，需要配置环境变量。
+1)、java jdk 环境变量
+A、新建系统变量 JAVA_HOME 变量，值为：E:\Android\Java\jdk1.8.0_40 ；
+B、新建系统变量 classpath 变量，变量值为： .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar （注意前面的“.</description>
     </item>
     
     <item>
       <title>golang：interface 和 nil 以及 error nil</title>
-      <link>http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-14/golanginterface-%E5%92%8C-nil-%E4%BB%A5%E5%8F%8A-error-nil/</link>
       <pubDate>Sat, 14 Mar 2015 15:16:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/reading-notes/2015-03-14-golang-interface-and-nil/</guid>
-      <description>interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-14/golanginterface-%E5%92%8C-nil-%E4%BB%A5%E5%8F%8A-error-nil/</guid>
+      <description>interface（接口） 在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括nil也可以赋值给interface{}，interface{}有点像c艹中的纯虚基类，只包含了方法的集合。
+interface在底层的实现包括两个成员：类型（_type）和值(data)，我对lua比较熟，这点上类似lua的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。_type表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？…… data存储变量的真实值。
+例如： var value interface{} = int32(100)
+那么value在底层的结构就是：{_type:int32,data=100}
+关于普通类型与interface{}的转换：
+1、普通类型转换到interface{}是隐式转换；例如 fmt.Println(),我们可以传入任意类型的值，Println都会把传入的值转换成interface{}类型
+2、interface{}转换成普通类型需要显式转换；
+关于接口的实现：
+假如有一个接口 type interface{} T, *T包含了定义在T和*T上的所有方法，而T只包含定义在T上的方法。
+nil值 在golang中，nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。
+如何判断一个interface{} 是否是 nil？
+根据上面对interface{}的介绍，判断interface{}是否为nil的规则：
+&amp;gt;只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
+那么思考如下问题：
+type T struct{ Age int Name string } func main(){ t1:= &amp;amp;T{20,&amp;quot;kaka&amp;quot;} fmt.Printf(&amp;quot;%p\n&amp;quot;, t1) fmt.Println(t1==nil) //fmt.Println(*t1 == nil) //cannot convert nil to type test }  为什么注释的那行会报错？我的分析是：</description>
     </item>
     
     <item>
       <title>大端与小端</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-11-big-endian-and-little-endian/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-11/%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF/</link>
       <pubDate>Wed, 11 Mar 2015 15:36:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-11-big-endian-and-little-endian/</guid>
-      <description>高内存地址和低内存地址 内存布局大致如下： -----------------------最高内存地址0xffffffff 栈底 栈 栈顶 ----------------------- NULL (空洞)</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-11/%E5%A4%A7%E7%AB%AF%E4%B8%8E%E5%B0%8F%E7%AB%AF/</guid>
+      <description>高内存地址和低内存地址 内存布局大致如下：
+-----------------------最高内存地址0xffffffff 栈底 栈 栈顶 ----------------------- NULL (空洞) ----------------------- 堆 ----------------------- 未初始 化的数据 ----------------------- 统称数据段 初始化的数据 ----------------------- 正 文段(代码段) ----------------------- 最低内存地址 0x00000000  假如有一个4字节的数组 char[4] szBuf; 那么szBuf在内容中的分布如下：
+栈底 （高地址） ---------- szBuf[3] szBuf[2] szBuf[1] szBuf[0] ---------- 栈顶 （低地址）  高字节和低字节 在十进制中我们都说靠左边的是高位，靠右边的是低位，在其他进制也是如此。
+比如有一个16进制的数： 0x12345678，一共占用4个字节的内存空间，从左到右表示：高字节 &amp;ndash;&amp;gt; 低字节，分别是：
+&amp;gt;0x12，0x34，0x56，0x78
+在内存中的分布根据大小端的不同，顺序就相反：
+大端：
+栈底 （高地址） --------------- 0x78 -- 低位字节 0x56 0x34 0x12 -- 高位字节 --------------- 栈顶 （低地址）  小端：
+栈底 （高地址） --------------- 0x12 -- 高位字节 0x34 0x56 0x78 -- 低位字节 -------------- 栈 顶 （低地址）  大端和小端 简单点来说：</description>
     </item>
     
     <item>
       <title>mongoDB 常用命令</title>
-      <link>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</link>
+      <link>http://shuimu98.gitHub.io/2015-03-04/mongodb-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Wed, 04 Mar 2015 21:43:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/wiki/2015-03-04-mongodb_command/</guid>
-      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●) 1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `</description>
+      <guid>http://shuimu98.gitHub.io/2015-03-04/mongodb-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description>网上收集了一部分（地址忘记了）， 自己也记录了一些(●—●)
+1、超级用户相关 use admin `#切换库` db.addUser(ixigua,&#39;pwd&#39;) `#增加或修改用户密码` db.system.users.find() `#查看用户列表` db.auth(ixigua,&#39;pwd&#39;) `#用户认证` db.removeUser(&#39;mongodb&#39;) `#删除用户` show users `#查看所有用户` show dbs `#查看所有数据库` show collections `#查看所有的collection` db.printCollectionStats() `#查看各collection的状态` db.printReplicationInfo() `#查看主从复制状态` db.repairDatabase() `#修复数据库` db.setProfilingLevel(1) `#设置记录profiling，0=off 1=slow 2=all` show profile `#查看profiling` db.copyDatabase(&#39;mail_addr&#39;,&#39;mail_addr_tmp&#39;) `#拷贝数据库` db.mail_addr.drop() `#删除collection` db.dropDatabase() `#删除当前的数据库`  2、客户端连接 MongoDB连接远程服务器的命令格式如下:
+mongo 远程主机ip或DNS:MongoDB端口号/数据库名 -u user -p password
+例子：
+mongo 192.168.1.200:27017/test -u user -p password /usr/local/mongodb/bin/mongo 192.168.1.100:27017/testdb -u test -p &#39;pwd&#39;  3、增删改 db.foo.save({&#39;name&#39;:&#39;ysz&#39;,&#39;address&#39;:{&#39;city&#39;:&#39;beijing&#39;,&#39;post&#39;:100096},&#39;phone&#39;:[138,139]}) `#存储嵌套的对象` db.user_addr.save({&#39;Uid&#39;:&#39;yushunzhi@sohu.com&#39;,&#39;Al&#39;:[&#39;test-1@sohu.com&#39;,&#39;test-2@sohu.com&#39;]}) `#存储数组对象` db.</description>
     </item>
     
     <item>
       <title>入住github pages</title>
-      <link>http://shuimu98.gitHub.io/post/blog/2014-12-13-first-blog/</link>
+      <link>http://shuimu98.gitHub.io/2014-12-13/%E5%85%A5%E4%BD%8Fgithub-pages/</link>
       <pubDate>Sat, 13 Dec 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://shuimu98.gitHub.io/post/blog/2014-12-13-first-blog/</guid>
-      <description>一番折腾，我的github pages 终于搭建完成。 一共经历了n个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，再到hexo，最后又迁</description>
+      <guid>http://shuimu98.gitHub.io/2014-12-13/%E5%85%A5%E4%BD%8Fgithub-pages/</guid>
+      <description>一番折腾，我的github pages 终于搭建完成。
+一共经历了n个版本，从最开始很挫的基于jekyll搭建的站点，再到第二版本，再到hexo，最后又迁移回jekyll。
+一路下来，也是耗费了很多心血。但是感觉很值得。
+ </description>
+    </item>
+    
+    <item>
+      <title>Creating a New Theme</title>
+      <link>http://shuimu98.gitHub.io/2014-09-28/creating-a-new-theme/</link>
+      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/2014-09-28/creating-a-new-theme/</guid>
+      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
+We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>http://shuimu98.gitHub.io/2014-04-02/hugo-template-primer/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/2014-04-02/hugo-template-primer/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
+    </item>
+    
+    <item>
+      <title>Getting Started with Hugo</title>
+      <link>http://shuimu98.gitHub.io/2014-04-02/getting-started-with-hugo/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/2014-04-02/getting-started-with-hugo/</guid>
+      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
+Save it somewhere specific as we will be using it in the next step.
+More complete instructions are available at installing hugo
+Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
+Follow the following steps:
+ Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+    </item>
+    
+    <item>
+      <title>Migrate from Jekyll</title>
+      <link>http://shuimu98.gitHub.io/2014-03-10/migrate-from-jekyll/</link>
+      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://shuimu98.gitHub.io/2014-03-10/migrate-from-jekyll/</guid>
+      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
+▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
+▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
     </item>
     
   </channel>
