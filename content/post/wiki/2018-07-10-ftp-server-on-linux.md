@@ -2,7 +2,7 @@
 layout: post
 title: 在linux下搭建ftp服务
 date: 2018-07-10 14:21:00 +0800
-excerpt: "在linux下搭建ftp服务，同时支持匿名、虚拟用户"
+description: "在linux下搭建ftp服务，同时支持匿名、虚拟用户"
 tags: [环境搭建]
 comments: true
 
