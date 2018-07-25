@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TCP/IP协议族详解（一）</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="TCP/IP协议族详解（一）">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">TCP/IP协议族详解（一）</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+
+    <h4><a href="/2018-03-22/tcp/ip%E5%8D%8F%E8%AE%AE%E6%97%8F%E8%AF%A6%E8%A7%A3%E4%B8%80/">TCP/IP协议族详解（一）</a></h4>
+    <h5>2018-03-22 - 1 minutes</h5>
+
+    
+
+    
+    <a href="/tags/tcp/ip">
+        <kbd class="item-tag"> TCP/IP </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏这一行，而且还是服务器，网络方便的知识多少还是要掌握一下，遂依照网易云课堂上的教程又重新复习了一遍TCP/IP结构。</p>
+
+<p>本系列文章是<strong>教程：</strong><a href="http://study.163.com/course/courseMain.htm?courseId=1003343002">TCP、IP协议族详解</a>的学习笔记。</p>
+
+<p>该系列大概分为下面几个部分：</p>
+
+<ul>
+<li>1、TCP/IP协议4层结构以及每层的作用</li>
+<li>2、IP协议详解</li>
+<li>3、ARP协议和RARP协议详解</li>
+<li>4、ICMP协议详解</li>
+<li>5、TCP协议详解</li>
+<li>6、UDP协议详解</li>
+</ul>
+
+<p>本文主要介绍TCP/IP网络体系四层结构，以及每层的作用。</p>
+
+<p>在介绍TCP/IP四层结构之前，先介绍一下OSI七层参考模型。</p>
+
+<h2 id="1-iso-osi">1、ISO/OSI</h2>
+
+<p>英文全称为<strong>Open Systems Interconnection Reference Model</strong>(开放式通信系统互联参考模型)，它是国际标准化组织ISO(International Organization for Standardization)提出的一个框架，注意的是，OSI只是一个参考模型，现在的厂商并不是完全按照这个标准，而是参考了这个标准，所以才有现在比较常用的TCP/IP四层网络体系结构，它简化了OSI模型。</p>
+
+<h3 id="7层模型的功能">7层模型的功能</h3>
+
+<p>OSI标准分为7层，从下往上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，同时规定了这个7层结构需要遵循的一些准则。见下图：
+<img src="/images/posts/tcp-ip/osi-layer.png" alt="OIS/RM 七层模型" /></p>
+
+<p>下面介绍下OSI七层模型每层的作用：</p>
+
+<ol>
+<li><strong>应用层</strong>：是应用程序访问网络服务的窗口，提供应用程序运行的环境、负责管理和执行应用程序，它是直接面向应用程序的</li>
+<li><strong>表示层</strong>：确定计算机之间交换数据的格式，为数据在传输之前，对加密、解密、压缩、解压缩以及终端数据格式提供一套规则和约定（它不对数据做操作，只是提供一套规则）</li>
+<li><strong>会话层</strong>：允许不同计算机上的两个应用程序建立、使用和结束会话，对对话的双方进行资格审查和验证的规则，同时规定发送时的单双工模式，用来使不同应用程序的数据与其他应用程序的数据保持隔离</li>
+
+<li><p><strong>传输层</strong>：确保报文无差错、有序、不丢失、无重复的传输，它主要负责分割与重组数据、按端口号寻址、连接管理、差错控制和流量控制</p>
+
+<p>传输层在7层体系中起到了一个承上启下的作用，它相当于一个纽带，连接上面三层（偏软件）与下面三层（偏硬件），它是七层中最重要、最关键的一层。它传输的数据称为数据段（Segment）</p></li>
+
+<li><p><strong>网络层</strong>：负责信息寻址（IP协议）和将逻辑地址和名字转换为物理地址（ARP协议），负责建立、保持、终止通过<strong>中间设备</strong>的连接，同时负责<strong>通讯子网</strong>内路径选择和拥挤控制，它传输的数据称为数据包（Packet）</p></li>
+
+<li><p><strong>数据链路层</strong>：负责从网络层向物理层发送数据帧，它将数据组装成帧，处理数据在传输过程中出现的差错，调节发送速率，它传输的数据称为数据帧（Frame）</p></li>
+
+<li><p><strong>物理层</strong>：发送和接收比特流</p></li>
+</ol>
+
+<p>注意要区别<strong>点到点</strong>和<strong>端到端</strong>这两个概念：
+- 点到点，是物理层面的概念，比如上图中，两个中间结点就是点到点的连接
+- 端到端，是逻辑层面的概念，可以理解是设备A的某个端口与远程设备B的某个端口的连接</p>
+
+<h3 id="7层模型的使用">7层模型的使用</h3>
+
+<p>加入计算机A通过一个进程向计算机B发送数据，那么发送的数据每经过一层（发送方从上到下），就会在数据的头部加上该层的头部，到达计算机B后，每过一层（从下到上），又减去该层头部，最后计算机B收到A发送的原始数据。</p>
+
+<p>注意：数据链路层，除了会加上头部，还会在数据末尾加上尾部，而其他层，只会加上头部。</p>
+
+<p><img src="/images/posts/tcp-ip/osi-data.png" alt="OIS数据传输" /></p>
+
+<h2 id="2-tcp-ip四层结构">2、TCP/IP四层结构</h2>
+
+<p>因为OSI七层参考模型也有缺点，比如开发成本大、功能重叠，实现复杂等，所以TCP/IP协议体系在OSI的基础上做了一些简化，它分为四层，从上到下分别为：应用层、传输层、网络层、网络接口层（或者叫数据链路层）。
+<img src="/images/posts/tcp-ip/tcpip-layer.png" alt="TCP/IP四层模型" /></p>
+
+<p>它与OSI七层模型的对应关系如下图：
+<img src="/images/posts/tcp-ip/osi-tcpip.png" alt="TCP/IP四层模型与OSI七层模型对应关系" /></p>
+
+<p>另外，TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此说，TCP/IP是一个协议族而不是一种协议。</p>
+
+<p><img src="/images/posts/tcp-ip/tcpip-data-format.png" alt="每一层传输数据格式" /></p>
+
+<h3 id="tcp-ip协议族主要协议">TCP/IP协议族主要协议</h3>
+
+<ul>
+<li><strong>应用层</strong>：各种服务及应用程序通过该层利用网络。常用协议：HTTP（基于TCP）、FTP(文件传输，基于TCP)、SMTP、TELNET(终端仿真,基于TCP)、DNS(域名解析)等。</li>
+<li><strong>传输层</strong>：确认数据传输及进行纠错处理，常用协议：TCP、UDP。</li>
+<li><strong>网络层</strong>：负责数据的传输，路径及地址选择。常用协议：IP、ICMP(互联网控制消息协议)、ARP(地址解析协议)、RARP(反向地址解析协议，已不常用)。</li>
+<li><strong>网络接口层</strong>：是针对不同物理网络的连接形式的协议。例如：Ethernet(以太网，目前最常用的<strong>局域网</strong>中使用网络接口层协议)、FDDI、ATM、PPP(点对点协议，广域网)。</li>
+</ul>
+
+<p>每层对应的主要协议：
+<img src="/images/posts/tcp-ip/tcpip-protocol-list.png" alt="主要的协议" /></p>
+
+<h3 id="网络接口层">网络接口层</h3>
+
+<p>这里顺便介绍一下网络接口层（数据链路层），因为我主要想学习的并非偏硬件层的知识，所以，也不作过多的学习和研究。</p>
+
+<p>在早期，IEEE 802委员会（1980年2月，所以称为802委员会）将<strong>局域网</strong>的数据链路层拆分了两个子层：</p>
+
+<ul>
+<li>MAC子层（Media Access Control），介质访问控制</li>
+<li>LLC子层（Logical Link Control），逻辑链路控制</li>
+</ul>
+
+<p>现在已经不再使用了，取而代之的是以太网（Ethernet）。</p>
+
+<h3 id="以太网和互联网的区别">以太网和互联网的区别</h3>
+
+<p>以太网是一种局域网，只能连接附近的设备，属于数据链路层，因特网是广域网，而且是一个最大的广域网。因此可以说互联网是包含以太网的。</p>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2018-03-22 14:21:00 \x2b0800 \x2b0800',
+              title: 'TCP\/IP协议族详解（一）',
+              link: decodeURI(location.href),
+              desc: '写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏这一行，而且还是服务器，网络方便的知识多少还是要掌握一下，遂依照网易云课堂上的教程又重新复习了一遍TCP\/IP结构。\n本系列文章是教程：TCP、IP协议族详解的学习笔记。\n该系列大概分为下面几个部分：\n 1、TCP\/IP协议4层结构以及每层的作用 2、IP协议详解 3、ARP协议和RARP协议详解 4、ICMP协议详解 5、TCP协议详解 6、UDP协议详解  本文主要介绍TCP\/IP网络体系四层结构，以及每层的作用。\n在介绍TCP\/IP四层结构之前，先介绍一下OSI七层参考模型。\n1、ISO\/OSI 英文全称为Open Systems Interconnection Reference Model(开放式通信系统互联参考模型)，它是国际标准化组织ISO(International Organization for Standardization)提出的一个框架，注意的是，OSI只是一个参考模型，现在的厂商并不是完全按照这个标准，而是参考了这个标准，所以才有现在比较常用的TCP\/IP四层网络体系结构，它简化了OSI模型。\n7层模型的功能 OSI标准分为7层，从下往上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，同时规定了这个7层结构需要遵循的一些准则。见下图： 下面介绍下OSI七层模型每层的作用：\n 应用层：是应用程序访问网络服务的窗口，提供应用程序运行的环境、负责管理和执行应用程序，它是直接面向应用程序的 表示层：确定计算机之间交换数据的格式，为数据在传输之前，对加密、解密、压缩、解压缩以及终端数据格式提供一套规则和约定（它不对数据做操作，只是提供一套规则） 会话层：允许不同计算机上的两个应用程序建立、使用和结束会话，对对话的双方进行资格审查和验证的规则，同时规定发送时的单双工模式，用来使不同应用程序的数据与其他应用程序的数据保持隔离 传输层：确保报文无差错、有序、不丢失、无重复的传输，它主要负责分割与重组数据、按端口号寻址、连接管理、差错控制和流量控制\n传输层在7层体系中起到了一个承上启下的作用，它相当于一个纽带，连接上面三层（偏软件）与下面三层（偏硬件），它是七层中最重要、最关键的一层。它传输的数据称为数据段（Segment）\n 网络层：负责信息寻址（IP协议）和将逻辑地址和名字转换为物理地址（ARP协议），负责建立、保持、终止通过中间设备的连接，同时负责通讯子网内路径选择和拥挤控制，它传输的数据称为数据包（Packet）\n 数据链路层：负责从网络层向物理层发送数据帧，它将数据组装成帧，处理数据在传输过程中出现的差错，调节发送速率，它传输的数据称为数据帧（Frame）\n 物理层：发送和接收比特流\n  注意要区别点到点和端到端这两个概念： - 点到点，是物理层面的概念，比如上图中，两个中间结点就是点到点的连接 - 端到端，是逻辑层面的概念，可以理解是设备A的某个端口与远程设备B的某个端口的连接\n7层模型的使用 加入计算机A通过一个进程向计算机B发送数据，那么发送的数据每经过一层（发送方从上到下），就会在数据的头部加上该层的头部，到达计算机B后，每过一层（从下到上），又减去该层头部，最后计算机B收到A发送的原始数据。\n注意：数据链路层，除了会加上头部，还会在数据末尾加上尾部，而其他层，只会加上头部。\n2、TCP\/IP四层结构 因为OSI七层参考模型也有缺点，比如开发成本大、功能重叠，实现复杂等，所以TCP\/IP协议体系在OSI的基础上做了一些简化，它分为四层，从上到下分别为：应用层、传输层、网络层、网络接口层（或者叫数据链路层）。 它与OSI七层模型的对应关系如下图： 另外，TCP\/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此说，TCP\/IP是一个协议族而不是一种协议。\nTCP\/IP协议族主要协议  应用层：各种服务及应用程序通过该层利用网络。常用协议：HTTP（基于TCP）、FTP(文件传输，基于TCP)、SMTP、TELNET(终端仿真,基于TCP)、DNS(域名解析)等。 传输层：确认数据传输及进行纠错处理，常用协议：TCP、UDP。 网络层：负责数据的传输，路径及地址选择。常用协议：IP、ICMP(互联网控制消息协议)、ARP(地址解析协议)、RARP(反向地址解析协议，已不常用)。 网络接口层：是针对不同物理网络的连接形式的协议。例如：Ethernet(以太网，目前最常用的局域网中使用网络接口层协议)、FDDI、ATM、PPP(点对点协议，广域网)。  每层对应的主要协议： 网络接口层 这里顺便介绍一下网络接口层（数据链路层），因为我主要想学习的并非偏硬件层的知识，所以，也不作过多的学习和研究。\n在早期，IEEE 802委员会（1980年2月，所以称为802委员会）将局域网的数据链路层拆分了两个子层：\n MAC子层（Media Access Control），介质访问控制 LLC子层（Logical Link Control），逻辑链路控制  现在已经不再使用了，取而代之的是以太网（Ethernet）。',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

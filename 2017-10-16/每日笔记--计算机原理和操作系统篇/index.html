@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>每日笔记 —— 计算机原理和操作系统篇</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="每日笔记 —— 计算机原理和操作系统篇">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理。">
+    <meta property="og:description" content="记录了工作中，每天的笔记，分类整理。包括计算机原理、操作系统原理。">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">每日笔记 —— 计算机原理和操作系统篇</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+      
+
+    <h4><a href="/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86%E5%92%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/">每日笔记 —— 计算机原理和操作系统篇</a></h4>
+    <h5>2017-10-16 - 2 minutes</h5>
+
+    
+
+    
+    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">
+        <kbd class="item-tag"> 读书笔记 </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h2 id="1-计算机原理">1、计算机原理</h2>
+
+<ol>
+<li><p>10进制转16进制计算方法：</p>
+
+<p>注意：<strong>所有除法都要取整。</strong><br />
+从右数第一位：<code>1610%16 = 10</code>(表示16进制的A),结果： <code>_ _ A</code><br />
+从右数第二位：<code>1610/16 = 100</code>；<code>100%16 = 4</code>,结果：<code>_ 4 A</code><br />
+从右数第三位：<code>100/16  = 6</code>；<code>6%16 = 4</code>,结果：<code>6 4 A</code><br />
+最后： <sup>6</sup>&frasl;<sub>100</sub> =0 结束运算，最后 转换结果 为: <code>0x64A</code></p></li>
+
+<li><p>进制与位元：因为 6个bit就能表示64，所以64进制的<strong>位元=6</strong>，同理 16进制<strong>位元=4</strong>，因为2^4=16。</p></li>
+
+<li><p>计算机中原码、反码、补码：</p>
+
+<p>正数的原码、反码、补码都等于原码。<br />
+负数的反码=除了最高位的符号位不变，其他位取反。<br />
+负数的补码=它的反码+1。</p>
+
+<p>可以看看<a href="http://www.cnblogs.com/zhangziqiu/archive/2011/03/30/ComputerCode.html">这篇文章</a>，讲解的比较通俗易懂。</p></li>
+
+<li><p>负数在计算机中是以<strong>补码</strong>的形式存在，例如有这样一个二进制（<code>1111 1111</code>，其实就是-1），它的最高位是1，所以它是一个负数，
+所以它应该是某个负数的反码形式，转换反码为 <code>1111 1110</code> （补码-1），转换为原码为<code>1000 0001</code>（符号位不变，其他位取反），即<code>1111 1111</code> 表示-1，<code>1000 0000</code> = -128的补码。</p>
+
+<p>关于补码的计算，在我之前的<a href="http://domicat.me/c-primer-plus/#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%E4%BD%8D%E6%93%8D%E4%BD%9C">C primer笔记中有提到</a>。</p></li>
+
+<li><p><strong>总线和寻址范围以及和内存的关系</strong>：</p>
+
+<p>假设是32位的总线，那么cpu可以寻址的范围为2的32次方，这里的一根总线代表一个二进制的bit位，注意，这里的bit不是对应的内存bit。这个总线其实可以看成一个索引生成器，它可以给cpu生成2^32个索引。</p>
+
+<p>内存的存储单位为byte，即一个字节 。<strong>假如内存是一盒奥利奥，那每一块奥利奥就是一个存储单位，它有8个bit，即一个字节</strong>。</p>
+
+<p>通过总线产生的索引，去内存寻址。比如 cpu要寻址的地址 = 0x00000010，那么cpu就会去内存找到索引为 0x00000010 那个存储单元存储的值（一个字节）。</p></li>
+
+<li><p>算术右移：在汇编中，可以用算术右移来进行有符号数据的除法。把一个数右移n位，相当于该数除以2的n次方。</p>
+
+<p>比如，汇编语言中的：
+ASR R3,1
+其意义相当于R3=R3/2</p>
+
+<p>关于逻辑右移和算术右移的区别，可以参考<a href="http://domicat.me/c-primer-plus/#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%E4%BD%8D%E6%93%8D%E4%BD%9C">我的C笔记 第15章</a>。</p></li>
+</ol>
+
+<h2 id="2-操作系统">2、操作系统</h2>
+
+<h3 id="2-1-linux">2-1、linux</h3>
+
+<ol>
+<li>Linux链接分两种，一种被称为<strong>硬链接</strong>（Hard Link），另一种被称为<strong>符号链接（也称软连接）</strong>（Symbolic Link）。默认情况下，ln命令产生硬链接。<code>ln -s a b</code>创建一个软连接（就像windows系统的快捷方式），即给a创建了一个快捷方式b。</li>
+
+<li><p>centos 6.0系统升级gcc：因为centos 6.0系统默认的gcc版本是很早的4.4.7，如果需要升级到更高的版本，需要自行下载源码，编译安装。</p>
+
+<p>可以参考<a href="https://www.cnblogs.com/lzpong/p/5755678.html">这个教程</a>，里面有详细的步骤。另外，除了教程中出现的动态库问题，还需要注意<strong>gcc版本冲突</strong>的问题，因为自行编译安装的二进制，一般放在<code>/usr/local/bin</code>，而系统自带的放在<code>/usr/bin</code>，所以可能存在两个版本的gcc。解决的办法：可以yum remove 删除老版本，也可以参考<strong><a href="https://www.cnblogs.com/cynchanpin/p/6807239.html">这篇教程</a></strong>，用软连接的方式解决。</p></li>
+
+<li><p>linux修改时间和时区：<a href="http://www.cnblogs.com/hjslovewcl/archive/2011/06/28/2314323.html">linux 修改时间 date</a>。</p>
+
+<ul>
+<li><p>将日期转换为Unix时间戳，<a href="http://www.opstool.com/article/224">参考</a>：</p>
+
+<pre><code>date +%s #将当前时间以Unix时间戳
+date -d '2013-2-22 22:14' +%s # 转换指定日期为Unix时间戳
+</code></pre></li>
+
+<li><p>将Unix时间戳转换为日期时间</p>
+
+<pre><code>date -d @1361542596 #不指定日期时间的格式
+date -d @1361542596 +&quot;%Y-%m-%d %H:%M:%S&quot; #指定日期格式的转换
+</code></pre></li>
+</ul></li>
+
+<li><p>修改linux <code>date</code>命令的显示格式：编辑<code>.bash_profile</code>文件， 添加下面一行 <code>alias date='date &quot;+%Y-%m-%d %H:%M:%S&quot;'</code>。</p></li>
+
+<li><p><a href="http://semver.org/lang/zh-CN/">语义化版本</a>，教你如何定义软件的版本。</p></li>
+
+<li><p>linux开启tcp bbr：<a href="https://www.mf8.biz/linux-kernel-with-tcp-bbr/">Linux 升级内核开启 TCP BBR 实现高效单边加速</a>。</p></li>
+
+<li><p><code>alias grep='grep --color=auto'</code>，grep 高亮。</p></li>
+
+<li><p><code>alias = 'ls -lshF --color|sort'</code>，linux ls 按类型排列。</p></li>
+
+<li><p><code>alias rm='rm -i'</code>，rm删除前询问是否真正要删除（对root用户无效）。</p></li>
+
+<li><p>linux Epoll两种触发模式：LT水平触发（常用模式）、ET边缘触发。参考<a href="https://github.com/yedf/handy">这个项目的examples（已star）</a>。</p></li>
+
+<li><p>linux挂载（mount 和 umount），这里主要记录linux挂载网络共享文件系统，例如：在linux挂载windows系统上的共享文件夹。</p>
+
+<p>举例说明：</p>
+
+<pre><code class="language-shell">mount -t cifs //192.168.1.113/share /dir -o username=administrator,password=111111,rw,uid=500,gid=500,dir_mode=0777,file_mode=0777
+</code></pre>
+
+<p>-t cifs指定文件系统类型，-o 指定相关权限等。需要注意：mount挂载cifs需要先安装网络共享服务， <code>yum install -y cifs-utils</code>，windows系统需要开启<strong>445</strong>端口。<a href="http://www.jianshu.com/p/a631045d410d">挂载windows共享文件后的权限问题参考这里</a>。</p>
+
+<p><strong>开机自动挂载</strong>，其中一种方式：编辑 <code>/etc/rc.d/rc.local</code> 将上面的命令插入，重启即可。<br />
+umount卸载，如果出现device is busy报错，表示该文件系统正在被使用；使用命令<code>fuser -mv /dir</code>查看此文件系统正在被哪些进程访问。</p></li>
+
+<li><p><a href="http://www.cnblogs.com/123-/p/4189072.html">Linux下用户组、文件权限详解</a>，讲解干净利落，<strong>推荐</strong>。</p></li>
+
+<li><p>ngrok 内网穿透，ngnix 反向代理。</p>
+
+<p>假设：在路由器是先做一个内网穿透，开个隧道，穿透到80端口，再用ngnix做一个反向代理，代理内网某台电脑的8080端口，那这样是否可以做一个私有云呢？</p></li>
+
+<li><p>正则表达式，参考这篇文章:<a href="http://wubaoguo.com/2016/03/21/Linux/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>。</p></li>
+
+<li><p><code>ss</code>命令显示linux系统socket状态。例如：<code>ss -s</code>列出当前socket详细信息。</p></li>
+
+<li><p>centos开启zsh：<a href="https://my.oschina.net/shyann/blog/426004">centos开启zsh之旅</a>。</p></li>
+
+<li><p>centos 添加新用户并授权，<a href="http://www.cnblogs.com/woshimrf/p/5906084.html">参考</a>。</p>
+
+<pre><code>adduser zhangbiao
+passwd zhangbiao
+vim /etc/sudoers
+
+## 找到以下内容，并添加新用户
+## Allow root to run any commands anywher  
+root    ALL=(ALL)       ALL  
+zhangbiao  ALL=(ALL)       ALL  #这个是新增的用户
+</code></pre></li>
+
+<li><p><a href="http://www.cnblogs.com/lightnear/archive/2012/10/03/2710952.html"><strong>CentOS更改yum源与更新系统</strong></a>，改为网易源镜像。</p></li>
+
+<li><p>解决mysql报错[<code>can't create/write to file '/tmp/#sql_23e6_0MYI'</code>]：</p>
+
+<pre><code class="language-bash">$mkdir /var/lib/mysql/tmp
+$chown  mysql:mysql /var/lib/mysql/tmp
+$vim /etc/my.cnf
+$tmpdir = /var/lib/mysql/tmp
+$service mysqd restart
+</code></pre></li>
+
+<li><p>linuix禁止root用户开机登陆：修改<code>/etc/ssh/sshd_config</code>里面有一个配置选项<code>PermitRootLogin no</code>，这样就可以不让root直接登录了。另外，设置AllowUsers允许指定用户通过ssh登陆，如<code>AllowUsers domi</code>。</p></li>
+
+<li><p>centos6.x切换图形界面和命令行界面：修改<code>/etc/inittab</code>文件中的<code>id:3:initdefault</code>，将3改为5则为图形界面 ，反之则为命令行界面，修改完后重新启动系统生效；</p></li>
+
+<li><p>centos6.x VMware虚拟机网络设置（桥接方式），参考<a href="http://www.jb51.net/article/105110.htm">VMware中让CentOS利用桥接上网的方法教程</a>：</p>
+
+<ol>
+<li>在 VMware 中打开【编辑】-&gt;【虚拟网络编辑器】，添加 VMnet0，并选择桥接模式。需要注意的是，需要选择“桥接到”的网卡，使用无线网卡就选无线网卡，使用有线网卡就选有线网卡</li>
+<li>在虚拟机系统上右键，进入【设置】界面，在【硬件】选项卡中，找到【网络适配器】，设置为桥接模式</li>
+<li>在虚拟机中编辑文件<code>/etc/sysconfig/network-scripts/ifcfg-eth0</code>，没有就创建一个</li>
+<li>如果使用的是静态IP，则配置如下：
+~~~
+BOOTPROTO=&ldquo;static&rdquo;
+HWADDR=&ldquo;00:0C:29:9D:5D:24&rdquo;
+DEVICE=&ldquo;eth0&rdquo;
+BOOTPROTO=&ldquo;static&rdquo;
+HWADDR=&ldquo;00:0C:29:9D:5D:24&rdquo;
+IPV6INIT=&ldquo;yes&rdquo;
+NM_CONTROLLED=&ldquo;yes&rdquo;
+ONBOOT=&ldquo;yes&rdquo;
+TYPE=&ldquo;Ethernet&rdquo;
+UUID=&ldquo;4f3f8c86-2041-40de-afbc-4a9056ad1d2e&rdquo;
+IPADDR=192.168.22.172  #静态IP地址，与宿主机在同一网段内，不能被其他设备占用该IP
+NETMASK=255.255.254.0  #子网掩码，与宿主机一致
+GATEWAY=192.168.23.254 #网关，与宿主机一致
+DNS1=114.114.114.114   #如果是静态IP，需要在这里配置dns，在etc/resolv.conf的dns在重启网络后会丢失
+DNS2=202.96.128.166
+~~~</li>
+<li>若使用 dhcp的方式获得IP，则配置如下：
+~~~
+DEVICE=eth0
+HWADDR=00:0C:29:F4:F5:D6
+TYPE=Ethernet
+UUID=&ldquo;4f3f8c86-2041-40de-afbc-4a9056ad1d2e&rdquo;
+ONBOOT=yes #修改
+NM_CONTROLLED=yes
+BOOTPROTO=dhcp #修改
+~~~</li>
+<li>输出命令<code>service network restart</code>，重启网络</li>
+</ol>
+
+<p>#DEVICE是网卡编号，HWADDR是MAC地址，TYPE、UUID和NM_CONTROLLED这五项无需更改<br />
+#ONBOOT是设置在启动network服务时是否启用该网卡，需要将其改为ONBOOT=yes，否则以后每次都要使用ifup eth0启动网卡<br />
+#BOOTPROTO是设置获得IP方式，可选为staic(静态IP)、dhcp(动态分配)、none(不使用)</p></li>
+</ol>
+
+<h3 id="2-2-windows">2-2、windows</h3>
+
+<ol>
+<li><p>链接器中三个最重要的动态链接库<code>kernel32.dll、user32.dll、gdi32.dll</code>的作用：</p>
+
+<ul>
+<li><p><code>kernel32.dll</code>是Windows9x/Me中非常重要的32位动态链接库文件，属于内核级文件。它控制着系统的内存管理、数据的输入输出操作和中断处理，当Windows启动时，kernel32.dll就驻留在内存中特定的写保护区域，使别的程序无法占用这个内存区域。</p></li>
+
+<li><p><code>user32.dll</code>是Windows用户界面相关应用程序接口，用于包括Windows处理，基本用户界面等特性，如创建窗口和发送消息。</p></li>
+
+<li><p><code>gdi32.dll</code>是Windows GDI图形用户界面相关程序，包含的函数用来绘制图像和显示文字。</p></li>
+</ul></li>
+
+<li><p>TODO</p></li>
+</ol>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2017-10-16 00:00:00 \x2b0000 UTC',
+              title: '每日笔记 —— 计算机原理和操作系统篇',
+              link: decodeURI(location.href),
+              desc: '1、计算机原理  10进制转16进制计算方法：\n注意：所有除法都要取整。\n从右数第一位：1610%16 = 10(表示16进制的A),结果： _ _ A\n从右数第二位：1610\/16 = 100；100%16 = 4,结果：_ 4 A\n从右数第三位：100\/16 = 6；6%16 = 4,结果：6 4 A\n最后： 6\x26frasl;100 =0 结束运算，最后 转换结果 为: 0x64A\n 进制与位元：因为 6个bit就能表示64，所以64进制的位元=6，同理 16进制位元=4，因为2^4=16。\n 计算机中原码、反码、补码：\n正数的原码、反码、补码都等于原码。\n负数的反码=除了最高位的符号位不变，其他位取反。\n负数的补码=它的反码\x2b1。\n可以看看这篇文章，讲解的比较通俗易懂。\n 负数在计算机中是以补码的形式存在，例如有这样一个二进制（1111 1111，其实就是-1），它的最高位是1，所以它是一个负数， 所以它应该是某个负数的反码形式，转换反码为 1111 1110 （补码-1），转换为原码为1000 0001（符号位不变，其他位取反），即1111 1111 表示-1，1000 0000 = -128的补码。\n关于补码的计算，在我之前的C primer笔记中有提到。\n 总线和寻址范围以及和内存的关系：\n假设是32位的总线，那么cpu可以寻址的范围为2的32次方，这里的一根总线代表一个二进制的bit位，注意，这里的bit不是对应的内存bit。这个总线其实可以看成一个索引生成器，它可以给cpu生成2^32个索引。\n内存的存储单位为byte，即一个字节 。假如内存是一盒奥利奥，那每一块奥利奥就是一个存储单位，它有8个bit，即一个字节。\n通过总线产生的索引，去内存寻址。比如 cpu要寻址的地址 = 0x00000010，那么cpu就会去内存找到索引为 0x00000010 那个存储单元存储的值（一个字节）。\n 算术右移：在汇编中，可以用算术右移来进行有符号数据的除法。把一个数右移n位，相当于该数除以2的n次方。',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

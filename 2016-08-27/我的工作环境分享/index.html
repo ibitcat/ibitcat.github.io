@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>我的工作环境分享</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="我的工作环境分享">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">我的工作环境分享</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+
+    <h4><a href="/2016-08-27/%E6%88%91%E7%9A%84%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83%E5%88%86%E4%BA%AB/">我的工作环境分享</a></h4>
+    <h5>2016-08-27 - 1 minutes</h5>
+
+    
+
+    
+    <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">
+        <kbd class="item-tag"> 环境搭建 </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。
+本文将分享我自己这么多年用得比较顺手的工作环境。</p>
+
+<h3 id="1-编辑器-ide">1、编辑器&amp;IDE</h3>
+
+<h4 id="sublime-text-3">sublime text 3</h4>
+
+<p>编辑器首推 <strong>sublime text 3</strong>，而且我也差不多用了3年的时间，期间也有收集了很多很好用的插件、主题等。</p>
+
+<ul>
+<li>插件
+<br /></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>SideBarEnhancements</td>
+<td align="left">侧边栏增强插件</td>
+</tr>
+
+<tr>
+<td>BracketHighlighter</td>
+<td align="left">匹配高亮插件（我使用默认的下划线显示，不刺眼）</td>
+</tr>
+
+<tr>
+<td>ConvertToUTF8</td>
+<td align="left">中文必备插件</td>
+</tr>
+
+<tr>
+<td>IMESupport</td>
+<td align="left">中文输入法鼠标跟随，在st3中如果使用中文输入法（搜狗、微软中文）等，输入法的框没办法跟随鼠标光标，特别是双屏的时候，特别不方便。</td>
+</tr>
+
+<tr>
+<td>TortoiseSVN</td>
+<td align="left">小乌龟svn，设置快捷键后，update、commit、log、diff简直不能太舒心</td>
+</tr>
+
+<tr>
+<td>HexViewer</td>
+<td align="left">16进制显示，有时候会用到</td>
+</tr>
+
+<tr>
+<td>SublimeLinter-lua</td>
+<td align="left">lua语法检查（其他语言也有对应的SublimeLinter）</td>
+</tr>
+
+<tr>
+<td>Terminal</td>
+<td align="left">右键打开cmd，默认是打开powershell，太难看，更改配置可以打开git bash</td>
+</tr>
+
+<tr>
+<td>SublimeTextTrans</td>
+<td align="left">sublime text 3透明，仅限windows，可能更适合前端同学<sup class="footnote-ref" id="fnref:footer1"><a href="#fn:footer1">1</a></sup></td>
+</tr>
+
+<tr>
+<td>Theme - Nil</td>
+<td align="left">这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服</td>
+</tr>
+
+<tr>
+<td>GoSublime</td>
+<td align="left">golang 插件，有少许不足(第三方包不能转到定义)</td>
+</tr>
+</tbody>
+</table>
+
+<p>{: rules=&ldquo;all&rdquo;}</p>
+
+<ul>
+<li>设置</li>
+</ul>
+
+<pre><code class="language-json">{
+	&quot;color_scheme&quot;: &quot;Packages/User/SublimeLinter/Triplet (SL).tmTheme&quot;,
+	&quot;colored_folder_glyphs&quot;: true,
+	&quot;font_face&quot;: &quot;Microsoft YaHei Mono&quot;,
+	&quot;font_options&quot;:
+	[
+		&quot;directwrite&quot;
+	],
+	&quot;font_size&quot;: 11,
+	&quot;highlight_line&quot;: true,
+	&quot;highlight_modified_tabs&quot;: true,
+	&quot;ignored_packages&quot;:
+	[
+		&quot;Vintage&quot;
+	],
+	&quot;mid_line_tabs&quot;: true,
+	&quot;sidebar_folders&quot;: true,
+	&quot;theme&quot;: &quot;Nil.sublime-theme&quot;,
+	&quot;update_check&quot;: false,
+	&quot;word_wrap&quot;: &quot;auto&quot;
+}
+</code></pre>
+
+<ul>
+<li>修改sublime text插件路径<br />
+sublime text插件安装的路径一般在 <code>%appdata%/sublime text 3</code> 文件夹下，里面有个Data文件夹（大写），里面是安装的插件，但是这有个问题，就是我们如果重装系统或者换了新的电脑，每次都要重新安装sublime text以及那些插件，而且很多设置也要重新来过。</li>
+</ul>
+
+<p>我们可以修改这个插件路径，先关闭st，在我的电脑输入路径 <code>%appdata%</code>。删除sublime text文件夹，然后在
+  sublime text的安装路径下建立一个名为Data的文件夹。重新打开st就OK了。</p>
+
+<ul>
+<li>修改sublime project设置 (有两种方式修改project设置)
+
+<ol>
+<li>在*.sublime-project文件中，你可以定义工程配置。例如你可以定义多个目录路径，或者哪些目录或文件需要排除在外。</li>
+<li>打开菜单栏：Project &ndash;&gt; Edit Project</li>
+</ol></li>
+</ul>
+
+<p><code>folder_exclude_patterns</code> 表示从项目中排除哪些文件夹<br />
+<code>file_exclude_patterns</code>   表示从项目中排除哪些文件</p>
+
+<pre><code class="language-json">  {
+    &quot;folders&quot;:
+    [
+        {
+            &quot;path&quot;: &quot;wwwroot&quot;,
+            &quot;folder_exclude_patterns&quot;: [&quot;images&quot;]
+        },
+        {
+            &quot;path&quot;: &quot;c:\wwwroot\project1\assets&quot;,
+            &quot;name&quot;: &quot;Project 1&quot;,
+            &quot;file_exclude_patterns&quot;: [&quot;*.php&quot;]
+        }
+    ],
+    &quot;settings&quot;:
+    {
+        &quot;tab_size&quot;: 8
+    }
+ }
+</code></pre>
+
+<h4 id="visual-studio-2015">Visual studio 2015</h4>
+
+<p>目前比较少用vs，除了必装的小番茄助手（Visual Assist X ）之外，Indent Guides这个插件也还不错。</p>
+
+<p>另外，从vs2015开始，也有跟sublime text一样的minimap，对于很长代码的预览还是非常不错的。</p>
+
+<h3 id="2-windows">2、windows</h3>
+
+<p>windows下面有很多非常好用的小软件，下面是我收集的一些方便实用的小众软件，对工作非常有帮助。</p>
+
+<ul>
+<li><p>Launchy：
+非常好用的快速启动工具，有了它你的桌面再也不用放快捷方式了，同类的软件有 ALTRun，但是在win10上好像有点问题。
+Launchy 有一款非常好看的皮肤，可以去Launchy的皮肤网站上搜索，<a href="http://www.deviantart.com/browse/all/customization/skins/applaunchers/launchy/?q=Discovery">Discovery</a>。</p></li>
+
+<li><p>Everything：
+简直不要太好用，查找文件非常方便，类似的软件<strong>Listary</strong>（查找文件夹比较方便，功能更多），但是我更喜欢Everything，它已经满足了我的需求。</p></li>
+
+<li><p>git截图工具：
+有时候，你需要截一些gif动态图，有两个非常好用的gif截图工具，几百K大小，GifCam 和 LICEcap。</p></li>
+
+<li><p>cmder &amp; git bash：
+windows自带的cmd丑得不要不要的，也不太方便，cmder算是一个很好的替代品，但是我更推荐git bash，安装git for windows后，
+会连带安装git bash，很多命令和linux兼容，也非常好用。推荐 git bash。</p></li>
+
+<li><p>notepad++：
+这个就更不用说了，非常好用的编辑器，但是已经有了sublime text了，所以把他作为辅助编辑器还是很不错的，比如用它来做文件查找、
+json 格式化等等。</p></li>
+
+<li><p>clover：
+多标签管理器，也是非常方便，目前已支持win10（居然也学坏了，第一次启动有广告）。</p></li>
+
+<li><p>Shadowsocks：
+这个你懂得，程序员需要自带梯子。</p></li>
+</ul>
+
+<h3 id="3-linux">3、linux</h3>
+
+<p>对于linux，经常用的当时是linux命令了 - -
+  除了要熟悉一些常用的linux命令，还有有几个不错的linux 软件可以折腾下。<br />
+  linux下这些配置，以后整理之后放到github上，方便以后使用。</p>
+
+<ul>
+<li><p>vim：
+vim的折腾主要是vim的配置文件和vim插件了，关于vim，我之前有篇文章已经做了比较详细的介绍，<a href="http://domicat.me/vim-config-and-plugin/">传送门</a>。</p></li>
+
+<li><p>zsh：
+zsh 兼容 bash，但是比bash更好用，zsh有个非常有名的配置：oh-my-zsh，安装简单，傻瓜式。</p></li>
+
+<li><p>tmux：
+非常非常推荐，屏幕切分简直方便，终于不用再多个SucureCRT标签页下切来切去，看log不废眼。</p></li>
+
+<li><p>asciiflow2：
+算不上一个linux工具，但是可以非常快速架设到自己的linux服务器上，可以方便自己画一些比较简单极客的流程图之类的。
+<a href="https://github.com/lewish/asciiflow2">github地址</a></p></li>
+</ul>
+
+<blockquote>
+<p>脚注</p>
+</blockquote>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:footer1">该插件需要自己去github拉取，<a href="https://github.com/vhanla/SublimeTextTrans.git">github 地址</a>。
+ <a class="footnote-return" href="#fnref:footer1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2016-08-27 15:08:00 \x2b0800 \x2b0800',
+              title: '我的工作环境分享',
+              link: decodeURI(location.href),
+              desc: '古语有云：工欲善其事必先利其器。一个程序员必须要有一套属于自己的、熟悉的工作环境。这里做起事来也会提高很多效率。 本文将分享我自己这么多年用得比较顺手的工作环境。\n1、编辑器\x26amp;IDE sublime text 3 编辑器首推 sublime text 3，而且我也差不多用了3年的时间，期间也有收集了很多很好用的插件、主题等。\n 插件      插件 备注     SideBarEnhancements 侧边栏增强插件   BracketHighlighter 匹配高亮插件（我使用默认的下划线显示，不刺眼）   ConvertToUTF8 中文必备插件   IMESupport 中文输入法鼠标跟随，在st3中如果使用中文输入法（搜狗、微软中文）等，输入法的框没办法跟随鼠标光标，特别是双屏的时候，特别不方便。   TortoiseSVN 小乌龟svn，设置快捷键后，update、commit、log、diff简直不能太舒心   HexViewer 16进制显示，有时候会用到   SublimeLinter-lua lua语法检查（其他语言也有对应的SublimeLinter）   Terminal 右键打开cmd，默认是打开powershell，太难看，更改配置可以打开git bash   SublimeTextTrans sublime text 3透明，仅限windows，可能更适合前端同学1   Theme - Nil 这个主题简单时尚，也找过一些其他的，但是还是这个用着最舒服   GoSublime golang 插件，有少许不足(第三方包不能转到定义)    {: rules=\x26ldquo;all\x26rdquo;}',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

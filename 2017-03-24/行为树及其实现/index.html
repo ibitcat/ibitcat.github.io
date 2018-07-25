@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>行为树及其实现</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="行为树及其实现">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="主要介绍行为树的概念、行为树节点，以及行为树的实现">
+    <meta property="og:description" content="主要介绍行为树的概念、行为树节点，以及行为树的实现">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">行为树及其实现</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+      
+
+    <h4><a href="/2017-03-24/%E8%A1%8C%E4%B8%BA%E6%A0%91%E5%8F%8A%E5%85%B6%E5%AE%9E%E7%8E%B0/">行为树及其实现</a></h4>
+    <h5>2017-03-24 - 1 minutes</h5>
+
+    
+
+    
+    <a href="/tags/%E8%A1%8C%E4%B8%BA%E6%A0%91">
+        <kbd class="item-tag"> 行为树 </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。
+加之之前对行为树有一点了解，所以寻思将之前的ai改为行为树的方式。</p>
+
+<p>在动手之前，自己也参考了网上很多关于行为树的介绍，以及行为树相关项目。</p>
+
+<p><strong>关于行为树的介绍：</strong></p>
+
+<p>主要参考了育碧大神finney关于行为树介绍的文章。<a href="http://www.aisharing.com/">大神的博客</a>里面有很多关于ai设计的文章，干货十足。</p>
+
+<p>另外，可以参考资料《The Behavior Tree Starter Kit》，出自《Game AI Pro》第一版第二部分（Section 2: Architecture）的第六章节。
+对应的代码在<a href="https://github.com/aigamedev/btsk">github</a>上。我会抽个时间翻译一下。</p>
+
+<p><strong>行为树的相关项目：</strong></p>
+
+<p>我看过的项目主要有两个：
+- 饥荒的ai实现
+- 腾讯的开源项目<a href="http://www.behaviac.com/language/zh/%E9%A6%96%E9%A1%B5/">Tencent Behaviac</a></p>
+
+<p>饥荒的脚本是lua实现，而且是未编译成字节码的，所以可以看到整个游戏的lua层代码，其中就包括了饥荒整个ai框架。<br />
+ai相关的主要代码在：<code>behaviours</code>、<code>brains</code>和<code>stategraphs</code> 这三个文件夹，其中stategraphs是状态机的实现，也有参考意义。
+我也是将里面行为树部分移除出来，并做了一些修改运用到我们的游戏中。</p>
+
+<h2 id="什么是行为树">什么是行为树</h2>
+
+<p>先看一个简单的怪物行为树：
+<img src="/images/posts/ai.png" alt="怪物简单行为树" /></p>
+
+<p>行为树是一种树形结构，它其实可以看成是一个分层状态机从网状图拉成了一个树。一颗树包含了中间节点和叶子节点，
+中间节点控制决策的走向，叶子节点则负责展现行为。</p>
+
+<h2 id="行为树的节点">行为树的节点</h2>
+
+<p>行为树节点主要分为：
+1. 组合节点（序列节点、选择节点、并行节点等）
+2. 装饰节点（有且仅有一个子节点）
+3. 条件节点
+4. 动作节点</p>
+
+<p>组合节点和装饰节点只能作为行为树的中间节点，而条件节点和动作节点作为树的叶子节点。
+所以，条件和动作节点称为<strong>行为节点</strong>（Behavior Node），组合和装饰节点称为<strong>决策节点</strong>（Decider Node）。</p>
+
+<p>在详细介绍每个节点之前，首先要了解节点的状态。行为树的每个节点的运行状态只会有两种：
+- 运行中（running）
+- 运行完毕（success/failed）</p>
+
+<p>父节点通过每个子节点的运行状态，来决定自己的状态。</p>
+
+<p><strong>如何理解running状态？</strong></p>
+
+<p>举个例子，假如人吃饭是一个行为，但是吃饭需要花一段时间，所以当人执行吃饭的行为时，这个吃饭的节点就处于running中，
+直到吃完后，才会变成success状态（吃饭成功），或者吃到一半时发现菜里有屎，变成failed状态（吃饭失败）。</p>
+
+<p>当然，如果是瞬时动作，可以不需要running。</p>
+
+<h3 id="组合节点">组合节点</h3>
+
+<ul>
+<li>序列节点</li>
+</ul>
+
+<p>它实现的是and的逻辑，例如：r = x and y and z,则先执行x，如果x为true，则继续执行y，如果x为false，则直接返回false，以此类推
+执行该节点时，它会一个接一个运行，
+如果子节点状态为success，则执行下一个子节点；
+如果子节点状态为running，则把自身设置为running，并等待返回其他结果（success或failed）；
+如果子节点状态为failed，则把自身设置为failed，并返回；
+如果所有节点都为success，则把自身设置为success并返回。
+原则：只要一个子节点返回&rdquo;失败&rdquo;或&rdquo;运行中&rdquo;，则返回；若返回&rdquo;成功&rdquo;，则执行下一个子节点。</p>
+
+<ul>
+<li>选择节点</li>
+</ul>
+
+<p>它实现的是or的逻辑，例如：r = x or y or z,则先执行x，如果x为false，则继续执行y，如果x为true，则直接返回true，以此类推
+执行该节点时，它会一个接一个运行，
+如果子节点状态为success，则把自身设置为success并返回；
+如果子节点状态为running，则把自身设置为running，并等待返回其他结果（success或failed）；
+如果子节点状态为failed，则会执行下一个子节点；
+如果所有没子节点都不为success，则把自身设置为failed并返回。
+原则：只要一个子节点返回&rdquo;成功&rdquo;或&rdquo;运行中&rdquo;，则返回；若返回&rdquo;失败&rdquo;，则执行下一个子节点。</p>
+
+<ul>
+<li>并行节点</li>
+</ul>
+
+<p>看上去是同时执行所有的子节点，但是真正的逻辑还是一个一个执行子节点。
+可以自己设定并行节点的退出条件，比如：如果子节点失败，则并行节点返回，并将自身状态也设为失败。</p>
+
+<h3 id="装饰节点">装饰节点</h3>
+
+<p>顾名思义，它只是对它的子节点的运行状态做一些修饰，比如取反、限制次数等。</p>
+
+<h3 id="条件节点">条件节点</h3>
+
+<p>条件节点根据比较结果返回成功或失败，但永远不会返回正在执行（Running）</p>
+
+<h3 id="动作节点">动作节点</h3>
+
+<p>即真正的行为，可能一些行为需要特殊实现，所以，可以根据需要自行定制。</p>
+
+<h2 id="行为树的实现">行为树的实现</h2>
+
+<p>我移植的行为树实现，已经放在了<a href="https://github.com/shuimu98/domi-lab/tree/master/lua/bt">github repo</a>,
+但是在实现上稍微有一些区别。在饥荒原版的实现中，ai固定思考的频率是变动的，而我将它改为了固定频率。</p>
+
+<p>什么意思呢？</p>
+
+<p>首先，要明白饥荒行为树的执行流程。</p>
+
+<p>行为树根节点（<code>PriorityNode</code>）有一个最大思考间隔<code>_period</code>，每次思考（执行）一次后，如果思考耗时未超过<code>_period</code>，则有两种处理方式：</p>
+
+<ol>
+<li>如果思考后的结果为running，则根节点会记录这个running的子节点，并在思考后计算出下一次思考的间隔时间，那么下一次则直接从这个running的子节点开始思考；</li>
+<li>如果思考后的结果为成功或者失败，则在下一个逻辑帧时从根节点重新思考。</li>
+</ol>
+
+<p>如果思考超过了最大思考间隔，则从根节点重新思考一次，不管上次思考的结果是否是running。</p>
+
+<p><strong>举个例子：</strong></p>
+
+<p>假设 <code>_period=1000 ms</code>, 游戏的逻辑帧为10ms, 并且按照下面的思考流程：</p>
+
+<ol>
+<li>第一次思考的时间戳是0，思考完后有一个子节点<strong>A</strong>返回running，并且需要在300ms后进行下一次思考；</li>
+
+<li><p>等待300ms后，开始第二次思考（此时时间戳为300），直接从<strong>A</strong>开始执行，这里需要注意，返回的结果不同，下次思考的流程也会不同；</p>
+
+<ul>
+<li>若思考后返回success，并且下一个逻辑帧（10ms后）又需要从头重新思考；</li>
+<li>若思考后返回running，并且需要等待800ms，那么，300+800&gt;1000，所以下次思考的间隔时间为（0+1000）-300=700ms。</li>
+</ul></li>
+</ol>
+
+<p>换句话说，最大思考间隔的作用是，防止某个子节点一直running，而导致其他满足条件的子节点得不到运行的机会。</p>
+
+<p>而我改成固定频率，是担心ai思考过于频繁，还是上面的例子，在第二次思考后，如果返回成功，下一次思考还是需要等待700ms，而不是在下一次逻辑帧从头重新思考。</p>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2017-03-24 00:00:00 \x2b0000 UTC',
+              title: '行为树及其实现',
+              link: decodeURI(location.href),
+              desc: '前两周一直在忙于ai的优化，之前的ai实现有一点类似状态机的做法，写起了有点不太简洁优雅，可维护性比较低。 加之之前对行为树有一点了解，所以寻思将之前的ai改为行为树的方式。\n在动手之前，自己也参考了网上很多关于行为树的介绍，以及行为树相关项目。\n关于行为树的介绍：\n主要参考了育碧大神finney关于行为树介绍的文章。大神的博客里面有很多关于ai设计的文章，干货十足。\n另外，可以参考资料《The Behavior Tree Starter Kit》，出自《Game AI Pro》第一版第二部分（Section 2: Architecture）的第六章节。 对应的代码在github上。我会抽个时间翻译一下。\n行为树的相关项目：\n我看过的项目主要有两个： - 饥荒的ai实现 - 腾讯的开源项目Tencent Behaviac\n饥荒的脚本是lua实现，而且是未编译成字节码的，所以可以看到整个游戏的lua层代码，其中就包括了饥荒整个ai框架。\nai相关的主要代码在：behaviours、brains和stategraphs 这三个文件夹，其中stategraphs是状态机的实现，也有参考意义。 我也是将里面行为树部分移除出来，并做了一些修改运用到我们的游戏中。\n什么是行为树 先看一个简单的怪物行为树： 行为树是一种树形结构，它其实可以看成是一个分层状态机从网状图拉成了一个树。一颗树包含了中间节点和叶子节点， 中间节点控制决策的走向，叶子节点则负责展现行为。\n行为树的节点 行为树节点主要分为： 1. 组合节点（序列节点、选择节点、并行节点等） 2. 装饰节点（有且仅有一个子节点） 3. 条件节点 4. 动作节点\n组合节点和装饰节点只能作为行为树的中间节点，而条件节点和动作节点作为树的叶子节点。 所以，条件和动作节点称为行为节点（Behavior Node），组合和装饰节点称为决策节点（Decider Node）。\n在详细介绍每个节点之前，首先要了解节点的状态。行为树的每个节点的运行状态只会有两种： - 运行中（running） - 运行完毕（success\/failed）\n父节点通过每个子节点的运行状态，来决定自己的状态。\n如何理解running状态？\n举个例子，假如人吃饭是一个行为，但是吃饭需要花一段时间，所以当人执行吃饭的行为时，这个吃饭的节点就处于running中， 直到吃完后，才会变成success状态（吃饭成功），或者吃到一半时发现菜里有屎，变成failed状态（吃饭失败）。\n当然，如果是瞬时动作，可以不需要running。\n组合节点  序列节点  它实现的是and的逻辑，例如：r = x and y and z,则先执行x，如果x为true，则继续执行y，如果x为false，则直接返回false，以此类推 执行该节点时，它会一个接一个运行， 如果子节点状态为success，则执行下一个子节点； 如果子节点状态为running，则把自身设置为running，并等待返回其他结果（success或failed）； 如果子节点状态为failed，则把自身设置为failed，并返回； 如果所有节点都为success，则把自身设置为success并返回。 原则：只要一个子节点返回\x26rdquo;失败\x26rdquo;或\x26rdquo;运行中\x26rdquo;，则返回；若返回\x26rdquo;成功\x26rdquo;，则执行下一个子节点。',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

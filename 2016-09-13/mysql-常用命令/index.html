@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mysql 常用命令</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="Mysql 常用命令">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="Mysql 常用命令">
+    <meta property="og:description" content="Mysql 常用命令">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Mysql 常用命令</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+      
+
+    <h4><a href="/2016-09-13/mysql-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Mysql 常用命令</a></h4>
+    <h5>2016-09-13 - 2 minutes</h5>
+
+    
+
+    
+    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">
+        <kbd class="item-tag"> 数据库 </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="mysql常用命令-footer2">Mysql常用命令<sup class="footnote-ref" id="fnref:footer2"><a href="#fn:footer2">1</a></sup></h3>
+
+<table>
+<thead>
+<tr>
+<th align="left">功能</th>
+<th align="left">命令</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">连接远程数据库</td>
+<td align="left">mysql -h192.168.2.172 -uroot -p123456;</td>
+</tr>
+
+<tr>
+<td align="left">添加密码/修改密码</td>
+<td align="left">mysqladmin -u用户名 -p旧密码 password 新密码;</td>
+</tr>
+
+<tr>
+<td align="left">显示所有库</td>
+<td align="left">show databases;</td>
+</tr>
+
+<tr>
+<td align="left">切换库</td>
+<td align="left">use 库名;</td>
+</tr>
+
+<tr>
+<td align="left">显示表结构</td>
+<td align="left">desc 表名;</td>
+</tr>
+
+<tr>
+<td align="left">创建数据库</td>
+<td align="left">create database 库名;</td>
+</tr>
+
+<tr>
+<td align="left">删除数据库</td>
+<td align="left">drop database 库名;</td>
+</tr>
+
+<tr>
+<td align="left">创建表</td>
+<td align="left">create table 表名(字段&hellip;);  <sup class="footnote-ref" id="fnref:footer1"><a href="#fn:footer1">2</a></sup></td>
+</tr>
+
+<tr>
+<td align="left">删除表</td>
+<td align="left">drop table 表名;</td>
+</tr>
+
+<tr>
+<td align="left">清空表数据</td>
+<td align="left">delete from 表名;</td>
+</tr>
+
+<tr>
+<td align="left">显示表中的记录</td>
+<td align="left">select * from 表名;</td>
+</tr>
+
+<tr>
+<td align="left">导入.sql文件命令</td>
+<td align="left">use 库名;<br>source d:/mysql.sql;</td>
+</tr>
+
+<tr>
+<td align="left">命令行修改root密码</td>
+<td align="left">update mysql.user SET password=PASSWORD(&lsquo;新密码&rsquo;) WHERE User=&lsquo;root&rsquo;;<br>FLUSH PRIVILEGES;</td>
+</tr>
+
+<tr>
+<td align="left">显示当前use的数据库名</td>
+<td align="left">select database();</td>
+</tr>
+
+<tr>
+<td align="left">显示当前的user</td>
+<td align="left">select user();</td>
+</tr>
+
+<tr>
+<td align="left">简单描述表结构，字段类型</td>
+<td align="left">desc tabl_name;</td>
+</tr>
+
+<tr>
+<td align="left">查询表中的结构信息</td>
+<td align="left">select * from information_schema.columns where table_schema=&lsquo;dbname&rsquo; and table_name=&lsquo;tablename&rsquo;;</td>
+</tr>
+
+<tr>
+<td align="left">查看表生成的DDL</td>
+<td align="left">show create table table_name;;</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="数据库操作示例">数据库操作示例</h3>
+
+<ul>
+<li><strong>创建表</strong></li>
+</ul>
+
+<p>例如创建一张邮件表：</p>
+
+<pre><code class="language-sql">CREATE TABLE `mail` (
+  `pid` int(10) unsigned NOT NULL COMMENT '玩家id,邮件接收者',
+  `uuid` char(22) BINARY NOT NULL COMMENT '唯一id',
+  `readed` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '邮件读取标志 0未读,1已读未取附件,2已读并取附件',
+  `sender` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '邮件发送方ID',
+  `createTime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间(单位:秒)',
+  `subject` varchar(24) BINARY NOT NULL DEFAULT '' COMMENT '标题(24个字符)',
+  `content` varchar(512) BINARY NOT NULL DEFAULT '' COMMENT '正文(600个字符)',
+  `attachment` text NOT NULL COMMENT '附件',
+  PRIMARY KEY (`pid`,`uuid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='邮件';
+</code></pre>
+
+<p>创建一张玩家表：</p>
+
+<pre><code class="language-sql">CREATE TABLE `player` (
+  `pid` int(11) unsigned NOT NULL COMMENT '角色id',
+  `name` varchar(32) BINARY NOT NULL DEFAULT '0' COMMENT '角色名',
+  `level` int(11) unsigned NOT NULL COMMENT '等级',
+  `exp` int(11) unsigned NOT NULL COMMENT '经验',
+  PRIMARY KEY (`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='玩家基本信息';
+</code></pre>
+
+<ul>
+<li><strong>查询</strong></li>
+</ul>
+
+<pre><code class="language-sql">select * from player; #查询所有记录
+select pid,name from player where pid = 1; #按条件查询指定字段
+</code></pre>
+
+<ul>
+<li><strong>删除</strong></li>
+</ul>
+
+<pre><code class="language-sql">delete from player; #清空所有记录
+delete from player where pid = 1; #清空pid等于1的记录
+</code></pre>
+
+<ul>
+<li><strong>插入</strong></li>
+</ul>
+
+<pre><code class="language-sql">insert into player(pid,name) values(1,&quot;aaa&quot;),(2,&quot;bbb&quot;); #指定字段的插入
+insert into player values(1,&quot;test001&quot;,5,100),(2,&quot;test002&quot;,10,700);
+#第二种形式的插入，values必须与字段一一对应
+</code></pre>
+
+<ul>
+<li><strong>更新</strong></li>
+</ul>
+
+<pre><code class="language-sql">update player set name=&quot;fuckyou&quot; where pid = 1; 
+update player set name=&quot;domicat&quot;,level=100 where pid=1;
+</code></pre>
+
+<ul>
+<li><strong>修改表结构</strong></li>
+</ul>
+
+<pre><code class="language-sql">alter table player ADD `entryId` int(11) unsigned NOT NULL COMMENT '职业';#添加字段
+alter table player change `test` `createTime` int(11) unsigned NOT NULL COMMENT '创号时间'; #修改字段
+alter table player modify column `entryId` int(11) UNSIGNED NOT NULL COMMENT '职业' after `server`; #更改字段位置
+alter table player CHANGE `entryId` `entryId` int(11) UNSIGNED NOT NULL COMMENT '职业'; #修改字段注释
+</code></pre>
+
+<ul>
+<li><strong>检查库或者表是否存在</strong></li>
+</ul>
+
+<pre><code class="language-sql">DROP DATABASE IF EXISTS db;
+CREATE DATABASE IF NOT EXISTS db;
+DROP TABLE IF EXISTS tb;
+</code></pre>
+
+<ul>
+<li><strong>多表数据删除</strong></li>
+</ul>
+
+<pre><code class="language-sql">delete from t1 where 条件;
+delete t1 from t1 where 条件;
+delete t1 from t1,t2 where 条件;
+</code></pre>
+
+<blockquote>
+<p>脚注：</p>
+</blockquote>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:footer2">参考：<a href="http://www.jb51.net/article/18667.htm">http://www.jb51.net/article/18667.htm</a>
+ <a class="footnote-return" href="#fnref:footer2"><sup>[return]</sup></a></li>
+<li id="fn:footer1">这里表示简单的命令结构，详细创建表的方式有很多种，请参考 <strong>数据库操作示例</strong>。
+ <a class="footnote-return" href="#fnref:footer1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2016-09-13 00:00:00 \x2b0000 UTC',
+              title: 'Mysql 常用命令',
+              link: decodeURI(location.href),
+              desc: 'Mysql常用命令1    功能 命令     连接远程数据库 mysql -h192.168.2.172 -uroot -p123456;   添加密码\/修改密码 mysqladmin -u用户名 -p旧密码 password 新密码;   显示所有库 show databases;   切换库 use 库名;   显示表结构 desc 表名;   创建数据库 create database 库名;   删除数据库 drop database 库名;   创建表 create table 表名(字段\x26hellip;); 2   删除表 drop table 表名;   清空表数据 delete from 表名;   显示表中的记录 select * from 表名;   导入.',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>git 操作手册</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="git 操作手册">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">git 操作手册</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+
+    <h4><a href="/2015-12-16/git-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/">git 操作手册</a></h4>
+    <h5>2015-12-16 - 2 minutes</h5>
+
+    
+
+    
+    <a href="/tags/git">
+        <kbd class="item-tag"> Git </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着<strong>好记性不如烂笔头</strong>的伟大信念，我决定有必要系统性整理一下，方便日后查找。</p>
+
+<p>分为四个部分：</p>
+
+<ul>
+<li>1、git学习资料；</li>
+<li>2、git命令与常用操作；</li>
+<li>3、git的设置；</li>
+<li>4、错误解决方法；</li>
+</ul>
+
+<h3 id="第一部分-git学习资料以及选项解释">第一部分 - git学习资料以及选项解释</h3>
+
+<p>这里是我收集的git学习资料：</p>
+
+<ul>
+<li><a href="https://snowdream86.gitbooks.io/github-cheat-sheet/content/zh/index.html">GitHub秘籍</a></li>
+<li><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程</a></li>
+<li><a href="http://git.oschina.net/progit/index.html">Pro Git（中文版）</a></li>
+<li><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/intl/zh_cn/index.html">Git Magic</a></li>
+<li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">Git 简明指南</a></li>
+<li><a href="http://blog.csdn.net/x805433354/article/details/41214895">github秘笈</a>。</li>
+</ul>
+
+<p>另外，关于一些比较疑惑的git命令选项，我也收集了一部分，不是很全，目前就遇到了工作中不懂的一些命令选项。</p>
+
+<h4 id="1-1-git-仓库内部结构">1-1： git 仓库内部结构</h4>
+
+<p><img src="/images/posts/git.jpg" alt="pic" /></p>
+
+<h4 id="1-2-origin到底是什么意思">1-2： origin到底是什么意思？</h4>
+
+<p>可以参考知乎的<a href="https://www.zhihu.com/question/27712995">此问题</a>，origin，译为起源，我个人理解为远程仓库在本地的一个别名或者标签，这个是约定俗成的，也可以改为其他名字。同时，要区分repository（仓库）和 master（主分支）这两个概率的区别，举个栗子：repository是一棵树的树根，master则是这个树的主干，其他枝叶都是从master分出去的。不论是主干还是枝干，它们通通都起源于树根。<br />
+这样就很容易理解命令：<code>git push origin master</code>。</p>
+
+<h4 id="1-3-git-u这个参数到底表示什么">1-3： git -u这个参数到底表示什么？</h4>
+
+<p>-u 参数即 &ndash;set-upstream，
+依然参考知乎的<a href="https://www.zhihu.com/question/20019419">此问题</a>，用来关联本地分支和远程分支。举一个非常简单的例子：<br />
+我在本地新建了一个分支<strong>test</strong>，并提交到远程仓库，然后取回远程仓库的更新。</p>
+
+<pre><code>git checkout -b test
+git push origin test
+git pull #此时就会报错，因为git不知道去拉取远程的哪个分支
+</code></pre>
+
+<p>但是，如果使用了<code>git push -u origin test</code>，等价于： <code>git push origin test ; git branch --set-upstream test origin/test</code>。</p>
+
+<h3 id="第二部分-git命令与常用操作">第二部分 - git命令与常用操作</h3>
+
+<h4 id="2-1-git命令">2-1：git命令</h4>
+
+<ul>
+<li>git status #查看仓库状态</li>
+<li>git add xxx.txt #添加文件到仓库</li>
+<li>git log #查询历史记录，加参数 <code>--pretty=oneline</code>简化显示信息</li>
+<li>git checkout &ndash; file #撤销工作区的修改，即撤销未add的修改</li>
+<li>git reset HEAD file #撤销暂存区的修改，即撤销add后的修改，之后再使用<code>git checkout -- file</code></li>
+<li>git branch #查看本地分支</li>
+<li>git branch -a #查看所有分支，包括本地和远程分支</li>
+<li>git push origin &ndash;delete test #删除远程仓库的test分支</li>
+<li>git push origin &ndash;delete tag <tagname> #删除远程仓库的标签</li>
+<li>git remote -v #显示远程仓库，-v表示显示仓库的url地址</li>
+</ul>
+
+<h4 id="2-2-常用操作">2-2：常用操作</h4>
+
+<ul>
+<li><p>版本回退与恢复，使用<strong>git reset</strong></p>
+
+<p>git reset &ndash;hard HEAD^ #回退到上一个版本，HEAD表示当前版本<br />
+git reflog #仓库的所有操作记录</p></li>
+</ul>
+
+<p>在Git中，用HEAD表示当前版本，上一个版本就是HEAD^，上上一个版本就是HEAD^^，往上100个版本写成HEAD~100
+{: .notice}</p>
+
+<ul>
+<li><p>提交所有有改动的文件：</p>
+
+<p>git add .<br />
+git add &ndash;update .<br />
+git commit -am &ldquo;提交描述&rdquo;</p></li>
+</ul>
+
+<h3 id="第三部分-git的设置">第三部分 - git的设置</h3>
+
+<p>主要是一些常用的git设置，一般都是使用<code>git config</code>命令。</p>
+
+<h4 id="3-1-git-config-常用配置">3-1：git config 常用配置</h4>
+
+<ol>
+<li>设置用户名和邮箱<br />
+$ git config &ndash;global user.name &ldquo;Your Name&rdquo;<br />
+$ git config &ndash;global user.email &ldquo;email@example.com&rdquo;<br /></li>
+</ol>
+
+<p>&ndash;global，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。<br />
+{: .notice}</p>
+
+<h4 id="3-2-git-push免用户名-密码输入">3-2：git push免用户名、密码输入</h4>
+
+<p>如果使用https向远程push代码时，总是要输入用户名和密码，长期如此会觉得很烦，网上搜索有三种解决方案。具体参考：</p>
+
+<ul>
+<li><a href="http://git-scm.com/docs/gitcredentials">Git - gitcredentials Documentation</a></li>
+<li><a href="http://git-scm.com/docs/git-credential-store">Git - git credential store</a></li>
+<li><a href="https://help.github.com/articles/caching-your-github-password-in-git/">Caching your GitHub password in Git</a></li>
+<li><a href="http://www.cnblogs.com/ballwql/p/3462104.html">Git Push 避免用户名和密码方法</a></li>
+</ul>
+
+<p><strong>方法一</strong>：切换成ssh模式</p>
+
+<pre><code>Domi@DomiCat MINGW64 /d/Github/domi-vimrc (master)
+$ git remote -v
+origin  https://github.com/shuimu98/domi-vimrc.git (fetch) #这里表示使用的是https方式
+origin  https://github.com/shuimu98/domi-vimrc.git (push) 
+
+$ git remote rm origin
+$ git remote add origin git@github.com:shuimu98/domi-vimrc.git
+$ git push origin
+
+#如果push失败，报以下错误
+fatal: The current branch master has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin master
+按照提示输入
+$ git push -u origin master
+或
+$ git push --set-upstream origin master
+</code></pre>
+
+<p><strong>方法二</strong>：设置 credential helper，打开git bash，按顺序输入以下命令：</p>
+
+<pre><code>cd ~
+touch .git-credentials
+vim .git-credentials #输入 https://{username}:{password}@github.com 
+git config --global credential.helper store
+</code></pre>
+
+<p>用<code>cat .gitconfig</code>查看配置文件，会看到：</p>
+
+<pre><code>[credential]
+    helper = store
+</code></pre>
+
+<p><strong>方法三</strong>： 使用环境变量存储用户名和密码（未自测）<br />
+1、在windows中添加一个HOME环境变量，变量名:HOME,变量值：%USERPROFILE%；<br />
+2、进入%HOME%目录，新建一个名为&rdquo;_netrc&rdquo;的文件，文件中内容格式如下：</p>
+
+<pre><code>machine {git account name}.github.com  #如果无效，改为 machine github.com
+login your-usernmae
+password your-password
+</code></pre>
+
+<h3 id="第四部分-出现的错误以及解决方法">第四部分 - 出现的错误以及解决方法</h3>
+
+<h4 id="4-1-warning-push-default-is-unset">4-1：warning: push.default is unset</h4>
+
+<p>原因：git1.x版本与2.x版本对push的行为不同而产生的该警告。具体参考：<a href="http://www.oschina.net/news/45585/git-2-x-change-push-default-to-simple">这里</a></p>
+
+<p>解决方法：<br />
+打开git bash，设置git全局配置： <code>git config --global push.default matching</code> 或者 <code>git config --global push.default simple</code></p>
+
+<ul>
+<li>matching，  Git 1.x 的默认行为，其意是如果你执行 git push 但没有指定分支，它将 push 所有你本地的分支到远程仓库中对应匹配的分支。</li>
+<li>simple，Git 2.x 的默认行为，意味着执行 git push 没有指定分支时，只有当前分支会被 push 到你使用 git pull 获取的代码。</li>
+</ul>
+
+<h4 id="4-2-warning-lf-will-be-replaced-by-crlf">4-2：warning: LF will be replaced by CRLF</h4>
+
+<p>CRLF（ Carriage-Return Line-Feed，回车换行），ACSII字符为 <code>\r\n</code>。
+{: .notice}</p>
+
+<p>原因： Git的换行符检查功能。因为操作系统定义的换行符的不一致，windows系统使用 <strong>CRLF</strong>(\r\n)来表示一行结束，而linux用 \n 来表示换行，Git提供了一个换行符检查功能（core.safecrlf），可以在提交时检查文件是否混用了不同风格的换行符。Git可以在你提交时自动地把行结束符CRLF转换成LF，而在迁出代码时把LF转换成CRLF。具体参考：<a href="http://blog.csdn.net/feng88724/article/details/11600375">这里</a></p>
+
+<p>解决方法： 可以忽略</p>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2015-12-16 11:54:00 \x2b0000 UTC',
+              title: 'git 操作手册',
+              link: decodeURI(location.href),
+              desc: 'git是什么鬼，这个就不啰嗦了，是个程序猿都知道。这篇文章主要是记录常用的git操作以及常见错误的解决方案，人老了，脑子记不住，遇到一些错误解决之后过几天就忘了，所以秉着好记性不如烂笔头的伟大信念，我决定有必要系统性整理一下，方便日后查找。\n分为四个部分：\n 1、git学习资料； 2、git命令与常用操作； 3、git的设置； 4、错误解决方法；  第一部分 - git学习资料以及选项解释 这里是我收集的git学习资料：\n GitHub秘籍 Git教程 Pro Git（中文版） Git Magic Git 简明指南 github秘笈。  另外，关于一些比较疑惑的git命令选项，我也收集了一部分，不是很全，目前就遇到了工作中不懂的一些命令选项。\n1-1： git 仓库内部结构 1-2： origin到底是什么意思？ 可以参考知乎的此问题，origin，译为起源，我个人理解为远程仓库在本地的一个别名或者标签，这个是约定俗成的，也可以改为其他名字。同时，要区分repository（仓库）和 master（主分支）这两个概率的区别，举个栗子：repository是一棵树的树根，master则是这个树的主干，其他枝叶都是从master分出去的。不论是主干还是枝干，它们通通都起源于树根。\n这样就很容易理解命令：git push origin master。\n1-3： git -u这个参数到底表示什么？ -u 参数即 \x26ndash;set-upstream， 依然参考知乎的此问题，用来关联本地分支和远程分支。举一个非常简单的例子：\n我在本地新建了一个分支test，并提交到远程仓库，然后取回远程仓库的更新。\ngit checkout -b test git push origin test git pull #此时就会报错，因为git不知道去拉取远程的哪个分支  但是，如果使用了git push -u origin test，等价于： git push origin test ; git branch --set-upstream test origin\/test。',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

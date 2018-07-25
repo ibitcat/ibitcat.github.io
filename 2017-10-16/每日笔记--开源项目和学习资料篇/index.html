@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>每日笔记 —— 开源项目和学习资料篇</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="每日笔记 —— 开源项目和学习资料篇">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="记录了工作中，每天的笔记，分类整理。本篇文章主要记录开源项目学习和自己收集的学习资料。">
+    <meta property="og:description" content="记录了工作中，每天的笔记，分类整理。本篇文章主要记录开源项目学习和自己收集的学习资料。">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">每日笔记 —— 开源项目和学习资料篇</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+      
+
+    <h4><a href="/2017-10-16/%E6%AF%8F%E6%97%A5%E7%AC%94%E8%AE%B0--%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E7%AF%87/">每日笔记 —— 开源项目和学习资料篇</a></h4>
+    <h5>2017-10-16 - 1 minutes</h5>
+
+    
+
+    
+    <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0">
+        <kbd class="item-tag"> 读书笔记 </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h2 id="1-开源项目">1、开源项目</h2>
+
+<h3 id="1-1-redis">1-1、redis</h3>
+
+<ol>
+<li>redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字<code>redis</code>。</li>
+<li>关于<strong>Redis ae事件驱动库</strong>的讲解，网上有比较多的教程，例如：<a href="http://www.wzxue.com/%E8%A7%A3%E8%AF%BBredis-ae%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%BA%93/">教程1</a> 和 <a href="https://m.oschina.net/blog/161077">教程2</a></li>
+</ol>
+
+<h3 id="1-2-libev">1-2、libev</h3>
+
+<ol>
+<li><p>windows下visual studio编译libev:</p>
+
+<ol>
+<li>在vs下添加已存在的项目;</li>
+<li>从vs中移除<code>ev_epoll.c</code>, <code>ev_kqueue.c</code>, <code>ev_poll.c</code>, <code>ev_select.c</code>, <code>ev_win32.c</code>几个文件;</li>
+<li>event.c中要包含winsock2.h头文件; config.h.in复制为config.h, 定义<code>HAVE_SELECT</code>和<code>HAVE_SYS_SELECT_H</code></li>
+<li>加上ws2_32.lib</li>
+</ol>
+
+<p>具体参考：<a href="https://github.com/xmulyj/libev/blob/master/readme.txt">https://github.com/xmulyj/libev 里面的README</a></p></li>
+
+<li><p>关于windows下编译libev的问题:</p>
+
+<ul>
+<li>1. cygwin下编译正常,有backend;</li>
+<li>2. visual studio中编译的话:</li>
+</ul>
+
+<p>(1)把config.h.in复制一份改为config.h,然后HAVE_SELECT和HAVE_SYS_SELECT_H都定义为1后;<br />
+(2)在event.c中包含winsock2.h头文件<br />
+编译ok, 有backend(select), 运行libev官网上的例子(去掉io watcher,只保留timer watcher)正常.</p></li>
+
+<li><p>libev 教程：可以参考这个<a href="http://dirtysalt.info/">大神的博客</a>，里面搜索关键字<code>libev</code></p></li>
+</ol>
+
+<h3 id="1-3-snowflake算法">1-3、Snowflake算法</h3>
+
+<ol>
+<li><p>Twitter-Snowflake算法，64位自增ID算法，可以用来替换UUID算法。关于该算法的介绍，可以参考<a href="http://www.lanindex.com/twitter-snowflake%EF%BC%8C64%E4%BD%8D%E8%87%AA%E5%A2%9Eid%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/">这篇文章</a>。</p></li>
+
+<li><p>Snowflake算法，<a href="https://github.com/korialuo/skynet/blob/master/lualib-src/lua-snowflake.c">C语言实现</a>。</p></li>
+</ol>
+
+<h3 id="1-4-skynet">1-4、skynet</h3>
+
+<ol>
+<li><a href="http://www.cnblogs.com/ychellboy/archive/2012/10/15/2723470.html">skynet架构</a>，基本的框架介 以及 <a href="https://my.oschina.net/zengjs275/blog/719663">Skynet 设计综述</a>。</li>
+</ol>
+
+<h3 id="1-5-raft-分布式系统-raft-一致性算法">1-5、raft(分布式系统 RAFT 一致性算法)</h3>
+
+<ol>
+<li><a href="http://thesecretlivesofdata.com/raft/">raft 简单介绍</a>。</li>
+</ol>
+
+<h3 id="1-6-groupcache">1-6、groupcache</h3>
+
+<ol>
+<li><a href="https://github.com/golang/groupcache">groupcache（已star）</a>是一个分布式缓存 go 语言库,支持多节点互备热数据,有良好的稳定性和较高的并发性。寥寥2000来行代码完成了个lru cache库，核心只用一个list和一个map，出自brad大神之手（memcached作者）。</li>
+</ol>
+
+<h3 id="1-7-uuid生成">1-7、UUID生成</h3>
+
+<ol>
+<li><a href="https://tools.ietf.org/html/rfc4122"><strong>rfc4122</strong></a>详细介绍了UUID的生成。在我自己的游戏服务器中有<a href="https://github.com/shuimu98/game_server/blob/master/src/lualib-src/lbase64.c">简单的实现</a>并对生成的uuid进行了base64。</li>
+</ol>
+
+<h2 id="2-游戏开发">2、游戏开发</h2>
+
+<ol>
+<li>游戏常用的编程设计模式：<a href="http://gpp.tkchu.me/">游戏编程模式</a>。</li>
+
+<li><p>行为树：</p>
+
+<ul>
+<li><a href="http://www.cnblogs.com/hammerc/p/5044815.html">行为树的理解和学习</a></li>
+<li><a href="http://godorz.info/2015/10/behaviourtree/">行为树及其实现</a></li>
+<li><a href="http://blog.csdn.net/kenkao/article/details/6099966">使用行为树(Behavior Tree)实现游戏AI</a></li>
+</ul></li>
+
+<li><p>棋牌游戏开发：</p>
+
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/cronlygames">棋牌游戏感悟</a></li>
+</ul></li>
+
+<li><p><a href="http://blog.csdn.net/lalate/article/details/51498869">基于Lua的游戏服务端框架简介</a>，是以C/C++为底层，lua为上次的游戏框架为基础，做了比较全面的介绍。</p></li>
+
+<li><p>游戏的同步方式：<strong>帧同步</strong>和<strong>状态同步</strong>。前者适用于FPS/RTS游戏，后者适用于mmorpg游戏。</p>
+
+<p>参考： <a href="http://www.cnblogs.com/sevenyuan/p/5283265.html">状态同步与帧同步</a>和<a href="https://www.cnblogs.com/shown/p/6108617.html">动作手游实时PVP帧同步方案（客户端）</a></p></li>
+</ol>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2017-10-16 00:00:00 \x2b0000 UTC',
+              title: '每日笔记 —— 开源项目和学习资料篇',
+              link: decodeURI(location.href),
+              desc: '1、开源项目 1-1、redis  redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字redis。 关于Redis ae事件驱动库的讲解，网上有比较多的教程，例如：教程1 和 教程2  1-2、libev  windows下visual studio编译libev:\n 在vs下添加已存在的项目; 从vs中移除ev_epoll.c, ev_kqueue.c, ev_poll.c, ev_select.c, ev_win32.c几个文件; event.c中要包含winsock2.h头文件; config.h.in复制为config.h, 定义HAVE_SELECT和HAVE_SYS_SELECT_H 加上ws2_32.lib  具体参考：https:\/\/github.com\/xmulyj\/libev 里面的README\n 关于windows下编译libev的问题:\n 1. cygwin下编译正常,有backend; 2. visual studio中编译的话:  (1)把config.h.in复制一份改为config.h,然后HAVE_SELECT和HAVE_SYS_SELECT_H都定义为1后;\n(2)在event.c中包含winsock2.h头文件\n编译ok, 有backend(select), 运行libev官网上的例子(去掉io watcher,只保留timer watcher)正常.\n libev 教程：可以参考这个大神的博客，里面搜索关键字libev\n  1-3、Snowflake算法  Twitter-Snowflake算法，64位自增ID算法，可以用来替换UUID算法。关于该算法的介绍，可以参考这篇文章。\n Snowflake算法，C语言实现。\n  1-4、skynet  skynet架构，基本的框架介 以及 Skynet 设计综述。  1-5、raft(分布式系统 RAFT 一致性算法)  raft 简单介绍。  1-6、groupcache  groupcache（已star）是一个分布式缓存 go 语言库,支持多节点互备热数据,有良好的稳定性和较高的并发性。寥寥2000来行代码完成了个lru cache库，核心只用一个list和一个map，出自brad大神之手（memcached作者）。  1-7、UUID生成  rfc4122详细介绍了UUID的生成。在我自己的游戏服务器中有简单的实现并对生成的uuid进行了base64。  2、游戏开发  游戏常用的编程设计模式：游戏编程模式。 行为树：',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

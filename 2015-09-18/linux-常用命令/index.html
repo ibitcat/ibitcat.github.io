@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>linux 常用命令</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="linux 常用命令">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="linux下常用的命令以及配置">
+    <meta property="og:description" content="linux下常用的命令以及配置">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">linux 常用命令</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+      
+      
+
+    <h4><a href="/2015-09-18/linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">linux 常用命令</a></h4>
+    <h5>2015-09-18 - 3 minutes</h5>
+
+    
+
+    
+    <a href="/tags/linux">
+        <kbd class="item-tag"> Linux </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<h3 id="第一部分-常用简单命令">第一部分 - 常用简单命令</h3>
+
+<p><font color="#FF090f">小知识：</font> markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。
+{: .notice}</p>
+
+<ol>
+<li>重命名文件文件夹 ： <code>mv file1 file2</code></li>
+<li>移动文件文件夹 ： <code>mv file1 dir1</code></li>
+<li>新建文件夹 ： <code>mkdir dirname</code></li>
+<li>删除非空目录 ： <code>rm -rf dirname</code></li>
+<li>实时打印文件变化 ： <code>tail -f file.log</code></li>
+<li>解压zip文件 ： <code>unzip file.zip -d/temp</code></li>
+<li>文件夹压缩成zip ： <code>zip –q –r test.zip ~/test</code></li>
+
+<li><p>tar解压： <code>tar zxvf zhcon-0.2.5.tar.gz</code><br />
+<code>x</code> : 从 tar 包中把文件提取出来<br />
+<code>z</code> : 表示tar包被gzip压缩过,需要用gunzip解压<br />
+<code>v</code> : 显示详细信息<br />
+<code>f</code> : xxx.tar.gz :  指定被处理的文件是 xxx.tar.gz</p></li>
+
+<li><p>文件夹压缩成zip ： <code>zip –q –r xahot.zip /home/xahot</code></p></li>
+
+<li><p>查看文件夹以及文件大小 ： <code>du -ah  filename</code></p></li>
+
+<li><p>建立软连接 ： <code>ln -s /usr/local/bin/python2.7 /usr/bin/python</code><br />
+将python2.7软连接到系统的默认python,即<code>/usr/bin/python</code>是<code>python2.7</code>的快捷方式</p></li>
+
+<li><p>查看文件夹下文件的总数目 ：  <code>find ./ -type f |wc -l</code></p></li>
+
+<li><p>查看文件列出文件下一级目的的大小 ：</p>
+
+<ul>
+<li>1、df -h<br /></li>
+<li>2、du -h &ndash;max-depth=1 指定层数</li>
+</ul></li>
+
+<li><p>查看磁盘占用情况 ： <code>df -hl</code><br />
+df是以磁盘分区为单位来查看文件系统，/dev/hdb2 75G 75G 0 100% /, 以此为例。<br />
+就是HD硬盘借口的第二个硬盘(b)上，里面的第二个分区(2)，容量是75G，用了75G，可用是0。<br />
+因此利用率是100%, 他被挂载到根分区目录上（/）。<br />
+示例：<br />
+文件系统 容量 已用 可用 已用% 挂载点<br />
+/dev/hdb2 75G 75G 0 100% /<br />
+/dev/hdb1 99M 9.2M 85M 10% /boot<br />
+none 251M 0 251M 0% /dev/shm</p></li>
+
+<li><p>只显示文件夹 ： <code>ls -F|grep /$</code></p></li>
+
+<li><p>查看端口占用 ： <code>netstat -nltp|grep 80</code> t表示tcp协议; l表示仅列出有在 Listen (监听) 的服務状态</p></li>
+
+<li><p>查找文件 ：</p>
+
+<ul>
+<li><p>1.whereis 文件名<br />
+特点:快速,但是是模糊查找,例如 找 #whereis mysql 它会把mysql,mysql.ini,mysql.* 所在的目录都找出来.我一般的查找都用这条命令.</p></li>
+
+<li><p>2.find / -name 文件名<br />
+特点:准确,但速度慢,消耗资源大,例如我想找到php.ini的准确位置,就需要用
+#find / -name php.ini</p></li>
+
+<li><p>3.locate 文件名<br />
+强力推荐的方法,最快,最好的方法.
+注意:第一次使用该命令,可能需要更新数据库,按照提示的命令执行一下就好了.</p></li>
+</ul></li>
+
+<li><p>查看ubuntu版本号 ：</p>
+
+<ul>
+<li><code>cat /etc/issue</code></li>
+<li><code>lsb_release -a</code> (此方法显示内容更详细)</li>
+</ul></li>
+
+<li><p>查看端口占用情况：</p>
+
+<ul>
+<li><code>netstat -nltp|grep 80</code>  表示tcp协议;l表示仅列出有在 Listen (监听) 的服務状态</li>
+<li><code>netstat -anp|grep 80</code></li>
+</ul></li>
+
+<li><p>top命令  <sup class="footnote-ref" id="fnref:footer1"><a href="#fn:footer1">1</a></sup></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><code>PID</code></td>
+<td align="left">进程的ID</td>
+</tr>
+
+<tr>
+<td align="left"><code>USER</code></td>
+<td align="left">进程所有者</td>
+</tr>
+
+<tr>
+<td align="left"><code>PR</code></td>
+<td align="left">进程的优先级别，越小越优先被执行</td>
+</tr>
+
+<tr>
+<td align="left"><code>VIRT</code></td>
+<td align="left">进程占用的虚拟内存</td>
+</tr>
+
+<tr>
+<td align="left"><code>RES</code></td>
+<td align="left">进程占用的物理内存</td>
+</tr>
+
+<tr>
+<td align="left"><code>SHR</code></td>
+<td align="left">进程使用的共享内存</td>
+</tr>
+
+<tr>
+<td align="left"><code>S</code></td>
+<td align="left">进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数</td>
+</tr>
+
+<tr>
+<td align="left"><code>%CPU</code></td>
+<td align="left">进程占用CPU的使用率</td>
+</tr>
+
+<tr>
+<td align="left"><code>%MEM</code></td>
+<td align="left">进程使用的物理内存和总内存的百分比</td>
+</tr>
+
+<tr>
+<td align="left"><code>TIME+</code></td>
+<td align="left">该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。</td>
+</tr>
+
+<tr>
+<td align="left"><code>COMMAND</code></td>
+<td align="left">进程启动命令名</td>
+</tr>
+</tbody>
+</table>
+
+<p>{: rules=&ldquo;all&rdquo; frame=&ldquo;box&rdquo;}</p>
+
+<p>参考：<a href="http://www.cnblogs.com/gaojun/p/3406096.html">查看LINUX进程内存占用情况</a> 、<a href="http://www.cnblogs.com/cherishry/p/5886041.html">Top 命令详解</a>、<a href="https://javawind.net/p131">linux top命令VIRT,RES,SHR,DATA的含义</a></p></li>
+
+<li><p>chmod更改文件权限 : <code>chmod u+r xxx</code> 或者 <code>chmod u=rwx,g=r xxx</code> <sup class="footnote-ref" id="fnref:footer2"><a href="#fn:footer2">2</a></sup></p></li>
+
+<li><p>查看文件类型： <code>file xxx</code></p></li>
+
+<li><p>修改linux时间： <code>date -s 11:00</code> 或者 <code>date -s &quot;2008-08-08 12:00:00&quot;</code></p></li>
+
+<li><p>将指定的时间戳按日期格式显示 ： <code>date -d @1361542596</code></p></li>
+
+<li><p>linux解压缩文件：</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">压缩包格式</th>
+<th align="left">解压</th>
+<th align="left">压缩</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><strong>.tar格式</strong></td>
+<td align="left">tar xvf FileName.tar</td>
+<td align="left">tar cvf FileName.tar DirName（注：tar是打包，不是压缩！）</td>
+</tr>
+
+<tr>
+<td align="left">.gz格式</td>
+<td align="left">解压1：gunzip FileName.gz <br>解压2：gzip -d FileName.gz</td>
+<td align="left">gzip FileName</td>
+</tr>
+
+<tr>
+<td align="left">.tar.gz格式</td>
+<td align="left">tar zxvf FileName.tar.gz</td>
+<td align="left">tar zcvf FileName.tar.gz DirName</td>
+</tr>
+
+<tr>
+<td align="left">.bz2格式</td>
+<td align="left">bzip2 -d FileName.bz2  <br>解压2：bunzip2 FileName.bz2</td>
+<td align="left">bzip2 -z FileName</td>
+</tr>
+
+<tr>
+<td align="left">.tar.bz2格式</td>
+<td align="left">tar jxvf FileName.tar.bz2</td>
+<td align="left">tar jcvf FileName.tar.bz2 DirName</td>
+</tr>
+
+<tr>
+<td align="left">.bz格式</td>
+<td align="left">bzip2 -d FileName.bz</td>
+<td align="left">bunzip2 FileName.bz</td>
+</tr>
+
+<tr>
+<td align="left">.tar.bz格式</td>
+<td align="left"></td>
+<td align="left">tar jxvf FileName.tar.bz</td>
+</tr>
+
+<tr>
+<td align="left">.Z格式</td>
+<td align="left">uncompress FileName.Z</td>
+<td align="left">compress FileName</td>
+</tr>
+
+<tr>
+<td align="left">.tar.Z格式</td>
+<td align="left">tar Zxvf FileName.tar.Z</td>
+<td align="left">tar Zcvf FileName.tar.Z DirName</td>
+</tr>
+
+<tr>
+<td align="left">.tgz格式</td>
+<td align="left">tar Zxvf FileName.tar.Z</td>
+<td align="left">tar zxvf FileName.tgz</td>
+</tr>
+
+<tr>
+<td align="left">.tar.tgz格式</td>
+<td align="left">tar zxvf FileName.tar.tgz</td>
+<td align="left">tar zcvf FileName.tar.tgz FileName</td>
+</tr>
+
+<tr>
+<td align="left"><strong>.zip格式</strong></td>
+<td align="left">unzip FileName.zip</td>
+<td align="left">zip FileName.zip DirName</td>
+</tr>
+
+<tr>
+<td align="left">.lha格式</td>
+<td align="left">lha -e FileName.lha</td>
+<td align="left">lha -a FileName.lha FileName</td>
+</tr>
+
+<tr>
+<td align="left">.rar格式</td>
+<td align="left">rar a FileName.rar</td>
+<td align="left">rar e FileName.rar</td>
+</tr>
+</tbody>
+</table>
+
+<p>{: rules=&ldquo;all&rdquo; frame=&ldquo;box&rdquo;}</p></li>
+
+<li><p>环境变量设置与删除:</p>
+
+<ul>
+<li><code>export -l</code> 查看环境变量</li>
+<li><code>export 变量名=变量值</code> 设置环境变量</li>
+<li><code>unset xxx</code> 删除环境变量</li>
+</ul></li>
+
+<li><p>查看linux系统的cpu核心的简单方法：<code>top</code>命令后按 <strong><code>数字键 1</code></strong>。</p></li>
+
+<li><p>inux查看用户所属组：</p>
+
+<ul>
+<li>命令<code>groups</code>查看当前用户所属组</li>
+<li>groups 用户（查看用户所属组），例如：<code>groups root</code></li>
+<li>id 用户(查看用户所属组），例如：<code>whoami</code>，然后<code>id xxx</code>(xxx为whoami的返回值)</li>
+<li>直接查看组文件，<code>more /etc/group</code></li>
+</ul></li>
+
+<li><p><code>cat /etc/passwd</code>查看所有的用户信息。</p></li>
+
+<li><p>获取本机ip：<code>ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk '{print $2}'|tr -d \&quot;addr:\&quot;</code></p></li>
+
+<li><p><code>nc</code>命令，需要安装<code>netcat</code></p></li>
+</ol>
+
+<h3 id="第二部分-稍微复杂的命令">第二部分 - 稍微复杂的命令</h3>
+
+<h4 id="1-tree">1、tree</h4>
+
+<p>比较常用的：</p>
+
+<ul>
+<li>tree -L n ：  <code>#n代表数字,表示要显示几层</code><br /></li>
+<li>tree -d ： <code>仅显示目录</code><br /></li>
+<li>tree -f ： <code>显示完整路径</code></li>
+</ul>
+
+<p><strong>注意!</strong> 一般需要安装tree，ubuntu下安装： <code>apt-get install tree</code>
+{: .notice}</p>
+
+<h4 id="2-ls-ps-grep和awk结合使用">2、ls、ps、grep和awk结合使用</h4>
+
+<p>首先了解 <code>/proc</code>目录，参考<a href="http://blog.csdn.net/zdwzzu2006/article/details/7747977">Linux下/proc目录简介</a>。
+Linux 内核提供了一种通过 /proc 文件系统，在运行时访问内核内部数据结构、改变内核设置的机制。<br />
+proc文件系统是一个伪文件系统，它只存在内存当中，而不占用外存空间。它以文件系统的方式为访问系统内核数据的操作提供接口。</p>
+
+<p><code>ps</code>：用来查看进程的相关信息；<br />
+<code>grep</code>：用来查找、过滤（可使用正则表达式）；<br />
+<code>awak</code>：类似grep的扫描和处理工具，比grep强大些；<br />
+<code>ps -aux</code>                 # 显示所有进程<br />
+<code>ps -e</code>                   # 显示所有进程、环境变量<br />
+<code>ps -e |grep nginx</code>       # 查看nginx所有进程<br />
+<code>grep -w ss</code>             # -w表示全字匹配<br />
+<code>ls -l /proc/{pid}/exe</code>   # 链接到进程的执行命令文件<br />
+<code>ls -l /proc/{pid}/exe |grep -w &quot;xxx&quot; | awk '{print $11}'</code>  # 查看进程可执行文件的绝对路径</p>
+
+<h4 id="3-grep详解-可参考-grep-的或与非操作-http-www-cnblogs-com-franjia-p-4384362-html">3、grep详解，可参考<a href="http://www.cnblogs.com/franjia/p/4384362.html">grep 的或与非操作</a></h4>
+
+<ul>
+<li><p><strong>或操作：</strong><br />
+<code>grep -E '123|abc' filename</code>    #找出文件（filename）中包含123或者包含abc的行<br />
+<code>grep '123\|abc' filename</code>      #通过使用 <code>\|</code> 来分割多个pattern，以此实现OR的操作<br />
+<code>grep -e pattern1 -e pattern2 filename</code> #<code>-e</code> 选项，只能传递一个参数<br />
+<code>egrep '123|abc' filename</code>      #用egrep同样可以实现<br />
+<code>awk '/123|abc/' filename</code>      #awk 的实现方式</p></li>
+
+<li><p><strong>与操作：</strong><br />
+<code>grep pattern1 files | grep pattern2</code>   显示既匹配 pattern1 又匹配 pattern2 的行</p></li>
+
+<li><p><strong>非操作：</strong><br />
+<code>grep -v pattern1 files</code>   <code>-v</code>选项用来实现反选匹配的</p></li>
+
+<li><p><strong>其他操作:</strong><br />
+<code>grep -i pattern files</code>           # 不区分大小写地搜索。默认情况区分大小写<br />
+<code>grep -l pattern files</code>           # 只列出匹配的文件名<br />
+<code>grep -L pattern files</code>           # 列出不匹配的文件名<br />
+<code>grep -w pattern files</code>           # 只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’）<br />
+<code>grep -C number pattern files</code>    # 匹配的上下文分别显示[number]行</p></li>
+</ul>
+
+<h3 id="第三部分-常用软件的安装">第三部分 - 常用软件的安装</h3>
+
+<p><code>sudo apt-get install graphviz graphviz-doc</code>   安装graphviz绘图工具</p>
+
+<blockquote>
+<p>脚注</p>
+</blockquote>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:footer1">常用的命令（输入top后）：P：按%CPU使用率排行  T：按MITE+排行  M：按%MEM排行
+ <a class="footnote-return" href="#fnref:footer1"><sup>[return]</sup></a></li>
+<li id="fn:footer2">linux文件权限可参考<a href="http://www.cnblogs.com/123-/p/4189072.html">这篇文章</a>
+ <a class="footnote-return" href="#fnref:footer2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2015-09-18 09:56:00 \x2b0000 UTC',
+              title: 'linux 常用命令',
+              link: decodeURI(location.href),
+              desc: '第一部分 - 常用简单命令 小知识： markdown table让列中内容右对齐，则在虚线最后加一个冒号 “:”，左对齐的不加。 {: .notice}\n 重命名文件文件夹 ： mv file1 file2 移动文件文件夹 ： mv file1 dir1 新建文件夹 ： mkdir dirname 删除非空目录 ： rm -rf dirname 实时打印文件变化 ： tail -f file.log 解压zip文件 ： unzip file.zip -d\/temp 文件夹压缩成zip ： zip –q –r test.zip ~\/test tar解压： tar zxvf zhcon-0.2.5.tar.gz\nx : 从 tar 包中把文件提取出来\nz : 表示tar包被gzip压缩过,需要用gunzip解压\nv : 显示详细信息\nf : xxx.tar.gz : 指定被处理的文件是 xxx.tar.gz\n 文件夹压缩成zip ： zip –q –r xahot.',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

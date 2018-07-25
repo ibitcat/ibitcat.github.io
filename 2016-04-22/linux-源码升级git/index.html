@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>linux 源码升级git</title>
+        <style>
+
+    html body {
+        font-family: 'Mina', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #386890;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mina">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="http://shuimu98.gitHub.io/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/go.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/cpp.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/lua.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.45" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="linux 源码升级git">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="http://shuimu98.gitHub.iofavicon/avatar.jpg" >
+      
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">linux 源码升级git</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/tags/">Tags</a></li>
+                            
+                                <li><a href="/links/">Links</a></li>
+                            
+                                <li><a href="/about/">About</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:shui_mu98@163.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/shuimu98/"><i class="fa fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='fa fa-moon-o fa-lg' style='vertical-align:25%'></i>"
+        data-off= "<i class='fa fa-sun-o fa-lg' style='vertical-align:25%'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+
+    <h4><a href="/2016-04-22/linux-%E6%BA%90%E7%A0%81%E5%8D%87%E7%BA%A7git/">linux 源码升级git</a></h4>
+    <h5>2016-04-22 - 1 minutes</h5>
+
+    
+
+    
+    <a href="/tags/git">
+        <kbd class="item-tag"> Git </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+<p>centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。</p>
+
+<p>另外一个原因是在centos 使用git push的时候，出现错误：</p>
+
+<pre><code>error: The requested URL returned error: 401 Unauthorized while accessing https://github.com/shuimu98/domi-vimrc/info/refs
+</code></pre>
+
+<p>而根据网上找的<a href="http://houzhiqingjava.blog.163.com/blog/static/167399507201472343324562/">解决方案</a>会导致提交到github上的commit记录有问题（提交者信息为<code>invalid-email-address</code>），如图：
+<img src="/images/posts/gitpush.png" alt="图1" /></p>
+
+<!-- more -->
+
+<p>虽然可以正常提交，但是总是感觉别扭，网上说需要升级git版本，所以顺手就源码升级下git。</p>
+
+<p>这里参照了这篇<a href="http://www.centoscn.com/image-text/install/2015/0225/4735.html">教程</a>，另外记录了在实践中出现的问题以及解决方案。</p>
+
+<p>具体步骤：</p>
+
+<h3 id="1-卸载之前的git">(1) 卸载之前的git</h3>
+
+<pre><code>git --version
+git version 1.7.1
+yum remove git
+</code></pre>
+
+<h3 id="2-安装依赖的包">(2) 安装依赖的包</h3>
+
+<pre><code>sudo yum update
+sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel 
+</code></pre>
+
+<p>如果Git在make的时候报错：<code>Can't locate ExtUtils/MakeMaker.pm in @INC</code></p>
+
+<p>解决方法如下：</p>
+
+<pre><code class="language-shell">yum -y install perl-devel
+yum -y install perl-CPAN
+</code></pre>
+
+<p>或者安装<strong>ExtUtils-MakeMaker</strong></p>
+
+<pre><code class="language-shell">wget http://files.directadmin.com/services/9.0/ExtUtils-MakeMaker-6.31.tar.gz
+tar xvzf ExtUtils-MakeMaker-6.31.tar.gz
+cd ExtUtils-MakeMaker-6.31
+perl Makefile.PL
+make
+make install
+</code></pre>
+
+<h3 id="3-下载git源码并解压缩">(3) 下载git源码并解压缩</h3>
+
+<pre><code>wget https://github.com/git/git/archive/v2.8.1.tar.gz
+tar -zxvf git-2.3.0.tar.gz
+cd git-2.8.1
+</code></pre>
+
+<h3 id="4-编译安装">(4) 编译安装</h3>
+
+<pre><code>make prefix=/usr/local/git all
+sudo make prefix=/usr/local/git install
+</code></pre>
+
+<h3 id="5-将git安装路径添加到path变量">(5) 将git安装路径添加到PATH变量</h3>
+
+<pre><code>sudo vim /etc/bashrc
+</code></pre>
+
+<p>在最后一行添加 <code>export PATH=/usr/local/git/bin:$PATH</code> 保存退出</p>
+
+<h3 id="6-验证是否安装成功">(6) 验证是否安装成功</h3>
+
+<pre><code>source /etc/bashrc
+git --version
+git clone https://github.com/shuimu98/domi-vimrc.git
+</code></pre>
+
+<p>如果在clone过程中出现错误：<code>Failed connect to github.com:443; Operation now in progress</code>，不用担心，ctrl+c后再试一次，一般是网络的问题。</p>
+
+<h3 id="7-配置git">(7) 配置git</h3>
+
+<pre><code>git config --global user.name &quot;username&quot;
+git config --global user.email &quot;user@mail.com&quot;
+</code></pre>
+</div>
+
+    
+
+    <hr>
+    <div class="text-justify">
+    
+        <div id="comments-gitment"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script type="text/javascript">
+            const gitment = new Gitment({
+              id: '2016-04-22 22:05:00 \x2b0800 \x2b0800',
+              title: 'linux 源码升级git',
+              link: decodeURI(location.href),
+              desc: 'centos6.0 yum安装的git版本是1.7.1，而git目前的版本已经到2.8.1了，为了跟上节奏，决定更新下git。\n另外一个原因是在centos 使用git push的时候，出现错误：\nerror: The requested URL returned error: 401 Unauthorized while accessing https:\/\/github.com\/shuimu98\/domi-vimrc\/info\/refs  而根据网上找的解决方案会导致提交到github上的commit记录有问题（提交者信息为invalid-email-address），如图： 虽然可以正常提交，但是总是感觉别扭，网上说需要升级git版本，所以顺手就源码升级下git。\n这里参照了这篇教程，另外记录了在实践中出现的问题以及解决方案。\n具体步骤：\n(1) 卸载之前的git git --version git version 1.7.1 yum remove git  (2) 安装依赖的包 sudo yum update sudo yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel  如果Git在make的时候报错：Can\x27t locate ExtUtils\/MakeMaker.pm in @INC\n解决方法如下：\nyum -y install perl-devel yum -y install perl-CPAN  或者安装ExtUtils-MakeMaker\nwget http:\/\/files.directadmin.com\/services\/9.0\/ExtUtils-MakeMaker-6.31.tar.gz tar xvzf ExtUtils-MakeMaker-6.31.tar.gz cd ExtUtils-MakeMaker-6.31 perl Makefile.',
+              owner: 'shuimu98',
+              repo: 'shuimu98.github.io',
+              oauth: {
+                client_id: 'af5065a1372570c7babc',
+                client_secret: '3bd955012d21847887f0d3d4f9ea3c2cbc2b7e10'
+              }
+            })
+            gitment.render('comments-gitment')
+            </script>
+    
+    </div>
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fa fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+
