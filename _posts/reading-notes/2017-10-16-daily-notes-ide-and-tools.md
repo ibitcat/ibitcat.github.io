@@ -8,9 +8,9 @@ tag:
 comments: true
 ---
 
-## 1、编辑器
+### 1、编辑器
 
-### 1-1、vim
+#### 1-1、vim
 
 1. vim的4种模式，以及模式的切换
 
@@ -41,7 +41,7 @@ comments: true
 2. vim升级到8.0教程：[轻松学会源码编译Vim 8.0](http://www.linuxprobe.com/easymake-vim8.html)。
 3. 普通用户用vim打开某文件在按tab键补全时出现报错：`_arguments:448: _vim_files: function definition file not found`，解决办法：删除了`~/.zcompdump`，然后执行`exec zsh`。
 
-### 1-2、sublime text3
+#### 1-2、sublime text3
 
 1. lua语法高亮修改，sublime text是可以让lua函数高亮的，但是遇到类似于function AA3AA:BB() end（即函数名带有数字）这样类名中带有数字的函数，便无法高亮。
 
@@ -72,9 +72,9 @@ comments: true
 	- `-*.xlsx`，`-/Debug/*` 表示排除查找指定的后缀文件和指定的目录
 
 
-## 2、工具
+### 2、工具
 
-### 2-1、SVN
+#### 2-1、SVN
 
 1. svn 回滚本地代码，[参考](http://blog.sina.com.cn/s/blog_6ad5907b0102uyqy.html)：
 
@@ -87,7 +87,7 @@ comments: true
 
 	-v显示文件详情, -r控制某段时间, sed做筛选
 
-### 2-2、Tmux
+#### 2-2、Tmux
 
 1. tmux复制：`bind-key+[`（组合键）进入在tmux的copy-mode下，按空格键进入选中模式，按Enter复制并退出，按q不复制并退出。**这种复制不会在windows剪贴板上**。可以通过`tmux show-buffer`（简写命令`tmux showb`）显示。
 2. 解决tmux启动「tmux can't create socket: No such file or directory」的问题：`rm /tmp/tmux-* -R`。
@@ -96,13 +96,13 @@ comments: true
 
 1. 自定义用户规则:[shadowsocks自定义代理规则user-rule设置方法](https://www.duoluodeyu.com/1337.html)。
 
-### 2-4、sysbench
+#### 2-4、sysbench
 
 一款开源的多线程性能测试工具，可以执行CPU/内存/线程/IO/数据库等方面的性能测试。
 
 1. 目前我还没有熟练使用这个工具，只是收集了网上的一些教程：[sysbench的一点整理](http://int64.me/2017/sysbench%E7%9A%84%E4%B8%80%E7%82%B9%E6%95%B4%E7%90%86.html)、[howto sysbench](https://www.centoshowtos.org/commands/sysbench/)、[sysbench1.0.5安装以及使用其对mysql5.5.32压力测试](https://www.601849.com/post/90.html)。
 
-### 2-5、静态博客（jekyll等）
+#### 2-5、静态博客（jekyll等）
 
 1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
 2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
@@ -111,7 +111,7 @@ comments: true
 5. [前端构建工具gulpjs的使用介绍及技巧](http://www.cnblogs.com/2050/p/4198792.html)。
 
 
-## 3、小众软件
+### 3、小众软件
 
 - LICEcap，GIF 屏幕录制工具，[下载地址](https://www.appinn.com/licecap/)。
 - Chrome商店Crx离线安装包下载，[下载地址](https://yurl.sinaapp.com/crx.php)。

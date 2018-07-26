@@ -8,13 +8,13 @@ tag:
 comments: true
 ---
 
-## 1、开源项目
-### 1-1、redis
+### 1、开源项目
+#### 1-1、redis
 
 1. redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字`redis`。
 2. 关于**Redis ae事件驱动库**的讲解，网上有比较多的教程，例如：[教程1](http://www.wzxue.com/%E8%A7%A3%E8%AF%BBredis-ae%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%BA%93/) 和 [教程2](https://m.oschina.net/blog/161077)
 
-### 1-2、libev
+#### 1-2、libev
 
 1. windows下visual studio编译libev:
 
@@ -36,7 +36,7 @@ comments: true
 3. libev 教程：可以参考这个[大神的博客](http://dirtysalt.info/)，里面搜索关键字`libev`
 
 
-### 1-3、Snowflake算法
+#### 1-3、Snowflake算法
 
 1. Twitter-Snowflake算法，64位自增ID算法，可以用来替换UUID算法。关于该算法的介绍，可以参考[这篇文章](http://www.lanindex.com/twitter-snowflake%EF%BC%8C64%E4%BD%8D%E8%87%AA%E5%A2%9Eid%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/
 )。
@@ -44,24 +44,24 @@ comments: true
 2. Snowflake算法，[C语言实现](https://github.com/korialuo/skynet/blob/master/lualib-src/lua-snowflake.c)。
 
 
-### 1-4、skynet
+#### 1-4、skynet
 
 1. [skynet架构](http://www.cnblogs.com/ychellboy/archive/2012/10/15/2723470.html)，基本的框架介 以及 [Skynet 设计综述](https://my.oschina.net/zengjs275/blog/719663)。
 
-### 1-5、raft(分布式系统 RAFT 一致性算法)
+#### 1-5、raft(分布式系统 RAFT 一致性算法)
 
 1. [raft 简单介绍](http://thesecretlivesofdata.com/raft/)。 
 
-### 1-6、groupcache
+#### 1-6、groupcache
 
 1. [groupcache（已star）](https://github.com/golang/groupcache)是一个分布式缓存 go 语言库,支持多节点互备热数据,有良好的稳定性和较高的并发性。寥寥2000来行代码完成了个lru cache库，核心只用一个list和一个map，出自brad大神之手（memcached作者）。
 
 
-### 1-7、UUID生成
+#### 1-7、UUID生成
 
 1. [**rfc4122**](https://tools.ietf.org/html/rfc4122)详细介绍了UUID的生成。在我自己的游戏服务器中有[简单的实现](https://github.com/shuimu98/game_server/blob/master/src/lualib-src/lbase64.c)并对生成的uuid进行了base64。
 
-## 2、游戏开发
+### 2、游戏开发
 
 1. 游戏常用的编程设计模式：[游戏编程模式](http://gpp.tkchu.me/)。
 2. 行为树：
