@@ -40,8 +40,6 @@ comments: true
 首先，打开powershell，输入`bash`，或者按`win+q`快捷键后搜索bash
 
 ![打开powershell](/images/posts/sublinux/powershell.png)
-![Win+Q](/images/posts/sublinux/winq.png)
-
 
 然后，按照提示，在浏览器输入网址`https://aka.ms/wslstore`，会打开应用商城，然后选择一个linux系统安装，这里我选择我比较熟悉的ubuntu。
 
