@@ -49,8 +49,7 @@ libbz2-dev \
 libfreetype6-dev \
 libjpeg-dev \
 libpng12-dev \
-pkg-config \
-lib32bz2-dev \
+pkg-config
 ~~~
 
 ## 4、configure
