@@ -9,8 +9,6 @@ comments: true
 ---
 
 
-wsl ubuntu 16.04安装编译安装php5.6
-
 参考：https://blog.csdn.net/qq_34372929/article/details/79854388
 
 ## 1、移除已安装的php
