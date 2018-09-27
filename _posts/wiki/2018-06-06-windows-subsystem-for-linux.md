@@ -270,7 +270,8 @@ ConEmu支持分屏，也支持多标签，这对开发来说是很方便的。�
 
 ### WSL更改root密码
 
-具体可以参考这个[Unable to change the root password in Windows 10 WSL](https://askubuntu.com/questions/931940/unable-to-change-the-root-password-in-windows-10-wsl)
+**2018-09-27更新**
+具体可以参考这个[Unable to change the root password in Windows 10 WSL](https://askubuntu.com/questions/931940/unable-to-change-the-root-password-in-windows-10-wsl)。
 
 ~~~
 1. in wsl, sudo passwd will change the password of the WSL root user.
