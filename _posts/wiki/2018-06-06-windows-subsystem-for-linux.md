@@ -268,6 +268,55 @@ ConEmu支持分屏，也支持多标签，这对开发来说是很方便的。�
 不过，还是有一些小瑕疵，比如tmux分屏后，分屏的分割线会莫名其妙消失或者重叠。所以，我还是采用了第一种方式，在需要使用方向键的时候直接用默认的wsl终端。
 
 
+### WSL更改root密码
+
+具体可以参考这个[Unable to change the root password in Windows 10 WSL](https://askubuntu.com/questions/931940/unable-to-change-the-root-password-in-windows-10-wsl)
+
+~~~
+1. in wsl, sudo passwd will change the password of the WSL root user.
+2. in wsl, passwd will change the password of the current WSL user
+3. in wsl, passwd [user] will change the password of any WSL user
+4. in wsl, sudo generally asks for the password of the current WSL user.
+5. in windows cmd.exe, youn can change what user you will login into when opening WSL - if that user is root, you will be able to use option 3.
+
+	creators update and earlier: lxrun /setdefaultuser [user]
+	fall creators update and later: ubuntu.exe config --default-user [user]
+You probably want to change the password of the sudo-capable, non-root user.
+~~~
+
+我这里用的是从应用商店下载的ubuntu1604版本，因此，需要做一些小修改：
+
+打开power shell，
+~~~
+PS C:\WINDOWS\system32> ubuntu1604 /?
+Launches or configures a Linux distribution.
+
+Usage:
+    <no args>
+        Launches the user's default shell in the user's home directory.
+
+    install [--root]
+        Install the distribuiton and do not launch the shell when complete.
+          --root
+              Do not create a user account and leave the default user set to root.
+
+    run <command line>
+        Run the provided command line in the current working directory. If no
+        command line is provided, the default shell is launched.
+
+    config [setting [value]]
+        Configure settings for this distribution.
+        Settings:
+          --default-user <username>
+              Sets the default user to <username>. This must be an existing user.
+
+    help
+        Print usage information.
+PS C:\WINDOWS\system32> ubuntu1604 config --default-user root
+~~~
+
+然后，重启电脑，再打开wsl就是使用root用户登录了。
+
 最后来一张截图，项目成功运行在linux子系统下：
 
 ![项目运行中](/images/posts/sublinux/project.png)
