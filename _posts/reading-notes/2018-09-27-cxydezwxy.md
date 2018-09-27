@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 读书笔记 —— 《程序员的自我修养-链接、装载与库》
+title: 读书笔记 ——《程序员的自我修养-链接、装载与库》
 excerpt: "《程序员的自我修养-链接、装载与库》的学习笔记。"
 date: 2018-09-27 17:05:00
 tag: [读书笔记]
@@ -59,4 +59,12 @@ comments: true
 线程的权限如下图：
 ![线程的权限](/images/posts/cxydzwxy/thread-priv.png)
 
-	- 线程调度
+- 线程调度
+
+	在线程调度中，至少有三种状态
+
+	- 运行（running），此时线程正在执行
+	- 就绪（ready），此时线程可以立即执行，但CPU已经被其他线程占用
+	- 等待（waiting），此时线程正在等待某一事件（通常是IO或者同步）发生，无法执行。
+
+	![线程状态切换](/images/posts/cxydzwxy/thread-status.png)
