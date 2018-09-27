@@ -77,3 +77,26 @@ comments: true
 ## 第二章：编译和链接
 
 1. 编译过程可以分解为4个步骤：预处理（Prepressing）、编译(Compilation)、汇编(Assembly)、链接(Linking)。
+
+	假如有一个c程序`hello.c`，代码如下：
+
+	~~~c
+	#include <stdio.h>
+
+	#define HELLO "hello,world!"
+	int main(){
+		printf("%s\n", HELLO);
+		return 0;
+	}
+	~~~
+
+	- 预处理
+
+		使用命令：`gcc -E hello.c -o hello.i`，将源文件进行预处理操作。预处理主要处理源代码中以“#”开始的预处理指令。
+		比如：`#include`, `#define`, `#if`等。
+
+		主要处理规则如下：
+
+		1. 
+
+	- 编译
