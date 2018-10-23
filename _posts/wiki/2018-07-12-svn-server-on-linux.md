@@ -122,6 +122,7 @@ comments: true
 		* 3 * * * /usr/sh /root/rsync_svn.sh
 		~~~
 
+> 注意：服务端的`rsyncd.passwd` 和 客户端的`rsyncd.scrt`，权限都要设置为600。
 ### svn迁移
 
 因为项目需要，需要将原本在`192.168.2.251`这台服务器上的svn仓库（svn仓库路径：`/var/svn/repos/proj-h5`），迁移到`192.168.2.250`这台机器上。
