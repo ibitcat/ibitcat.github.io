@@ -78,7 +78,7 @@ comments: true
 源服务器A：即svn服务器，假设IP：192.168.2.250  
 备份服务器B：用于拉取A的svn备份文件，假设IP：192.168.2.251
 
-- 首先，配置A服务器，也就是rsync的服务端：
+- 首先，配置A服务器，也就是rsync的服务端(rsync监听873端口)：
 
 	- 新建配置文件：`touch /etc/rsyncd.conf`
 	- 编辑配置，如下：
@@ -105,7 +105,7 @@ comments: true
 
 	- 启动rysnc服务：`/usr/bin/rsync --daemon --config=/etc/rsyncd.conf`，可以写入到`/etc/rc.local`实现开机启动。
 
-- 然后，配置B服务器，写一个脚本，并配合cron实现每日定时同步。
+- 然后，配置B服务器，写一个脚本（需要创建rsync客户端密码文件`/etc/rsyncd.scrt`，与服务器密码一致，但不需要用户名），并配合cron实现每日定时同步。
 
 	- 编写脚本：`touch rsync_svn.sh`
 
