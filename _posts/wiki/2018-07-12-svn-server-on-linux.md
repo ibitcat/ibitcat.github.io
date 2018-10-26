@@ -90,7 +90,8 @@ comments: true
 		log file=/var/log/rsyncd.log
 		pid file=/var/run/rsyncd.pid
 		lock file=/var/run/rsyncd.lock
-		secrets file=/etc/rsyncd.passwd #服务端密码文件，例如：root:123456
+		#服务端密码文件，例如：root:123456
+		secrets file=/etc/rsyncd.passwd
 
 		# svn 备份文件的路径
 		[svn_repos]
