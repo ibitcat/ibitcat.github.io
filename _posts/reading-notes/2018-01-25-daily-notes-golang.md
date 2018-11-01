@@ -71,17 +71,16 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 	
 	返回 result = 1,因为在函数f() return 之前，defer函数执行了一次。  
 		
-	```go
+	~~~go
 	func f() (result int) {
 	return 0
 		defer func()
 		{
 		result++
 		}()
-	
 		return 0
 	}
-	```
+	~~~
 	返回 result = 0，因为在defer之前，函数f() 就已经返回了。
 
 2. panic：
@@ -108,9 +107,9 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 [转自： http://www.cnblogs.com/ghj1976/archive/2013/02/12/2910384.html](http://www.cnblogs.com/ghj1976/archive/2013/02/12/2910384.html)  
 1. make用于内建类型（map、slice 和channel）的内存分配。new用于各种类型的内存分配。  
 
-2. new本质上说跟其它语言中的同名函数功能一样：new(T)分配了零值填充的T类型的内存空间，并且返回其地址，即一个*T类型的值。用Go的术语说，它返回了一个指针，指向新分配的类型T的零值。有一点非常重要：new返回指针。  
+2. new本质上说跟其它语言中的同名函数功能一样：new(T)分配了零值填充的T类型的内存空间，并且返回其地址，即一个`*T`类型的值。用Go的术语说，它返回了一个指针，指向新分配的类型T的零值。有一点非常重要：new返回指针。  
 
-3. make(T, args)与new(T)有着不同的功能，make只能创建slice、map和channel，并且返回一个有初始值(非零)的T类型（引用），而不是*T。
+3. make(T, args)与new(T)有着不同的功能，make只能创建slice、map和channel，并且返回一个有初始值(非零)的T类型（引用），而不是`*T`。
 
 4. 本质来讲，导致这三个内建类型有所不同的原因是：引用在使用前必须被初始化。例如，一个slice，是一个包含指向数据（内部array）的指针、长度和容量的三项描述符；在这些项目被初始化之前，slice为nil。对于slice、map和channel来说，make初始化了内部的数据结构，填充适当的值。make返回初始化后的（非零）值。
 
@@ -180,34 +179,29 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 
 	注意区分slice的以下三种操作：
 	
-	```go
-	
+	~~~go
 	func main() {
 	    a := []int{1,2,3}
 	    fmt.Println(a)
 	    modifySliceData(a)
 	    fmt.Println(a)
 	}
-	
 	// 这里只是修改了底层指针指向的值，所以原本的参数的值也发生了变化	
 	func modifySliceData(data []int) {
 		fmt.Printf("%p",&data)
 	    data[0] = 0
 	}
-	
 	// 这里append之后，底层的数组地址发生了变化
 	func appendSliceData(data []int) {
 		fmt.Printf("%p",&data)
 		data = append(data,4) // 注意：append并不会生成新的data，只会修改data底层指向数组的地址，以便存储append之后的值
 	}
-	
 	// 如果要操作原本的参数，应该传入slice的指针
 	func updateSliceData(data *[]int) {
 		fmt.Printf("%p",data)
 		*data = append(*data,4)	// 此时，main函数的变量a=[]int{1,2,3,4}	
 	}
-	
-	```
+	~~~
 
 总结：
 
@@ -222,10 +216,10 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 
 接口的调用规则是建立在这些方法的接受者和接口如何被调用的基础上。下面的是语言规范里定义的规则，这些规则用来说明是否我们一个类型的值或者指针实现了该接口：
   
-- 1.类型 *T 的可调用方法集包含接受者为 *T 或 T 的所有方法集  
+- 1.类型 `*T` 的可调用方法集包含接受者为 `*T` 或 `T` 的所有方法集  
 这条规则说的是如果我们用来调用特定接口方法的接口变量是一个指针类型，那么方法的接受者可以是值类型也可以是指针类型。
 
-- 2.类型 T 的可调用方法集包含接受者为 T 的所有方法,但不包含接受者为 *T 的方法  
+- 2.类型 `T` 的可调用方法集包含接受者为 `T` 的所有方法,但不包含接受者为 `*T` 的方法  
 这条规则说的是如果我们用来调用特定接口方法的接口变量是一个值类型，那么方法的接受者必须也是值类型该方法才可以被调用。
 
 
@@ -234,14 +228,14 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对lua比较熟，这点上类似lua的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。_type表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？……  data存储变量的真实值。
 
 例如： var value interface{} = int32(100)  
-那么value在底层的结构就是：{_type:int32,data=100}
+那么value在底层的结构就是：`{_type:int32,data=100}`
 
 关于普通类型与interface{}的转换：  
 1、普通类型转换到interface{}是隐式转换；例如 fmt.Println(),我们可以传入任意类型的值，Println都会把传入的值转换成interface{}类型  
 2、interface{}转换成普通类型需要显式转换；
 
 关于接口的实现：  
-假如有一个接口 type interface{} T, *T包含了定义在T和*T上的所有方法，而T只包含定义在T上的方法。
+假如有一个接口 type interface{} T, `*T`包含了定义在`T`和`*T`上的所有方法，而T只包含定义在T上的方法。
 
 ### nil值
 在golang中，nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。
@@ -249,7 +243,7 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 如何判断一个interface{} 是否是 nil？
 
 根据上面对interface{}的介绍，判断interface{}是否为nil的规则：  
->只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
+>只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：`(*int, nil)`。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
 
 那么思考如下问题：  
 
