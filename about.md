@@ -16,6 +16,7 @@ title: 关于
 * E-mail : [shui_mu98(at)163.com]()
 * GitHub：[shuimu98](https://github.com/shuimu98)
 * 博客：[{{ site.title }}]({{ site.url }})
+* 简历：[hacknical](https://hacknical.com/shuimu98/resume?locale=zh)
 
 
 ### 技能
