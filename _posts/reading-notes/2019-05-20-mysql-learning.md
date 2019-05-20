@@ -50,6 +50,20 @@ comments: true
 	- 第2阶段：写入binlog
 	- 第2阶段：redo log的commit
 
+6. 为什么我们需要两阶段提交？
+
+	1. 假设mysql在第2阶段发生崩溃：
+	
+		- 重启恢复：后发现没有commit，回滚。
+		- 备份恢复：没有binlog。
+		- 恢复结果：一致。
+	2. 假设mysql在第3阶段发生崩溃：
+
+		- 重启恢复：虽没有commit，但满足prepare和binlog完整，所以重启后会自动commit。
+		- 备份恢复：有binlog。
+		- 恢复结果：一致。
+
+	假设没有两阶段提交，那么，由于redo log 和 bin log是两个独立的逻辑，要么先写入redo log，后写入bin log，或者采用反过来的顺序。此时，若采用重启恢复和备份恢复后，都会发生结果不一致的情况。
 
 	这里为了更形象的描述这个两阶段提交，我将教材中的例子也搬过来，方便理解和记忆“为什么我们需要两阶段提交？”。
 
@@ -66,21 +80,6 @@ comments: true
 	现在有一个更新操作，“把id=2的行的字段c加1”。大概的流程如下图：
 
 	![update执行流程](/images/posts/mysql/redolog-update.png)
-
-6. 为什么我们需要两阶段提交？
-
-	1. 假设mysql在第2阶段发生崩溃：
-	
-		- 重启恢复：后发现没有commit，回滚。
-		- 备份恢复：没有binlog。
-		- 恢复结果：一致。
-	2. 假设mysql在第3阶段发生崩溃：
-
-		- 重启恢复：虽没有commit，但满足prepare和binlog完整，所以重启后会自动commit。
-		- 备份恢复：有binlog。
-		- 恢复结果：一致。
-
-	假设没有两阶段提交，那么，由于redo log 和 bin log是两个独立的逻辑，要么先写入redo log，后写入bin log，或者采用反过来的顺序。此时，若采用重启恢复和备份恢复后，都会发生结果不一致的情况。
 
 7. `innodb_flush_log_at_trx_commit`和`sync_binlog`两个参数是控制MySQL磁盘写入策略以及数据安全性的关键参数。前者是控制redo log；后者是控制binlog。
 
