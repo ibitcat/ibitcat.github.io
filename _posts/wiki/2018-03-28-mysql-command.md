@@ -122,7 +122,6 @@ delete t1 from t1,t2 where 条件;
 - **数据库导出**
 
 ~~~sql
-/*导出：*/
 mysqldump -u 用户名 -p 数据库名 > 导出的文件名
 mysqldump -u dbuser -p dbname > /root/dbname.sql /*导出表结构和数据*/
 mysqldump -u dbuser -p -d dbname > /root/dbname.sql /*只导出表结构*/
@@ -130,21 +129,16 @@ mysqldump -u dbuser -p -d dbname > /root/dbname.sql /*只导出表结构*/
 
 
 - **数据库导入**
+~~~sql
+/*1. 先创建空的数据库*/
+CREATE DATABASE cn_dalanh5_S10001 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 
-	- 先创建空的数据库
-	~~~sql
-	CREATE DATABASE cn_dalanh5_S10001 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-	~~~
+/*2. 选择数据库*/
+use cn_dalanh5_S10001;	
 
-	- 选择数据库
-	~~~sql
-	use cn_dalanh5_S10001;	
-	~~~
-
-	- 导入sql数据
-	~~~sql
-	source /root/cn_dalanh5_S1.sql	
-	~~~
+/*3. 导入数据*/
+source /root/cn_dalanh5_S1.sql	
+~~~
 
 	
 
