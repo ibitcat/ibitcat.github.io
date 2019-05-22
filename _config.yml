@@ -10,7 +10,8 @@ url: "http://domicat.me"
 
 # Comment
 comment:
-    disqus: domi
+    gitment: domi
+    # disqus: domi
     # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
