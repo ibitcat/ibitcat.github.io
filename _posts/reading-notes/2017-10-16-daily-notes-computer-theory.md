@@ -20,6 +20,7 @@ comments: true
 	最后： 6/100 =0 结束运算，最后 转换结果 为: `0x64A`
 
 2. 进制与位元：因为 6个bit就能表示64，所以64进制的**位元=6**，同理 16进制**位元=4**，因为2^4=16。
+
 3. 计算机中原码、反码、补码：
 
 	正数的原码、反码、补码都等于原码。  
@@ -54,6 +55,7 @@ comments: true
 ### 2-1、linux
 
 1. Linux链接分两种，一种被称为**硬链接**（Hard Link），另一种被称为**符号链接（也称软连接）**（Symbolic Link）。默认情况下，ln命令产生硬链接。`ln -s a b`创建一个软连接（就像windows系统的快捷方式），即给a创建了一个快捷方式b。
+
 2. centos 6.0系统升级gcc：因为centos 6.0系统默认的gcc版本是很早的4.4.7，如果需要升级到更高的版本，需要自行下载源码，编译安装。
 
 	可以参考[这个教程](https://www.cnblogs.com/lzpong/p/5755678.html)，里面有详细的步骤。另外，除了教程中出现的动态库问题，还需要注意**gcc版本冲突**的问题，因为自行编译安装的二进制，一般放在`/usr/local/bin`，而系统自带的放在`/usr/bin`，所以可能存在两个版本的gcc。解决的办法：可以yum remove 删除老版本，也可以参考**[这篇教程](https://www.cnblogs.com/cynchanpin/p/6807239.html)**，用软连接的方式解决。
@@ -73,13 +75,20 @@ comments: true
 		~~~
 
 4. 修改linux `date`命令的显示格式：编辑`.bash_profile`文件， 添加下面一行 `alias date='date "+%Y-%m-%d %H:%M:%S"'`。
+
 5. [语义化版本](http://semver.org/lang/zh-CN/)，教你如何定义软件的版本。
+
 6. linux开启tcp bbr：[Linux 升级内核开启 TCP BBR 实现高效单边加速](https://www.mf8.biz/linux-kernel-with-tcp-bbr/)。
+
 7. `alias grep='grep --color=auto'`，grep 高亮。
+
 8. `alias = 'ls -lshF --color|sort'`，linux ls 按类型排列。
+
 9. `alias rm='rm -i'`，rm删除前询问是否真正要删除（对root用户无效）。
+
 10. linux Epoll两种触发模式：LT水平触发（常用模式）、ET边缘触发。参考[这个项目的examples（已star）](https://github.com/yedf/handy)。
-12. linux挂载（mount 和 umount），这里主要记录linux挂载网络共享文件系统，例如：在linux挂载windows系统上的共享文件夹。
+
+11. linux挂载（mount 和 umount），这里主要记录linux挂载网络共享文件系统，例如：在linux挂载windows系统上的共享文件夹。
 
 	举例说明：
 	```shell
@@ -92,13 +101,17 @@ comments: true
 	umount卸载，如果出现device is busy报错，表示该文件系统正在被使用；使用命令`fuser -mv /dir`查看此文件系统正在被哪些进程访问。
 
 12. [Linux下用户组、文件权限详解](http://www.cnblogs.com/123-/p/4189072.html)，讲解干净利落，**推荐**。
+
 13. ngrok 内网穿透，ngnix 反向代理。
 	
 	假设：在路由器是先做一个内网穿透，开个隧道，穿透到80端口，再用ngnix做一个反向代理，代理内网某台电脑的8080端口，那这样是否可以做一个私有云呢？
 
 14. 正则表达式，参考这篇文章:[正则表达式](http://wubaoguo.com/2016/03/21/Linux/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/)。
+
 15. `ss`命令显示linux系统socket状态。例如：`ss -s `列出当前socket详细信息。
+
 16. centos开启zsh：[centos开启zsh之旅](https://my.oschina.net/shyann/blog/426004)。
+
 17. centos 添加新用户并授权，[参考](http://www.cnblogs.com/woshimrf/p/5906084.html)。
 
 	~~~
@@ -113,6 +126,7 @@ comments: true
 	~~~
 
 18. [**CentOS更改yum源与更新系统**](http://www.cnblogs.com/lightnear/archive/2012/10/03/2710952.html)，改为网易源镜像。
+
 19. 解决mysql报错[`can't create/write to file '/tmp/#sql_23e6_0MYI'`]：
 
 	~~~bash

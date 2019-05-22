@@ -39,6 +39,7 @@ comments: true
 	{: rules="all" frame="border"}
 
 2. vim升级到8.0教程：[轻松学会源码编译Vim 8.0](http://www.linuxprobe.com/easymake-vim8.html)。
+
 3. 普通用户用vim打开某文件在按tab键补全时出现报错：`_arguments:448: _vim_files: function definition file not found`，解决办法：删除了`~/.zcompdump`，然后执行`exec zsh`。
 
 #### 1-2、sublime text3
@@ -105,9 +106,13 @@ comments: true
 #### 2-5、静态博客（jekyll等）
 
 1. jekyll 中文帮助在线文档：[http://jekyllcn.com/docs/templates/ ](http://jekyllcn.com/docs/templates/ )。
+
 2. github pages 升级jekylls 3，参考[这里](https://oncemore2020.github.io/blog/upgrade-jekyll/)，以及[rouge代码高亮](http://rouge.jneen.net/)。
+
 3. 一个比较简洁实用的[jekyll 主题](https://github.com/Gaohaoyang/gaohaoyang.github.io)，已star。
+
 4. CSS的优先级顺序: tag中的style > id > class > tag > 继承的属性。
+
 5. [前端构建工具gulpjs的使用介绍及技巧](http://www.cnblogs.com/2050/p/4198792.html)。
 
 

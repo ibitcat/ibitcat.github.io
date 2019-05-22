@@ -12,6 +12,7 @@ comments: true
 #### 1-1、redis
 
 1. redis项目里面的网络框架（Redis ae事件驱动库）非常不错，称得上是短小精悍，我已经star了两个仓库，在我的star搜索关键字`redis`。
+
 2. 关于**Redis ae事件驱动库**的讲解，网上有比较多的教程，例如：[教程1](http://www.wzxue.com/%E8%A7%A3%E8%AF%BBredis-ae%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E5%BA%93/) 和 [教程2](https://m.oschina.net/blog/161077)
 
 #### 1-2、libev
@@ -74,6 +75,7 @@ comments: true
 	- [棋牌游戏感悟](https://zhuanlan.zhihu.com/cronlygames)
 
 4. [基于Lua的游戏服务端框架简介](http://blog.csdn.net/lalate/article/details/51498869)，是以C/C++为底层，lua为上次的游戏框架为基础，做了比较全面的介绍。
+
 5. 游戏的同步方式：**帧同步**和**状态同步**。前者适用于FPS/RTS游戏，后者适用于mmorpg游戏。
 
 	参考： [状态同步与帧同步](http://www.cnblogs.com/sevenyuan/p/5283265.html)和[动作手游实时PVP帧同步方案（客户端）](https://www.cnblogs.com/shown/p/6108617.html)

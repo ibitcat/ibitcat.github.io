@@ -12,6 +12,7 @@ comments: true
 
 
 1. lua的元表和元方法：**元表**像是一个“操作指南”，里面包含了一系列操作的解决方案，每一个操作的解决方案就是元方法（以`__`开头的key），例如：__index元方法。
+
 2. __index元方法，引用自[这篇文章](http://blog.csdn.net/xocoder/article/details/9028347)：  
 	很多人对此都有误解，这个误解是：*如果A的元表是B，那么如果访问了一个A中不存在的成员，就会访问查找B中有没有这个成员。*而这个理解是完全错误的，实际上，即使将A的元表设置为B，而且B中也确实有这个成员，返回结果仍然会是nil，原因就是B的__index元方法没有赋值。别忘了我们之前说过的：“元表是一个操作指南”，定义了元表，只是有了操作指南，但不应该在操作指南里面去查找元素，而__index方法则是“操作指南”的“索引失败时该怎么办”。  
 	~~~lua
@@ -29,8 +30,11 @@ comments: true
 	- 1.在表中查找，如果找到，返回该元素，找不到则继续
 	- 2.判断该表是否有元表（操作指南），如果没有元表，返回nil，有元表则继续
 	- 3.判断元表（操作指南）中有没有关于索引失败的指南（即`__index`方法），如果没有（即`__index`方法为nil），则返回nil；如果`__index`方法是一个表，则重复1、2、3； 如果`__index`是一个函数，则以 table 和 key 作为参数调用它。  
+
 4. userdata的元表，[参考](http://www.cnblogs.com/zhangdongsheng/p/3653303.html)，**重点：**在lua代码中的普通表，不能作为userdata的metatable。必须使用`luaL_newmetatable`创建的表才能作为userdata的metatable。luaL_newmetatable创建的元表仅在栈中被声明，并没有加入到lua代码中，所以在lua层是无法访问这个元表的。
+
 5. lua调用C函数是，先将参数从左往右压栈，然后调用C函数，最后把返回值也压栈，并告诉lua返回了几个值。**这个过程lua会自己维护栈**。lua调用完C函数后，栈中只会有之前压入的参数，以及返回值，**不应该存在其他的值在栈中**。
+
 6. c调用lua函数，**要注意栈的变化**，lua_pcall 之后，一定要将栈复原。
 
 	~~~c
@@ -106,7 +110,9 @@ comments: true
 	![resume和yeild关系](/images/posts/lua-coroutine.png)
 
 12. 一个[lua版本的屏蔽字处理](http://www.cnblogs.com/zhangfeitao/p/6378458.html)，采用字典树算法，以及一个lua版的[DFA屏蔽字算法](http://blog.csdn.net/u010223072/article/details/50542531)。
+
 13. lua[官方FAQ](http://www.luafaq.org/)以及云风的[lua5.3帮助文档](https://github.com/cloudwu/lua53doc)翻译。
+
 14. lua弱表，即**表中的元素为弱引用的表**。它是相对于普通的强引用的表，对于普通的强引用表，**当你把对象放进表中的时候，就产生了一个引用，那么即使其他地方没有对表中元素的任何引用，gc也不会被回收这些对象**。 引用自[Lua中的weak表——weak table](http://www.cnblogs.com/sifenkesi/p/3850760.html)。
 
 	`__mode`字段可以取以下三个值：k、v、kv。
@@ -116,6 +122,7 @@ comments: true
 	- kv就是二者的组合。任何情况下，只要key和value中的一个被gc，那么这个key-value pair就被从表中移除了
 	
 	关于弱表和普通表的个人理解：普通的强引用表可以想象成一根**网线**，而弱表就相当于**无线WiFi**。
+
 15. lua和c相互调用，关于lua和C之间的相互调用，有两种方式：
 
 	- 1、程序主体在C中运行，C函数注册到Lua中。C调用Lua，Lua调用C注册的函数，C得到函数的执行结果。 
@@ -163,5 +170,6 @@ comments: true
 	~~~
 
 19. 如何编写高性能lua代码，[原版](http://www.lua.org/gems/sample.pdf)和中文译文版[高性能 Lua 技巧（译）](https://segmentfault.com/a/1190000004372649)。
+
 20. Lua和C/C++语言通信的主要方法是一个无处不在的虚拟栈。栈的特点是**先进后出**。  
 在Lua中，Lua堆栈就是一个struct，堆栈索引的方式可是是正数也可以是负数，区别是：**<font color="red">正数索引1永远表示栈底，负数索引-1永远表示栈顶</font>**。
