@@ -93,7 +93,7 @@ a:hover {
   -webkit-transition: .5s; 
 }
 
-img + em {text-align: center; margin-top: 5px; margin-bottom: 7px; font-size: 12px; font-style:italic;}
+img + em {text-align: center; margin-top: 5px; margin-bottom: 7px; font-size: 12px; font-style:italic;display: block;}
 
 h1,
 h2,
