@@ -93,6 +93,8 @@ a:hover {
   -webkit-transition: .5s; 
 }
 
+img + em {text-align: center; margin-top: 5px; margin-bottom: 7px; font-size: 12px; font-style:italic;}
+
 h1,
 h2,
 h3,
@@ -509,8 +511,6 @@ img::-moz-selection {
     width: 30%;
     margin: 2em 0;
     border-top: 1px solid #DDDDDD; }
-
-img + br + strong + em {margin-top: 5px; margin-bottom: 7px; font-size: 12px; font-style:italic;}
 
 
   .panel {
