@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [转载]epoll 的本质是什么？
+title: 【转载】epoll 的本质是什么？
 excerpt: "详细描述了epoll的本意，以及是如何从select进化到epoll的。"
 date: 2019-05-22 10:30:00
 tag: [epoll]
