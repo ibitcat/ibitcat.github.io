@@ -119,23 +119,6 @@ h2 {
   /*text-align: center;*/
 }
 
-.post h2{
-  font-size: 1.5em; 
-  /*background:#B9D3EE;*/
-  /*text-align: center;*/
-  font-weight:bold;
-  text-indent: 4px; 
-  border-radius: 4px; 
-  padding: 10px 15px;
-  margin-bottom: 20px;
-  margin-top: 5px;
-  background:#0eafd3;
-  /*0px right, 5px botton, 5px fuzzy*/
-  box-shadow: 0px 5px 5px #9FB6CD;
-  border-left: 6px solid #cd5218;
-  position:relative;
-}
-
 h3 {
   font-size: 1.2em; 
   text-indent: 4px; 
@@ -162,7 +145,7 @@ p {
   margin-bottom: 10px;
   margin-top: 5px;
   line-height: 1.7em; 
-  padding-left: 0px;
+  padding-left: 20px;
 }
 
 strong {
@@ -211,7 +194,7 @@ code {
 
 pre {
   margin-bottom: 1.3em;
-  padding: 1em 0.5%;
+  padding: 1em 2.5%;
   background: #e8f2fb;
   border: 1px solid #c9e1f6;
   border-radius: 3px;
@@ -336,6 +319,13 @@ img::-moz-selection {
     float:left;
   }
 }
+
+.footer-social-icon {
+  width: 30px;
+  height: 30px;
+  background-size: 15px;
+}
+
 /*pager end----------------*/
 
   .date,
@@ -358,7 +348,7 @@ img::-moz-selection {
   }
 
   .excerpt {
-    border-left: 3px solid #458B74; 
+    border-left: 3px solid #12B2F8; 
     margin: 0;
     margin-right: 10px;
     font-size: .9em;
@@ -404,7 +394,7 @@ img::-moz-selection {
   .content-wrapper {
     z-index: 800;
     width: 70%;
-    margin-left: 23%; }
+    margin-left: 30%; }
 
   .content-wrapper__inner {
     /*margin: 0 10%;*/
@@ -487,6 +477,23 @@ img::-moz-selection {
     border: none;
     box-shadow: none; 
   }*/
+  .post h2{
+    font-size: 1.5em;
+    /*background:#B9D3EE;*/
+    /*text-align: center;*/
+    font-weight:bold;
+    text-indent: 4px;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    background:#0eafd3;
+    /*0px right, 5px botton, 5px fuzzy*/
+    box-shadow: 0px 5px 5px #9FB6CD;
+    border-left: 6px solid #cd5218;
+    position:relative;
+  }
+
 
   .post img {
     max-width: 100%;
@@ -661,7 +668,7 @@ img::-moz-selection {
     font-size: 1.0em;
     height: 30px;
     margin-left: 20px; 
-    color: #458B74;
+    color: #1289F8;
   }
 
   .btn-secondary {
@@ -758,7 +765,7 @@ img::-moz-selection {
 
   .navigation__item_social {
     display: inline-block;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     width: 50px;
   }
   .navigation__item_social a {
