@@ -30,7 +30,7 @@ epoll 很重要，但是 epoll 与 select 的区别是什么呢？epoll 高效�
 
 ![图2](/images/posts/epoll/2.jpg) 
 
-> 计算机结构图（图片来源：Linux内核完全注释之微型计算机组成结构）
+*计算机结构图（图片来源：Linux内核完全注释之微型计算机组成结构）*
 
 下图展示了网卡接收数据的过程。
 
@@ -64,7 +64,7 @@ epoll 很重要，但是 epoll 与 select 的区别是什么呢？epoll 高效�
 
 ![图5](/images/posts/epoll/5.jpg)
 
-> CPU 中断（图片来源：net.pku.edu.cn）
+*CPU 中断（图片来源：net.pku.edu.cn）*
 
 现在可以回答“**如何知道接收了数据？”**这个问题了：当网卡把数据写入到内存后，网卡向 CPU 发出一个中断信号，操作系统便能得知有新数据到来，再通过网卡中断程序去处理数据。
 
