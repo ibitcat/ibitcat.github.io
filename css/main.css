@@ -348,7 +348,7 @@ img::-moz-selection {
   }
 
   .excerpt {
-    border-left: 3px solid #12B2F8; 
+    border-left: 3px solid #458B74; 
     margin: 0;
     margin-right: 10px;
     font-size: .9em;
@@ -394,7 +394,7 @@ img::-moz-selection {
   .content-wrapper {
     z-index: 800;
     width: 70%;
-    margin-left: 30%; }
+    margin-left: 23%; }
 
   .content-wrapper__inner {
     /*margin: 0 10%;*/
