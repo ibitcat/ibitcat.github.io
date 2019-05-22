@@ -132,13 +132,11 @@ mysqldump -u dbuser -p -d dbname > /root/dbname.sql /*只导出表结构*/
 - **数据库导入**
 
 	- 先创建空的数据库
-	
 	~~~sql
 	CREATE DATABASE cn_dalanh5_S10001 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 	~~~
 
 	- 选择数据库
-
 	~~~sql
 	use cn_dalanh5_S10001;	
 	~~~
