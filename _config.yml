@@ -10,7 +10,7 @@ url: "http://domicat.me"
 
 # Comment
 comment:
-    gitment: domi
+    # gitment: domi
     # disqus: domi
     # uyan: 2143225  # 有言id,登录有言官网申请
 
@@ -28,10 +28,10 @@ social:
 
 # Google Analytics
 # 使用博客模板请去掉或者更换 id
-ga:
-    id: UA-71084139-1
-    host: auto
-
+#ga:
+#    id: UA-71084139-1
+#    host: auto
+#
 
 # 《----------------- 上面的信息修改成你自己的 ---------------------------》
 #
