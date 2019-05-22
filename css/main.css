@@ -509,7 +509,9 @@ img::-moz-selection {
     width: 30%;
     margin: 2em 0;
     border-top: 1px solid #DDDDDD; }
-  .post img + em { }
+
+img + br + strong + em {margin-top: 5px; margin-bottom: 7px; font-size: 12px; font-style:italic;}
+
 
   .panel {
     display: table;
