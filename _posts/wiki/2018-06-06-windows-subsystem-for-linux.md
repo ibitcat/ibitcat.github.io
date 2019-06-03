@@ -318,6 +318,11 @@ PS C:\WINDOWS\system32> ubuntu1604 config --default-user root
 
 然后，重启电脑，再打开wsl就是使用root用户登录了。
 
+### WSL下安装LEMP stack
+**2019-06-03更新**
+
+安装流程参考：[如何在Ubuntu18.04上安装Linux、Nginx、MySQL和PHP](https://blog.csdn.net/wudics/article/details/84073350)
+
 最后来一张截图，项目成功运行在linux子系统下：
 
 ![项目运行中](/images/posts/sublinux/project.png)
