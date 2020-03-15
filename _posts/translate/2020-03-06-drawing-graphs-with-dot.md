@@ -59,7 +59,8 @@ digraph G {
 &emsp;&emsp;当节点的名称首次出现在文件中时，将创建该节点。当节点由边运算符 `->` 连接时，将创建边。
 在本例中，第2行使边从 `main` 到 `parse`，从 `parse` 到 `execute`。运行下面的命令（文件名为 graph1.dot）将会生成出图1的图形。
 
->`$ dot -Tps graph1.dot -o graph1.ps`
+- 
+`$ dot -Tps graph1.dot -o graph1.ps`
 
 命令行选项 `-Tps` 选择 PostScript（EPSF）输出。*graph1.ps* 可以打印、可以由 PostScript 查看器显示，或者也可以嵌入到另一个文档中。
 ![ Drawing of small graph](/images/posts/dot/small.png)
@@ -127,6 +128,21 @@ digraph G {
 - *skew* 是一个浮点数（通常介于-1.0和1.0之间），通过从上到下倾斜形状来扭曲形状，正值将多边形的顶部向右移动。因此，斜线可以用来把一个方框变成一个平行四边形。
 - *distortion* 将从上到下收缩多边形，负值将导致底部大于顶部。它可以使方框变成梯形。
 
+- **示例3**： *多边形图形*
+```
+digraph G {
+	a -> b -> c;
+	b -> d;
+	a [shape=polygon,sides=5,peripheries=3,color=lightblue,style=filled];
+	c [shape=polygon,sides=4,skew=.4,label="hello world"]
+	d [shape=invtriangle];
+	e [shape=polygon,sides=4,distortion=.7];
+}
+```
+
+![Drawing of polygonal node shapes](/images/posts/dot/polygon.png)
+*图3：多边形图形*
+
 &emsp;&emsp;另一类节点形状是基于记录的节点。其中包括形状 *record* 和 *Mrecord* 。两者是相同的，只是后者有圆角。
 这些节点表示字段的递归列表，这些字段绘制成水平行和垂直行交替的方框。递归结构由节点的标签（`label`）确定，该标签具有以下描述：
 
@@ -140,6 +156,22 @@ boxLabel → [ ’<’ string ’>’ ] [ string ]
 &emsp;&emsp;大括号、竖杠和尖括号必须转义。空格是 *tokens* 的分隔符，因此，如果要在文本中按字面意思显示空格，必须对它们进行转义（eg.: `"hello\ world |test"`）。
 *boxLabel* 中的第一个字符串为字段名，并用作方框的的端口名（参见第3.1节）。第二个字符串用作字段的标签；它可以包含与多行标签相同的转义序列（参见第2.2节）。
 示例4和图4的例子说明了 records 的使用和它的一些相关属性。
+
+- **示例4**： *带有嵌套字段的记录*
+```
+digraph structs {
+	node [shape=record];
+	struct1 [shape=record,label="<f0> left|<f1> mid\ dle|<f2> right"];
+	struct2 [shape=record,label="<f0> one|<f1> two"];
+	struct3 [shape=record,label="hello\nworld |{ b |{c|<here> d|e}| f}| g | h"];
+	struct1 -> struct2;
+	struct1 -> struct3;
+}
+```
+
+![ Drawing of records](/images/posts/dot/record.png)
+*图4：带有嵌套字段的记录*
+
 
 [^footer1]: 有一种方法可以实现自定义节点形状，使用 `shape=epsf` 和 `shapefile` 属性，并依赖 PostScript 输出。详细信息超出了本用户指南的范围。有关详细信息，请与作者联系。
 
@@ -298,7 +330,7 @@ inode编号或完整路径名称可作为唯一标识符。然后，可以将其
 颜色值可以是饱和度-亮度三元组（0到1之间的三个浮点数，用逗号分隔），附录G中列出的颜色名称之一（参考某个版本的X窗口系统）；
 或者是红-绿-蓝（RGB）三元组[^footer4]（00到FF之间的三个十六进制数，前面加上字符“#”）。
 因此， `orchid`, `0.8396,0.4862,0.8549` 和 `#DA70D6` 是同一种颜色的三种不同表示方法。
-其中，数字形式的表示法更适用于自动生成颜色的脚本或工具。颜色名称不区分大小写，并且会忽略非字母数字字符，因此 *warmgrey* 和 *Warm_Grey* 是等效的。
+其中，数字形式的表示法更适用于自动生成颜色的脚本或工具。颜色名称**不区分大小写**，并且会忽略非字母数字字符，因此 *warmgrey* 和 *Warm_Grey* 是等效的。
 
 
 &emsp;&emsp;我们可以提供一些在图形绘图中使用颜色的提示：
@@ -344,7 +376,232 @@ dot -Tps -l lib.ps file.dot -o file.ps
 
 ### 2.4 绘图方向，大小和间距
 
+&emsp;&emsp;在确定 *dot* 图大小时，有两个比较重要的属性：***nodesep*** 和 ***ranksep***。
+第一个属性指定在同一层级上两个相邻节点之间的最小距离（以英寸为单位）。
+第二个属性指定层级间距，即一个层级中节点的底部与下一层级中节点的顶部之间的最小垂直距离（以英寸为单位）。
+或者可以设置为 `ranksep=equally`，那么所有相邻的层级都是等间距的。由于 *ranksep* 的两种用法是相互独立的，因此两者可以同时设置。
+例如，`ranksep="1.0 equally"` 表示所有相邻层间距都相等，且间距为1英寸。
+
+&emsp;&emsp;通常，使用默认节点大小和分隔符绘制的图形对于打印机或文档中的图形所允许的空间来说太大。有几种方法试图解决这个问题。
+首先，我们回顾下dot如何计算最终布局大小。
+
+&emsp;&emsp;布局最初是在使用默认设置的“自然”大小的内部创建的（除非设置了 `ratio=compress`，如下所述），图形的大小或纵横比没有限制，因此如果图形很大，布局也很大。
+如果不指定 *size* 或 *ratio*，则打印自然大小布局。控制图形输出大小的最简单方法是在图形文件中设置 `size="x,y"`（或在命令行中使用 *-G*）。这决定了最终布局的大小。
+例如，无论初始布局有多大， `size="7.5,10"` 都适合 8.5x11 页面（假定竖屏为默认排版方向）。
+
+*ratio* 也会影响布局大小。根据 *size* 和 *ratio* 的设置，有许多情况。
+
+- 情况1：未设置 *ratio*。如果图已经符合给定的尺寸，那么不需要做其他操作。否则，图会均匀缩小，以使其适应临界尺寸。
+
+如果设置了 *ratio*，则又会有4种子情况：
+
+- 情况2-1：如果 *ratio=x*，其中 x 是浮点数，则在一个维度中放大图形，以达到所需的比率（图形高度/宽度）。例如，`ratio=2.0` 使图形的高度是宽度的两倍。然后使用 *size* 缩放布局，如情况1所示。
+- 情况2-2：如果设置了 `ratio=fill` 和 `size=x,y`，则在一个维度上缩放图形以达到比率 *y/x*。然后按情况1执行缩放，最终的效果是把图形填充在 *size* 给定的大小的边界框内。
+- 情况2-3：如果设置了 `ratio=compress` 和 `size=x,y`，则压缩初始布局以尝试将图形适配到给定的边界框中。这样就会在布局质量、平衡性和对称性之间进行权衡，以使布局更加紧凑。然后按情况1执行缩放。
+- 情况2-4：如果 `ratio=auto` 并且设置了 *page* 属性，并且图形无法在单个页面上绘制，那么 *size* 将被忽略，*dot* 将计算一个“理想”大小。特别是，给定维度中的大小将是该维度中页面大小的最小整数倍，至少是当前大小的一半。然后，这两个维度将独立缩放到新的大小。
+
+
+&emsp;&emsp;如果设置了 `rotate=90` 或 `orientation=landscape`，则图形将旋转 **90°** 进入 *landscape* 模式。
+此时，图形布局的X轴将沿着画布的Y轴， 但是，这不影响 *dot* 对大小、比率或页面的解释。此时若 *page* 属性未设置，则最终布局将生成为一页。
+
+&emsp;&emsp;如果设置了 `page=x,y`，则布局将打印为一系列可以平铺或组装成马赛克的页面，常用设置为 `page="8.5,11"` 或 `page="11,17"`。
+这些值是指物理设备的完整大小；实际使用的区域将会因为设置了边距而减少。（对于打印机输出，边距默认值为0.5英寸；对于位图输出，X 和 Y 页边距分别为10点和2点。）
+对于平铺式布局，设置较小的边距可能会更好，可以通过 *margin* 属性来设置边距，可以使用一个数字（x和y的边距相同），或者两个用逗号分隔的数字来分别这是x和y边距，单位都是英寸。
+虽然可以讲 *margin* 设置为0，但是许多位图打印机都有一个无法覆盖的内部边距硬件。
+
+&emsp;&emsp;页面的打印属性由 *pagedir* 属性控制，输出始终基于行或基于列的顺序，*pagedir* 设置为两个字母的代码，分别指定主方向和次方向。
+例如：默认值是 *BL*，指定了从下到上的主顺序和从左到右的次顺序。因此，页面将从最下面一行开始，从左到右，然后是第二行，从左到右，以此类推，直到最上面的一行。
+从上到下的顺序用 *T* 表示，从右到左的顺序用 *R* 表示。
+
+&emsp;&emsp;如果设置 `center=true` 且图形可以在一页上输出，并且 `page` 也未设置，则使用默认大小为 8.5 x 11 英寸的页面，并将图形在该页上居中。
+
+&emsp;&emsp;还有一个常见的问题就是，以小尺寸绘制大图时会产生无法读取的节点标签，一页可容纳的可读文本数量是有限制的。
+通常，在运行 *dot*  之前，你可以通过提取原始图形的关键部分来绘制较小的图形，有一些工具可以帮助解决这个问题。
+
+- sccmap，将图形分解为若干强连接的组件
+- tred，减少递归计算（删除传递性所隐含的边）
+- gvpr，图形处理器，只选择节点或边，并收缩或移除图形的其余部分
+- unflatten，通过错开叶子边长度来提高图形树的高宽比
+
+考虑到这一点，可以在图尝试以下操作：
+
+1. 增加节点字体大小。
+2. 使用较小的 *ranksep* 和 *nodesep*。
+3. 设置 `ratio=auto`。
+4. 使用 `ratio = compress` 并设置合理的 *size*。
+5. 在缩小后，无衬线字体（如Helvetica）的可读性可能 *Times* 字体强。
+
 ### 2.5 节点和边的放置
+
+&emsp;&emsp;*dot* 中的属性提供了许多方法来调整节点和边的大规模布局，以及微调绘图以满足用户的需求和口味。本节讨论这些属性[^footer6]。
+
+&emsp;&emsp;有时，使边的指向从左向右会比从上到下更为自然，如果在图形最顶层设置 `rankdir=LR` 后，则会旋转绘图。***TB*** （自上而下）是默认布局指向。
+`rankdir=BT` 用于绘制从下往上的有向图，当然，也可以使用 `rankdir=RL`。
+
+&emsp;&emsp;在带有时间线的图形中，或在强调源节点和宿节点的图形中，可能需要约束秩（***rank***）的分配。子图的 *rank* 可以设置为：*same*, *min*, *source*, *max* 或 *sink*。
+值 *same* 会使子图中所有的节点在同一行上；如果设置为 *min*，子图中的所有节点都会保证在同一个秩上，至少与布局中的任何其他节点一样小[^footer7]。
+如果设置为 *source*，可以强制子图中的节点在一定程度上，严格小于任何其他节点的秩（其他同样指定为 *min* 或 *source* 的子图节点除外）。
+*max* 和 *sink* 对最大秩起类似作于（对应 *min* 和 *source*）。
+如果一个子图强制节点A和B处于同一 rank，而另一个子图强制节点C和B共享一个 rank，则两个子图中的所有节点都必须绘制在同一 rank 上。
+示例5和图5说明了使用子图来控制 *rank*。
+
+&emsp;&emsp;在有些图中，从左到右的顺便很重要。如果子图没有设置 *ordering=out*， 那么子图中具有相同尾节点的外边则会按照创建顺序从左向右展开。
+（还要注意，涉及头部节点的平边 *直边？* 可能会影响其顺序。）
+
+&emsp;&emsp;有许多方法可以微调节点和边的布局。如果边的节点都具有相同的 *group* 属性，则 *dot* 会尝试使边保持笔直，并避免其他边与之交叉。
+边的 *weight* 属性是另一种保持边缘笔直的方法，边的 *weight* 表示边缘的重要性，因此，权重越重，其节点之间的距离就越近。
+*dot* 使具有较重重量的边被拉短和拉直。
+
+&emsp;&emsp;当节点被约束在相同的秩时，边的权重也会有效果。
+这些节点之间权重非零的边尽可能沿同一方向（在旋转的图形中从左到右或从上到下）跨 rank 排列。
+可以利用这个特性，通过在需要的地方放置不可见边（`style="invi"`）来调整节点顺序。
+
+&emsp;&emsp;使用 *samehead* 和 *sametail* 属性可以约束与同一节点相邻的边的端点。
+具体来说，具有相同头部和相同 *samehead* 值的所有边都被约束为在同一点与头部节点相交（指向同一节点的边，且边的 *samehead* 值都一样，那么这些边都指向节点的同一位置）。
+类似的属性适用于尾部节点和 *sametail* （从一个节点所发出的边，如果边的 *sametail* 都一样，则这些边的发出点都在该节点的同一个位置）。
+
+&emsp;&emsp;在秩分配过程中，边的头节点（**箭头所指的节点**）被约束在比尾节点更高的秩上。但是，如果边设置了 `constraint=false`，则不强制执行此要求。
+在某些情况下，用户可能希望边的两端点不要太近，可以通过设置边的 *minlen* 属性来解决，它定义了边首尾之间的最小差值。
+例如，如果 `minlen=2`，则在头部和尾部之间始终至少有一个中间列。请注意，这与两个节点之间的几何距离无关。
+（***类似跨越了一个中间秩，并不是边首尾断点的几何距离被扩大2倍。***）
+
+微调须谨慎。当 *dot* 可以在不需要太多“帮助”或干扰单个节点和边的位置的情况下进行布局时，它的工作效果最好。
+通过增加某些边的权重，或者使用 `style=invi` 创建不可见的边或节点，甚至通过重新排列文件中节点和边的顺序，来微调布局。
+但这可能会适得其反，因为对布局的更改不一定是稳定的。一次调整可能会导致之前的所有的更改都无效，并生成非常糟糕的绘图。
+我们未来的计划是将 dot 的数学布局技术与允许用户定义提示和约束的交互式前端结合起来。
+
+- **示例5**： *带约束等级的图*
+```
+digraph asde91 {
+ranksep=.75;
+//size = "7.5,7.5";
+	{
+		node [shape=plaintext, fontsize=16];
+
+		/* the time-line graph */
+		past -> 1978 -> 1980 -> 1982 -> 1983 -> 1985 -> 1986 ->
+				1987 -> 1988 -> 1989 -> 1990 -> "future";
+
+		/* ancestor programs */
+
+		"Bourne sh"; "make"; "SCCS"; "yacc"; "cron"; "Reiser cpp";
+		"Cshell"; "emacs"; "build"; "vi"; "<curses>"; "RCS"; "C*";
+	}
+
+	{ rank = same;
+		"Software IS"; "Configuration Mgt"; "Architecture & Libraries";
+		"Process";
+	};
+
+	node [shape=box];
+
+	{ rank = same; "past"; "SCCS"; "make"; "Bourne sh"; "yacc"; "cron"; }
+	{ rank = same; 1978; "Reiser cpp"; "Cshell"; }
+	{ rank = same; 1980; "build"; "emacs"; "vi"; }
+	{ rank = same; 1982; "RCS"; "<curses>"; "IMX"; "SYNED"; }
+	{ rank = same; 1983; "ksh"; "IFS"; "TTU"; }
+	{ rank = same; 1985; "nmake"; "Peggy"; }
+	{ rank = same; 1986; "C*"; "ncpp"; "ksh-i"; "<curses-i>"; "PG2"; }
+	{ rank = same; 1987; "Ansi cpp"; "nmake 2.0"; "3D File System"; "fdelta";
+		"DAG"; "CSAS";}
+	{ rank = same; 1988; "CIA"; "SBCS"; "ksh-88"; "PEGASUS/PML"; "PAX";
+		"backtalk"; }
+	{ rank = same; 1989; "CIA++"; "APP"; "SHIP"; "DataShare"; "ryacc";
+		"Mosaic"; }
+	{ rank = same; 1990; "libft"; "CoShell"; "DIA"; "IFS-i"; "kyacc"; "sfio";
+		"yeast"; "ML-X"; "DOT";  }
+	{ rank = same; "future"; "Adv. Software Technology"; }
+
+	"PEGASUS/PML" -> "ML-X";
+	"SCCS" -> "nmake";
+	"SCCS" -> "3D File System";
+	"SCCS" -> "RCS";
+	"make" -> "nmake";
+	"make" -> "build";
+	"Bourne sh" -> "Cshell";
+	"Bourne sh" -> "ksh";
+	"Reiser cpp" -> "ncpp";
+	"Cshell" -> "ksh";
+	"build" -> "nmake 2.0";
+	"emacs" -> "ksh";
+	"vi" -> "ksh";
+	"vi" -> "<curses>";
+	"IFS" -> "<curses-i>";
+	"IFS" -> "IFS-i";
+	"IFS" -> "sfio";
+	"<curses>" -> "<curses-i>";
+	"<curses-i>" -> "fdelta";
+	"RCS" -> "SBCS";
+	"RCS" -> "fdelta";
+	"ksh" -> "nmake";
+	"ksh" -> "ksh-i";
+	"ksh" -> "ksh-88";
+	"ksh-i" -> "ksh-88";
+	"nmake" -> "ksh";
+	"nmake" -> "ncpp";
+	"nmake" -> "3D File System";
+	"nmake" -> "nmake 2.0";
+	"ncpp" -> "Ansi cpp";
+	"C*" -> "CSAS";
+	"fdelta" -> "SBCS";
+	"CSAS" -> "CIA";
+	"ksh-88" -> "sfio";
+	"ksh-88" -> "Configuration Mgt";
+	"ksh-88" -> "Architecture & Libraries";
+	"IFS-i" -> "Architecture & Libraries";
+	"SYNED" -> "Peggy";
+	"Peggy" -> "PEGASUS/PML";
+	"Peggy" -> "ryacc";
+	"PEGASUS/PML" -> "Architecture & Libraries";
+	"yacc" -> "ryacc";
+	"ryacc" -> "kyacc";
+	"kyacc" -> "Architecture & Libraries";
+	"ML-X" -> "Architecture & Libraries";
+	"APP" -> "Software IS";
+	"SBCS" -> "Configuration Mgt";
+	"DAG" -> "Software IS";
+	"DAG" -> "DOT";
+	"CIA++" -> "Software IS";
+	"Ansi cpp" -> "Configuration Mgt";
+	"nmake 2.0" -> "Configuration Mgt";
+	"3D File System" -> "Configuration Mgt";
+	"CIA" -> "CIA++";
+	"IMX" -> "TTU";
+	"TTU" -> "PG2";
+	"PG2" -> "backtalk";
+	"backtalk" -> "DataShare";
+	"DataShare" -> "Architecture & Libraries";
+	"nmake 2.0" -> "CoShell";
+	"CIA" -> "DIA";
+	"APP" -> "DIA";
+	"DAG" -> "DIA";
+	"fdelta" -> "PAX";
+	"PAX" -> "SHIP";
+	"SHIP" -> "Configuration Mgt";
+	"DIA" -> "Software IS";
+	"DOT" -> "Software IS";
+	"libft" -> "Software IS";
+	"sfio" -> "Architecture & Libraries";
+	"CoShell" -> "Configuration Mgt";
+	"CoShell" -> "Architecture & Libraries";
+	"Mosaic" -> "Process";
+	"cron" -> "yeast";
+	"yeast" -> "Process";
+	"Software IS" -> "Adv. Software Technology";
+	"Configuration Mgt" -> "Adv. Software Technology";
+	"Architecture & Libraries" -> "Adv. Software Technology";
+	"Process" -> "Adv. Software Technology";
+}
+```
+
+![Drawing with constrained ranks](/images/posts/dot/asde91.png)
+*图5：带约束等级(秩)的图*
+
+
+
+[^footer6]: 为了完整起见，dot 还提供了对影响布局算法的各种参数。其中包括 *mclimit*、*nslimit*、*nslimit1*、*remincross* 和 *searchsize*。
+[^footer7]: 回想一下，最小秩都在图的顶部。
+
 
 ## 3、高级特性
 
