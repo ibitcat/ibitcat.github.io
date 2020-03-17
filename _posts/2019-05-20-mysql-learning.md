@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Mysql学习笔记
+title: Mysql 学习笔记
 date: 2019-05-20 12:00:00
 tag: [数据库,读书笔记]
 

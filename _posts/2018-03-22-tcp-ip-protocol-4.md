@@ -2,10 +2,9 @@
 layout: post
 title:  "TCP/IP协议族详解（四）"
 date:   2018-03-22
-excerpt: "这个系列的文章主要详细了解TCP/IP协议族，本篇主要介绍ICMP协议"
 tag:
 - TCP/IP
-comments: true
+
 ---
 
 
@@ -28,71 +27,61 @@ comments: true
 - 无差错报告和差错纠正机制
 - 缺少一种为主机和管理查询的机制
 
-例如：当IP数据报在网络中超过了它的TTL，那么路由器就会将这个数据报丢弃，但是没有对这个丢弃操作返回错误报告。
-
-为了弥补IP协议的这些缺点，所以就产生了ICMP协议。需要注意的是：**ICMP没有纠正错误的机制**。
+例如：当 IP 数据报在网络中超过了它的 TTL，那么路由器就会将这个数据报丢弃，但是没有对这个丢弃操作返回错误报告。
+为了弥补 IP 协议的这些缺点，所以就产生了 ICMP 协议。需要注意的是：**ICMP 没有纠正错误的机制**。
 
 
 ## 2、ICMP协议的数据封装格式
 
 它的大概封装格式如下：
-![ICMP的封装](/images/posts/tcp-ip/icmp-head-1.png)
+![ICMP的封装](/assets/image/posts/2018-03-22-01.png?style=centerme)
 
-ICMP本身是网络层协议。但是，**它的报文不是如设想的那样直接传送给数据链路层**，实际上，ICMP报文首先**封装成IP数据报**，然后再传送给下一层。在IP数据报中的协议字段值是1就表示其IP数据是ICMP报文。通过抓包可以证实这一点。
+ICMP 本身是网络层协议。但是，**它的报文不是如设想的那样直接传送给数据链路层**，实际上，ICMP 报文首先**封装成IP数据报**，
+然后再传送给下一层。在IP 数据报中的协议字段值是 1 就表示其IP数据是 ICMP 报文。通过抓包可以证实这一点。
 
-1、通过`ping www.baidu.com`命令，使计算机产生ICMP报文；  
-2、通过wireshark抓包，筛选ICMP协议，此时抓包的结果如下图所示：
-
-![ICMP的封装](/images/posts/tcp-ip/icmp-wireshark-1.png)
+1. 通过 `ping www.baidu.com` 命令，使计算机产生 ICMP 报文；
+2. 通过 Wireshark 抓包，筛选 ICMP 协议，此时抓包的结果如下图所示：
+![ICMP的封装](/assets/image/posts/2018-03-22-02.png?style=centerme)
 
 ## 3、ICMP报文种类
 
 ### 差错报告报文
-
-可以理解成是错误信息error，它总是把差错报告返回给原始的数据源。常用的错误类型有：
-
+可以理解成是错误信息 error，它总是把差错报告返回给原始的数据源。常用的错误类型有：
 - 类型3：终点不可达，例如：无法到达目的地，可能是硬件错误、软件设置错误等等原因导致
-- 类型4：源点抑制，例如：发送方发送速率太快，但是某个路由器接受速率过慢，那么这个路由器就会返回一个ICMP，通知发送方速率要慢一点
-- 类型5：路由重定向，例如：当路由器发现数据报走的不是最佳路由，就会返回一个ICMP报告，让发送方下次不要走这里了
-- 类型11：超时，例如：发生了路由环路，从而导致TTL变为0值
+- 类型4：源点抑制，例如：发送方发送速率太快，但是某个路由器接受速率过慢，那么这个路由器就会返回一个 ICMP，通知发送方速率要慢一点
+- 类型5：路由重定向，例如：当路由器发现数据报走的不是最佳路由，就会返回一个 ICMP 报告，让发送方下次不要走这里了
+- 类型11：超时，例如：发生了路由环路，从而导致 TTL 变为 0 值
 - 类型12：参数问题，例如：数据报的首部被篡改或者丢失
 
-我们使用`tracert www.baidu.com`这个命令，然后抓一些ICMP包，如下图，可以看到很多黑色的结果，即差错报告。
-![ICMP的差错报告](/images/posts/tcp-ip/icmp-wireshark-2.png)
+我们使用`tracert www.baidu.com`这个命令，然后抓一些 ICMP 包，如下图，可以看到很多黑色的结果，即差错报告。
+![ICMP的差错报告](/assets/image/posts/2018-03-22-03.png?style=centerme)
 
 **差错报文的要点：**
-
-- 对于携带ICMP差错报文的数据报，不再产生ICMP差错报文
-- 对于分片的数据报，如果不是**第一个分片**，则不产生ICMP差错报文
-- 对于具有多播地址（224.0.0.0-239.255.255.255）的数据报，不产生ICMP差错报文
-- 对于具有特殊地址如（127.0.0.0或0.0.0.0）的数据报，不产生ICMP
-差错报文
+- 对于携带 ICMP 差错报文的数据报，不再产生 ICMP 差错报文
+- 对于分片的数据报，如果不是**第一个分片**，则不产生 ICMP 差错报文
+- 对于具有多播地址（224.0.0.0-239.255.255.255）的数据报，不产生 ICMP 差错报文
+- 对于具有特殊地址如（127.0.0.0或0.0.0.0）的数据报，不产生 ICMP 差错报文
 
 
 ### 查询报文
-
 常用的类型有：
-
-- 类型8或者0：返回请求或回到，例如常用的`ping`命令
+- 类型8或者0：返回请求或回到，例如常用的 `ping` 命令
 - 类型13或14：时间戳请求或回答，注意：需要两方的时间必须与标准时间同步
 - 类型17或18：地址码（掩码）请求或回答，不太常用（过时）
 - 类型10或9：路由器查询通告
 
 ## 4、ICMP头部格式
-
-ICMP两种报文种类有着不同的头部格式，但区别不大，前4个字节是一样的，不同的只有后面4个字节。
+ICMP两种报文种类有着不同的头部格式，但区别不大，前 4 个字节是一样的，不同的只有后面4个字节。
 
 ### 查询报文头部格式
+ICMP查询报文头部格式如下，主要包括两个部分：8 byte + 32 byte 的数据。格式如下图：
+![ICMP的查询报文头部格式](/assets/image/posts/2018-03-22-04.png?style=centerme)
 
-ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的数据。格式如下图：
-![ICMP的查询报文头部格式](/images/posts/tcp-ip/icmp-head-2.png)
-
-通过抓包证实一下：  
-1、运行`ping www.baidu.com`，开始抓包  
-2、筛选ICMP协议包，结果如下：
-![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-3.png)
-3、字段解释：  
-
+通过抓包证实一下：
+1. 运行 `ping www.baidu.com`，开始抓包
+2. 筛选 ICMP 协议包，结果如下：
+![ICMP抓包结果](/assets/image/posts/2018-03-22-05.png?style=centerme)
+3. 字段解释：
 - 第1个字节：值为08，表示这是一个查询报文
 - 第2个字节：值为00
 - 第3、4个字节：值为0x4d14，表示头部校验和
@@ -103,14 +92,15 @@ ICMP查询报文头部格式如下，主要包括两个部分：8byte+32byte的�
 
 ### 差错报告报文头部格式
 
-ICMP差错报文头部格式如下（通用格式），这里**需要注意**的一点是，差错报告报文的格式除了前4个字节，后面的字节所对应的意义是根据**type值**和**code值**发生变化的。
+ICMP差错报文头部格式如下（通用格式），这里**需要注意**的一点是，差错报告报文的格式除了前4个字节，
+后面的字节所对应的意义是根据**type值**和**code值**发生变化的。
 
-![ICMP的差错报文头部格式](/images/posts/tcp-ip/icmp-head-3.png)
+![ICMP的差错报文头部格式](/assets/image/posts/2018-03-22-06.png?style=centerm)
 
-通过抓包证实一下：  
-1、运行`tracert www.baidu.com`，开始抓包（注意：这里用的是**tracert命令**）  
-2、筛选ICMP协议包，结果如下（后4个字节全部为0）：
-![ICMP抓包结果](/images/posts/tcp-ip/icmp-wireshark-4.png)  
+通过抓包证实一下：
+1. 运行 `tracert www.baidu.com`，开始抓包（注意：这里用的是**tracert命令**）
+2. 筛选 ICMP 协议包，结果如下（后4个字节全部为0）：
+![ICMP抓包结果](/assets/image/posts/2018-03-22-07.png?style=centerm)
 
 关于查询报文和差错报文的type和code字段所代表的具体信息，这里不做详细的介绍，如果需要，可以查看本教程的课件。
 
@@ -142,8 +132,8 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 	- TTL为54（请求包的TTL为64），也就是回复的包进过了10个路由器。
 
 通过抓包，可以证实上面的流程（我使用的是`ping -l 1024 www.baidu.com`）。
-![ping抓包结果1](/images/posts/tcp-ip/ping-wireshark-1.png) 
-![ping抓包结果2](/images/posts/tcp-ip/ping-wireshark-2.png) 
+![ping抓包结果1](/assets/image/posts/2018-03-22-01.ping-wireshark-1.png) 
+![ping抓包结果2](/assets/image/posts/2018-03-22-01.ping-wireshark-2.png) 
 
 注意：上图的Length是1066，也就是包的总长度是1066byte。那么这个1066是怎么算出来的？1066 = 1024byte(ICMP数据长度)+ 8byte(ICMP头部长度)+ 20byte(IP头部)+14byte(以太网头部)。
 
@@ -154,7 +144,7 @@ linux下的命令是`traceroute`，windows下使用	`tracert`。tracert可以解
 先介绍一下tracert命令的工作原理：命令发起方会**依次**对到达目的主机的路由路径中的路由节点发起**一轮**ping请求，**三次ping为一轮**，每一轮的TTL值加以（第一轮为1，第二轮为2...依次类推），逐个检查这条路由路径上每个路由节点。最核心的一句话就是：它就是利用了路由器对TTL为0的包进行丢弃后，返回给源主机一个ICMP差错报告报文这一点来实现的。
 
 大概流程如下图所示：
-![tracert流程](/images/posts/tcp-ip/tracert-1.png) 
+![tracert流程](/assets/image/posts/2018-03-22-01.tracert-1.png) 
 
 下面通过一个实例来使用一下这个命令，并通过抓包，验证上面描述的流程。
 
@@ -188,5 +178,5 @@ linux下的命令是`traceroute`，windows下使用	`tracert`。tracert可以解
 
 跟踪结束后，停止抓包，通过分析抓包结果，与上面的工作原理是完全符合的。
 
-![tracert抓包1](/images/posts/tcp-ip/tracert-2.png)
-![tracert抓包2](/images/posts/tcp-ip/tracert-3.png) 
+![tracert抓包1](/assets/image/posts/2018-03-22-01.tracert-2.png)
+![tracert抓包2](/assets/image/posts/2018-03-22-01.tracert-3.png) 
