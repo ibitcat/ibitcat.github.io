@@ -1,71 +1,486 @@
-# Basic
-title: Domi●Cat
-subtitle: 好记性不如烂笔头
-description: "痛苦不止 希望不灭"
-# 头像里面的标题
-avatarTitle: DomiCat
-# 头像里面的描述
-avatarDesc: 外出务工人员
-url: "http://domicat.me"
+title: Domi●Cat # 站点标题
+description: | # 头像背后的信息（html格式），<br/>代表换行
+  未来一直来<br/>
+  过去一直去<br/>
+  痛苦不止<br/>
+  希望不灭<br/>
+  <a href="mailto:shui_mu98@163.com">
+    <i class="fas fa-envelope"></i>
+  </a>
+  <a href="https://github.com/shuimu98">
+    <i class="fab fa-github"></i>
+  </a>
+  <iframe
+    src="https://music.163.com/outchain/player?type=2&id=351190&auto=0&height=32"
+    width=100%
+    height=52
+    frameborder="no"
+    border="0"
+    marginwidth="0"
+    marginheight="0"
+  ></iframe>
+url: https://domicat.me # 你的域名，例如https://wu-kan.github.io
+baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
-# Comment
-comment:
-    # gitment: domi
-    # disqus: domi
-    # uyan: 2143225  # 有言id,登录有言官网申请
+jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
+  default:
+    body:
+      theme-base: theme-base-07 # 可选的值08~0f，见<https://github.com/poole/lanyon>
+      layout-reverse: false # 开启后sidebar在右边，反之左边
+      sidebar-overlay: true # 开启后正文不随sidebar移动而移动
+    append_to_head: # 通过内嵌html的方式引入并定制插件，删改前确定知道自己在做什么。定制插件的方式可以参考这篇文章<https://wu-kan.cn/_posts/2019-01-18-基于Jekyll搭建个人博客/>
+      - | #一些页面优化标签，看不懂可跳过
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1"
+        />
+        <meta
+          http-equiv="content-type"
+          content="text/html; charset=utf-8"
+        />
+        <link
+          rel="alternate"
+          href="/feed.xml"
+          title="RSS"
+          type="application/rss+xml"
+        />
+      - | # 网站小图标，可换成你自己的图片，改href中的部分即可
+        <link
+          rel="apple-touch-icon-precomposed"
+          href="/assets/image/favicon.png?s=320"
+        />
+        <link
+          rel="shortcut icon"
+          href="/assets/image/favicon.png?s=32"
+        />
+      - | # 来自lanyon的页面样式，不要改
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@ac85a3115c094b3e6cb92cc41771e98b443f6c5d/public/css/poole.min.css,gh/poole/lanyon@ac85a3115c094b3e6cb92cc41771e98b443f6c5d/public/css/lanyon.min.css"
+        />
+      - | #对于lanyon侧边栏按钮的一些补丁，Hide the sidebar checkbox that we toggle with `.sidebar-toggle`；建议不要改
+        <style>
+          .sidebar-checkbox {
+            display: none;
+          }
+          .sidebar-toggle {
+            position: fixed;
+          }
+          .sidebar-toggle:before,
+          .sidebar-toggle:active:before,
+          #sidebar-checkbox:focus~.sidebar-toggle:before,
+          #sidebar-checkbox:checked~.sidebar-toggle:before {
+            background-image: none;
+          }
+        </style>
+      - | # 引入fontawesome图标样式
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
+        />
+      - | # 百度爬虫推送，http站点使用 http://push.zhanzhang.baidu.com/push.js
+        <script
+          src='https://zz.bdstatic.com/linksubmit/push.js'
+          defer="defer"
+        ></script>
+      - | # 网站背景图片，分竖屏、宽屏；改链接即可，不想用可以把这一项全删掉；要换壁纸图片的话可把url内的部分换成你自己的，比如你放在/assets/image/background.jpg，那就改成url(/assets/image/background.jpg)
+        <style>
+          .wrap {
+            min-height: 100vh;
+            display: inline-block;
+            background-size: 100vw auto;
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-image: url();
+          }
+          @media (min-aspect-ratio: 2400/1850) {
+            .wrap {
+              background-image: url();
+            }
+          }
+        </style>
+      - | # 网站字体
+        <style>
+          html,
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6,
+          .sidebar {
+            font-family: Menlo, Monaco, "Courier New", Microsoft JhengHei, monospace;
+          }
+        </style>
+      - | # 侧边栏头像效果
+        <style>
+          .effect {
+            margin: 1rem;
+            perspective: 900px;
+          }
+          .effect-info {
+            text-align: center;
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            transform-style: preserve-3d;
+          }
+          .effect-img {
+            z-index: 11;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: all 0.5s ease-in-out;
+          }
+          .effect-img:before {
+            position: absolute;
+            display: block;
+          }
+          .effect-right_to_left .effect-img {
+            transform-origin: 0% 50%;
+          }
+          .effect-right_to_left:hover .effect-img {
+            transform: rotate3d(0, 1, 0, -180deg);
+          }
+        </style>
+      - | # 彩虹滚动条，仅对Chrome系浏览器生效
+        <style>
+          ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+          }
+          ::-webkit-scrollbar-thumb {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+          }
+        </style>
+      - | # 如果你会CSS的话，在这里自定义你的页面样式吧~
+        <style>
+          img {
+            display: inline-block;
+            margin: 0;
+          }
+        </style>
+    sidebar: # 此配置项下是一些关于侧边栏的配置
+      disable: false # 是否不显示sidebar
+      avatar: # 侧边栏显示的头像
+        enable: true
+        img: /assets/image/avatar.jpg?s=320 # 头像的地址
+      nav: # 导航部分的内容，你也可以自己增加文字、图标（来自fontawesome）和对应的链接
+        - title: '<i class="fas fa-home fa-fw"></i> 首页'
+          href: /
+        - title: '<i class="fas fa-tags fa-fw"></i> 标签'
+          href: /tags/
+        - title: '<i class="fas fa-archive fa-fw"></i> 归档'
+          href: /archive/
+      simple_jekyll_search: # 侧边栏的全站搜索
+        enable: true
+        full_text_search: false # 可能导致缓慢的搜索和加载
+        alert: | # 如果看不懂就不改
+          <input
+            id="sidebar-search-input"
+            placeholder="搜索博文"
+            style="background: none;border: none;color: #fff;width: 100%;"/>
+          <ol
+            id="sidebar-search-results-container"
+            style="overflow: auto auto;max-height:50vh;"
+          ></ol>
+          <script
+            src='https://cdn.jsdelivr.net/npm/simple-jekyll-search/dest/simple-jekyll-search.min.js'
+            async='async'
+            onload='
+              SimpleJekyllSearch({
+                json: "/assets/simple-jekyll-search/search.json",
+                searchInput: document.getElementById("sidebar-search-input"),
+                resultsContainer: document.getElementById("sidebar-search-results-container"),
+                searchResultTemplate: `<li><a href="{url}">{title}</a></li>`,
+                limit: 999,
+                fuzzy: true
+              })'
+          ></script>
+      append_to_sidebar:
+        - | # 目录插件，如果看不懂就不改
+          <aside style="overflow: auto auto;max-height:50vh;" id="toc">
+            目录
+          </aside>
+          <script
+            defer='defer'
+            src='https://cdn.jsdelivr.net/npm/html-contents/html-contents.min.js'
+            onload="htmlContents('#toc', {listType: 'o', filter: function(arr) {return !arr.matches('.masthead-title')}})"
+          ></script>
+        - | # 运行时间，可将倒数第三行的时间改成你自己的建站时间，格式仿照上面的；不需要的话可以把这一项都删掉
+          <div>
+            <i class="fas fa-cog fa-spin fa-fw"></i>
+            <span id="run_time_day">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </span>天
+            <span id="run_time_hour">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </span>时
+            <span id="run_time_minute">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </span>分
+            <span id="run_time_second">
+              <i class="fas fa-spinner fa-pulse"></i>
+            </span>秒
+            <script>
+              setInterval(function (BirthDay) {
+                function setzero(i) {
+                  if (i < 10) return "0" + i;
+                  return i;
+                }
+                BirthDay = new Date(BirthDay);
+                today = new Date();
+                timeold = (today.getTime() - BirthDay.getTime());
+                sectimeold = timeold / 1000;
+                secondsold = Math.floor(sectimeold);
+                msPerDay = 24 * 60 * 60 * 1000;
+                e_daysold = timeold / msPerDay;
+                daysold = Math.floor(e_daysold);
+                e_hrsold = (e_daysold - daysold) * 24;
+                hrsold = Math.floor(e_hrsold);
+                e_minsold = (e_hrsold - hrsold) * 60;
+                minsold = Math.floor((e_hrsold - hrsold) * 60);
+                seconds = Math.floor((e_minsold - minsold) * 60);
+                document.getElementById("run_time_day").innerHTML = daysold;
+                document.getElementById("run_time_hour").innerHTML = setzero(hrsold);
+                document.getElementById("run_time_minute").innerHTML = setzero(minsold);
+                document.getElementById("run_time_second").innerHTML = setzero(seconds);
+              }, 1000, "12/13/2014 00:00:00") // 这是我第一篇博客的时间
+            </script>
+          </div>
+        - | # Copyright声明
+          <div>
+            <i class="fas fa-copyright fa-fw"></i>
+            2014-2020 domicat
+          </div>
+        - | # 觉得我的主题好用的话，让更多的人知道它吧！
+          <div>
+            <i class="fas fa-thumbs-up fa-fw"></i>
+            <a href="https://jekyll-theme-WuK.wu-kan.cn">
+              jekyll-theme-WuK
+            </a>
+          </div>
+      wordcount: # 全站字数统计
+        enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
+        alert: <i class="fas fa-user-edit fa-fw"></i>
+        kilo: 千
+        unit: 字
+  page:
+    masthead: # 显示顶栏
+      enable: true
+    append_before:
+      - | # 代码块背景透明（否则mermaid受影响），且代码块超过半屏的时候自动折叠
+        <style>
+          pre {
+            max-height: 50vh;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0);
+          }
+        </style>
+      - | # 增加宽屏下的显示内容，黄 金 分 割 比
+        <style>
+          @media (min-width: 56em) {
+            .container {
+              max-width: 61.8%;
+            }
+          }
+        </style>
+      - | # 给文章加上白色背景，防止被背景影响阅读；同时加上加载动画
+        <style>
+          .masthead,
+          .container.content {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            box-shadow: 0 0 .75rem rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
+            animation: animationAppear 2s;
+          }
+          @keyframes animationAppear {
+            0%,
+            33% {
+              opacity: 0;
+            }
+            100% {}
+          }
+        </style>
+      - | # 使文章支持Katex数学公式渲染，行内公式用$...$括起来，行内公式用$$..$$括起来
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/combine/npm/katex/dist/katex.min.js,npm/katex/dist/contrib/mathtex-script-type.min.js,npm/katex/dist/contrib/auto-render.min.js"
+          defer="defer"
+          onload='renderMathInElement(document.body, { delimiters: [{ left: "$", right: "$", display: false }] })'
+        ></script>
+      - | # mermaid
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
+          defer="defer"
+          onload='
+            for(let x=document.getElementsByClassName("language-mermaid"), i=0;i<x.length;i++)
+            {
+              x[i].classList.add("mermaid");
+              x[i].classList.remove("language-mermaid");
+            }'
+        ></script>
+      - | # prism代码高亮
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/combine/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.css,npm/prismjs/plugins/toolbar/prism-toolbar.min.css,gh/PrismJS/prism-themes@1955cfef6953b3a59e66016e8a1e016b45d6cc79/themes/prism-nord.css"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/combine/npm/prismjs/components/prism-core.min.js,npm/prismjs/plugins/autoloader/prism-autoloader.min.js,npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js,npm/prismjs/plugins/toolbar/prism-toolbar.min.js"
+          defer="defer"
+          onload='
+            Prism.plugins.autoloader.languages_path = "https:\/\/cdn.jsdelivr.net/npm/prismjs/components/";
+            for(let x=document.getElementsByTagName("pre"), i=0;i<x.length;i++)
+            {
+              x[i].classList.add("line-numbers");
+            }
+            Prism.plugins.toolbar.registerButton("select-code", function (env) {
+              let button = document.createElement("button");
+              button.innerHTML = "select this " + env.language;
+              button.addEventListener("click", function () {
+                if (document.body.createTextRange) {
+                  let range = document.body.createTextRange();
+                  range.moveToElementText(env.element);
+                  range.select();
+                } else if (window.getSelection) {
+                  let selection = window.getSelection();
+                  let range = document.createRange();
+                  range.selectNodeContents(env.element);
+                  selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+              });
+              return button;
+            })'
+        ></script>
+  post:
+    date: # 显示博文时间
+      enable: true
+      alert: <i class="fas fa-calendar-day fa-fw"></i>
+    wordcount: # 统计全文字数
+      enable: true
+      alert: <i class="fas fa-file-word fa-fw"></i>
+      unit: 字
+    readtime: # 计算文章阅读时间
+      enable: true
+      alert: <i class="fas fa-clock fa-fw"></i>
+      unit: 分
+      divided_by: 300 # 正常人的阅读速度大概每分钟三百个字
+    visitor: # 需要引入并开启valine的visitor选项使之开始计数; 可能会和busuanzi统计的有出入
+      enable: false
+      alert: <i class="fas fa-book-reader fa-fw"></i>
+      unit: 次
+    tags: # 显示博文标签
+      enable: true
+      alert: <i class="fas fa-tag fa-fw"></i>
+    copyright: | # 我的文章使用最宽松的知识共享协议：署名 4.0 国际 (CC BY 4.0)。您可以自由地：共享 — 在任何媒介以任何形式复制、发行本作品；演绎 — 修改、转换或以本作品为基础进行创作；在任何用途下，甚至商业目的。只要你遵守许可协议条款，许可人就无法收回你的这些权利。惟须遵守下列条件：署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。
+      <br/>
+      <i class="fab fa-creative-commons-by fa-fw"></i>
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a>（除特别声明或转载文章外）
+  tags:
+    alert: <i class="fas fa-tag"></i> # 在标签页的每个标签前面显示一个图标
+    count: true # 统计每个标签下文章的数量
+  archive:
+    posts_count:
+      enable: true # 博文数量统计
+      alert: 篇博文。长路漫漫！ # 提示语
+  home: # 用于生成ppt的模板，看不懂的话可以不用配置
+    append_to_section_tag:
+      - key: data-markdown
+      - key: data-separator # 水平展示页分隔符
+        value: <!-- slide -->
+      - key: data-separator-vertical # 垂直展示页分隔符
+        value: <!-- slide vertical=true -->
+    append_before: |
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/combine/npm/reveal.js/css/reveal.min.css,npm/reveal.js/css/theme/serif.min.css"
+      />
+      <style>
+        .sidebar {
+          line-height: 1.5;
+        }
+        .reveal .slides {
+          text-align: left;
+        }
+      </style>
+      <script
+        defer="defer"
+        src="https://cdn.jsdelivr.net/npm/reveal.js/js/reveal.min.js"
+        onload="
+        document.getElementsByClassName('wrap')[0].classList.add('reveal');
+        let path = 'https:\/\/cdn.jsdelivr.net/npm/reveal.js/';
+        Reveal.initialize({
+          height: '100%',
+          hash: true,
+          mouseWheel: true,
+          navigationMode: 'linear',
+          parallaxBackgroundImage: 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAD8D+JaQAA3AA/uVqAAA=',//这是一张纯白图
+          dependencies: [
+              { src: path+'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: path+'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+              { src: path+'plugin/highlight/highlight.js', async: true },
+              { src: path+'plugin/zoom-js/zoom.js', async: true },
+              { src: path+'plugin/notes/notes.js', async: true },
+              { src: path+'plugin/math/math.js', async: true }
+          ]
+          });
+        "></script>
+  page404:
+    append_before:
+      - | # 腾讯公益
+        <script
+          src='https://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js'
+          async='async'
+          charset='utf-8'
+          homePageUrl='/'
+          homePageName='回到我的主页'
+        ></script>
 
-# Social
-social:
-    #weibo: 5366874726
-    github: shuimu98
-    # twitter:
-    mail: shui_mu98@163.com
+# githubpage上支持的插件见<https://pages.github.com/versions/>
+plugins: # <https://jekyllrb.com/docs/plugins/>
+  - jekyll-readme-index # 使用readme做index，从而和github渲染效果一致
+  - jekyll-default-layout # 为每个markdown自动生成layout
+  - jekyll-seo-tag # 为每个页面生成标题
+  - jekyll-sitemap # 为站点生成站点地图
+  - jekyll-feed # 为站点生成RSS源
+  - jekyll-remote-theme # 使用remote_theme插件实现主题的前后分离，详见<https://github.com/benbalter/jekyll-remote-theme/>
 
-# 百度统计
-# 使用博客模板请去掉或者更换 id
-#baidu:
-#    id: 8ba1c6be0953b6f9c2ba38e57f615421
+remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@3.1.0 #使用固定版本号以防止主题更新导致站点显示错乱
 
-# Google Analytics
-# 使用博客模板请去掉或者更换 id
-#ga:
-#    id: UA-71084139-1
-#    host: auto
-#
+readme_index: # 缺失index.md和index.html时，使用README.md代替之
+  with_frontmatter: true # 支持带有yaml头的README
 
-# 《----------------- 上面的信息修改成你自己的 ---------------------------》
-#
-#
-#  _post/ 下的文章更换成你自己的文章
-#  帮忙star一下，感谢~😆 地址： https://github.com/leopardpan/leopardpan.github.io
-#
-#
-# 《--------------- 下面的信息可以自行选择是否修改 ------------------------》
+permalink: /_posts/:year-:month-:day-:title/ #生成文章的地址格式，我希望它和_posts目录下的格式一样
+# timezone: Asia/Shanghai # 解决githubpage显示时间不正确的问题，见<https://www.iana.org/time-zones>
+# future: false # 不发布时间在未来的文章
 
+# limit_posts: 999 # 限制博文数量
+# encoding: utf-8
 
-permalink: /:year/:month/:title/
-# Format
-highlighter: rouge
+markdown: kramdown
+kramdown: # 见<https://kramdown.gettalong.org/options.html>
+  input: GFM # 见<http://jekyllcn.com/docs/configuration/#kramdown>
+  syntax_highlighter_opts: # 可见<https://kramdown.gettalong.org/syntax_highlighter/rouge.html>
+    disable: true # 关掉默认的高亮，换用prismjs
 
-textColor: #FF0000
-
-# supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: slate
-
-# The blog button should not be removed.
-blog_button:
-    title: Posts
-
-# Navigation buttons in the front page.s
-nav:
-    - {title: Archives, description: archive, url: '/archive'}
-    - {title: Tags, description: tags, url: '/tags'}
-    - {title: About, description: about, url: '/about'}
-
-
-# Pagination
-plugins: [jekyll-paginate, jekyll-sitemap]
-paginate: 5
-paginate_path: "page/:num/"
-
-
+# 以下为 githubpage上不可修改的参数，见<https://help.github.com/en/github/working-with-github-pages/about-github-pages-and-jekyll>
+#lsi: false # 为相关文章生成索引
+#safe: true # 禁用自定义插件
+#source: [your repo's top level directory] # Jekyll 读取文件的路径
+#incremental: false # 增量生成
+#highlighter: rouge # 代码高亮器
+#gist:
+#  noscript: false
+#kramdown:
+#  math_engine: mathjax
+#  syntax_highlighter: rouge

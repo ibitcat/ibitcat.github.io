@@ -1,5 +1,19 @@
-个人站，jekyll主题[leopard](https://github.com/leopardpan/leopardpan.github.io/)
+# 十里长安
 
-小修改了一点东西，tag的最顶层的目录去掉了，评论改为gitment。删除了文章打赏。
+欢迎访问我的个人主页！
 
-h2标题css修改。
+<!-- slide -->
+
+## 联系我
+
+- Site: **<https://domicat.me>**
+- E-mail : **[shui_mu98(at)163.com](mailto:shui_mu98@163.com)**
+
+<!-- slide vertical=true -->
+
+## 关于我
+
+多年游戏后端苦力，会一些搬砖技能。
+- c
+- lua
+- golang
