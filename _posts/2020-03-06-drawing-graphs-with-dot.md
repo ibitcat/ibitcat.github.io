@@ -63,8 +63,8 @@ digraph G {
 &emsp;&emsp;`$ dot -Tps graph1.dot -o graph1.ps`
 
 命令行选项 `-Tps` 选择 PostScript（EPSF）输出。*graph1.ps* 可以打印、可以由 PostScript 查看器显示，或者也可以嵌入到另一个文档中。
-![ Drawing of small graph](/images/posts/dot/small.png)
-*图1：简单有向图*
+![Drawing of small graph](/assets/image/posts/2020-03-06-02.png?style=centerme)
+*<center>图1：简单有向图</center>*
 
 &emsp;&emsp;通常可以通过设置输入文件中节点、边或子图的属性来调整图形布局中节点和边的表现方式或位置。
 属性是字符串的键值对（name-value）。示例2和图2展示了一些布局属性。
@@ -99,8 +99,8 @@ digraph G {
 - 第12行中，节点 *make_string* 被赋予一个多行标签。
 - 第13行将默认节点更改为一个填充蓝色阴影的方框。节点 *compare* 继承这些属性值（此后的节点都继承该节点属性）。
 
-![ Drawing of fancy graphh](/images/posts/dot/fancy.png)
-*图2：稍复杂的有向图*
+![Drawing of fancy graphh](/assets/image/posts/2020-03-06-03.png?style=centerme)
+*<center>图2：稍复杂的有向图</center>*
 
 
 ## 2、绘图属性
@@ -129,7 +129,7 @@ digraph G {
 - *distortion* 将从上到下收缩多边形，负值将导致底部大于顶部。它可以使方框变成梯形。
 
 - **示例3**： *多边形图形*
-```
+```dot
 digraph G {
 	a -> b -> c;
 	b -> d;
@@ -140,14 +140,13 @@ digraph G {
 }
 ```
 
-![Drawing of polygonal node shapes](/images/posts/dot/polygon.png)
-*图3：多边形图形*
+![Drawing of polygonal node shapes](/assets/image/posts/2020-03-06-04.png?style=centerme)
+*<center>图3：多边形图形</center>*
 
 &emsp;&emsp;另一类节点形状是基于记录的节点。其中包括形状 *record* 和 *Mrecord* 。两者是相同的，只是后者有圆角。
 这些节点表示字段的递归列表，这些字段绘制成水平行和垂直行交替的方框。递归结构由节点的标签（`label`）确定，该标签具有以下描述：
 
-- 
-```
+```dot
 rlabel → field ( ’|’ field )*
 field → boxLabel | ’’ rlabel ’’
 boxLabel → [ ’<’ string ’>’ ] [ string ]
@@ -158,7 +157,7 @@ boxLabel → [ ’<’ string ’>’ ] [ string ]
 示例4和图4的例子说明了 records 的使用和它的一些相关属性。
 
 - **示例4**： *带有嵌套字段的记录*
-```
+```dot
 digraph structs {
 	node [shape=record];
 	struct1 [shape=record,label="<f0> left|<f1> mid\ dle|<f2> right"];
@@ -169,8 +168,8 @@ digraph structs {
 }
 ```
 
-![ Drawing of records](/images/posts/dot/record.png)
-*图4：带有嵌套字段的记录*
+![ Drawing of records](/assets/image/posts/2020-03-06-05.png?style=centerme)
+*<center>图4：带有嵌套字段的记录</center>*
 
 
 [^footer1]: 有一种方法可以实现自定义节点形状，使用 `shape=epsf` 和 `shapefile` 属性，并依赖 PostScript 输出。详细信息超出了本用户指南的范围。有关详细信息，请与作者联系。
@@ -337,13 +336,12 @@ inode编号或完整路径名称可作为唯一标识符。然后，可以将其
 - 首先，避免使用太多鲜艳的颜色。“彩虹效应”会令人困惑。所以最好选择较窄的颜色范围，或者改变饱和度以及色相。
 - 其次，当节点用深色或非常饱和的颜色填充时，`fontcolor=white` 和 `fontname=Helvetica` 的标签看起来会更容易阅读（我们还为 dot 提供了 PostScript 函数，可以从普通字体创建轮廓字体）。
 - 最后，在某些输出格式中，可以定义自己的颜色空间。例如，如果使用 PostScript 进行输出，则可以在库文件中重新定义 *nodecolor*、*edgecolor* 或 *graphcolor*。因此，要使用 RGB 颜色，请将以下行放在文件 *lib.ps* 中。
-```
-/nodecolor {setrgbcolor} bind def
-```
+
+&emsp;&emsp;`/nodecolor {setrgbcolor} bind def`
+
 使用 `-l` 命令行选项加载此文件。
-~~~
-dot -Tps -l lib.ps file.dot -o file.ps
-~~~
+
+&emsp;&emsp;`dot -Tps -l lib.ps file.dot -o file.ps`
 
 &emsp;&emsp;***style*** 属性控制节点和边的其他图形特征。此属性是用逗号分隔的、带有可选参数列表的原语列表。
 预定义的原语包括：*solid*, *dashed*, *dotted*, *bold* 和 *invis* 。
@@ -471,7 +469,7 @@ dot -Tps -l lib.ps file.dot -o file.ps
 我们未来的计划是将 dot 的数学布局技术与允许用户定义提示和约束的交互式前端结合起来。
 
 - **示例5**： *带约束等级的图*
-```
+```dot
 digraph asde91 {
 ranksep=.75;
 //size = "7.5,7.5";
@@ -594,8 +592,8 @@ ranksep=.75;
 }
 ```
 
-![Drawing with constrained ranks](/images/posts/dot/asde91.png)
-*图5：带约束等级(秩)的图*
+![Drawing with constrained ranks](/assets/image/posts/2020-03-06-06.png?style=centerme)
+*<center>图5：带约束等级(秩)的图</center>*
 
 
 

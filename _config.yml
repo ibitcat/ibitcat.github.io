@@ -1,5 +1,5 @@
 title: Domi●Cat # 站点标题
-description: | # 头像背后的信息（html格式），<br/>代表换行
+description: | # 头像背后的信息（html格式），<br/>代表换行，图片居中可以参考<https://stackoverflow.com/questions/12090472/github-readme-md-center-image>
   未来一直来<br/>
   过去一直去<br/>
   痛苦不止<br/>
@@ -19,6 +19,12 @@ description: | # 头像背后的信息（html格式），<br/>代表换行
     marginwidth="0"
     marginheight="0"
   ></iframe>
+  <style type="text/css">
+    img[src$="centerme"] {
+      display:block;
+      margin: 0 auto;
+    }
+  </style>
 url: https://domicat.me # 你的域名，例如https://wu-kan.github.io
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
