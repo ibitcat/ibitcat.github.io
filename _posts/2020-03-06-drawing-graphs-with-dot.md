@@ -2,9 +2,7 @@
 layout: post
 title: 【翻译】使用dot绘图
 date: 2020-03-06 19:50:00 +0800
-excerpt: "dotguide pdf 翻译"
 tag: [翻译]
-comments: true
 
 ---
 

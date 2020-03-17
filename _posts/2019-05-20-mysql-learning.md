@@ -1,10 +1,8 @@
 ---
 layout: post
 title: Mysql学习笔记
-excerpt: "Mysql的学习笔记。"
 date: 2019-05-20 12:00:00
 tag: [数据库,读书笔记]
-comments: true
 
 ---
 
@@ -17,7 +15,7 @@ comments: true
 	- server层，即服务层，提供核心的服务组件，包括链接器、查询缓存（mysql 8.0已经删除改功能）、分析器、优化器、执行器等。
 	- 存储引擎层，负责数据存储和提取
 
-	![Mysql的两层框架](/images/posts/mysql/mysql框架.png) 
+	![Mysql的两层框架](/assets/image/posts/2019-05-20-01.png?style=centerme)
 
 2. 当链接器查询到你拥有的权限后，这个链接的所有权限判断逻辑，都依赖于此时读取到的权限。所以，一个连接成功后，即时管理员对你的权限进行了修改，也不会影响当前已存在的连接。
 
@@ -79,7 +77,7 @@ comments: true
 
 	现在有一个更新操作，“把id=2的行的字段c加1”。大概的流程如下图：
 
-	![update执行流程](/images/posts/mysql/redolog-update.png)
+	![update执行流程](/assets/image/posts/2019-05-20-02.png?style=centerme)
 
 7. `innodb_flush_log_at_trx_commit`和`sync_binlog`两个参数是控制MySQL磁盘写入策略以及数据安全性的关键参数。前者是控制redo log；后者是控制binlog。
 
@@ -92,9 +90,8 @@ comments: true
 	~~~
 
 	如图所示：
-	![redo log策略](/images/posts/mysql/redolog-write.png)
-	
-	
+	![redo log策略](/assets/image/posts/2019-05-20-03.png?style=centerme)
+
 	- 当设置该值为1时，每次事务提交都要做一次fsync，这是最安全的配置，即使宕机也不会丢失事务；
 	- 当设置为2时，则在事务提交时只做write操作，只保证写到系统的page cache，因此实例crash不会丢失事务，但宕机则可能丢失事务；
 	- 当设置为0时，事务提交不会触发redo写操作，而是留给后台线程每秒一次的刷盘操作，因此实例crash将最多丢失1秒钟内的事务。

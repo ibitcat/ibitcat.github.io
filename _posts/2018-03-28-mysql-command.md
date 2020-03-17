@@ -2,7 +2,6 @@
 layout: post
 title: Mysql 常用命令
 date: 2016-09-13
-excerpt: Mysql 常用命令
 tag: [数据库]
 ---
 
@@ -36,9 +35,7 @@ tag: [数据库]
 ### 数据库操作示例
 
 - **创建表**
-
 例如创建一张邮件表：
-
 ```sql
 CREATE TABLE `mail` (
   `pid` int(10) unsigned NOT NULL COMMENT '玩家id,邮件接收者',
@@ -52,9 +49,7 @@ CREATE TABLE `mail` (
   PRIMARY KEY (`pid`,`uuid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='邮件';
 ```
-
 创建一张玩家表：
-
 ```sql
 CREATE TABLE `player` (
   `pid` int(11) unsigned NOT NULL COMMENT '角色id',
@@ -66,21 +61,18 @@ CREATE TABLE `player` (
 ```
 
 - **查询**
-
 ```sql
 select * from player; #查询所有记录
 select pid,name from player where pid = 1; #按条件查询指定字段
 ```
 
 - **删除**
-
 ```sql
 delete from player; #清空所有记录
 delete from player where pid = 1; #清空pid等于1的记录
 ```
 
 - **插入**
-
 ```sql
 insert into player(pid,name) values(1,"aaa"),(2,"bbb"); #指定字段的插入
 insert into player values(1,"test001",5,100),(2,"test002",10,700);
@@ -88,14 +80,12 @@ insert into player values(1,"test001",5,100),(2,"test002",10,700);
 ```
 
 - **更新**
-
 ```sql
 update player set name="fuckyou" where pid = 1; 
 update player set name="domicat",level=100 where pid=1;
 ```
 
 - **修改表结构**
-
 ```sql
 alter table player ADD `entryId` int(11) unsigned NOT NULL COMMENT '职业';#添加字段
 alter table player change `test` `createTime` int(11) unsigned NOT NULL COMMENT '创号时间'; #修改字段
@@ -104,7 +94,6 @@ alter table player CHANGE `entryId` `entryId` int(11) UNSIGNED NOT NULL COMMENT 
 ```
 
 - **检查库或者表是否存在**
-
 ```sql
 DROP DATABASE IF EXISTS db;
 CREATE DATABASE IF NOT EXISTS db;
@@ -112,7 +101,6 @@ DROP TABLE IF EXISTS tb;
 ```
 
 - **多表数据删除**
-
 ~~~sql
 delete from t1 where 条件;
 delete t1 from t1 where 条件;
@@ -120,7 +108,6 @@ delete t1 from t1,t2 where 条件;
 ~~~
 
 - **数据库导出**
-
 ~~~sql
 mysqldump -u 用户名 -p 数据库名 > 导出的文件名
 mysqldump -u dbuser -p dbname > /root/dbname.sql /*导出表结构和数据*/
@@ -129,19 +116,15 @@ mysqldump -u dbuser -p -d dbname > /root/dbname.sql /*只导出表结构*/
 
 
 - **数据库导入**
-
 ~~~sql
 /*1. 先创建空的数据库*/
 CREATE DATABASE cn_dalanh5_S10001 DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
-
 /*2. 选择数据库*/
 use cn_dalanh5_S10001;	
-
 /*3. 导入数据*/
 source /root/cn_dalanh5_S1.sql	
 ~~~
 
-	
 
 >脚注：
 

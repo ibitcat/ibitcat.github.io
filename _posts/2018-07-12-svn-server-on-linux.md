@@ -2,9 +2,7 @@
 layout: post
 title: svn服务器搭建、迁移、备份、容灾
 date: 2018-07-10 14:21:00 +0800
-excerpt: "在linux下（centos 6.9）下搭建svn服务，并将svn仓库做每日备份，同时将仓库备份同步到其他主机，做容灾处理。另外，本文也记录如何将仓库从一台机器迁移到另外一台机器。"
 tag: [环境搭建]
-comments: true
 
 ---
 
@@ -23,20 +21,21 @@ comments: true
 	编辑passwd文件，在`[user]`节点下，添加用户和密码。
 
 5. 版本仓库配置：编辑svnserve.conf， 在节点`[general]`下，取消一下字段的注释：
-	~~~
+
+	```conf
 	anon-access = none  	#进制匿名用户访问
 	auth-access = write 	#认证用户具有写权限
 	password-db = passwd 	#密码文件
 	authz-db = authz 		#权限文件
 	realm = proj-test 		#认证域，可以随意填写，但是多个仓库如果认证域相同，使用的密码库也必须相同
-	~~~
+	```
 
 	**注意**，可能出现一个问题，*svn在show log 时候出现 want to go offline*，Subversion 有个小 bug ，当 `anon-access=read` 并且某个目录有被设置上 `* =` 标记，则会出现上述问题。
 
 6. 权限管理：编辑authz文件，权限管理支持分组、单个用户、通配符。权限分为读(r)、写(w)、无访问权限(空)。
 
 	- 分组，在节点`[groups]`下面添加分组，例如：
-	```
+	```conf
 	# 一个用户可以同时存在于不同的组中
 	[groups]
 	harry_and_sally = harry,sally
@@ -44,8 +43,7 @@ comments: true
 	```
 
 	- 版本权限（举例说明）
-
-	![权限配置](/images/posts/svn_auth.png)
+	![权限配置](/assets/image/posts/2018-07-10-01.png?style=centerme)
 
 ### svn备份
 
@@ -83,7 +81,7 @@ comments: true
 	- 新建配置文件：`touch /etc/rsyncd.conf`
 	- 编辑配置，如下：
 
-		~~~
+		```conf
 		uid=root
 		gid=root
 		max connections=400
@@ -102,7 +100,7 @@ comments: true
 		auth users=root
 		hosts allow=192.168.2.251
 		hosts deny=*
-		~~~
+		```
 
 	- 启动rysnc服务：`/usr/bin/rsync --daemon --config=/etc/rsyncd.conf`，可以写入到`/etc/rc.local`实现开机启动。
 
@@ -110,18 +108,18 @@ comments: true
 
 	- 编写脚本：`touch rsync_svn.sh`
 
-		~~~shell
+		```shell
 		#!/bin/bash
 		rsync -vzrtopg --progress --password-file=/etc/rsyncd.scrt root@192.168.2.250::svn_repos /data/svn_backup
-		~~~
+		```
 
 
 	- 写入定时任务：`crontab -e`
 
-		~~~
+		```shell
 		# 每日凌晨3点执行一次同步脚本
 		* 3 * * * /usr/sh /root/rsync_svn.sh
-		~~~
+		```
 
 > 注意：服务端的`rsyncd.passwd` 和 客户端的`rsyncd.scrt`，权限都要设置为600。
 

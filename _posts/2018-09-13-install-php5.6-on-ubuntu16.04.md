@@ -13,24 +13,24 @@ comments: true
 
 ## 1、移除已安装的php
 
-~~~
+```shell
 sudo dpkg -l | grep php| awk '{print $2}' |tr "\n" " "
 sudo apt-get install aptitude
 sudo aptitude purge `dpkg -l | grep php| awk '{print $2}' |tr "\n" " "`
-~~~
+```
 
 ## 2、下载源码包
 
-~~~
+```shell
 cd ~
 wget http://cn2.php.net/get/php-5.6.37.tar.gz/from/this/mirror
 sudo mv mirror php-5.6.37.tar.gz
 tar zxvf php-5.6.37.tar.gz
-~~~
+```
 
 ## 3、安装依赖
 
-~~~
+```shell
 cd ~/php-5.6.37
 sudo apt-get install \
 gcc \
@@ -50,11 +50,11 @@ libfreetype6-dev \
 libjpeg-dev \
 libpng12-dev \
 pkg-config
-~~~
+```
 
 ## 4、configure
 
-~~~
+```shell
 ./configure --prefix=/usr/local/php \
 --with-config-file-path=/usr/local/php/etc \
 --enable-inline-optimization --disable-debug \
@@ -85,7 +85,7 @@ pkg-config
 --with-bz2 \
 --with-readline \
 --enable-maintainer-zts
-~~~
+```
 
 **注意点:**
 
@@ -95,7 +95,7 @@ php5.6 只支持openssl 1.0，不支持1.1
 
 ## 5、配置
 
-~~~
+```shell
 cd ~/php-5.6.37
 sudo cp php.ini-development /usr/local/php/etc/php.ini
 sudo cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
@@ -106,7 +106,7 @@ sudo service php-fpm start
 sudo vim ~/.bashrc
 PATH=$PATH:/usr/local/php/bin
 sudo source .bashrc
-~~~
+```
 
 ## 6、报错
 - failed to retrieve TCP_INFO for socket: Protocol not available (92)
@@ -120,7 +120,7 @@ sudo source .bashrc
 
 ## 7、安装pthread扩展
 
-~~~
+```shell
 cd ~
 sudo wget http://pecl.php.net/get/pthreads-2.0.10.tgz
 tar zxvf pthreads-2.0.10.tgz
@@ -132,6 +132,6 @@ sudo make install
 
 #修改php.ini,添加
 extension=pthreads.so
-~~~
+```
 
 (如果出现error: pthreads requires ZTS, please re-compile PHP with ZTS enabled的错误，说明在编译php时没有加入--enable-maintainer-zts，所以只能重新编译php)

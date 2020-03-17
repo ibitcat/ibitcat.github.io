@@ -1,11 +1,10 @@
 ---
 layout: post
-title:  "TCP/IP协议族详解（六）"
-date:   2018-03-24
-excerpt: "这个系列的文章主要详细了解TCP/IP协议族，本篇主要介绍UDP协议"
+title: "TCP/IP协议族详解（六）"
+date: 2018-03-24
 tag:
 - TCP/IP
-comments: true
+
 ---
 
 
@@ -41,11 +40,11 @@ UDP协议的功能：
 
 UDP数据包报包含两个部分：UDP首部+数据
 
-![UDP数据报](/images/posts/tcp-ip/udp-datagram.png)
-![UDP首部格式](/images/posts/tcp-ip/udp-head.png)
+![UDP数据报](/assets/image/posts/2018-03-24-01.png?style=centerme)
+![UDP首部格式](/assets/image/posts/2018-03-24-02.png?style=centerme)
 
 UDP首部非常简单，占8个byte，下面是一个UDP报文的抓包结果：
-![UDP首部抓吧](/images/posts/tcp-ip/udp-wireshark-1.png)
+![UDP首部抓吧](/assets/image/posts/2018-03-24-03.png?style=centerme)
 
 字段解释：
 

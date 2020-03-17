@@ -1,10 +1,8 @@
 ---
 layout: post
 title: 读书笔记 ——《程序员的自我修养-链接、装载与库》
-excerpt: "《程序员的自我修养-链接、装载与库》的学习笔记。"
 date: 2018-09-27 17:05:00
 tag: [读书笔记]
-comments: true
 
 ---
 
@@ -54,10 +52,10 @@ comments: true
 
 	进程和线程的关系如下图：
 
-	![进程和线程的关系](/images/posts/cxydzwxy/process-thread.png)
+	![进程和线程的关系](/assets/image/posts/2018-09-27-01.png?style=centerme)
 
 	线程的权限如下图：
-	![线程的权限](/images/posts/cxydzwxy/thread-priv.png)
+	![线程的权限](/assets/image/posts/2018-09-27-02.png?style=centerme)
 
 	- 线程调度
 
@@ -67,7 +65,7 @@ comments: true
 		- 就绪（ready），此时线程可以立即执行，但CPU已经被其他线程占用
 		- 等待（waiting），此时线程正在等待某一事件（通常是IO或者同步）发生，无法执行。
 
-		![线程状态切换](/images/posts/cxydzwxy/thread-status.png)
+		![线程状态切换](/assets/image/posts/2018-09-27-03.png?style=centerme)
 
 		一般把频繁等待的线程称为**IO密集型线程**，把很少等待的线程称为**CPU密集型线程**，因为频繁进入等待的线程意味着，它不需要将CPU时间片耗尽。
 
@@ -79,10 +77,8 @@ comments: true
 1. 编译过程可以分解为4个步骤：**预处理**（Prepressing）、**编译**(Compilation)、**汇编**(Assembly)、**链接**(Linking)。
 
 	假如有一个c程序`hello.c`，代码如下：
-
 	~~~c
 	#include <stdio.h>
-
 	#define HELLO "hello,world!"
 	int main(){
 		printf("%s\n", HELLO);
@@ -175,14 +171,14 @@ int main(void){
 
 4. 一个简单的目标文件段结构：
 
-	![程序与目标文件](/images/posts/cxydzwxy/app-objectfile.png)
+	![程序与目标文件](/assets/image/posts/2018-09-27-04.png?style=centerme)
 
 5. ELF文件的开头是一个“文件头”(ELF Header)，它描述了整个文件的文件属性，包括文件是否可以执行、是静态链接还是动态链接、入口地址（如果是可执行文件）、目标硬件、目标操作系统等信息。
 文件头还有一个**段表**，描述了文件中各个端在文件中的偏移位置以及段的属性等。
 
 6. ELF基本结构如下图：
 
-	![ELF基本结构](/images/posts/cxydzwxy/elf.png)
+	![ELF基本结构](/assets/image/posts/2018-09-27-05.png?style=centerme)
 
 7. 使用命令：`readelf -h simple.o`，可以查看目标文件的ELF文件头结构，各个字段的意义在这里不做详细的描述了。比较重要的一个字段是`Start of section headers`，它表示段表的偏移位置。
 
@@ -206,7 +202,7 @@ int main(void){
 13. C++的符号签名机制：所有符号都以`_Z`开头，对于嵌套的名字（在命名空间或者在类里面的），后面紧跟`N`，然后是各个命名空间和类的名字，且在每个名字前加上名字字符串长度，再以	`E`结尾。
 对于带参数的函数，它的参数列表会紧跟在`E`的后面，例如：int参数就是字母`i`，float参数就是字母`f`。
 
-	![函数签名](/images/posts/cxydzwxy/func-signature.png)
+	![函数签名](/assets/image/posts/2018-09-27-06.png?style=centerme)
 
 14. 为了C++与C语言兼容，C++提供了`extern "C"`的关键字用法：
 
