@@ -42,7 +42,7 @@ dot使用的布局过程依赖于非循环的图形：
 所有这些对象的名称可以是C标识符、数字或带引号的C字符串。引号则用来保护标点符号和空格。
 
 - **示例1**： *简单的有向图*
-```dot
+```markup
 digraph G {
 	main -> parse -> execute;
 	main -> init;
@@ -68,7 +68,7 @@ digraph G {
 属性是字符串的键值对（name-value）。示例2和图2展示了一些布局属性。
 
 - **示例2**： *稍复杂的有向图*
-```dot
+```markup
 digraph G {
 	size ="7,4";
 	main [shape=box]; /* 这里是注释 */
@@ -127,7 +127,7 @@ digraph G {
 - *distortion* 将从上到下收缩多边形，负值将导致底部大于顶部。它可以使方框变成梯形。
 
 - **示例3**： *多边形图形*
-```dot
+```markup
 digraph G {
 	a -> b -> c;
 	b -> d;
@@ -144,7 +144,7 @@ digraph G {
 &emsp;&emsp;另一类节点形状是基于记录的节点。其中包括形状 *record* 和 *Mrecord* 。两者是相同的，只是后者有圆角。
 这些节点表示字段的递归列表，这些字段绘制成水平行和垂直行交替的方框。递归结构由节点的标签（`label`）确定，该标签具有以下描述：
 
-```dot
+```markup
 rlabel → field ( ’|’ field )*
 field → boxLabel | ’’ rlabel ’’
 boxLabel → [ ’<’ string ’>’ ] [ string ]
@@ -155,7 +155,7 @@ boxLabel → [ ’<’ string ’>’ ] [ string ]
 示例4和图4的例子说明了 records 的使用和它的一些相关属性。
 
 - **示例4**： *带有嵌套字段的记录*
-```dot
+```markup
 digraph structs {
 	node [shape=record];
 	struct1 [shape=record,label="<f0> left|<f1> mid\ dle|<f2> right"];
@@ -467,7 +467,7 @@ inode编号或完整路径名称可作为唯一标识符。然后，可以将其
 我们未来的计划是将 dot 的数学布局技术与允许用户定义提示和约束的交互式前端结合起来。
 
 - **示例5**： *带约束等级的图*
-```dot
+```markup
 digraph asde91 {
 ranksep=.75;
 //size = "7.5,7.5";
