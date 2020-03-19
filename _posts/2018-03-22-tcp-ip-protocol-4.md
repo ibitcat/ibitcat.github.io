@@ -105,7 +105,7 @@ ICMP差错报文头部格式如下（通用格式），这里**需要注意**的
 `ping`命令是基于ICMP的查询报文，分为回送请求和回送应答，**请求类型为8，应答类型为0**。
 
 现在我使用 `ping www.baidu.com` 命令 （windows 10系统），得到下面的结果：
-```cmd
+```batch
 C:\Windows\System32>ping www.baidu.com
 
 正在 Ping www.a.shifen.com [14.215.177.39] 具有 32 字节的数据:
@@ -149,7 +149,7 @@ linux下的命令是 `traceroute`，windows 下使用 `tracert`。tracert 可以
 下面通过一个实例来使用一下这个命令，并通过抓包，验证上面描述的流程。
 打开CMD（win 10系统），运行命令`tracert www.qq.com`，等待一段时间，得到下面的结果。
 
-```cmd
+```batch
 C:\Windows\System32>tracert www.qq.com
 通过最多 30 个跃点跟踪
 到 www.qq.com [59.37.96.63] 的路由:

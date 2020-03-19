@@ -1,22 +1,22 @@
 ---
 layout: post
 title: golang：interface 和 nil 以及 error nil
-date: 2015-3-14 15:16:00
-updated: 2015-11-05 17:19:00
-excerpt: "详解golang的interface接口，以及介绍nil与 error类型的nil的区别."
+date: 2015-03-14 15:16:00
 tag: [golang]
-comments: true
 
 ---
 
 
 ### interface（接口）
-在golang中，万物皆interface{}，所以golang中可以将任意类型赋值给interface{}，包括nil也可以赋值给interface{}，interface{}有点像c艹中的**纯虚基类**，只包含了方法的集合。
+在golang中，万物皆 interface{}，所以 golang 中可以将任意类型赋值给 interface{}，包括nil也可以赋值给 interface{}，
+interface{} 有点像 c艹 中的**纯虚基类**，只包含了方法的集合。
 
-interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对lua比较熟，这点上类似lua的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。_type表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？……  data存储变量的真实值。
+interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对lua比较熟，这点上类似 lua 的值在底层的实现，
+所以比较容易理解（我估计大部分动态语言都是这么干的吧）。`_type` 表示存储变量的动态类型，也就是这个值真正是什么类型的。
+int？bool？……  data存储变量的真实值。
 
 例如： var value interface{} = int32(100)  
-那么value在底层的结构就是：{_type:int32,data=100}
+那么value在底层的结构就是：`{_type:int32,data=100}`
 
 关于普通类型与interface{}的转换：  
 1、普通类型转换到interface{}是隐式转换；例如 fmt.Println(),我们可以传入任意类型的值，Println都会把传入的值转换成interface{}类型  
@@ -31,11 +31,13 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 如何判断一个interface{} 是否是 nil？
 
 根据上面对interface{}的介绍，判断interface{}是否为nil的规则：  
->只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：(*int, nil)。 因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
+>只有在内部值和类型都未设置时(nil, nil)，一个接口的值才为 nil。特别是，一个 nil 接口将总是拥有一个 nil 类型。
+若我们在一个接口值中存储一个 int 类型的指针，则内部类型将为 int，无论该指针的值是什么：`(*int, nil)`。 
+因此，这样的接口值会是非 nil 的，即使在该指针的内部为 nil。
 
 那么思考如下问题：  
 
-```golang
+```go
 type T struct{
 	Age int
 	Name string
@@ -50,7 +52,8 @@ func main(){
 ```
 
 为什么注释的那行会报错？我的分析是：  
-t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
+t1 真正指向的是 T类型的一个实例，是一个T类型的值，而nil值无法转换成除了指针、channel、func、interface、map或slice的类型，所以会报错。
+这也验证了： **nil只能赋值给指针、channel、func、interface、map或slice类型的变量。如果未遵循这个规则，则会引发panic。**
 
 ### error类型的nil
 TODO

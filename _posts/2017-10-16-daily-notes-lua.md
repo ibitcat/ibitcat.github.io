@@ -2,10 +2,9 @@
 layout: post
 title:  "每日笔记 —— lua篇"
 date:   2017-10-16
-excerpt: "记录了工作中，每天的笔记，分类整理。lua的笔记相对较多，本篇文章将单独记录lua部分"
 tag:
 - 读书笔记
-comments: true
+
 ---
 
 记录从工作至今，工作期间遇到的一些关于lua方面理解不太清晰的部分、相关的新知识等。
@@ -107,7 +106,7 @@ comments: true
 
 11. lua协程，类似于线程的概念，但是又有所区别，lua协程的核心是`resume`和`yeild`，它们的工作方式类似于CPU的**保护现场和恢复现场**。yeild的参数是调用者resume的返回值，而下一次resume的参数又是被还原的那个yeild的返回值。具体参考[这篇文章](https://www.tuicool.com/articles/AnAVJbu)。
 
-	![resume和yeild关系](/images/posts/lua-coroutine.png)
+	![resume和yeild关系](/assets/image/posts/2017-10-16-01.png)
 
 12. 一个[lua版本的屏蔽字处理](http://www.cnblogs.com/zhangfeitao/p/6378458.html)，采用字典树算法，以及一个lua版的[DFA屏蔽字算法](http://blog.csdn.net/u010223072/article/details/50542531)。
 

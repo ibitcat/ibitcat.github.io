@@ -1,11 +1,10 @@
 ---
 layout: post
 title:  "TCP/IP协议族详解（一）"
-date:   2018-03-22
-excerpt: "这个系列的文章主要详细了解TCP/IP协议族"
+date:   2018-03-19
 tag:
 - TCP/IP
-comments: true
+
 ---
 
 写在最前面：大学时，自己所学的专业就是网络工程，奈何自己对这方面兴趣不大，一心想要开发游戏，所以学的也是乱七八糟，谁曾想，毕业后真的入了游戏这一行，而且还是服务器，网络方便的知识多少还是要掌握一下，遂依照网易云课堂上的教程又重新复习了一遍TCP/IP结构。
@@ -31,7 +30,7 @@ comments: true
 
 ### 7层模型的功能
 OSI标准分为7层，从下往上分别是：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，同时规定了这个7层结构需要遵循的一些准则。见下图：
-![OIS/RM 七层模型](/images/posts/tcp-ip/osi-layer.png)
+![OIS/RM 七层模型](/assets/image/posts/2018-03-19-01.png?style=centerme)
 
 下面介绍下OSI七层模型每层的作用：
 
@@ -55,19 +54,19 @@ OSI标准分为7层，从下往上分别是：物理层、数据链路层、网�
 
 注意：数据链路层，除了会加上头部，还会在数据末尾加上尾部，而其他层，只会加上头部。
 
-![OIS数据传输](/images/posts/tcp-ip/osi-data.png)
+![OIS数据传输](/assets/image/posts/2018-03-19-02.png?style=centerme)
 
 ## 2、TCP/IP四层结构
 
 因为OSI七层参考模型也有缺点，比如开发成本大、功能重叠，实现复杂等，所以TCP/IP协议体系在OSI的基础上做了一些简化，它分为四层，从上到下分别为：应用层、传输层、网络层、网络接口层（或者叫数据链路层）。
-![TCP/IP四层模型](/images/posts/tcp-ip/tcpip-layer.png)
+![TCP/IP四层模型](/assets/image/posts/2018-03-19-03.png?style=centerme)
 
 它与OSI七层模型的对应关系如下图：
-![TCP/IP四层模型与OSI七层模型对应关系](/images/posts/tcp-ip/osi-tcpip.png)
+![TCP/IP四层模型与OSI七层模型对应关系](/assets/image/posts/2018-03-19-04.png?style=centerme)
 
 另外，TCP/IP协议实际上包含了大量的协议和应用，并且由多个独立定义的协议组合在一起，因此说，TCP/IP是一个协议族而不是一种协议。
 
-![每一层传输数据格式](/images/posts/tcp-ip/tcpip-data-format.png)
+![每一层传输数据格式](/assets/image/posts/2018-03-19-05.png?style=centerme)
 
 ### TCP/IP协议族主要协议
 
@@ -78,7 +77,7 @@ OSI标准分为7层，从下往上分别是：物理层、数据链路层、网�
 
 
 每层对应的主要协议：
-![主要的协议](/images/posts/tcp-ip/tcpip-protocol-list.png)
+![主要的协议](/assets/image/posts/2018-03-19-06.png?style=centerme)
 
 
 ### 网络接口层

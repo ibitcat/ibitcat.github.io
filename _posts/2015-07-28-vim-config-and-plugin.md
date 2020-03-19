@@ -1,10 +1,8 @@
 ---
 layout: post
 title: vim配置以及使用vundle管理vim插件
-date: 2015-7-28 15:08:00
-updated: 2015-11-05 17:22:00
+date: 2015-07-28 15:08:00
 tag: [Linux]
-comments: true
 
 ---
 
@@ -14,15 +12,15 @@ comments: true
 **另外推荐一个**:[k-vim](https://github.com/wklken/k-vim)
 
 先来一张预览图：  
-![预览](/images/posts/vim.png) 
+![预览](/assets/image/posts/2015-07-28-01.png) 
 
 ### 安装步骤
-
-	1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	2、git clone https://github.com/shuimu98/domi-dotfile.git
-	3、cp domi-dotfile/.vimrc ~/
-	4、打开vim，输入命令 :PluginInstall
-
+```shell
+1、git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+2、git clone https://github.com/shuimu98/domi-dotfile.git
+3、cp domi-dotfile/.vimrc ~/
+4、打开vim，输入命令 :PluginInstall
+```
 
 这里需要注意，一开始还没有安装插件，所以打开vim会报很多错误，不用管，一路enter下去，装完插件之后，重新打开vim，如果还有报错，就需要自己仔细检查下了。
 
@@ -142,9 +140,10 @@ ctrl+p搜索是你当前路径的，如果要切换，可以在命令模式下�
 **问题一**： `neocomplete requires Vim 7.3.885 or later with Lua support ("+lua").`
 
 出现这个提示是vim没有支持lua，输入命令 
-	
-	domi@ubuntu:~$ vim --version|grep lua
-	+dialog_con      -lua             +rightleft       +writebackup
+```markup
+domi@ubuntu:~$ vim --version|grep lua
++dialog_con      -lua             +rightleft       +writebackup
+```
 lua前面有个“-”说明还没支持lua。
 
 解决方法：	
@@ -177,22 +176,26 @@ cd vim
 
 然后，编译vim：
 
-`./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff –with-luajit`
+```shell
+./configure –enable-cscope –enable-multibyte –enable-xim –enable-fontset –with-features=huge –enable-pythoninterp –enable-luainterp –enable-gui=gtk2 –enable-sniff –with-luajit
+```
 
 编译mac vim
-
-`./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local`
+```shell
+./configure –with-features=huge –enable-pythoninterp –enable-luainterp –enable-cscope –with-lua-prefix=/usr/local
+```
 
 2、参考：[https://github.com/Shougo/neocomplete.vim](https://github.com/Shougo/neocomplete.vim)
+```markup
+neocomplete requires Vim 7.3.885+ compiled with if_lua. If :echo has("lua") returns 1, then you're done; otherwise, see below.
 
-	neocomplete requires Vim 7.3.885+ compiled with if_lua. If :echo has("lua") returns 1, then you're done; otherwise, see below.
-	
-	Make sure you have any of these packages:
-	
-	vim-nox
-	vim-gtk
-	vim-gnome
-	vim-athena
+Make sure you have any of these packages:
+
+vim-nox
+vim-gtk
+vim-gnome
+vim-athena
+```
 
 **问题二**：当tagbar打开时，Easygrep的搜索结果窗口会跑到tagbar的窗口
 

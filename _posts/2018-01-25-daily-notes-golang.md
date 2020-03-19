@@ -1,10 +1,8 @@
 ---
 layout: post
 title: 每日笔记 —— golang篇
-excerpt: "go语言的学习笔记。"
 date: 2018-01-25 15:15:15
 tag: [golang,读书笔记]
-comments: true
 
 ---
 
@@ -100,7 +98,7 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 	不过要注意的是，recover之后，逻辑并不会恢复到panic那个点去，函数还是会在defer之后返回。
 
 ### import流程  
-流程图：![pic](/images/posts/golang_import.jpg)  
+流程图：![pic](/assets/image/posts/2018-01-25-01.jpg)  
 
 
 ### make 和 new的区别  

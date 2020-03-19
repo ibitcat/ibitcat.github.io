@@ -2,10 +2,9 @@
 layout: post
 title:  "读书笔记 ——《C Primer Plus》(第5版)"
 date:   2017-03-24
-excerpt: "《C Primer Plus》(第5版)的笔记，主要记录每个章节的重点部分，以及需要特别注意的细节。"
 tag:
 - 读书笔记
-comments: true
+
 ---
 
 本笔记是以**c99**作为标准，而不是最新的**c11**标准。
@@ -288,7 +287,7 @@ ps：前两章节，都是介绍c语言，所以，忽略掉这两章的内容�
 
 下图是一个二维数组的内存结构：
 
-![二维数组](/images/posts/two-dimension_array.png)  
+![二维数组](/assets/image/posts/2017-03-24-01.png?style=centerme)
 
 此时，指针和数组名存在以下关系：
 
@@ -381,7 +380,7 @@ int (*pz)[2] = zippo;//pz指向一个包含2个int值的数组
 
 - 矩形字符串数组和不规则字符串数组的区别
 
-![矩形数组和不规则数组](/images/posts/char_array.jpg)
+![矩形数组和不规则数组](/assets/image/posts/2017-03-24-02.jpg?style=centerme)
 
 ### 2、字符串和数字之间的转换
 
@@ -740,7 +739,7 @@ int (*pz)[2] = zippo;//pz指向一个包含2个int值的数组
 - C和C++对待void类型的指针是不同的，两种语言都可以把任意类型的指针赋值给`void*`，但是，把一个`void*`指针赋值给一个指针或另一个类型的指针时，C++需要一次强制类型转换。而C没有这个需要。
 
 - 不能把一个数组的值直接赋值给另一个数组，但是，可以使用string.h中的`memcpy()`和`memmove()`进行赋值。这两个方法左右一样，但是区别在于：`当内存发生局部重叠的时候`，memmove保证拷贝的结果是正确的（相当于字节复制到一个缓冲区，然后再复制到最终目的地），memcpy不保证拷贝的结果的正确（当源地址在目的地址之前时）。
-![memcpy复制内存发生重叠](/images/posts/memcpy.jpg)
+![memcpy复制内存发生重叠](/assets/image/posts/2017-03-24-03.jpg?style=centerme)
 
 - 可变参数`stdarg.h`
 

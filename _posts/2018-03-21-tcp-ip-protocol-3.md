@@ -1,11 +1,10 @@
 ---
 layout: post
 title:  "TCP/IP协议族详解（三）"
-date:   2018-03-22
-excerpt: "这个系列的文章主要详细了解TCP/IP协议族，本篇主要介绍ARP协议"
+date:   2018-03-21
 tag:
 - TCP/IP
-comments: true
+
 ---
 
 
@@ -47,7 +46,7 @@ comments: true
 
 因此，IP协议与ARP协议的关系就是，ARP是为IP协议提供服务，他比IP协议要稍微低一个层次。
 
-![ARP协议与IP协议的关系](/images/posts/tcp-ip/arp-ip.png)
+![ARP协议与IP协议的关系](/assets/image/posts/2018-03-21-01.png)
 
 
 ## 3、为什么有了IP地址还要使用Mac地址？
@@ -60,17 +59,17 @@ comments: true
 ## 4、ARP头部结构
 
 下图为ARP协议头部格式（分组格式，28字节的ARP请求/应答）：
-![ARP协议头部](/images/posts/tcp-ip/arp-head.png)
+![ARP协议头部](/assets/image/posts/2018-03-21-02.png?style=centerme)
 
 同IP协议一样，我依然结合抓包来解释每个字段的意义。
 
 1、使用wireshark抓一对(请求和应答)ARP包，本机IP地址为：192.168.2.103，虚拟机IP地址为：192.168.2.172，结果如下图所示
-![抓包](/images/posts/tcp-ip/arp-wireshark-0.png)
-![请求](/images/posts/tcp-ip/arp-wireshark-1.png)
-![应答](/images/posts/tcp-ip/arp-wireshark-3.png)
+![抓包](/assets/image/posts/2018-03-21-03.png?style=centerme)
+![请求](/assets/image/posts/2018-03-21-04.png?style=centerme)
+![应答](/assets/image/posts/2018-03-21-05.png?style=centerme)
 
 可以看到后面的二进制数据，这就是ARP协议报文的首部，一共28个字节。
-![抓包结果](/images/posts/tcp-ip/arp-wireshark-2.png)
+![抓包结果](/assets/image/posts/2018-03-21-06.png?style=centerme)
 
 2、详细解释每个字段的意义
 
@@ -90,7 +89,7 @@ comments: true
 3、ARP分组封装头部结构
 
 上面分析了ARP头部的结构，下图表示了ARP分组封装的结构，它是在ARP头部前再加了以太网首部字段信息：
-![ARP分组封装](/images/posts/tcp-ip/arp-head-1.jpg)
+![ARP分组封装](/assets/image/posts/2018-03-21-07.jpg?style=centerme)
 
 详细的字段分析，就不再赘述，可以参考上面的抓包图。
 

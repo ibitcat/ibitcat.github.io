@@ -2,10 +2,9 @@
 layout: post
 title:  "Markdown 语法"
 date:   2016-03-15
-excerpt: "Markdown 语法"
 tag:
 - markdown
-comments: true
+
 ---
 
 文章转载自[Markdown Syntax](https://taylantatli.github.io/Moon/markdown-syntax/)
@@ -34,7 +33,7 @@ comments: true
 
 文本内容，**这里是加粗**， *这里是斜体*.
 
-![这里是图片](/assets/img/avatar.jpg)
+![这里是图片](/assets/image/avatar.jpg)
 {: .image-right}
 
 ~~这里是删除线~~

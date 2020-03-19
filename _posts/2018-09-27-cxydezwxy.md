@@ -206,7 +206,7 @@ int main(void){
 
 14. 为了C++与C语言兼容，C++提供了`extern "C"`的关键字用法：
 
-	~~~C++
+	~~~cpp
 	extern "C"{
 		int func(int a);
 		int var;

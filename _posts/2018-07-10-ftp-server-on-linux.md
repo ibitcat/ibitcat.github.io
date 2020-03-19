@@ -2,9 +2,7 @@
 layout: post
 title: 在linux下搭建ftp服务
 date: 2018-07-10 14:21:00 +0800
-excerpt: "在linux下搭建ftp服务，同时支持匿名、虚拟用户"
 tag: [环境搭建]
-comments: true
 
 ---
 
@@ -73,10 +71,8 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 ### 2-5、虚拟用户配置
 
 1. 先建立虚拟用户名单文件：`touch /etc/vsftpd/virtusers`
-2. 添加虚拟用户：	`vim /etc/vsftpd/virtusers`
-
-	然后一行账号，一行密码，例如：
-	```txt
+2. 添加虚拟用户：	`vim /etc/vsftpd/virtusers`，然后一行账号，一行密码，例如：
+	```markup
 	kgogame
 	123
 	public
@@ -137,17 +133,15 @@ vsftpd的配置：`/etc/vsftpd/vsftpd.conf`。
 	```
 
 	2、公共账户配置如下：
-	```conf
+	```markup
 	local_root=/var/ftp/pub
 	virtual_use_local_privs=YES
 	```
 
 6. 用户登陆限制进其它的目录，只能进它的主目录
-
-```conf
+```markup
 #设置所有的本地用户都执行chroot
 chroot_local_user=yes （本地所有帐户都只能在自家目录）
-
 #设置指定用户执行chroot
 #新建文件 chroot_list
 #在这个配置文件中添加用户，每个用户一行，则在这个文件里的用户登录ftp后，可以访问上级目录。

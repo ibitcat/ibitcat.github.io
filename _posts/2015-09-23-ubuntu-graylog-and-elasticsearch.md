@@ -1,10 +1,8 @@
 ---
 layout: post
 title: ubuntu elasticsearch和graylog安装与使用
-date: 2015-9-23 11:25:00
-updated: 2015-11-05 17:26:00
+date: 2015-09-23 11:25:00
 tag: [环境搭建]
-comments: true
 
 ---
 
@@ -27,10 +25,8 @@ comments: true
 
 - **检查Java是否已经安装在Ubuntu上**
 
-打开终端，使用下面的命令：**`java -version`**
-
-如果你看到像下面的输出，这就意味着你并没有安装过Java:
-
+	打开终端，使用下面的命令：**`java -version`**，如果你看到像下面的输出，这就意味着你并没有安装过Java:
+	```markup
 	The program ‘java’ can be found in the following packages:
 	*default-jre
 	* gcj-4.6-jre-headless
@@ -38,19 +34,20 @@ comments: true
 	* gcj-4.5-jre-headless
 	* openjdk-7-jre-headless
 	Try: sudo apt-get install
+	```
 
 - **在Ubuntu和Linux Mint上安装Java**
 
-看了各种类型‘Java’的不同之后，让我们看如何安装他们。
-
-在Ubuntu和Linux Mint上安装JRE，打开终端，使用下面的命令安装JRE：**`sudo apt-get install default-jre`**  
-在Ubuntu和Linux Mint上安装OpenJDK，在终端，使用下面的命令安装OpenJDK Java开发工具包：**`sudo apt-get install default-jdk`**  
-特殊地，如果你想要安装Java 7或者Java 6等等，你可以使用openjdk-7-jdk/openjdk-6jdk，但是记住在此之前安装openjdk-7-jre/openjdk-6-jre。
+	看了各种类型‘Java’的不同之后，让我们看如何安装他们。
+	在Ubuntu和Linux Mint上安装 JRE，打开终端，使用下面的命令安装JRE：**`sudo apt-get install default-jre`**，
+	在Ubuntu和Linux Mint上安装 OpenJDK，在终端，使用下面的命令安装OpenJDK Java开发工具包：**`sudo apt-get install default-jdk`**，
+	特殊地，如果你想要安装 Java 7 或者 Java 6 等等，你可以使用 openjdk-7-jdk/openjdk-6jdk，但是记住在此之前安装 openjdk-7-jre/openjdk-6-jre。
 
 
 #### 2-2 安装mongodb
 
-因为之前已经安装了mongdb，就不在记录，个人感觉mongodb官方的帮助非常清新，一路下来，完全没错误。给个地址[http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
+因为之前已经安装了mongdb，就不在记录，个人感觉mongodb官方的帮助非常清新，一路下来，完全没错误。
+给个地址[http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/](http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/)
 
 #### 2-3 安装elasticsearch
 
@@ -59,56 +56,53 @@ comments: true
 这货真难搞（其实是我linux用的不够熟练），有两种安装方式：
 
 - 下载deb包安装
-
-		wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.2.deb
-		dpkg -i elasticsearch-1.7.2.deb
-		cp cp /usr/share/elasticsearch/bin/elasticsearch /etc/init.d/    #添加到启动脚本
-
+```shell
+wget https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.2.deb
+dpkg -i elasticsearch-1.7.2.deb
+cp cp /usr/share/elasticsearch/bin/elasticsearch /etc/init.d/    #添加到启动脚本
+```
 - apt-get 安装
-
-		#根据官网的教程：
-		# 安装key
-		wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-
-		# 添加软件源
-		echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" >> /etc/apt/sources.list
-
-		# 更新apt-get软件源
-		sudo apt-get update
-
-		# 安装
-		sudo apt-get install elasticsearch
+```shell
+#根据官网的教程：
+# 安装key
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+# 添加软件源
+echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" >> /etc/apt/sources.list
+# 更新apt-get软件源
+sudo apt-get update
+# 安装
+sudo apt-get install elasticsearch
+```
 
 <font color="#FF090f">小知识：</font>
-
 ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163、阿里等。[ubuntu源列表](http://wiki.ubuntu.org.cn/%E6%BA%90%E5%88%97%E8%A1%A8)
 
 
 **注意：** 使用apt-get 安装后，不能使用 `sudo /usr/share/elasticsearch/bin/elasticsearch`来启动，否则会报下面的错误：
-  
-	~ $ sudo /usr/share/elasticsearch/bin/elasticsearch
-	Failed to configure logging...
-	org.elasticsearch.ElasticsearchException: Failed to load logging configuration
-	at org.elasticsearch.common.logging.log4j.LogConfigurator.resolveConfig(LogConfigurator.java:117)
-	at org.elasticsearch.common.logging.log4j.LogConfigurator.configure(LogConfigurator.java:81)
-	at org.elasticsearch.bootstrap.Bootstrap.setupLogging(Bootstrap.java:94)
-	at org.elasticsearch.bootstrap.Bootstrap.main(Bootstrap.java:178)
-	at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:32)
-	Caused by: java.nio.file.NoSuchFileException: /usr/share/elasticsearch/config
-	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
-	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
-	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
-	at sun.nio.fs.UnixFileAttributeViews$Basic.readAttributes(UnixFileAttributeViews.java:55)
-	at sun.nio.fs.UnixFileSystemProvider.readAttributes(UnixFileSystemProvider.java:144)
-	at sun.nio.fs.LinuxFileSystemProvider.readAttributes(LinuxFileSystemProvider.java:97)
-	at java.nio.file.Files.readAttributes(Files.java:1686)
-	at java.nio.file.FileTreeWalker.walk(FileTreeWalker.java:109)
-	at java.nio.file.FileTreeWalker.walk(FileTreeWalker.java:69)
-	at java.nio.file.Files.walkFileTree(Files.java:2602)
-	at org.elasticsearch.common.logging.log4j.LogConfigurator.resolveConfig(LogConfigurator.java:107)
-	... 4 more
-	log4j:WARN No appenders could be found for logger (node).  
-
+```shell
+~ $ sudo /usr/share/elasticsearch/bin/elasticsearch
+Failed to configure logging...
+org.elasticsearch.ElasticsearchException: Failed to load logging configuration
+at org.elasticsearch.common.logging.log4j.LogConfigurator.resolveConfig(LogConfigurator.java:117)
+at org.elasticsearch.common.logging.log4j.LogConfigurator.configure(LogConfigurator.java:81)
+at org.elasticsearch.bootstrap.Bootstrap.setupLogging(Bootstrap.java:94)
+at org.elasticsearch.bootstrap.Bootstrap.main(Bootstrap.java:178)
+at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:32)
+Caused by: java.nio.file.NoSuchFileException: /usr/share/elasticsearch/config
+at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+at sun.nio.fs.UnixFileAttributeViews$Basic.readAttributes(UnixFileAttributeViews.java:55)
+at sun.nio.fs.UnixFileSystemProvider.readAttributes(UnixFileSystemProvider.java:144)
+at sun.nio.fs.LinuxFileSystemProvider.readAttributes(LinuxFileSystemProvider.java:97)
+at java.nio.file.Files.readAttributes(Files.java:1686)
+at java.nio.file.FileTreeWalker.walk(FileTreeWalker.java:109)
+at java.nio.file.FileTreeWalker.walk(FileTreeWalker.java:69)
+at java.nio.file.Files.walkFileTree(Files.java:2602)
+at org.elasticsearch.common.logging.log4j.LogConfigurator.resolveConfig(LogConfigurator.java:107)
+... 4 more
+log4j:WARN No appenders could be found for logger (node).  
+```
 
 解决办法参考 ：
 
@@ -118,17 +112,17 @@ ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163
 >If you installed using a packet manager like yum or apt-get you should not start elasticsearch this way.Try to use the service: for instance /etc/init.d/elasticsearch.
 
 <font color="#FF090f">小知识：</font>
-
-	关于 /etc/init.d/ 目录，里面放的是启动脚本，类似于windows的开机启动项， 该命令的结构大致如下所示：
-	     /etc/init.d/command 选项
-	comand是实际运行的命令，选项可以有如下几种：
-		start
-		stop
-		reload
-		restart
-		force-reload
-	大多数的情况下，你会使用start,stop,restart选项。
-
+```markup
+关于 /etc/init.d/ 目录，里面放的是启动脚本，类似于windows的开机启动项， 该命令的结构大致如下所示：
+     /etc/init.d/command 选项
+comand是实际运行的命令，选项可以有如下几种：
+	start
+	stop
+	reload
+	restart
+	force-reload
+大多数的情况下，你会使用start,stop,restart选项。
+```
 
 #### 2-4 测试elasticsearch
 修改 es配置，配置路径： `/etc/elasticsearch/elasticsearch.yml`，重启。
@@ -139,39 +133,42 @@ ubuntu 官方的源下载速度很慢，可以更改为国内的镜像，如 163
 直接在浏览器中输入`http://192.168.1.112:9002`
 
 如果输出如下信息，则表示启动成功：  
-
-	root@st-B85M-DS3H:~# service elasticsearch start #启动ES
-	 * Starting Elasticsearch Server                                                                                                                                                                             * Already running.                             [ OK ] 
-	root@st-B85M-DS3H:~# curl "http://192.168.1.112:9200" #测试
-	{
-	  "status" : 200,
-	  "name" : "Rintrah",
-	  "cluster_name" : "elasticsearch",
-	  "version" : {
-	    "number" : "1.7.2",
-	    "build_hash" : "e43676b1385b8125d647f593f7202acbd816e8ec",
-	    "build_timestamp" : "2015-09-14T09:49:53Z",
-	    "build_snapshot" : false,
-	    "lucene_version" : "4.10.4"
-	  },
-	  "tagline" : "You Know, for Search"
-	}
+```json
+root@st-B85M-DS3H:~# service elasticsearch start #启动ES
+ * Starting Elasticsearch Server                                                                                                                                                                             * Already running.                             [ OK ] 
+root@st-B85M-DS3H:~# curl "http://192.168.1.112:9200" #测试
+{
+  "status" : 200,
+  "name" : "Rintrah",
+  "cluster_name" : "elasticsearch",
+  "version" : {
+    "number" : "1.7.2",
+    "build_hash" : "e43676b1385b8125d647f593f7202acbd816e8ec",
+    "build_timestamp" : "2015-09-14T09:49:53Z",
+    "build_snapshot" : false,
+    "lucene_version" : "4.10.4"
+  },
+  "tagline" : "You Know, for Search"
+}
+```
 
 另外，也可以通过查看日志来检测ES是否成功启动（注意：log文件的名字是你在 es配置文件内配置的**cluster.name**字段的名字）：  
 
-	root@st-B85M-DS3H:/etc/graylog/server# cat /var/log/elasticsearch/graylog-production.log
-	[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] version[1.7.2], pid[21881], build[e43676b/2015-09-14T09:49:53Z]
-	[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] initializing ...
-	[2015-09-22 17:34:21,455][INFO ][plugins                  ] [Morgan Le Fay] loaded [], sites []
-	[2015-09-22 17:34:21,531][INFO ][env                      ] [Morgan Le Fay] using [1] data paths, mounts [[/ (/dev/sda1)]], net usable_space [47.6gb], net total_space [98.3gb], types [ext4]
-	[2015-09-22 17:34:23,980][INFO ][node                     ] [Morgan Le Fay] initialized
-	[2015-09-22 17:34:23,980][INFO ][node                     ] [Morgan Le Fay] starting ...
-	[2015-09-22 17:34:24,042][INFO ][transport                ] [Morgan Le Fay] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.112:9300]}
-	[2015-09-22 17:34:24,057][INFO ][discovery                ] [Morgan Le Fay] graylog-production/V659jaOGRF6PYF3L0xiFcw
-	[2015-09-22 17:34:27,824][INFO ][cluster.service          ] [Morgan Le Fay] new_master [Morgan Le Fay][V659jaOGRF6PYF3L0xiFcw][st-B85M-DS3H][inet[/192.168.1.112:9300]], reason: zen-disco-join (elected_as_master)
-	[2015-09-22 17:34:27,842][INFO ][http                     ] [Morgan Le Fay] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.112:9200]}
-	[2015-09-22 17:34:27,842][INFO ][node                     ] [Morgan Le Fay] started
-	[2015-09-22 17:34:27,883][INFO ][gateway                  ] [Morgan Le Fay] recovered [1] indices into cluster_state
+```markup
+root@st-B85M-DS3H:/etc/graylog/server# cat /var/log/elasticsearch/graylog-production.log
+[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] version[1.7.2], pid[21881], build[e43676b/2015-09-14T09:49:53Z]
+[2015-09-22 17:34:21,346][INFO ][node                     ] [Morgan Le Fay] initializing ...
+[2015-09-22 17:34:21,455][INFO ][plugins                  ] [Morgan Le Fay] loaded [], sites []
+[2015-09-22 17:34:21,531][INFO ][env                      ] [Morgan Le Fay] using [1] data paths, mounts [[/ (/dev/sda1)]], net usable_space [47.6gb], net total_space [98.3gb], types [ext4]
+[2015-09-22 17:34:23,980][INFO ][node                     ] [Morgan Le Fay] initialized
+[2015-09-22 17:34:23,980][INFO ][node                     ] [Morgan Le Fay] starting ...
+[2015-09-22 17:34:24,042][INFO ][transport                ] [Morgan Le Fay] bound_address {inet[/0:0:0:0:0:0:0:0:9300]}, publish_address {inet[/192.168.1.112:9300]}
+[2015-09-22 17:34:24,057][INFO ][discovery                ] [Morgan Le Fay] graylog-production/V659jaOGRF6PYF3L0xiFcw
+[2015-09-22 17:34:27,824][INFO ][cluster.service          ] [Morgan Le Fay] new_master [Morgan Le Fay][V659jaOGRF6PYF3L0xiFcw][st-B85M-DS3H][inet[/192.168.1.112:9300]], reason: zen-disco-join (elected_as_master)
+[2015-09-22 17:34:27,842][INFO ][http                     ] [Morgan Le Fay] bound_address {inet[/0:0:0:0:0:0:0:0:9200]}, publish_address {inet[/192.168.1.112:9200]}
+[2015-09-22 17:34:27,842][INFO ][node                     ] [Morgan Le Fay] started
+[2015-09-22 17:34:27,883][INFO ][gateway                  ] [Morgan Le Fay] recovered [1] indices into cluster_state
+```
 
 ### 3、下载安装graylog
 
@@ -199,31 +196,33 @@ glaylog-server的配置可以参考：
 检查是否开启成功：
 
 **方式1 - 查看日志**  
-
-	root@st-B85M-DS3H:/usr/share/graylog-server# tail -f /var/log/graylog-server/server.log 
-	2015-09-23T09:30:46.582+08:00 INFO  [ServerBootstrap] Graylog server up and running.  
+```shell
+root@st-B85M-DS3H:/usr/share/graylog-server# tail -f /var/log/graylog-server/server.log 
+2015-09-23T09:30:46.582+08:00 INFO  [ServerBootstrap] Graylog server up and running.  
+```
 
 **方式2 - 查看进程**  
-
-	ps -aux|grep graglog-server  
+```shell
+ps -aux|grep graglog-server  
+```
 
 **方式3 - 查看端口** 
-
-	netstat -nlpt|grep 12900  # server端默认端口为 12900  
+```shell
+netstat -nlpt|grep 12900  # server端默认端口为 12900  
+```
 
 ### 6、修改graylog-web配置
 web端配置路径 ： `/etc/graylog/web/web.conf`
-
-	graylog2-server.uris="http://192.168.1.112:12900/" # server端地址
-	application.secret="xxx" # secret，需要和server端配置的 password_secre字段的值一样  
+```shell
+graylog2-server.uris="http://192.168.1.112:12900/" # server端地址
+application.secret="xxx" # secret，需要和server端配置的 password_secre字段的值一样  
+```
 
 ### 7、启动graylog-web
+执行 `start graylog-web`，然后在浏览器中输入， http://192.168.1.112:9000（web的默认端口为 9000），
+输入 server 配置里面的 root_username 和 root_password_sha2 ，注意，密码是hash之后的值。登陆成功，如图。
 
-	start graylog-web
-
-然后，在浏览器中输入， http://192.168.1.112:9000（web的默认端口为 9000），输入server配置里面的 root_username 和 root_password_sha2 ，注意，密码是hash之后的值。登陆成功，如图。
-
-![graylog-web](/images/posts/graylog-web.png)
+![graylog-web](/assets/image/posts/2015-09-23-01.png?style=centerme)
 
 ### 8、使用GELF写日志
 
@@ -231,8 +230,9 @@ web端配置路径 ： `/etc/graylog/web/web.conf`
 title，port，例如： title：gelf-http-12201，port：12201，表示可以通过http 的 12201端口写入日志。
 
 测试： 
-
-	curl -XPOST http://192.168.1.112:12202/gelf  -p0 -d '{"short_message":"Hello there,fuck you", "host":"www.baidu.com", "facility":"test", "_foo":"bar"}'  
+```shell
+curl -XPOST http://192.168.1.112:12202/gelf  -p0 -d '{"short_message":"Hello there,fuck you", "host":"www.baidu.com", "facility":"test", "_foo":"bar"}'  
+```
 
 刷新页面，会出现刚写入的日志。 
 
