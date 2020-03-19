@@ -159,7 +159,7 @@ insert into test values(2,"b");
 [^footer1]: 详细的命令列表本文未做详细解释，如需了解更多，参考官网文档[Command Phase](https://dev.mysql.com/doc/internals/en/command-phase.html)。
 
 ## 服务器返回包
-服务器手动一个命令请求后，将对其进行处理并发送一个或者多个响应数据包。服务器返回包主要包括四类：
+服务器收到一个命令请求后，将对其进行处理并发送一个或者多个响应数据包。服务器返回包主要包括四类：
 - 成功报告包
 - 错误消息包
 - 数据结束包
