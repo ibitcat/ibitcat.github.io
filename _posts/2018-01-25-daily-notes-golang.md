@@ -226,7 +226,8 @@ import xxx "fmt" 表示xxx是系统包“fmt”的一个别名，在代码中可
 
 **在golang中，万物皆interface{}**，所以golang中可以将任意类型赋值给interface{}，包括nil也可以赋值给interface{}，interface{}有点像c艹中的**纯虚基类**，只包含了方法的集合。
 
-interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对lua比较熟，这点上类似lua的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。_type表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？……  data存储变量的真实值。
+interface在底层的实现包括两个成员：类型（`_type`）和值(`data`)，我对 lua 比较熟，这点上类似 lua 的值在底层的实现，所以比较容易理解（我估计大部分动态语言都是这么干的吧）。
+`_type` 表示存储变量的动态类型，也就是这个值真正是什么类型的。int？bool？……  data存储变量的真实值。
 
 例如： var value interface{} = int32(100)  
 那么value在底层的结构就是：`{_type:int32,data=100}`
@@ -248,7 +249,7 @@ interface在底层的实现包括两个成员：类型（`_type`）和值(`data`
 
 那么思考如下问题：  
 
-```golang
+```go
 type T struct{
 	Age int
 	Name string
