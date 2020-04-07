@@ -206,7 +206,8 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
                 resultsContainer: document.getElementById("sidebar-search-results-container"),
                 searchResultTemplate: `<li><a href="{url}">{title}</a></li>`,
                 limit: 999,
-                fuzzy: true
+                fuzzy: true,
+                success: function(){}
               })'
           ></script>
       append_to_sidebar:
