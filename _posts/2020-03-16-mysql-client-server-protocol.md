@@ -45,7 +45,7 @@ MySQL 协议包分为：压缩（compressed ）和未压缩（uncompressed ）�
 不同的 MySQL 服务器版本支持的压缩算法也不一样，MySQL 5.7 只支持 zlib；MySQL 8 支持多种压缩算法，包括：`zlib, zstd, uncompresse`。
 
 在 MySQL 8 中，可以通过修改服务器配置 my.cnf 来指定压缩算法。例如：
-```cnf
+```ini
 [mysqld]
 protocol_compression_algorithms=zlib,zstd,uncompressed
 ```
