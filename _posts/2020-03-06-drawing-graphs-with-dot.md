@@ -602,6 +602,45 @@ ranksep=.75;
 ## 3、高级特性
 
 ### 3.1 节点端口
+节点端口是边可以附着到节点的点。(当边未附加到节点的端口时，它将对准节点中心位置处的边界。)
+
+可以使用 *headport* 和 *tailport* 属性指定简单端口。它们可以被指定为以下 8 个方位点 “n”、“ne”、“e”、“se”、“s”、“sw”、“w” 或 “nw” 中的一个。
+（*n*，*s*，*e*，*w* 分别是 *North*，*South*，*East*，*West* 的缩写。）然后，节点的末端将对准节点上的该位置。
+因此，如果 `tailport=se`，则边将连接到节点东南角处。
+
+具有 "record" 形状的节点使用记录结构来定义阶段端口。这种形状的节点会将记录表示为框的递归列表。（说人话就是，record 的节点形状就是由一个个小方框组成的，像拼积木一样。）
+可以通过在框标签中使用 `<port_name>` 的形式，给这个框定义一个端口名，该框的中心处用作端口点。（默认情况下，边会附着到框中心位置的边界上，并不会指到框的内部。）
+然后，使用语法 `node_name:port_name` 作为边的声明的一部分来实现。示例 6 说明了在记录节点中端口名的声明和使用，结果如图 6 所示。
+
+- **示例6**： *使用 records 的二叉搜索树*
+```markup
+digraph g {
+	splines=polyline;
+	node [shape = record,height=.1];
+	node0[label = "<f0> |<f1> G|<f2> "];
+	node1[label = "<f0> |<f1> E|<f2> "];
+	node2[label = "<f0> |<f1> B|<f2> "];
+	node3[label = "<f0> |<f1> F|<f2> "];
+	node4[label = "<f0> |<f1> R|<f2> "];
+	node5[label = "<f0> |<f1> H|<f2> "];
+	node6[label = "<f0> |<f1> Y|<f2> "];
+	node7[label = "<f0> |<f1> A|<f2> "];
+	node8[label = "<f0> |<f1> C|<f2> "];
+	"node0":f2 -> "node4":f1;
+	"node0":f0 -> "node1":f1;
+	"node1":f0 -> "node2":f1;
+	"node1":f2 -> "node3":f1;
+	"node2":f2 -> "node8":f1;
+	"node2":f0 -> "node7":f1;
+	"node4":f2 -> "node6":f1;
+	"node4":f0 -> "node5":f1;
+}
+```
+
+![ Drawing of binary search tree](/assets/image/posts/2020-03-06-07.png?style=centerme)
+*<center>图6：二叉搜索树</center>*
+
+
 ### 3.2 集群
 ### 3.3 集中器
 

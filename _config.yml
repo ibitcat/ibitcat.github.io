@@ -62,9 +62,9 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
       - | # 来自lanyon的页面样式，不要改
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@ac85a3115c094b3e6cb92cc41771e98b443f6c5d/public/css/poole.min.css,gh/poole/lanyon@ac85a3115c094b3e6cb92cc41771e98b443f6c5d/public/css/lanyon.min.css"
+          href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@v1.1.0/public/css/poole.min.css,gh/poole/lanyon@v1.1.0/public/css/lanyon.min.css"
         />
-      - | #对于lanyon侧边栏按钮的一些补丁，Hide the sidebar checkbox that we toggle with `.sidebar-toggle`；建议不要改
+      - | # 对于lanyon侧边栏按钮的一些补丁，Hide the sidebar checkbox that we toggle with `.sidebar-toggle`；建议不要改
         <style>
           .sidebar-checkbox {
             display: none;
@@ -77,6 +77,10 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           #sidebar-checkbox:focus~.sidebar-toggle:before,
           #sidebar-checkbox:checked~.sidebar-toggle:before {
             background-image: none;
+          }
+          .sidebar-toggle:before {
+            width: 16px;
+            height: 16px;
           }
         </style>
       - | # 引入fontawesome图标样式
@@ -116,7 +120,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           h5,
           h6,
           .sidebar {
-            font-family: Menlo, Monaco, Consolas, "Courier New", Microsoft JhengHei, monospace;
+            font-family: Menlo, Monaco, Consolas, monospace, serif;
           }
           @media (min-width: 38em) {
             html {
