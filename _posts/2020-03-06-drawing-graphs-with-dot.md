@@ -640,6 +640,58 @@ digraph g {
 ![ Drawing of binary search tree](/assets/image/posts/2020-03-06-07.png?style=centerme)
 *<center>图6：二叉搜索树</center>*
 
+示例 7 和 图 7 展示了使用记录节点和端口的另一个例子。这里复用了 图4 的示例，但是这里使用了端口作为边的连接器。
+注意，有时候为了让记录看起来更美观，可以设置记录的输入高度为一个较小的值，这样文本标签就会控制记录的实际大小，如 图 6 所示。
+否则，节点将使用默认大小（0.75 * 0.5），如图 7 所示。示例 8 和图 8 以从左到右的布局展示了哈希表的结构。
+
+- **示例7**： *带嵌套字段的记录*
+```markup
+digraph structs {
+	splines=polyline;
+	node [shape=record];
+	struct1 [shape=record,label="<f0> left|<f1> middle|<f2> right"];
+	struct2 [shape=record,label="<f0> one|<f1> two"];
+	struct3 [shape=record,label="hello\nworld |{ b |{c|<here> d|e}| f}| g | h"];
+	struct1:f1 -> struct2:f0;
+	struct1:f2 -> struct3:here;
+}
+```
+
+![Drawing of records](/assets/image/posts/2020-03-06-08.png?style=centerme)
+*<center>图7：带嵌套字段的记录</center>*
+
+
+- **示例8**： *哈希表结构*
+```markup
+digraph G {
+	splines=polyline;
+	nodesep=.05;
+	rankdir=LR;
+	node [shape=record,width=.1,height=.1];
+
+	node0 [label = "<f0> |<f1> |<f2> |<f3> |<f4> |<f5> |<f6> | ",height=2.5];
+	node [width = 1.5];
+	node1 [label = "{<n> n14 | 719 |<p> }"];
+	node2 [label = "{<n> a1 | 805 |<p> }"];
+	node3 [label = "{<n> i9 | 718 |<p> }"];
+	node4 [label = "{<n> e5 | 989 |<p> }"];
+	node5 [label = "{<n> t20 | 959 |<p> }"] ;
+	node6 [label = "{<n> o15 | 794 |<p> }"] ;
+	node7 [label = "{<n> s19 | 659 |<p> }"] ;
+	node0:f0 -> node1:n;
+	node0:f1 -> node2:n;
+	node0:f2 -> node3:n;
+	node0:f5 -> node4:n;
+	node0:f6 -> node5:n;
+	node2:p -> node6:n;
+	node4:p -> node7:n;
+}
+```
+
+![Hash table graph file](/assets/image/posts/2020-03-06-09.png?style=centerme)
+*<center>图8：哈希表结构</center>*
+
+
 
 ### 3.2 集群
 ### 3.3 集中器
