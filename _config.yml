@@ -64,25 +64,6 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/combine/gh/poole/lanyon@v1.1.0/public/css/poole.min.css,gh/poole/lanyon@v1.1.0/public/css/lanyon.min.css"
         />
-      - | # 对于lanyon侧边栏按钮的一些补丁，Hide the sidebar checkbox that we toggle with `.sidebar-toggle`；建议不要改
-        <style>
-          .sidebar-checkbox {
-            display: none;
-          }
-          .sidebar-toggle {
-            position: fixed;
-          }
-          .sidebar-toggle:before,
-          .sidebar-toggle:active:before,
-          #sidebar-checkbox:focus~.sidebar-toggle:before,
-          #sidebar-checkbox:checked~.sidebar-toggle:before {
-            background-image: none;
-          }
-          .sidebar-toggle:before {
-            width: 16px;
-            height: 16px;
-          }
-        </style>
       - | # 引入fontawesome图标样式
         <link
           rel="stylesheet"
@@ -93,23 +74,6 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           src='https://zz.bdstatic.com/linksubmit/push.js'
           defer="defer"
         ></script>
-      - | # 网站背景图片，分竖屏、宽屏；改链接即可，不想用可以把这一项全删掉；要换壁纸图片的话可把url内的部分换成你自己的，比如你放在/assets/image/background.jpg，那就改成url(/assets/image/background.jpg)
-        <style>
-          .wrap {
-            min-height: 100vh;
-            display: inline-block;
-            background-size: 100vw auto;
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-image: url();
-          }
-          @media (min-aspect-ratio: 2400/1850) {
-            .wrap {
-              background-image: url();
-            }
-          }
-        </style>
       - | # 网站字体
         <style>
           html,
@@ -126,6 +90,22 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
             html {
               font-size: 18px;
             }
+          }
+        </style>
+      - | #修复点击侧边栏按钮回到顶部的问题
+        <style>
+          .sidebar-checkbox {
+            display: none;
+          }
+          .sidebar-toggle {
+            position: fixed;
+          }
+        </style>
+      - | #修复行内图片默认样式
+        <style>
+          img {
+            display: inline-block;
+            margin: 0;
           }
         </style>
       - | # 侧边栏头像效果
@@ -166,7 +146,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
             height: 4px;
           }
           ::-webkit-scrollbar-thumb {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-image:  linear-gradient(0deg, #00C0FF 0%, #FFCF00 50%, #FC4F4F 100%);
           }
         </style>
       - | # 选中字体颜色
@@ -174,13 +154,6 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           ::selection {
             color: #fff;
             background: #26351c;
-          }
-        </style>
-      - | # 如果你会CSS的话，在这里自定义你的页面样式吧~
-        <style>
-          img {
-            display: inline-block;
-            margin: 0;
           }
         </style>
     sidebar: # 此配置项下是一些关于侧边栏的配置
@@ -223,7 +196,13 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           ></script>
       append_to_sidebar:
         - | # 目录插件，如果看不懂就不改
-          <aside style="overflow: auto auto;max-height:50vh;" id="toc">
+          <style>
+            #toc {
+              overflow: auto auto;
+              max-height:50vh;
+            }
+          </style>
+          <aside id="toc">
             目录
           </aside>
           <script
@@ -301,7 +280,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
             background-color: rgba(0, 0, 0, 0);
           }
         </style>
-      - | # 增加宽屏下的显示内容，黄 金 分 割 比
+      - | # 增加宽屏下的显示内容
         <style>
           @media (min-width: 56em) {
             .container {
@@ -385,7 +364,6 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
               return button;
             })'
         ></script>
-  comments: # 留言页
   post:
     date: # 显示博文时间
       enable: true
@@ -406,7 +384,8 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
     tags: # 显示博文标签
       enable: true
       alert: <i class="fas fa-tag fa-fw"></i>
-    copyright: | # 我的文章使用最宽松的知识共享协议：署名 4.0 国际 (CC BY 4.0)。您可以自由地：共享 — 在任何媒介以任何形式复制、发行本作品；演绎 — 修改、转换或以本作品为基础进行创作；在任何用途下，甚至商业目的。只要你遵守许可协议条款，许可人就无法收回你的这些权利。惟须遵守下列条件：署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。
+    copyright:
+      | # 我的文章使用最宽松的知识共享协议：署名 4.0 国际 (CC BY 4.0)。您可以自由地：共享 — 在任何媒介以任何形式复制、发行本作品；演绎 — 修改、转换或以本作品为基础进行创作；在任何用途下，甚至商业目的。只要你遵守许可协议条款，许可人就无法收回你的这些权利。惟须遵守下列条件：署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。
       <br/>
       <i class="fab fa-creative-commons-by fa-fw"></i>
       <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">CC BY 4.0</a>（除特别声明或转载文章外）
@@ -479,7 +458,7 @@ plugins: # <https://jekyllrb.com/docs/plugins/>
   - jekyll-feed # 为站点生成RSS源
   - jekyll-remote-theme # 使用remote_theme插件实现主题的前后分离，详见<https://github.com/benbalter/jekyll-remote-theme/>
 
-remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@3.1.1 #使用固定版本号以防止主题更新导致站点显示错乱
+remote_theme: https://github.com/wu-kan/jekyll-theme-WuK@3.1.2 #使用固定版本号以防止主题更新导致站点显示错乱
 
 readme_index: # 缺失index.md和index.html时，使用README.md代替之
   with_frontmatter: true # 支持带有yaml头的README
@@ -508,4 +487,3 @@ kramdown: # 见<https://kramdown.gettalong.org/options.html>
 #kramdown:
 #  math_engine: mathjax
 #  syntax_highlighter: rouge
-# 基于 ca824f9 进行修改

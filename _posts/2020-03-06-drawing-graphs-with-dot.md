@@ -691,9 +691,13 @@ digraph G {
 ![Hash table graph file](/assets/image/posts/2020-03-06-09.png?style=centerme)
 *<center>图8：哈希表结构</center>*
 
-
-
 ### 3.2 集群
+
+集群是一个放置在其特有的矩形布局中的子图，当子图的名称是以前缀 `cluster` 命名时，这个子图就表示一个集群。
+（如果顶层的图设置了 `clusterrank=none`，则关闭此特殊处理）。
+可以像对顶级图形那样， 设置集群的标签、字体特征相关和 labelloc 属性，默认情况下，集群标签显示在集群子图形的上方。
+对于集群，默认情况下标签左对齐；如果 `labeljust="r"`，则标签右对齐。color 属性指定集群矩形边框的颜色。
+
 ### 3.3 集中器
 
 ## 4、命令行选项
