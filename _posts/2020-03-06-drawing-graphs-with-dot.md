@@ -6,7 +6,6 @@ tag: [翻译]
 
 ---
 
-
 ## 0、摘要
 
 **dot**可以以层次结构的方式画有向图。它可以运行在命令行程序、web可视服务、兼容的图形界面。
@@ -41,7 +40,6 @@ dot使用的布局过程依赖于非循环的图形：
 &emsp;&emsp;示例1是 `DOT` 语言的一个示例图。第1行指定了图的名字和类型，后面的几行则创建节点、边或子图，并设置属性。
 所有这些对象的名称可以是C标识符、数字或带引号的C字符串。引号则用来保护标点符号和空格。
 
-- **示例1**： *简单的有向图*
 ```markup
 digraph G {
 	main -> parse -> execute;
@@ -54,6 +52,7 @@ digraph G {
 	execute -> compare;
 }
 ```
+<p align="center"><em>示例 1：简单的有向图</em></p>
 
 &emsp;&emsp;当节点的名称首次出现在文件中时，将创建该节点。当节点由边运算符 `->` 连接时，将创建边。
 在本例中，第2行使边从 `main` 到 `parse`，从 `parse` 到 `execute`。运行下面的命令（文件名为 graph1.dot）将会生成出图1的图形。
@@ -62,12 +61,11 @@ digraph G {
 
 命令行选项 `-Tps` 选择 PostScript（EPSF）输出。*graph1.ps* 可以打印、可以由 PostScript 查看器显示，或者也可以嵌入到另一个文档中。
 ![Drawing of small graph](/assets/image/posts/2020-03-06-02.png?style=centerme)
-*<center>图1：简单有向图</center>*
+*<center>图 1：简单有向图</center>*
 
 &emsp;&emsp;通常可以通过设置输入文件中节点、边或子图的属性来调整图形布局中节点和边的表现方式或位置。
 属性是字符串的键值对（name-value）。示例2和图2展示了一些布局属性。
 
-- **示例2**： *稍复杂的有向图*
 ```markup
 digraph G {
 	size ="7,4";
@@ -85,6 +83,7 @@ digraph G {
 	execute -> compare;
 }
 ```
+*<center>示例 2：稍复杂的有向图</center>*
 
 在示例2中：
 - 第2行将图形的大小设置为4,4（英寸），此属性 *size* 控制图形的大小；如果图形太大，则根据需要对其进行适当的缩放。节点或边属性在方括号中设置。
@@ -98,7 +97,7 @@ digraph G {
 - 第13行将默认节点更改为一个填充蓝色阴影的方框。节点 *compare* 继承这些属性值（此后的节点都继承该节点属性）。
 
 ![Drawing of fancy graphh](/assets/image/posts/2020-03-06-03.png?style=centerme)
-*<center>图2：稍复杂的有向图</center>*
+*<center>图 2：稍复杂的有向图</center>*
 
 
 ## 2、绘图属性
@@ -126,7 +125,6 @@ digraph G {
 - *skew* 是一个浮点数（通常介于-1.0和1.0之间），通过从上到下倾斜形状来扭曲形状，正值将多边形的顶部向右移动。因此，斜线可以用来把一个方框变成一个平行四边形。
 - *distortion* 将从上到下收缩多边形，负值将导致底部大于顶部。它可以使方框变成梯形。
 
-- **示例3**： *多边形图形*
 ```markup
 digraph G {
 	a -> b -> c;
@@ -137,9 +135,10 @@ digraph G {
 	e [shape=polygon,sides=4,distortion=.7];
 }
 ```
+*<center>示例 3：多边形图形</center>*
 
 ![Drawing of polygonal node shapes](/assets/image/posts/2020-03-06-04.png?style=centerme)
-*<center>图3：多边形图形</center>*
+*<center>图 3：多边形图形</center>*
 
 &emsp;&emsp;另一类节点形状是基于记录的节点。其中包括形状 *record* 和 *Mrecord* 。两者是相同的，只是后者有圆角。
 这些节点表示字段的递归列表，这些字段绘制成水平行和垂直行交替的方框。递归结构由节点的标签（`label`）确定，该标签具有以下描述：
@@ -154,7 +153,6 @@ boxLabel → [ ’<’ string ’>’ ] [ string ]
 *boxLabel* 中的第一个字符串为字段名，并用作方框的的端口名（参见第3.1节）。第二个字符串用作字段的标签；它可以包含与多行标签相同的转义序列（参见第2.2节）。
 示例4和图4的例子说明了 records 的使用和它的一些相关属性。
 
-- **示例4**： *带有嵌套字段的记录*
 ```markup
 digraph structs {
 	node [shape=record];
@@ -165,9 +163,10 @@ digraph structs {
 	struct1 -> struct3;
 }
 ```
+*<center>示例 4：带有嵌套字段的记录</center>*
 
 ![ Drawing of records](/assets/image/posts/2020-03-06-05.png?style=centerme)
-*<center>图4：带有嵌套字段的记录</center>*
+*<center>图 4：带有嵌套字段的记录</center>*
 
 
 [^footer1]: 有一种方法可以实现自定义节点形状，使用 `shape=epsf` 和 `shapefile` 属性，并依赖 PostScript 输出。详细信息超出了本用户指南的范围。有关详细信息，请与作者联系。
@@ -342,16 +341,16 @@ inode编号或完整路径名称可作为唯一标识符。然后，可以将其
 &emsp;&emsp;`dot -Tps -l lib.ps file.dot -o file.ps`
 
 &emsp;&emsp;***style*** 属性控制节点和边的其他图形特征。此属性是用逗号分隔的、带有可选参数列表的原语列表。
-预定义的原语包括：*solid*, *dashed*, *dotted*, *bold* 和 *invis* 。
-前四条控制线绘制在节点边界和边上，具有明显的意义，invi值使节点或边保持未绘制状态？？。
+预定义的原语包括：*solid*, *dashed*, *dotted*, *bold* 和 *invis* 。前四个控制节点框与边的绘制，意思代表实线、虚线、点线、粗线。
+而invis会让节点或边留空而不绘制。
 
-节点的样式包括：*filled*, *diagonals* 和 *rounded*。
+节点的 style 包括：*filled*, *diagonals* 和 *rounded*。
 
 - *filled* 会使用 *fillcolor* 指定的颜色对节点内部进行阴影填充。如果 *fillcolor* 未设置，则使用 *color* 属性的值。如果 *color* 属性也未设置，则使用浅灰色作为默认值[^footer5]。
 - *diagonals* 样式会在节点顶点的两边之间绘制一条短对角线。
 - *rounded* 样式会使多边形的角变为圆角。
 
-&emsp;&emsp;用户定义的样式原语可以实现为自定义 PostScript 过程。这些原语在图、节点或边的 *gsave* 上下文中执行，然后再绘制其任何标记？？。
+&emsp;&emsp;用户定义的样式原语可以实现为自定义 PostScript 过程。在其他标签绘制前，这些原语在图、节点或边的 gsave 上下文中执行。
 参数列表将转换为 PostScript 语法。 例如，使用 `style="setlinewidth(8)"` 绘制带有粗轮廓的节点。
 在这里，*setlinewidth* 是 PostScript 内置的，用户定义的 PostScript 过程也是这样调用的。
 这些过程的定义可以在使用 `-l` 加载的库文件中给出，如上图所示。
@@ -466,7 +465,6 @@ inode编号或完整路径名称可作为唯一标识符。然后，可以将其
 但这可能会适得其反，因为对布局的更改不一定是稳定的。一次调整可能会导致之前的所有的更改都无效，并生成非常糟糕的绘图。
 我们未来的计划是将 dot 的数学布局技术与允许用户定义提示和约束的交互式前端结合起来。
 
-- **示例5**： *带约束等级的图*
 ```markup
 digraph asde91 {
 ranksep=.75;
@@ -589,9 +587,10 @@ ranksep=.75;
 	"Process" -> "Adv. Software Technology";
 }
 ```
+*<center>示例 5：带约束等级的图</center>*
 
 ![Drawing with constrained ranks](/assets/image/posts/2020-03-06-06.png?style=centerme)
-*<center>图5：带约束等级(秩)的图</center>*
+*<center>图 5：带约束等级(秩)的图</center>*
 
 
 
@@ -612,7 +611,6 @@ ranksep=.75;
 可以通过在框标签中使用 `<port_name>` 的形式，给这个框定义一个端口名，该框的中心处用作端口点。（默认情况下，边会附着到框中心位置的边界上，并不会指到框的内部。）
 然后，使用语法 `node_name:port_name` 作为边的声明的一部分来实现。示例 6 说明了在记录节点中端口名的声明和使用，结果如图 6 所示。
 
-- **示例6**： *使用 records 的二叉搜索树*
 ```markup
 digraph g {
 	splines=polyline;
@@ -636,15 +634,15 @@ digraph g {
 	"node4":f0 -> "node5":f1;
 }
 ```
+*<center>示例 6：使用 records 的二叉搜索树</center>*
 
 ![ Drawing of binary search tree](/assets/image/posts/2020-03-06-07.png?style=centerme)
-*<center>图6：二叉搜索树</center>*
+*<center>图 6：二叉搜索树</center>*
 
 示例 7 和 图 7 展示了使用记录节点和端口的另一个例子。这里复用了 图4 的示例，但是这里使用了端口作为边的连接器。
 注意，有时候为了让记录看起来更美观，可以设置记录的输入高度为一个较小的值，这样文本标签就会控制记录的实际大小，如 图 6 所示。
 否则，节点将使用默认大小（0.75 * 0.5），如图 7 所示。示例 8 和图 8 以从左到右的布局展示了哈希表的结构。
 
-- **示例7**： *带嵌套字段的记录*
 ```markup
 digraph structs {
 	splines=polyline;
@@ -656,12 +654,11 @@ digraph structs {
 	struct1:f2 -> struct3:here;
 }
 ```
+*<center>示例 7：带嵌套字段的记录</center>*
 
 ![Drawing of records](/assets/image/posts/2020-03-06-08.png?style=centerme)
-*<center>图7：带嵌套字段的记录</center>*
+*<center>图 7：带嵌套字段的记录</center>*
 
-
-- **示例8**： *哈希表结构*
 ```markup
 digraph G {
 	splines=polyline;
@@ -687,25 +684,163 @@ digraph G {
 	node4:p -> node7:n;
 }
 ```
+*<center>示例 8：哈希表结构</center>*
 
 ![Hash table graph file](/assets/image/posts/2020-03-06-09.png?style=centerme)
-*<center>图8：哈希表结构</center>*
+*<center>图 8：哈希表结构</center>*
 
 ### 3.2 集群
 
-集群是一个放置在其特有的矩形布局中的子图，当子图的名称是以前缀 `cluster` 命名时，这个子图就表示一个集群。
-（如果顶层的图设置了 `clusterrank=none`，则关闭此特殊处理）。
-可以像对顶级图形那样， 设置集群的标签、字体特征相关和 labelloc 属性，默认情况下，集群标签显示在集群子图形的上方。
+集群是一个放置在其特有的矩形布局中的子图，当子图的名称是以前缀 `cluster` 命名时，这个子图就表示一个集群。（如果顶层的图设置了 `clusterrank=none`，则关闭此特殊处理）。
+可以像对顶级图形那样，设置集群的标签、字体特征相关和 labelloc 属性，默认情况下，集群标签显示在集群子图形的上方。
 对于集群，默认情况下标签左对齐；如果 `labeljust="r"`，则标签右对齐。color 属性指定集群矩形边框的颜色。
+此外，集群若设置了 `style="filled"`，在这种情况下，在绘制集群之前，集群的矩形边框内将填充成属性 *fillcolor* 所指定的颜色。
+（如果未指定 *fillcolor*，则使用群集的 *color* 属性。）
+
+集群是通过递归技术绘制的，该技术计算集群内节点的等级分配和内部排序。示例 9 和图 9 是 *cluster* 布局和相应的图形。
+
+```markup
+digraph G {
+	subgraph cluster0 {
+	node [style=filled,color=white];
+	style=filled;
+	color=lightgrey;
+	a0 -> a1 -> a2 -> a3;
+	label = "process #1";
+	}
+	subgraph cluster1 {
+	node [style=filled];
+	b0 -> b1 -> b2 -> b3;
+	label = "process #2";
+	color=blue
+	}
+	start -> a0;
+	start -> b0;
+	a1 -> b3;
+	b2 -> a3;
+	a3 -> a0;
+	a3 -> end;
+	b3 -> end;
+	start [shape=Mdiamond];
+	end [shape=Msquare];
+}
+```
+*<center>示例 9：集群图</center>*
+
+![Process diagram with clusters](/assets/image/posts/2020-03-06-10.png?style=centerme)
+*<center>图 9：集群图</center>*
+
+如果顶层图的 *compound* 属性设置为 *true*，则 dot 将允许边连接节点和集群（即把集群看作一个“特殊的节点”）。
+这是通过定义边的 *lhead* 或 *ltail* 属性来实现的，当集群作为头节点或尾节点时，这些属性的值必须集群的名称,。
+在这种情况下，连接的边会在集群的边界处被剪裁（也就是边只能连接到集群的边框上）。
+所有边的其他属性（如箭头 *arrowhead* 或方向 *dir*）都将应用于被裁剪的边。
+例如，图 10 显示了一个使用 *compound* 属性的集群图。
+
+```markup
+digraph G {
+	compound=true;
+	subgraph cluster0 {
+	a -> b;
+	a -> c;
+	b -> d;
+	c -> d;
+	}
+	subgraph cluster1 {
+	e -> g;
+	e -> f;
+	}
+	b -> f [lhead=cluster1];
+	d -> e;
+	c -> g [ltail=cluster0,
+	lhead=cluster1];
+	c -> e [ltail=cluster0];
+	d -> h;
+}
+```
+
+![Graph with edges on clusters](/assets/image/posts/2020-03-06-11.png?style=centerme)
+*<center>图 10：集群上有边的图</center>*
 
 ### 3.3 集中器
 
+在顶层图形上设置 `concentrate=true` 可以启用边合并技术，以减少密集布局中的混乱情况。
+边在并行出发、具有公共尾端点且长度大于1时合并。在固定大小的布局中，这样做有一个好处，可以移除部分边，从而让边变迁更大、更易读。
+虽然 dot 中的集中器看起来有点像 Newbery 的 [New89]，但它们是通过搜索布局中的边来找到的要合并的边，
+而不是通过检测底层图中的完整二分图（或称完全偶图）来找到的。因此，dot 的方法会运行得更快，且不会像 Newbery 算法那样折叠太多的边。
+
+> 可以通过下面的例子来理解集中器的作用。
+
+```markup
+digraph G {
+	splines=polyline;
+	concentrate=true;
+
+	a;
+	b;
+	c;
+	d;
+	a->d[minlen=2];
+	b->d[minlen=2];
+	c->d[minlen=2];
+}
+```
+![Concentrators](/assets/image/posts/2020-03-06-12.png?style=centerme)
+*<center>图 11：使用集中器的图</center>*
+
 ## 4、命令行选项
 
+默认情况下，dot 在过滤模式下运行，从标准输入 stdin 读取图形，并以附加了布局属性的 DOT 格式将图形写入stdout。dot 支持多种命令行选项：
+
+- `-T` 图形输出格式。格式的允许值为:
+	- canon
+	- dot
+	- fig
+	- gif
+	- ...
+- `-G`
+- `-l`
+- `-o`
+- `-v`
+- `-V`
+
 ## 5、其他
+在顶层图的标题中，图可以声明为 `strict digraph` (严格有向图)。这样就禁止图形创建自引用(self-arcs)和多条边缘(multi-edges)；它们在输入文件中被忽略。
+这是什么意思呢？看下面两个例子就知道区别了。
+
+```markup
+digraph G {
+	a->b;
+	a->b;
+	b->a[color=blue];
+}
+```
+![digraph](/assets/image/posts/2020-03-06-13.png?style=centerme)
+*<center>图 12：非严格有向图</center>*
+
+
+```markup
+strict digraph G {
+	a->b;
+	a->b;
+	b->a[color=blue];
+}
+```
+![digraph](/assets/image/posts/2020-03-06-14.png?style=centerme)
+*<center>图 13：严格有向图</center>*
+
+也就是说，如果加了 *strict* 修饰后，在有向情况下，在给定的尾节点和头节点之间**最多只能有一条边**。
+
+结点、边缘、图形可以有 *URL* 属性。在某些输出格式（ps2、imap、ismap、cmap 或 svg）中，这些信息被集成到输出中，
+以便在使用适当的工具显示时，节点、边缘和集群能变成活动链接（可以点击并跳转到设置的链接处）。
+通常，顶级图的 URLs 充当基础 URLs，以便支持组件的相对 URLs。当输出格式为 imap 或 cmap 时，类似的处理过程会被替换成 *headURL* 和 *tailURL* 属性。
+
+对于某些格式（ps、fig、mif、mp、vtx或svg），可以使用 *comment* 属性在输出中嵌入人类可读的符号。
 
 ## 6、结论
 
-## 7、致谢
+dot 生成令人满意的层次结构图，可以在许多设置中应用。
+由于 dot 的基本算法工作良好，为进一步研究大型图形的绘制方法和在线（动画）图形绘制等问题奠定了良好的基础。
 
-## 参考
+暂时先翻译到这里，后面的致谢、参考和附录没有翻译。
+
+<hr>
