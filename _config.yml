@@ -78,7 +78,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
         <style>
           html,
           .sidebar {
-            font-family: Menlo, Monaco, "Microsoft JhengHei", "Courier New", monospace;
+            font-family: Menlo, Monaco, "Courier New", Microsoft JhengHei, monospace;
           }
           .post {
             font-family: Menlo, Monaco, "华文细黑", "Courier New", monospace;
