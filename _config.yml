@@ -80,6 +80,9 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           .sidebar {
             font-family: Menlo, Monaco, Consolas, "Courier New", Courier, "华文细黑", Microsoft JhengHei, monospace;
           }
+          code, pre {
+            font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+          }
           @media (min-width: 38em) {
             html {
               font-size: 18px;
