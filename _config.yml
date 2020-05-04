@@ -89,7 +89,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
             }
           }
         </style>
-      - | #修复点击侧边栏按钮回到顶部的问题
+      - | # 修复点击侧边栏按钮回到顶部的问题
         <style>
           .sidebar-checkbox {
             display: none;
@@ -98,7 +98,7 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
             position: fixed;
           }
         </style>
-      - | #修复行内图片默认样式
+      - | # 修复行内图片默认样式
         <style>
           img {
             display: inline-block;
@@ -313,21 +313,6 @@ jekyll-theme-WuK: # 我的主题的自定义样式都在这个命名空间
           src="https://cdn.jsdelivr.net/combine/npm/katex/dist/katex.min.js,npm/katex/dist/contrib/mathtex-script-type.min.js,npm/katex/dist/contrib/auto-render.min.js"
           defer="defer"
           onload='renderMathInElement(document.body, { delimiters: [{ left: "$", right: "$", display: false }] })'
-        ></script>
-      - | # mermaid
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css"
-        />
-        <script
-          src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"
-          defer="defer"
-          onload='
-            for(let x=document.getElementsByClassName("language-mermaid"), i=0;i<x.length;i++)
-            {
-              x[i].classList.add("mermaid");
-              x[i].classList.remove("language-mermaid");
-            }'
         ></script>
       - | # prism代码高亮
         <link
