@@ -15,6 +15,7 @@ vendor
 *.swp
 *.zip
 *.vi
+*.code-workspace
 *~
 
 # OS or Editor folders
