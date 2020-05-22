@@ -172,3 +172,29 @@ tag:
 
 20. Lua和C/C++语言通信的主要方法是一个无处不在的虚拟栈。栈的特点是**先进后出**。  
 在Lua中，Lua堆栈就是一个struct，堆栈索引的方式可是是正数也可以是负数，区别是：**<font color="red">正数索引1永远表示栈底，负数索引-1永远表示栈顶</font>**。
+
+21. 在进行数学运算时，需要特别注意两个值：`1.#INF` 和 `-1.#IND`(nan)。前者表示无穷大（*infinite*），后者表示不是一个数值。具体可以参考[这个问题](https://stackoverflow.com/questions/19107302/in-lua-what-is-inf-and-ind)，同时，答案中也提供了这两个值的判断方法，我这里引用了最佳答案。
+
+	~~~lua
+	-- 在 windows 下
+	print(1/0) -- 1.#INF
+	print(0/0) -- -1.#IND
+
+	-- 在 linux 下
+	print(1/0) -- inf
+	print(0/0) -- nan
+	~~~
+
+	>- "inf" (+/- 1.#INF) are the higher number values that (Lua/C) can represent and the language provides that constant for you: "math.huge". So you can test a number inside Lua for +-INF; the function "isINF()" below shows how to use it.
+	- "nan" (- 1.#IND) is something that can not be handled numerically: it should be a number, its not, and anything you do with it is anything but a number also. with that in mind remember that no NaN is equal to other NaN; check for NaN like the function "isNAN()" below.
+
+	下面是判断方法：
+	```lua
+	local function isINF(value)
+		return value == math.huge or value == -math.huge
+	end
+
+	local function isNAN(value)
+		return value ~= value
+	end
+	```
