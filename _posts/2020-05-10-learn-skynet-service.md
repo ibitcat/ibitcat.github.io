@@ -29,22 +29,22 @@ tag:
 
 ```c
 struct skynet_context {
-	void * instance;
-	struct skynet_module * mod;
-	void * cb_ud;
-	skynet_cb cb;
-	struct message_queue *queue;
-	FILE * logfile;
-	uint64_t cpu_cost;	// in microsec
-	uint64_t cpu_start;	// in microsec
-	char result[32];
-	uint32_t handle;
-	int session_id;
-	int ref;
-	int message_count;
-	bool init;
-	bool endless;
-	bool profile;
+	void * instance; 			// 服务实例
+	struct skynet_module * mod;	// 动态库
+	void * cb_ud;				// 用于回调的实例
+	skynet_cb cb;				// 回调函数
+	struct message_queue *queue; // 服务消息队列
+	FILE * logfile; 			// for 服务日志
+	uint64_t cpu_cost;			// in microsec，for cpu 性能指标
+	uint64_t cpu_start;			// in microsec，for cpu 性能指标 & 当前消息处理耗时
+	char result[32]; 			// 存放性能指标的查询结果
+	uint32_t handle; 			// 服务的id
+	int session_id; 			// 消息id分配器
+	int ref;					// 服务引用计数
+	int message_count; 			// 已处理过的消息总数
+	bool init;					// 初始化成功的标识
+	bool endless;				// 死循环标识
+	bool profile;				// cpu 性能指标开启开关
 
 	CHECKCALLING_DECL
 };
