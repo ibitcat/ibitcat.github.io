@@ -13,7 +13,7 @@ tag:
 
 ![skynet 服务模块](/assets/image/posts/2020-05-10-01.svg)
 
-接下来，我会从分成**服务的创建**和**消息的处理**两个部分来深入服务模块。
+接下来，我会分成**服务的创建**和**消息的处理**两个部分来深入服务模块。
 
 ## 服务创建流程
 这一部分所说的**创建**不仅仅指服务对象的创建，还包括其消息队列的创建、服务模板动态库，同时还会介绍他们初始化的过程，以及在整个创建并初始化的过程中，需要注意的点及其原因。
@@ -52,10 +52,10 @@ struct skynet_context {
 这个结构体有四个重要的字段：
 - `instance`，它是一个指针，指向了一个服务对象，它是由服务模板 `struct skynet_module * mod` 创建出来的
 - `cb`，服务的回调函数，是消息被服务对象执行的**唯一**通道，这个回调函数可以重新设置
-- `queue`，它是一个指针，指向了消息队列对象，这个对象中的的 `q->queue` 字段才真正存放了消息数组
-- `cb_ud`，他是一个被回调函数真实调用的服务实例对象的指针
+- `queue`，它是一个指针，指向了消息队列对象，这个对象中的 `q->queue` 字段才真正存放了消息数组
+- `cb_ud`，它是一个被回调函数真实调用的服务实例对象的指针
 
-就是上面的四个字段，才构成了一个 Actor 核心骨架，消息队列内的消息被服务的回调函数 `cb` 执行，这也是为什么说 skynet 是消息驱动的。一个大致的流程是：一个消息通过服务的回调函数，最终由服务实例所消费处理掉。代码描述如下：
+就是上面的四个字段，才构成了一个 Actor 核心骨架，消息队列内的消息被服务的回调函数 `cb` 执行，这也是为什么说 skynet 是消息驱动的。一个大致的流程是：一个消息通过服务的回调函数，然后传递给服务实例，最终被消费处理掉。代码描述如下：
 
 ```c
 // 回调函数类型
@@ -65,8 +65,35 @@ typedef int (*skynet_cb)(struct skynet_context * context, void *ud, int type, in
 ctx->cb(ctx, ctx->cb_ud, type, msg->session, msg->source, msg->data, sz);
 ```
 
->这里需要注意下 `void * cb_ud` 这个字段，一般情况下，*cb_ud* 与 *instance* 是同一个东西，但是对于 *snlua* 服务，这两个是有区别的：  
->`cb_ud` 指向了一个 *lua vm*，而 `instance` 指向了一个 *snlua* 对象，它们存在这样的一个关系：`snlua->L = luavm`。
+这里需要注意下，在服务实例第一次初始化并设置回调后，*cb_ud* 与 *instance* 是同一个东西，即`ctx->instance = ctx->cb_ud`，但是对于 *snlua* 服务启动后，会重新设置一次回调，这里就产生了两个区别的：
+1. `cb_ud` 指向由原来的 `ctx->instance` 变成了 *lua vm*（lua 主线程），它们存在这样的一个关系：`ctx->instance->L = ctx->cb_ud = luavm`；
+2. `cb` 回调函数变成了一个封装了 lua 调用的函数；
+
+具体的更改流程的代码我贴在了下面：
+```c
+static int
+lcallback(lua_State *L) {
+	struct skynet_context * context = lua_touserdata(L, lua_upvalueindex(1));
+	int forward = lua_toboolean(L, 2);
+	luaL_checktype(L,1,LUA_TFUNCTION);
+	lua_settop(L,1);
+	lua_rawsetp(L, LUA_REGISTRYINDEX, _cb);
+
+	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_MAINTHREAD);
+	lua_State *gL = lua_tothread(L,-1);
+
+	if (forward) {
+		// cb_ud=gL 
+		// cb = forward_cb，消息派发后不free掉，用于转发消息
+		skynet_callback(context, gL, forward_cb);
+	} else {
+		// cb = _cb，消息派发后free掉
+		skynet_callback(context, gL, _cb);
+	}
+
+	return 0;
+}
+```
 
 ### 创建上下文
 在上一节展示了服务上下文的结构体，接下来看下服务上下文的**创建**和**初始化**流程，下图是一个服务上下文的详细创建过程。
@@ -108,7 +135,7 @@ cmd_launch(struct skynet_context * context, const char * param);
 4. snlua，所有的 lua 服务都由它负责。
 
 当然，所有的服务模板都需要遵守一些约定，它们需要提供以下 4 个 api:
-- create，**必选**，此 api 用来创建对应的服务实例；
+- create，**必须**，此 api 用来创建对应的服务实例；
 - init，**必须**，此 api 用来对服务实例进行初始化，同时还会设置 context 的回调实例和回调函数；
 - release，**必须**，用来释放服务实例，做一些清理工作；
 - signal，*可选*，用来跳出 lua 服务的死循环[^footer2]。
@@ -142,8 +169,23 @@ struct skynet_module {
 
 消息队列的容量默认是 64，若容量不足则以 2 倍的方式进行增长，另外，当消息队列中堆积的消息过载，则每次达到 1024 的整数倍时，由监控线程发出警报。
 
-### 其他细节
-context 其他字段的意义
+### 监控相关
+
+关于服务上下文的一些核心已经在上面基本介绍的差不多了，最后介绍一下 context 的一些小细节或辅助功能，它们会关联在结构体 `struct skynet_context` 上的一个或多个字段，利用好这些功能，对我们分析查找问题有很大的帮助。
+
+#### 服务日志
+这个功能可以把服务处理过的消息都导出到一个文件中，配合 debug console 的 `logon` 和 `logoff` 两个命令使用，这个功能可以帮助我们对某个指定的服务进行问题查找，下面是用 skynet 的 example 做了一个演示。
+
+![服务实例日志](/assets/image/posts/2020-05-10-05.png?style=centerme)
+
+#### 性能指标
+这些性能指标包括服务已经处理的消息总数、服务处理消息的 cpu 总耗时、是否出现死循环等，可以配合 debug console 的 `stat` 命令使用（都是调用了底层的 `cmd_stat`），下面是所有性能指标的名称和作用：
+- cpu，表示这个服务处理消息消耗的 cpu 总耗时，毫秒为单位，由 profile 字段控制，默认开启，数值越大表示这个服务越繁忙；
+- message，表示已经被这个服务处理过的消息总数；
+- time，这个指标可以计算出某个服务当前正在处理的消息已耗时长，可以用来检测一个服务的某个逻辑耗时是不是过长，一般情况为 0，如果值较大就需要注意了，是不是由业务逻辑有问题，可能死循环或者逻辑计算过大；
+- endless，若为 1 则表示服务长时间没有进行消息处理，可能出现了死循环，也可能是出现 endless 的前一个逻辑耗时超过 5s，它的值是由监控线程设置；
+- mqlen，表示服务当前还未处理的消息数量，如果消息堆积过多，会出现 `May overload， message queue lenght=xxx` 的错误日志，详细机制会在后面的消息处理部分详细讲解；
+- task，这一个指标较为特殊，它不是由底层提供，它的值需要在 lua 层获取，表示某个服务当前挂起的 coroutine 数量。
 
 ## 消息处理流程
 ### 工作线程
