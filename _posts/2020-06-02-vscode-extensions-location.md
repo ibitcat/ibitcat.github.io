@@ -48,9 +48,12 @@ Code.exe --extensions-dir "D:\Program Files\Microsoft VS Code\extensions"
 
 **当日更新：**
 
-修改使用了一会，发现上面的修改还是存在很多问题，另辟蹊径，使用软链接的方式，把自定义目录链接到默认目录，打开 CMD (管理员权限)，输入一下命令：
+修改使用了一会，发现上面的修改还是存在很多问题，另辟蹊径，使用软链接的方式[^footer1]，把自定义目录链接到默认目录，打开 CMD (管理员权限)，输入一下命令：
 ```
 mklink /D extensions "D:\Program Files\Microsoft VS Code\extensions"
 ```
 
 ![VSC 软链接](/assets/image/posts/2020-06-02-03.png?style=centerme)
+
+<hr>
+[^footer1]: 关于 Windows 软链接，请参考[这篇文章](https://www.cnblogs.com/wjw6692353/p/11106912.html)。
