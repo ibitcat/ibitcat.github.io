@@ -45,3 +45,12 @@ Code.exe --extensions-dir "D:\Program Files\Microsoft VS Code\extensions"
 ![VSC 注册表修改](/assets/image/posts/2020-06-02-02.png?style=centerme)
 
 不过，这样修改后只能针对本地启动 VS Code，对于在 WSL 使用 `code .` 启动的远程 VS Code，还是会去默认路径加载插件，也可能是我使用姿势不对，暂时先凑合用吧。
+
+**当日更新：**
+
+修改使用了一会，发现上面的修改还是存在很多问题，另辟蹊径，使用软链接的方式，把自定义目录链接到默认目录，打开 CMD (管理员权限)，输入一下命令：
+```
+mklink /D extensions "D:\Program Files\Microsoft VS Code\extensions"
+```
+
+![VSC 软链接](/assets/image/posts/2020-06-02-03.png?style=centerme)
