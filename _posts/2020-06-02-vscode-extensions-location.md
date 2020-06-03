@@ -10,7 +10,11 @@ tag:
 - 插件会占用 C 盘空间（我只给 C 盘划分了 50G）
 - 如果格式化 C 盘重装系统，需要重新安装插件，费时费力
 
-然后，我在网上搜索到了更改插件位置的方法，其核心就是启动 VSC 时指定参数 `--extensions-dir` 到自定义的插件路径，例如：
+然后，我在网上搜索了一番，大致找到了两种更改插件位置的方法。
+
+## 使用参数
+
+其核心点就是启动 VSC 时指定参数 `--extensions-dir` 到自定义的插件路径，例如：
 
 ```
 Code.exe --extensions-dir "D:\Program Files\Microsoft VS Code\extensions"
@@ -46,14 +50,36 @@ Code.exe --extensions-dir "D:\Program Files\Microsoft VS Code\extensions"
 
 不过，这样修改后只能针对本地启动 VS Code，对于在 WSL 使用 `code .` 启动的远程 VS Code，还是会去默认路径加载插件，也可能是我使用姿势不对，暂时先凑合用吧。
 
-**当日更新：**
+## 创建软链接
 
-修改使用了一会，发现上面的修改还是存在很多问题，另辟蹊径，使用软链接的方式[^footer1]，把自定义目录链接到默认目录，打开 CMD (管理员权限)，输入一下命令：
+使用参数启动，还是存在很多问题，所以另辟蹊径，使用软链接的方式[^footer1]，把自定义目录链接到默认目录，打开 CMD (管理员权限)，输入一下命令：
 ```
 mklink /D extensions "D:\Program Files\Microsoft VS Code\extensions"
 ```
 
 ![VSC 软链接](/assets/image/posts/2020-06-02-03.png?style=centerme)
+
+这种方式虽然还是需要在用户目录生成一个 `.vscode` 目录，但是里面的插件最终是存储在其他地方，至少不会占用系统盘空间。
+
+## git 问题
+在实际使用 Remote WSL 时，遇到了一个 git 的问题，虽然不是 VS Code 的问题，但是也顺便记录一下，方便日后查阅。问题表现如下：
+
+在 WSL 中使用命令 `code .` 打开一个 windows 上的 git 项目时，项目内的所有文件都显示未 *modify* 状态，但是这些文件并没有修改过。如下图所示：
+![VSC Git](/assets/image/posts/2020-06-02-04.png?style=centerme)
+
+出现这个现象的原因其实是由 git 提供的 **“换行符自动转换”** 功能引起的，我在[早前的一篇博文](/_posts/2015-12-16-git-doc/#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86---%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95)有记录过，因为在 Remote WSL 打开的文件使用的是 Linux 环境，而检出到 windows 文件系统内的文件会在检出时把换行符由 `\n` 转换成 `\r\n`，所以就出现了上述现象。一种解决方式是，在 windows 系统下检出时，关闭 “换行符自动转换” 功能，但是之前已经拉取的项目就要重新 pull 一次。 
+```
+#提交时转换为LF，检出时转换为CRLF
+git config --global core.autocrlf true   
+
+#提交时转换为LF，检出时不转换
+git config --global core.autocrlf input   
+
+#提交检出均不转换
+git config --global core.autocrlf false
+```
+
+如果不想关闭这个功能，也可以在 WSL 环境内，把项目拉取到 windows 文件系统内。
 
 <hr>
 [^footer1]: 关于 Windows 软链接，请参考[这篇文章](https://www.cnblogs.com/wjw6692353/p/11106912.html)。
