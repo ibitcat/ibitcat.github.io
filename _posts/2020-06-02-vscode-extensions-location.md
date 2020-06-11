@@ -61,6 +61,12 @@ mklink /D extensions "D:\Program Files\Microsoft VS Code\extensions"
 
 这种方式虽然还是需要在用户目录生成一个 `.vscode` 目录，但是里面的插件最终是存储在其他地方，至少不会占用系统盘空间。
 
+**2020-06-11 更新**
+今天 VS Code 更新重启后，发现无法启动，最后找到原因是因为更新后 VS Code 会重置它安装路径的文件，而我之前又把插件的文件夹 `extensions` 放在了它的安装路径内，导致更新后 VS Code 找不到它的插件路径，把插件文件夹从安装路径移出到其他路径即可。例如：
+```
+mklink /D extensions "D:\Data\extensions"
+```
+
 ## git 问题
 在实际使用 Remote WSL 时，遇到了一个 git 的问题，虽然不是 VS Code 的问题，但是也顺便记录一下，方便日后查阅。问题表现如下：
 

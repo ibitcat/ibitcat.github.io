@@ -556,3 +556,5 @@ kramdown: # 见<https://kramdown.gettalong.org/options.html>
 
 # Exclude list
 exclude: [Gemfile, Gemfile.lock, _site, vendor]
+
+# bundle 设置命令： bundle config set path 'vendor/bundle'

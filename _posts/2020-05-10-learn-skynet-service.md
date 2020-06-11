@@ -56,14 +56,11 @@ struct skynet_context {
 - `queue`，它是一个指针，指向了消息队列对象，这个对象中的 `q->queue` 字段才真正存放了消息数组
 - `cb_ud`，它是一个被回调函数真实调用的服务实例对象的指针
 
-就是上面的四个字段，才构成了一个 Actor 核心骨架，消息队列内的消息被服务的回调函数 `cb` 执行，这也是为什么说 skynet 是消息驱动的。一个大致的流程是：一个消息通过服务的回调函数，然后传递给服务实例，最终被消费处理掉。代码描述如下：
+就是上面的四个字段，才构成了一个 Actor 核心骨架，消息队列内的消息被服务的回调函数 `cb` 执行，这也是为什么说 skynet 是消息驱动的。一个大致的流程是：一个消息通过服务的回调函数，然后传递给服务实例，最终被消费处理掉。回调函数原型如下：
 
 ```c
 // 回调函数类型
 typedef int (*skynet_cb)(struct skynet_context * context, void *ud, int type, int session, uint32_t source , const void * msg, size_t sz);
-
-// 回调函数调用
-ctx->cb(ctx, ctx->cb_ud, type, msg->session, msg->source, msg->data, sz);
 ```
 
 这里需要注意下，在服务实例第一次初始化并设置回调后，*cb_ud* 与 *instance* 是同一个东西，即`ctx->instance = ctx->cb_ud`，但是对于 *snlua* 服务启动后，会重新设置一次回调，这里就产生了两个区别的：
@@ -227,12 +224,14 @@ skynet 有四类线程，其中只有工作线程创建多个，它由配置中�
 ```
 if weight > 0 then
     n = 消息队列当前容量 >> weight
-else
+elseif weight == 0 then
     n = 消息队列当前容量
+elseif weight < 0 then
+    n = 1
 end
 ```
 
-也就是说，当 `weight<=0` 时，每次会处理完“当前队列”中的所有消息，权重值越大，每次处理的消息越少。**注意：**这里所说的“当前队列”容量是指在处理第一个消息时，该时刻服务消息队列的消息容量，本质上是一个**“过去时”**的值，这也是为什么“当前队列”要加引号的原因。
+也就是说，当 `weight<0`时，每次处理一个消息，当 `weight==0` 时，每次会处理完“当前队列”中的所有消息，而当 `weight>0` 时，每次处理“当前队列”容量的 1/(2^weight)，权重值越大，每次处理的消息越少。**注意：**这里所说的“当前队列”容量是指在处理第一个消息时，该时刻服务消息队列的消息容量，本质上是一个**“过去时”**的值，这也是为什么“当前队列”要加引号的原因。
 
 ### 插入消息
 在 skynet 中，服务之间传递的消息都被封装成统一的格式，不论是网络消息还是定时器消息，消息结构体如下：
@@ -250,16 +249,89 @@ struct skynet_message {
 
 `data` 它是一个指针，指向了消息携带数据真正的内存地址，可以为空指针，即没有消息数据，对于一个从 lua 服务中传递过来的消息数据（在 lua 中使用了 c.send），可以是 `LUA_TSTRING` 和 `LUA_TLIGHTUSERDATA`，前者必须做一次内存拷贝（原因请查阅 `lua_tolstring` 的说明文档），而后者则不需要。关于这个数据指针的 free，将会在接下来的『消息消费』中深入探讨。
 
-`sz` 字面意思是消息数据的长度，但其实该字段除了包含了数据的长度，还携带了另外一个信息，就是这个消息的类型，消息类型的定义可以在 `skynet.h` 头文件中找到，它用 sz 的高 8 位（1 byte）来表示，例如在 64 位系统下 `sz = 消息类型<<56 | 数据长度`。 
+`sz` 字面意思是消息数据的长度，但其实该字段除了包含了数据的长度，还携带了另外一个信息，就是这个消息的类型，消息类型的定义可以在 `skynet.h` 头文件中找到，它用 sz 的高 8 位（1 byte）来表示，例如在 64 位系统下 `sz = 消息类型<<56 | 数据长度`。
 
 上面已经对 skynet 的消息结构有了一个全方位的了解，对于如何把一个消息插入到目的服务的消息队列中，已经没有太多需要深入的细节。可能唯一需要注意的是，当一个消息插入到服务的消息队列中时，如果这个服务处于“非活跃”状态（即没有加入到全局消息队列），那么会将该服务重新触发为“活跃”状态，实现细节在 `skynet_mq_push`。
 
 ### 消息消费
-主要讲解消息是怎么被派发的
+消息处理的过程已经在前面讲解的差不多了，其过程也较为简单，即服务通过注册的回调函数来处理收到的消息，回调函数（`skynet_cb`）的定义可以在 `skynet.h` 中找到（在前面也已经提到），它接收 7 个参数：
+1. context，表示处理该消息的服务上下文；
+2. ud，表示真正处理该消息的服务实体指针（不一定是服务实例，也可以是服务实例内的其他元素，例如 snlua 服务实例的 lua 虚拟机指针）；
+3. type，消息的类型（上文已提到）；
+4. session，消息的序列号；
+5. source，发生消息的源服务 handle id；
+6. msg，消息数据的指针；
+7. sz，消息数据的长度；
+
+关于消息处理的一个原则是：**一个消息的数据必须由最后处理该消息的服务进行回收处理**。这是什么意思呢？下面通过一个例子来解释这条原则。
+
+假如你的朋友小明给你送一盒橘子，你会有两种方式收到这一盒橘子并吃掉它们：
+- 小明直接亲自送到你手上
+- 小明用快递邮寄，通过快递员送到你的手上
+
+不管通过哪一种方式，最终你会收到一盒橘子，然后吃掉它们，那吃完后剩下的橘子皮肯定是由你自己负责清扫，不可能让朋友小明或者快递员来给你处理（除非你想被打），在这一个流程中，你就是最后处理消息的人，你就需要负责最后的数据回收，快递员虽然也处理过这条消息，但是他是不能吃掉盒子内的橘子（即消息包中携带的数据）。
+
+理解了上面的例子后，现在回头看看 skynet 的消息处理流程：
+```c
+static void
+dispatch_message(struct skynet_context *ctx, struct skynet_message *msg) {
+	assert(ctx->init);
+	CHECKCALLING_BEGIN(ctx)
+	pthread_setspecific(G_NODE.handle_key, (void *)(uintptr_t)(ctx->handle));
+	int type = msg->sz >> MESSAGE_TYPE_SHIFT;
+	size_t sz = msg->sz & MESSAGE_TYPE_MASK;
+	if (ctx->logfile) {
+		skynet_log_output(ctx->logfile, msg->source, type, msg->session, msg->data, sz);
+	}
+	++ctx->message_count;
+
+	/*
+		reserve_msg : 回调函数的返回值
+		reserve_msg = 1，表示不能释放消息数据 msg->data，只是做转发处理，在 clusterproxy 中有使用，lua 接口为 skynet.forward_type()
+		reserve_msg = 0，表示需要释放消息数据 msg->data，也说明这次是消息的终点
+	*/
+	int reserve_msg;
+	if (ctx->profile) {
+		ctx->cpu_start = skynet_thread_time();
+		reserve_msg = ctx->cb(ctx, ctx->cb_ud, type, msg->session, msg->source, msg->data, sz);
+		uint64_t cost_time = skynet_thread_time() - ctx->cpu_start;
+		ctx->cpu_cost += cost_time;
+	} else {
+		reserve_msg = ctx->cb(ctx, ctx->cb_ud, type, msg->session, msg->source, msg->data, sz);
+	}
+	if (!reserve_msg) {
+		skynet_free(msg->data);
+	}
+	CHECKCALLING_END(ctx)
+}
+```
+这里要注意回调函数 `ctx->cb` 的返回值，当 `reserve_msg = 1` 时，表示不需要 `free` 消息数据，只是负责转发这个消息；当 `reserve_msg = 0` 时，在回调结束后，会 `free` 消息数据。而对于 snlua 服务来说，是否开启转发是由 api `c.callback` 的第二个参数决定的，例如 `c.callback(func, true)` 则表示开启转发（具体参见 `skynet.forward_type`）。 
+
+这里还涉及到了一个多线程的知识点：**线程局部存储(Thread-Local Storage)**（我将会在后续博文详细聊一聊），用于在工作线程中获取当前正在处理的服务 handle：
+```c
+uint32_t 
+skynet_current_handle(void) {
+	if (G_NODE.init) {
+		void * handle = pthread_getspecific(G_NODE.handle_key);
+		return (uint32_t)(uintptr_t)handle;
+	} else {
+		uint32_t v = (uint32_t)(-THREAD_MAIN);
+		return v;
+	}
+}
+```
 
 ## 服务回收流程
 
+### 引用计数
+skynet 使用引用计数的方式来决定是否销毁一个服务上下文，这有点类似 C++ 的智能指针，当 `ctx->ref = 0` 时，则会触发服务 ctx 的销毁流程。
+
 <hr>
+**参考：**
+- [Linux 线程局部存储](https://blog.csdn.net/cywosp/article/details/26469435)。
+
+<hr>
+
 [^footer1]: 关于 harbor id 的设计，请参考[重新设计并实现了 skynet 的 harbor 模块](https://blog.codingnow.com/2014/06/skynet_harbor_redesign.html)。
 [^footer2]: 关于为什么需要一个 signal api，请参考云风博客[跳出死循环](https://blog.codingnow.com/2015/03/skynet_signal.html)。
 [^footer3]: 请参阅 [Skynet 设计综述](https://blog.codingnow.com/2012/09/the_design_of_skynet.html) 的 **skynet 的消息调度** 章节。
