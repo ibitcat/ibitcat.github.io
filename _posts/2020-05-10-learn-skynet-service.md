@@ -22,7 +22,7 @@ tag:
 ### 服务上下文
 首先，要描述一个叫做 **『服务上下文』** 的东西（我把它称之为 **服务上下文**- -，也就是 context），可以说它是 skynet 底层中非常重要的一个东西，基本上绝大部分的逻辑都是在围绕这个上下文进行。我们知道 skynet 是一个 Actor 模型的框架，所谓的“服务”本质就是一个 Actor，在上一篇文章中，我描述了一个等式：
 
-```markup
+```
 一个 Actor 的参与者 = {消息队列, 处理逻辑(服务实例)}
 ```
 
@@ -97,7 +97,72 @@ lcallback(lua_State *L) {
 在上一节展示了服务上下文的结构体，接下来看下服务上下文的**创建**和**初始化**流程，下图是一个服务上下文的详细创建过程。
 ![skynet 服务上下文创建](/assets/image/posts/2020-05-10-02.svg?style=centerme)
 
-整个流程都封装在 `skynet_context_new` 这个函数中，此函数一共有三个地方调用，其中有两处是在 skynet 启动过程中（`skynet_start`）调用，这两个函数调用会创建两个重要的服务：
+整个流程都封装在 `skynet_context_new` 这个函数中，函数实现如下：
+
+```c
+struct skynet_context * 
+skynet_context_new(const char * name, const char *param) {
+	struct skynet_module * mod = skynet_module_query(name);
+
+	if (mod == NULL)
+		return NULL;
+
+	void *inst = skynet_module_instance_create(mod);
+	if (inst == NULL)
+		return NULL;
+	struct skynet_context * ctx = skynet_malloc(sizeof(*ctx));
+	CHECKCALLING_INIT(ctx)
+
+	ctx->mod = mod;
+	ctx->instance = inst;
+	ctx->ref = 2; // 思考为什么是 2
+	ctx->cb = NULL;
+	ctx->cb_ud = NULL;
+	ctx->session_id = 0;
+	ctx->logfile = NULL;
+
+	ctx->init = false;
+	ctx->endless = false;
+
+	ctx->cpu_cost = 0;
+	ctx->cpu_start = 0;
+	ctx->message_count = 0;
+	ctx->profile = G_NODE.profile;
+	// Should set to 0 first to avoid skynet_handle_retireall get an uninitialized handle
+	ctx->handle = 0;	
+	ctx->handle = skynet_handle_register(ctx);
+	struct message_queue * queue = ctx->queue = skynet_mq_create(ctx->handle);
+	// init function maybe use ctx->handle, so it must init at last
+	context_inc();
+
+	CHECKCALLING_BEGIN(ctx)
+	int r = skynet_module_instance_init(mod, inst, ctx, param);
+	CHECKCALLING_END(ctx)
+	if (r == 0) {
+		// 初始化成功
+		struct skynet_context * ret = skynet_context_release(ctx);
+		if (ret) {
+			ctx->init = true;
+		}
+		skynet_globalmq_push(queue);
+		if (ret) {
+			skynet_error(ret, "LAUNCH %s %s", name, param ? param : "");
+		}
+		return ret;
+	} else {
+		// 初始化失败，回收 ctx
+		skynet_error(ctx, "FAILED launch %s", name);
+		uint32_t handle = ctx->handle;
+		skynet_context_release(ctx);
+		skynet_handle_retire(handle);
+		struct drop_t d = { handle };
+		skynet_mq_release(queue, drop_message, &d);
+		return NULL;
+	}
+}
+```
+
+此函数一共有三个地方调用，其中有两处是在 skynet 启动过程中（`skynet_start`）调用，这两个函数调用会创建两个重要的服务：
 
 - **logger** 服务，用来输出 skynet 的日志信息到文件（由配置字段 `logger` 指定）或标准输出（stdout），当然，我们可以重载 skynet 自带的 logger 服务，修改配置字段 `logservice` 即可。
 - **bootstrap** 服务，是一个 lua 服务，它负责引导基础服务，例如 launcher 服务等，它的作用类似于电脑开机时的**引导程序**一样。
@@ -198,7 +263,7 @@ struct skynet_module {
 
 好，现在再回到 skynet 中的消息处理流程，它其实就是采用了类似快递配送的最后的改良方案，我对其进行一次转换，就一目了然。
 
-```markup
+```
 片区队列 = 全局消息队列
 片区仓库 = 服务消息队列
 配送数量 = 一次派发的消息数量
@@ -209,6 +274,67 @@ struct skynet_module {
 ### 工作线程
 skynet 有四类线程，其中只有工作线程创建多个，它由配置中的 `thread` 字段控制，如果不配置默认为 8。此线程负责的逻辑非常简单，就是从全局消息队列中 pop 出一个服务消息队列，然后派发一定数量的消息。它的大致流程如下图所示：
 ![skynet 工作线程](/assets/image/posts/2020-05-10-06.svg?style=centerme)
+
+具体的代码实现在函数 `skynet_context_message_dispatch` 中。
+
+```c
+struct message_queue * 
+skynet_context_message_dispatch(struct skynet_monitor *sm, struct message_queue *q, int weight) {
+	if (q == NULL) {
+		q = skynet_globalmq_pop();
+		if (q==NULL)
+			return NULL;
+	}
+
+	uint32_t handle = skynet_mq_handle(q);
+
+	struct skynet_context * ctx = skynet_handle_grab(handle);
+	if (ctx == NULL) {
+		struct drop_t d = { handle };
+		skynet_mq_release(q, drop_message, &d);
+		return skynet_globalmq_pop();
+	}
+
+	int i,n=1;
+	struct skynet_message msg;
+
+	for (i=0;i<n;i++) {
+		if (skynet_mq_pop(q,&msg)) {
+			skynet_context_release(ctx);
+			return skynet_globalmq_pop();
+		} else if (i==0 && weight >= 0) {
+			n = skynet_mq_length(q);
+			n >>= weight;
+		}
+		int overload = skynet_mq_overload(q);
+		if (overload) {
+			skynet_error(ctx, "May overload, message queue length = %d", overload);
+		}
+
+		skynet_monitor_trigger(sm, msg.source , handle);
+
+		if (ctx->cb == NULL) {
+			skynet_free(msg.data);
+		} else {
+			dispatch_message(ctx, &msg);
+		}
+
+		skynet_monitor_trigger(sm, 0,0);
+	}
+
+	assert(q == ctx->queue);
+	struct message_queue *nq = skynet_globalmq_pop();
+	if (nq) {
+		// If global mq is not empty , push q back, and return next queue (nq)
+		// Else (global mq is empty or block, don't push q back, and return q again (for next dispatch)
+		skynet_globalmq_push(q);
+		q = nq;
+	} 
+	skynet_context_release(ctx);
+
+	return q;
+}
+```
 
 虽然整体逻辑较为简单，不过在其实现过程中还是有几个点可以拿出来研究一番。
 
@@ -235,7 +361,7 @@ end
 
 ### 插入消息
 在 skynet 中，服务之间传递的消息都被封装成统一的格式，不论是网络消息还是定时器消息，消息结构体如下：
-```
+```c
 struct skynet_message {
 	uint32_t source;
 	int session;
@@ -252,6 +378,30 @@ struct skynet_message {
 `sz` 字面意思是消息数据的长度，但其实该字段除了包含了数据的长度，还携带了另外一个信息，就是这个消息的类型，消息类型的定义可以在 `skynet.h` 头文件中找到，它用 sz 的高 8 位（1 byte）来表示，例如在 64 位系统下 `sz = 消息类型<<56 | 数据长度`。
 
 上面已经对 skynet 的消息结构有了一个全方位的了解，对于如何把一个消息插入到目的服务的消息队列中，已经没有太多需要深入的细节。可能唯一需要注意的是，当一个消息插入到服务的消息队列中时，如果这个服务处于“非活跃”状态（即没有加入到全局消息队列），那么会将该服务重新触发为“活跃”状态，实现细节在 `skynet_mq_push`。
+
+```c
+void 
+skynet_mq_push(struct message_queue *q, struct skynet_message *message) {
+	assert(message);
+	SPIN_LOCK(q)
+
+	q->queue[q->tail] = *message;
+	if (++ q->tail >= q->cap) {
+		q->tail = 0;
+	}
+
+	if (q->head == q->tail) {
+		expand_queue(q);
+	}
+
+	if (q->in_global == 0) {
+		q->in_global = MQ_IN_GLOBAL;
+		skynet_globalmq_push(q);
+	}
+	
+	SPIN_UNLOCK(q)
+}
+```
 
 ### 消息消费
 消息处理的过程已经在前面讲解的差不多了，其过程也较为简单，即服务通过注册的回调函数来处理收到的消息，回调函数（`skynet_cb`）的定义可以在 `skynet.h` 中找到（在前面也已经提到），它接收 7 个参数：
@@ -320,11 +470,107 @@ skynet_current_handle(void) {
 	}
 }
 ```
+<hr>
 
 ## 服务回收流程
+服务的回收过程可以分为三个部分：**服务实例的回收**、**服务消息队列的回收**以及**服务上下文（ctx）的回收**，整个回收过程在 `delete_context` 函数中实现。
+
+```c
+static void 
+delete_context(struct skynet_context *ctx) {
+	// 如果服务有日志文件，先关闭该日志文件
+	if (ctx->logfile) {
+		fclose(ctx->logfile);
+	}
+
+	// 回收服务实例
+	skynet_module_instance_release(ctx->mod, ctx->instance);
+
+	// 标记服务消息队列为“可回收(release)”
+	skynet_mq_mark_release(ctx->queue);
+	CHECKCALLING_DESTROY(ctx)
+
+	// 回收ctx
+	skynet_free(ctx);
+	context_dec();
+}
+```
+需要指出的是，服务消息队列的回收方式稍微特殊一点，消息队列的内存并不会立即被 `free` 掉，还需要处理回收前遗留在队列中的消息，我会在接下来章节详细展开。
 
 ### 引用计数
-skynet 使用引用计数的方式来决定是否销毁一个服务上下文，这有点类似 C++ 的智能指针，当 `ctx->ref = 0` 时，则会触发服务 ctx 的销毁流程。
+skynet 使用引用计数的方式来决定是否销毁一个服务上下文，这有点类似 C++ 的智能指针，当 `ctx->ref = 0` 时，则会触发服务 ctx 的销毁流程。在代码中会发现 `skynet_handle_grab` 和 `skynet_context_release` 基本都是成对出现，前者引用一次 ctx（引用次数 `+1`），后者释放一次引用（引用次数 `-1`）。
+
+```c
+struct skynet_context * 
+skynet_handle_grab(uint32_t handle) {
+	struct handle_storage *s = H;
+	struct skynet_context * result = NULL;
+
+	rwlock_rlock(&s->lock);
+
+	uint32_t hash = handle & (s->slot_size-1);
+	struct skynet_context * ctx = s->slot[hash];
+	if (ctx && skynet_context_handle(ctx) == handle) {
+		result = ctx;
+		skynet_context_grab(result); // ctx 引用次数 +1
+	}
+
+	rwlock_runlock(&s->lock);
+	return result;
+}
+
+struct skynet_context * 
+skynet_context_release(struct skynet_context *ctx) {
+	if (ATOM_DEC(&ctx->ref) == 0) {
+		delete_context(ctx); // ctx 引用次数等于0，则触发回收流程
+		return NULL;
+	}
+	return ctx;
+}
+```
+
+这里回顾一下前面提到的服务 ctx 创建过程，思考一下为什么初始的 `ctx->ref` 要设置为 2，为什么不是 0 或者 1 呢？
+
+首先，若 *ref* 设置为 0，肯定是错误的，因为在 ctx 注册到服务仓库 `handler_storage *H`中时，ctx 其实就已经被引用一次了，也就是说创建并注册成功的 ctx，其引用计数至少是 1。那为什么不直接设置 ctx 的 ref 为 1，而要设置为 2 呢？原因是 skynet 需要在 ctx 初始化后再次确保其是否是真实可用状态，举个例子：一个新的 ctx 在工作线程 A 中被创建，在 ctx 执行初始化操作后，若它在工作线程 B 中意外被减少一次引用（例如被执行了 kill），此时就会在线程 A 中出现一个已经被回收的 ctx 被 push 到全局消息队列的情况。
+
+### 回收消息队列
+服务消息队列的回收过程与服务实例回收和服务 ctx 回收相比会稍微复杂一点，不仅仅需要回收消息队列的内存，还需要处理队列中遗留的消息，要给这些遗留的消息的发送服务一个错误反馈，这就像你从一家公司离职后，当有之前的老客户和你联系时，你需要告知别人“我已经离职了”，而不是没有任何反馈信息。
+
+消息队列的回收过程分为两个步骤：
+1. 标记要回收的消息队列(`skynet_mq_mark_release`)，并把它 push 到全局消息队列中；
+2. 工作线程执行 `skynet_mq_release`，使用指定的丢弃函数(`drop_message`)来处理队列中遗留的消息包；
+
+回收函数 `skynet_mq_release` 和丢弃函数 `drop_message` 的函数定义如下：
+
+```c
+void 
+skynet_mq_release(struct message_queue *q, message_drop drop_func, void *ud) {
+	SPIN_LOCK(q)
+	
+	if (q->release) {
+		SPIN_UNLOCK(q)
+		// 循环pop剩余的消息，并drop掉
+		_drop_queue(q, drop_func, ud);
+	} else {
+		skynet_globalmq_push(q);
+		SPIN_UNLOCK(q)
+	}
+}
+
+static void
+drop_message(struct skynet_message *msg, void *ud) {
+	struct drop_t *d = ud;
+	skynet_free(msg->data);
+	uint32_t source = d->handle;
+	assert(source);
+	// report error to the message source
+	skynet_send(NULL, source, msg->source, PTYPE_ERROR, 0, NULL, 0);
+}
+```
+可以看到，整个回收过程就是一个把遗留的消息一个个 pop 出来，再由丢弃函数向消息源服务发送一个错误消息，最后释放掉消息队列的内存。
+
+## 总结
+通过对服务的创建、服务的执行和服务的回收这三个过程的抽丝剥茧，基本上已经对 skynet 的整个服务模块以及消息处理流程有了一个全方位的了解，这也是 skynet 的核心，有了对核心的深入理解，相信对于后续的定时模块、网络模块等的理解将会驾轻就熟。
 
 <hr>
 **参考：**
