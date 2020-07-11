@@ -260,9 +260,81 @@ timer_update(struct timer *T) {
 }
 ```
 
+整个执行逻辑的伪代码大致如下：
+```
+lock1(T);
+清空 T->near[T->time & 255], 并返回链表头部指针 current1;
+unlock1(T);
+
+派发 current1 链表中的定时消息;
+
+lock2(T);
+转动轮盘(++T->time);
+清空 T->near[T->time & 255], 并返回链表头部指针 current2;
+unlock2(T);
+
+派发 current2 链表中的定时消息;
+
+lock3(T);
+unlock3(T);
+```
+
 为什么会执行两次 `timer_execute` 呢？
 
-这就要回到上一节最后留下的那个疑问了，因为 timer 模块并不对 `timeout 0` 消息的处理做出承诺，也就说 timer 模块需要支持对 `timeout 0` 的正确处理，虽然 skynet 确实对 `timeout 0` 的消息做了过滤优化。
+回到上一节最后留下的那个疑问了，因为 timer 模块并不对 `timeout 0` 消息的处理做出承诺，也就说 timer 模块需要支持对 `timeout 0` 的正确处理，虽然 skynet 确实对 `timeout 0` 的消息做了过滤优化。下面还是通过一个示例来解释具体原因：
+
+```
+0                  1                  2                   3
++                  +                  +                   +
+|                  |                  |                   |
++---------------------------------------------------------+
+|                  |                  |                   |
+|      10ms        |      10ms        |       10ms        |
++                  +                  +                   +
+```
+
+假设当前 `T->time = 2`，即时间轮转动了 2 次，经过 10ms 后，再次转动时间轮，即 `T->time` 从 2 变为 3，按照正常逻辑会进行如下操作：
+
+```
+lock(T);
+转动轮盘(转动后 T->time = 3);
+清空 T->near[3], 并返回链表头部指针 current;
+unlock(T);
+派发 current 链表中的定时消息;
+```
+
+但是，在这次 tick 过程中，**一个细节处理**就出现了！
+
+因为 skynet 是一个多线程框架，在前一次时间轮转动（`T->time` 从 1 变为 2）之后，槽位 2 上的定时事件都会被处理完毕并清空，然后时间轮再等待 10ms 进行下一次转动，但是在这等待的 10ms 中，可能其他的工作线程会添加一些 `timeout 0` 的定时消息（假设 skynet 没有过滤掉 `timeout 0` 消息），而此时 `T->time = 2`，因此这些新添加的定时消息又会插入到槽位 2 中，当下一次转动发生后(`T->time=3`)，槽位 2 上的那些定时消息就失去了触发的机会，从而导致定时事件丢失。这就是为什么 `timer_execute` 需要执行两次的原因。
+
+需要说明一点，我个人认为上面的处理可能存在一个问题（*也许是我没有理解正确，如有错误请指正*）： 在 `unlock1(T)` 到 `lock2(T)` 的过程中，依然可能会出现工作线程插入 `timeout 0` 消息的情况。
+
+我的解决方案如下：
+```c
+static void 
+timer_update(struct timer *T) {
+	SPIN_LOCK(T);
+
+	struct timer_node *current1 = NULL;
+	struct timer_node *current2 = NULL;
+
+    int idx = T->time & 255;
+	while (T->near[idx].head.next) {
+		current1 = link_clear(&T->near[idx]);
+	}
+
+	timer_shift(T);
+
+    int idx = T->time & 255;
+	while (T->near[idx].head.next) {
+		current2 = link_clear(&T->near[idx]);
+		SPIN_UNLOCK(T);
+	}
+
+	dispatch_list(current1);
+	dispatch_list(current2);
+}
+```
 
 ## 参考
 

@@ -8,11 +8,10 @@ tag:
 
 实际使用skynet 已经接近一年了，一直想对 skynet 进行深入理解。于是，便打算做一个**“深入理解skynet”**的系列文章。大概会从以下几个方面对 skynet 进行全面深入的剖析：
 1. skynet的整体架构
-2. skynet定时器
-3. skynet网络处理
-4. skynet的服务
+2. skynet的服务
+3. skynet定时器
+4. skynet网络处理
 5. skynet的集群
-6. skynet的监控
 
 这是整个系列的第一篇，主要从一个全局的高度来简单概述 skynet 框架，了解 skynet 的核心模块和组件以及它们提供的功能。 
 
