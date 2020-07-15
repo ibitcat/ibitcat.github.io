@@ -161,7 +161,7 @@ end
 
 ### 包装法
 
-我个人更推荐这种做法，结合 `__index` 元方法，我们把真正的实体对象再进行一次包装，当 call 返回后，若真实对象被删除，包装体的索引操作就会报错，从而禁止 call 修改已经不在实体管理器 `mgr` 中的实体的数据。具体实现如下：
+我个人更推荐这种做法，结合 `__index` 和 `__newindex` 元方法，我们把真正的实体对象再进行一次包装，当 call 返回后，若真实对象被删除，包装体的索引操作就会报错，从而禁止 call 修改已经不在实体管理器 `mgr` 中的实体的数据。具体实现如下：
 ```lua
 function plr_mgr.addPlayer(plr)
     local wrapper = setmetatable({__plr=plr}, {
@@ -169,6 +169,11 @@ function plr_mgr.addPlayer(plr)
             local player = rawget(t, "__plr")
             assert(player, "player maybe destoryed!")
             return player[k]
+        end,
+        __newindex = function(t, k, v)
+			local player = rawget(t, "__plr")
+			assert(player, "player maybe destoryed!")
+			player[k] = v
         end
     })
     plr_mgr.plrs[plr.id] = wrapper
@@ -211,6 +216,11 @@ function plr_mgr.addPlayer(id)
             local player = rawget(t, "__plr")
             assert(player and player.__isvalid, "player maybe destoryed!")
             return player[k]
+        end,
+        __newindex = function(t, k, v)
+			local player = rawget(t, "__plr")
+			assert(player and player.__isvalid, "player maybe destoryed!")
+			player[k] = v
         end
     })
 
