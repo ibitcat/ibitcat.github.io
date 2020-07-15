@@ -219,12 +219,14 @@ function plr_mgr.addPlayer(id)
         __mode = "kv",
         __index = function(t, k)
             local player = rawget(t, "__plr")
-            assert(player and player.__isvalid, "player maybe destoryed!")
+            assert(player, "player maybe destoryed!")
+            assert(player.__isvalid, "player is disvalid!")
             return player[k]
         end,
         __newindex = function(t, k, v)
 			local player = rawget(t, "__plr")
-			assert(player and player.__isvalid, "player maybe destoryed!")
+            assert(player, "player maybe destoryed!")
+            assert(player.__isvalid, "player is disvalid!")
 			player[k] = v
         end,
         __pairs = function(t)
