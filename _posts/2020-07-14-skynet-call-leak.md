@@ -174,6 +174,11 @@ function plr_mgr.addPlayer(plr)
 			local player = rawget(t, "__plr")
 			assert(player, "player maybe destoryed!")
 			player[k] = v
+        end,
+        __pairs = function(t)
+            local player = rawget(t, "__plr")
+            assert(player, "player maybe destoryed!")
+            return pairs(player)
         end
     })
     plr_mgr.plrs[plr.id] = wrapper
@@ -221,6 +226,11 @@ function plr_mgr.addPlayer(id)
 			local player = rawget(t, "__plr")
 			assert(player and player.__isvalid, "player maybe destoryed!")
 			player[k] = v
+        end,
+        __pairs = function(t)
+            local player = rawget(t, "__plr")
+            assert(player, "player maybe destoryed!")
+            return pairs(player)
         end
     })
 
