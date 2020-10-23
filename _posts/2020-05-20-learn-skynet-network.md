@@ -159,6 +159,8 @@ struct event {
 这里需注意两个小细节：
 1. 事件的用户数据指针`*s`。当把一个 fd 注册到 event poll 中时，若该 fd 是一个外部网络连接则 `*s` 指向一个 socket 实例；若该 fd 是管道的读端则 `*s` 为null，这样在线程调用`socket_server_poll`时就能根据 `*s` 的值把内部消息流程和外部消息流程分隔，即管道的内部命令处理都使用 select，而外部网络消息使用 epoll/kqueue。
 2. read 标识需要关注 EPOLLHUP。
+	`man epoll_ctl`关于 EPOLLHUP 描述。
+
 
 ## socket 封装
 ### socket 状态
