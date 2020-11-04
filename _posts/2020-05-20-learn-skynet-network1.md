@@ -256,39 +256,55 @@ socket 的状态目前一共有 9 种，其宏定义如下：
 
 这里我们思考一个问题，为什么需要 `RESERVE` 中间状态呢？
 
-这是因为 skynet 是一个多线程框架，为了保证工作线程尽量少的出现阻塞调用（*服务都是由工作线程驱动*），就需要把网络操作中的阻塞部分交由网络线程处理，当网络线程处理完阻塞逻辑后，抛出消息异步通知给服务，而 RESERVE 状态则确保了工作线程在发起网络调用后能立即返回一个可用的 socket 实例并保留住，以便异步消息的回调。
+这是因为 skynet 是一个多线程框架，为了保证工作线程尽量少的出现阻塞调用（*服务都是由工作线程驱动*），就需要把网络操作中的阻塞部分交由网络线程处理，当网络线程处理完阻塞逻辑后，抛出消息异步通知给服务，而 RESERVE 状态则确保了工作线程在发起网络调用后能立即返回一个可用的 socket 实例并保留住，以便异步消息的回调。正如云风所说：
+>目前的设计是，所有网络请求，都通过把指令写到一个进程内的 pipe ，串行化到网络处理线程，依次处理，然后再把结果投递到 skynet 的其它服务中。
 
 除了公共状态，其余的状态与网络调用相对应，这些网络调用包括：监听连接、被动连接、主动连接、关闭连接。
 - 监听，skynet 把监听操作分成两个步骤：建立监听socket、绑定并监听(有阻塞，如 getaddrinfo)；手动将监听 fd 注册到 epoll/kqueue 中。
 ![listen](/assets/image/posts/2020-05-20-04.svg?style=centerme)
 - 被动连接，也可以看成是两个步骤：由网络线程上报新连接的到来并接收；手动将新连接 fd 注册到 epoll/kqueue 中。
 ![accept](/assets/image/posts/2020-05-20-05.svg?style=centerme)
-- 主动连接，以 connect (对外发起主动连接)举例来说，其单线程执行流程如下：
-	```c
-	// 解析地址和端口，得到网络地址列表
-	int status = getaddrinfo(...);
+- 主动连接
+![connect](/assets/image/posts/2020-05-20-06.svg?style=centerme)
+- 关闭连接，分为正常关闭(*close*)和强制停止(*shutdown*)。
+![close](/assets/image/posts/2020-05-20-07.svg?style=centerme)
 
-	// 创建socket
-	int sock = socket(ai_family, ai_socktype, ai_protocol);
+从上面这些网络操作的时序图中，我们可以看到它们都采用了异步消息通知的机制，网络调用由服务发起，通过内部命令管道转发给网络库，最终由网络线程执行具体的逻辑。这也印证了**RESERVE**状态的必要性。
 
-	// 发起对外连接
-	connect(socket, ...);
-
-	// 连接成功，分配socket
-	int id = reserve_id(ss);
-	```
-
-上面的流程是一个很简单的 connect 流程，但是它不适用在一个高性能的服务器上，这种线性流程存在两个问题：
-- getaddrinfo 是一个阻塞 API，linux 提供的各DNS API函数都是阻塞式的，无法设置超时时间等；
-- 若 sock 未设置为非阻塞模式，那么 connect API 也将会阻塞，虽然它可以设置超时间；
+需要注意的是，skynet 网络库使用的系统网络 API 基本都是非阻塞的，除了 getaddrinfo，它是一个阻塞 API，linux 提供的各DNS API函数都是阻塞式的，无法设置超时时间等；另外，由 socket() 创建的 fd 也基本会设置成非阻塞(nonblocking)模式，包括 connect 的 fd，只有 listen fd 为阻塞。
 
 ### 写入队列
-### dw_buffer
+一个 socket 实例有两个发送队列：高优先级队列、低优先级队列。它们的结构相同，只是在网络线程发送数据时有优先顺序，高优先级队列中的数据会优先发送。
+```c
+struct write_buffer {
+	struct write_buffer * next;
+	const void *buffer;
+	char *ptr;
+	size_t sz;
+	bool userobject;
+	uint8_t udp_address[UDP_ADDRESS_SIZE];
+};
+
+// 发送队列
+struct wb_list {
+	struct write_buffer * head;
+	struct write_buffer * tail;
+};
+```
+
+关于这两个队列的处理规则，可参考云风[《对 skynet 的 gate 服务的重构》](https://blog.codingnow.com/2014/04/skynet_gate_lua_version.html)文中所述：
+>socket 发送规则如下：
+>1. 如果 socket 可写，且两个队列都为空，立即发送。
+>2. 如果上一次有一个数据包没有发送完，无论它在哪个队列里，都确保先将其>发送完。
+>3. 如果高优先级队列有数据包，先保证发送高优先级队列上的数据。
+>4. 如果高优先级队列为空，且低优先级队列不为空，发送一个低优先级队列上的数据包。
+
 
 <hr>
 **参考：**
 - [skynet 网络线程的一点优化](https://blog.codingnow.com/2017/06/skynet_socket.html)
 - [skynet 网络层的一点小优化](https://blog.codingnow.com/2019/11/skynet_socket_rawpointer.html)
+- [对 skynet 的 gate 服务的重构](https://blog.codingnow.com/2014/04/skynet_gate_lua_version.html)
 - [管道的读写规则以及原子性问题](https://blog.csdn.net/X_Perseverance/article/details/99179114)
 - [Linux-socket的close和shutdown区别及应用场景](https://www.cnblogs.com/JohnABC/p/7238241.html)
 - [Linux tcp/ip 源码分析 - close](https://cloud.tencent.com/developer/article/1441584)
