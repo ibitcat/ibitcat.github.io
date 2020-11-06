@@ -264,7 +264,7 @@ socket 的状态目前一共有 9 种，其宏定义如下：
 ![listen](/assets/image/posts/2020-05-20-04.svg?style=centerme)
 - 被动连接，也可以看成是两个步骤：由网络线程上报新连接的到来并接收；手动将新连接 fd 注册到 epoll/kqueue 中。
 ![accept](/assets/image/posts/2020-05-20-05.svg?style=centerme)
-- 主动连接
+- 主动连接，同样分为两个步骤：发起主动连接请求；注册连接 fd 到 epoll/kqueue 中。
 ![connect](/assets/image/posts/2020-05-20-06.svg?style=centerme)
 - 关闭连接，分为正常关闭(*close*)和强制停止(*shutdown*)。
 ![close](/assets/image/posts/2020-05-20-07.svg?style=centerme)
