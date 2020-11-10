@@ -24,7 +24,7 @@ struct skynet_message {
 	size_t sz;				// payload 大小
 };
 ```
-关于 `skynet_message` 结构本文不再做过多解析，可以参考我之前博文的详细剖析[深入理解skynet —— 服务](_posts/2020-05-10-learn-skynet-service/#插入消息)，我们只需要记住一点：**skynet_message 是 skynet 服务能处理消息的唯一格式**，即其他模块派发给服务的通知都需要封装成 `skynet_message`，以便服务能够处理，可谓“殊途同归”，例如：定时器模块的定时消息、网络模块的内部命令结果和外部网络消息，都转换成 `skynet_message`，然后发送给对应的服务。
+关于 `skynet_message` 结构本文不再做过多解析，可以参考我之前博文的详细剖析[深入理解skynet —— 服务](/_posts/2020-05-10-learn-skynet-service/#插入消息)，我们只需要记住一点：**skynet_message 是 skynet 服务能处理消息的唯一格式**，即其他模块派发给服务的通知都需要封装成 `skynet_message`，以便服务能够处理，例如：定时器模块的定时消息、网络模块的内部命令结果和外部网络消息，都转换成 `skynet_message`，然后发送给对应的服务，可谓“殊途同归”。
 
 在转换过程中，我们需要关注很多细节，包括消息负载数据是否需要拷贝，确定消息类型等等。下图展示了收包过程中数据的封装及数据的流向：
 ![收包数据流向](/assets/image/posts/2020-05-21-02.svg?style=centerme)
