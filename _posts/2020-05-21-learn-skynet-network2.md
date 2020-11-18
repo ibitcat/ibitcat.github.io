@@ -30,9 +30,30 @@ struct skynet_message {
 ![收包数据流向](/assets/image/posts/2020-05-21-02.svg?style=centerme)
 
 ### 发包
-ada
+这里所说的发包是指向一个外部网络连接发送数据，需要注意的是，发包可能需要依赖内部命令，因为需要把**在工作线程无法直接发送的数据，透过内部管道，将这部分数据转交给网络线程发送**（发送流程我在下面会有更加详细的描述）。
 
-## poll
+任何需要交由网络模块发送的数据，都会封装为 `socket_sendbuffer`，其结构体定义如下：
+```c
+#define SOCKET_BUFFER_MEMORY 0 		// 内存块，能明确知道内存大小
+#define SOCKET_BUFFER_OBJECT 1		// 内存指针，需要做相应处理(send_object_init)才能知道数据的真实大小
+#define SOCKET_BUFFER_RAWPOINTER 2	// 原始内存，对应lua userdata
+
+struct socket_sendbuffer {
+	int id;					// socket id
+	int type;				// 要发送的数据类型（参见上面的宏定义）
+	const void *buffer;		// 数据指针（这里并非是真实要发送的数据的内存指针）
+	size_t sz;				// 数据大小
+};
+```
+在 sendbuffer 这个结构体中，`buffer`是一个指向待发送数据的指针，`type`则用来区分这个指针的类型。类型分为一下三种：
+- MEMORY，表示大小已知的内存指针，例如通过 `concat_table` 得到的字符串数据；
+- OBJECT，表示大小未知的数据对象指针，其真实发送的数据(*最终往 fd 中写入的数据*)需要二次提取，例如 lua 的 lightuserdata；
+- RAWPOINTER，特指 lua userdata，当该类型的数据透传给网络库时，需要进行内存数据拷贝；
+
+此外，在发包过程中，skynet 还做了一些优化，会优先在工作线程直接发送，若无法直发，则透传给网络线程发送。下图展示了发包过程中数据封装和流向：
+![发包数据流向](/assets/image/posts/2020-05-21-03.svg?style=centerme)
+
+## poll 流程
 在前面已经介绍过网络线程的主要逻辑，在这一节我将“庖丁解牛”般的拆解网络库的 **event poll** 流程，即`socket_server_poll`接口，对其进行梳理后，可以分为三个部分：内部处理、事件wait、事件处理，以下是经过简化后的代码：
 ```c
 int 
@@ -102,6 +123,10 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 ## 网络处理
 ### 消息读取
 ### 消息写入
+
+>把网络写操作从网络线程中拿出来。当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。  
+>网络线程每次发送待发队列前，需要先检查有没有直接发送剩下的部分，有则加到队列头，然后再依次发送。  
+>当然 udp 会更简单一些，一是 udp 包没有部分发送的可能，二是 udp 不需要保证次序。所以 udp 立即发送失败后，可以直接按原流程扔到发送队列尾即可。
 
 ## lua库
 ### socketdriver
