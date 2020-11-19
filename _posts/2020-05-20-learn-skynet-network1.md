@@ -302,7 +302,6 @@ struct wb_list {
 
 <hr>
 **参考：**
-- [skynet 网络线程的一点优化](https://blog.codingnow.com/2017/06/skynet_socket.html)
 - [skynet 网络层的一点小优化](https://blog.codingnow.com/2019/11/skynet_socket_rawpointer.html)
 - [对 skynet 的 gate 服务的重构](https://blog.codingnow.com/2014/04/skynet_gate_lua_version.html)
 - [管道的读写规则以及原子性问题](https://blog.csdn.net/X_Perseverance/article/details/99179114)

@@ -124,7 +124,7 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 ### 消息读取
 ### 消息写入
 
->把网络写操作从网络线程中拿出来。当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。  
+>当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。  
 >网络线程每次发送待发队列前，需要先检查有没有直接发送剩下的部分，有则加到队列头，然后再依次发送。  
 >当然 udp 会更简单一些，一是 udp 包没有部分发送的可能，二是 udp 不需要保证次序。所以 udp 立即发送失败后，可以直接按原流程扔到发送队列尾即可。
 
@@ -134,3 +134,4 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 
 <hr>
 **参考：**
+- [skynet 网络线程的一点优化](https://blog.codingnow.com/2017/06/skynet_socket.html)
