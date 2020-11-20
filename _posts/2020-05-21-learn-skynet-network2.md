@@ -54,7 +54,7 @@ struct socket_sendbuffer {
 ![发包数据流向](/assets/image/posts/2020-05-21-03.svg?style=centerme)
 
 ## poll 流程
-在前面已经介绍过网络线程的主要逻辑，在这一节我将“庖丁解牛”般的拆解网络库的 **event poll** 流程，即`socket_server_poll`接口，对其进行梳理后，可以分为三个部分：内部处理、事件wait、事件处理，以下是经过简化后的代码：
+在前面已经介绍过网络线程的主要逻辑，在这一节我将“庖丁解牛”般的拆解网络库的 **event poll** 流程，即`socket_server_poll`接口，对其进行梳理后，可以分为三个部分：内部处理、事件捕获、事件处理，以下是经过简化后的代码：
 ```c
 int 
 socket_server_poll(struct socket_server *ss, struct socket_message * result, int * more) {
@@ -118,19 +118,36 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 }
 ```
 
+**内部命令处理**是指在进程内的服务与网络库之间的通讯，例如在 lua 服务中监听一个端口，或发起一个 TCP 连接。这些内部命令，通过网络库提供的管道传递到网络库，最终由网络线程执行命令。网络线程在捕获到事件后，会优先处理所有的内部命令（如果有内部消息的话），具体的命令处理流程可查阅 `ctrl_cmd` 函数，这里不再详述，需要注意该函数的返回值 `type`，当 `type = -1` 表示内部命令还不能返回确切的结果（例如命令'L'），或者这个内部命令不需要返回结果（例如命令'T'），当 `type > -1` 则表示该命令已经执行成功且能返回明确的结果给服务。
+
+关于返回值 `type` 的宏定义如下：
+```c
+#define SOCKET_DATA 0   		// socket 接收到了数据
+#define SOCKET_CLOSE 1			// socket 被关闭
+#define SOCKET_OPEN 2			// socket 连接成功（主动连接、被动连接）
+#define SOCKET_ACCEPT 3			// 接收到新的连接（需要后续 start 才能使用）
+#define SOCKET_ERR 4			// socket 错误，需要关闭
+#define SOCKET_EXIT 5			// 退出网络线程
+#define SOCKET_UDP 6			// 收到 UDP 包
+#define SOCKET_WARNING 7 		// socket 报警（待发送的数据过大）
+```
+此外，当 type 为`SOCKET_CLOSE`或`SOCKET_ERR`(向一个已关闭的fd发送数据)时，表示连接已经关闭，则需要回收这个 socket 。
+
+**事件捕获**部分就较为简单，对于 epoll 就是 `epoll_wait`，对于 kqueue 就是 `kenvet`，唯一需要注意的点是 wait api 使用的无限期阻塞，即没有事件则一直阻塞，具体可以参考上一篇博文关于 `epoll_wait` 的讲解，此处不再赘述。
+
+**事件处理**主要负责网络连接的处理，包括对外的主动连接和外部的被动连接。有事件的 socket 依据其状态有不同的事件处理流程，如 对于 CONNECTING 的连接，则会完成之前发起的主动连接请求并上报给服务；对于
+
 ## 内部命令
 
 ## 网络处理
 ### 消息读取
 ### 消息写入
 
->当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。  
+>当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。
+>
 >网络线程每次发送待发队列前，需要先检查有没有直接发送剩下的部分，有则加到队列头，然后再依次发送。  
+>
 >当然 udp 会更简单一些，一是 udp 包没有部分发送的可能，二是 udp 不需要保证次序。所以 udp 立即发送失败后，可以直接按原流程扔到发送队列尾即可。
-
-## lua库
-### socketdriver
-### netpack
 
 <hr>
 **参考：**
