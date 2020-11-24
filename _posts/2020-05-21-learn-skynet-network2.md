@@ -135,11 +135,54 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 
 **事件捕获**部分就较为简单，对于 epoll 就是 `epoll_wait`，对于 kqueue 就是 `kenvet`，唯一需要注意的点是 wait api 使用的无限期阻塞，即没有事件则一直阻塞，具体可以参考上一篇博文关于 `epoll_wait` 的讲解，此处不再赘述。
 
-**事件处理**主要负责网络连接的处理，包括对外的主动连接和外部的被动连接。有事件的 socket 依据其状态有不同的事件处理流程，如 对于 CONNECTING 的连接，则会完成之前发起的主动连接请求并上报给服务；对于
+**事件处理**主要负责网络连接的处理，包括对外的主动连接和外部的被动连接。有事件的 socket 依据其状态有不同的事件处理流程，如对于 CONNECTING 的 socket 连接，则会完成之前发起的主动连接请求并上报给服务；对于 LISTEN 的 socket，则接收新连接（未start）并上报给服务；对于其他已经建立好连接，则对其进行读、写以及错误处理。
 
 ## 内部命令
+内部命令是指进程内服务发送给网络库有关网络操作的消息，这些消息经由管道透传到网络库，此过程的原理和细节可跳转到上一篇文章的[管道](/_posts/2020-05-21-learn-skynet-network1/#管道)章节，里面有很详细的介绍，这里主要介绍各个内部命令的功能及其封装结构。
 
-## 网络处理
+我们知道，在一个通道上要实现信息通信，那么在这个通道上流通的消息就需要遵循统一格式的消息封装。就像 skynet 中两个服务之间进行通讯，就需要把消息封装成 `skynet_message`; 再如当和 mysql 数据库进行交互时，就需要消息包遵循 mysql 数据包格式；同样，内部命令也会封装成统一的格式在管道上传递，其封装结构体定义如下：
+```
+struct request_package {
+	uint8_t header[8];	// 6 bytes dummy，头部，前6个字节预留，第7个字节表示命令类型，第8个字节表示命令内容的长度
+	union {
+		char buffer[256];
+		struct request_open open;
+		struct request_send send;
+		struct request_send_udp send_udp;
+		struct request_close close;
+		struct request_listen listen;
+		struct request_bind bind;
+		struct request_start start;
+		struct request_setopt setopt;
+		struct request_udp udp;
+		struct request_setudp set_udp;
+	} u;
+	uint8_t dummy[256];	// 预留256字节
+};
+```
+
+所有的命令内容都封装在一个大小为 256 字节的联合体 `u` 内，具体的消息长度由 `char header[7]` 控制，这就是为什么联合体需要一个 `char buffer[256]` 的字符数组；命令类型由 `char header[6]` 控制，一个大写字母代表一种内部命令。下面列出了目前支持的命令：
+```
+	S Start socket
+	B Bind socket
+	L Listen socket
+	K Close socket
+	O Connect to (Open)
+	X Exit
+	D Send package (high)
+	P Send package (low)
+	A Send UDP package
+	T Set opt
+	U Create UDP socket
+	C set udp address
+```
+
+为什么会使用一个 `char header[8]` 作为头部，而只使用最后两个字节，这样做的原因是要考虑结构体的**内存对齐**问题。假如我们只用 `char header[2]` 来作为头部，那么会在往管道写入数据时，会因为内存对齐的原因，导致写入的命令头部和内容之间存在6个“**未初始化**”的字节。
+
+下图展示了内部命令的内存结构以及管道的工作流程：
+![内部命令封装](/assets/image/posts/2020-05-21-04.svg?style=centerme)
+
+## 外部连接
 ### 消息读取
 ### 消息写入
 
