@@ -114,10 +114,14 @@ for fd, event in events {
 
 - 原子性，对管道写入小于 **PIPE_BUF** 的数据都是原子的，也就是说向写端写入小于 PIPE_BUF 的数据，能在读端一次完整收取到，而不会被截断成多个部分。这一点是很重要的，否则若数据过大，读取端可能还需要做一些数据缓存操作，以保证收到数据的完整性。关于PIPE_BUF，依然引用man文档的叙述：
 >POSIX 规定，小于 PIPE_BUF 的写操作必须是原子的：要写的数据应被连续地写到管道；大于 PIPE_BUF 的写操作可能是非原子的：内核可能会将数据与其它进程写入的数据交织在一起。 POSIX 规定 PIPE_BUF 至少为512字节（Linux 中为4096字节），具体的语义如下：（其中n为要写的字节数）  
-n <= PIPE_BUF，O_NONBLOCK disable，写入具有原子性。如果没有足够的空间供 n 个字节全部立即写入，则阻塞直到有足够空间将n个字节全部写入管道。  
-n <= PIPE_BUF，O_NONBLOCK enable，写入具有原子性。如果有足够的空间写入 n 个字节，则 write 立即成功返回，并写入所有 n 个字节；否则一个都不写入，write 返回错误，并将 errno 设置为 EAGAIN。  
-n > PIPE_BUF，O_NONBLOCK disable，写入不具有原子性。可能会和其它的写进程交替写，直到将 n 个字节全部写入才返回，否则阻塞等待写入。  
-n > PIPE_BUF，O_NONBLOCK enable，写入不具有原子性。如果管道已满，则写入失败，write 返回错误，并将 errno 设置为 EAGAIN；否则，可以写入 1 ~ n 个字节，即部分写入，此时 write 返回实际写入的字节数，并且写入这些字节时可能与其他进程交错写入。
+>
+>n <= PIPE_BUF，O_NONBLOCK disable，写入具有原子性。如果没有足够的空间供 n 个字节全部立即写入，则阻塞直到有足够空间将n个字节全部写入管道。  
+>
+>n <= PIPE_BUF，O_NONBLOCK enable，写入具有原子性。如果有足够的空间写入 n 个字节，则 write 立即成功返回，并写入所有 n 个字节；否则一个都不写入，write 返回错误，并将 errno 设置为 EAGAIN。  
+>
+>n > PIPE_BUF，O_NONBLOCK disable，写入不具有原子性。可能会和其它的写进程交替写，直到将 n 个字节全部写入才返回，否则阻塞等待写入。  
+>
+>n > PIPE_BUF，O_NONBLOCK enable，写入不具有原子性。如果管道已满，则写入失败，write 返回错误，并将 errno 设置为 EAGAIN；否则，可以写入 1 ~ n 个字节，即部分写入，此时 write 返回实际写入的字节数，并且写入这些字节时可能与其他进程交错写入。
 
 ### 事件
 一般来说，在使用多路复用IO模型时，会对事件进行二次封装或者二次处理。例如 skynet 中 epoll wait 流程如下：
