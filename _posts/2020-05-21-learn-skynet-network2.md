@@ -138,10 +138,10 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 **事件处理**主要负责网络连接的处理，包括对外的主动连接和外部的被动连接。有事件的 socket 依据其状态有不同的事件处理流程，如对于 CONNECTING 的 socket 连接，则会完成之前发起的主动连接请求并上报给服务；对于 LISTEN 的 socket，则接收新连接（未start）并上报给服务；对于其他已经建立好连接，则对其进行读、写以及错误处理。
 
 ## 内部命令
-内部命令是指进程内服务发送给网络库有关网络操作的消息，这些消息经由管道透传到网络库，此过程的原理和细节可跳转到上一篇文章的[管道](/_posts/2020-05-21-learn-skynet-network1/#管道)章节，里面有很详细的介绍，这里主要介绍各个内部命令的功能及其封装结构。
+内部命令是指进程内服务发送给网络库有关网络操作的消息，这些消息经由管道透传到网络库，此过程的原理和细节可跳转到上一篇文章的[管道](/_posts/2020-05-20-learn-skynet-network1/#管道)章节，里面有很详细的介绍，这里主要介绍各个内部命令的功能及其封装结构。
 
 我们知道，在一个通道上要实现信息通信，那么在这个通道上流通的消息就需要遵循统一格式的消息封装。就像 skynet 中两个服务之间进行通讯，就需要把消息封装成 `skynet_message`; 再如当和 mysql 数据库进行交互时，就需要消息包遵循 mysql 数据包格式；同样，内部命令也会封装成统一的格式在管道上传递，其封装结构体定义如下：
-```
+```c
 struct request_package {
 	uint8_t header[8];	// 6 bytes dummy，头部，前6个字节预留，第7个字节表示命令类型，第8个字节表示命令内容的长度
 	union {
@@ -163,18 +163,18 @@ struct request_package {
 
 所有的命令内容都封装在一个大小为 256 字节的联合体 `u` 内，具体的消息长度由 `char header[7]` 控制，这就是为什么联合体需要一个 `char buffer[256]` 的字符数组；命令类型由 `char header[6]` 控制，一个大写字母代表一种内部命令。下面列出了目前支持的命令：
 ```
-	S Start socket
-	B Bind socket
-	L Listen socket
-	K Close socket
-	O Connect to (Open)
-	X Exit
-	D Send package (high)
-	P Send package (low)
-	A Send UDP package
-	T Set opt
-	U Create UDP socket
-	C set udp address
+S Start socket
+B Bind socket
+L Listen socket
+K Close socket
+O Connect to (Open)
+X Exit
+D Send package (high)
+P Send package (low)
+A Send UDP package
+T Set opt
+U Create UDP socket
+C set udp address
 ```
 
 为什么会使用一个 `char header[8]` 作为头部，而只使用最后两个字节，这样做的原因是要考虑结构体的**内存对齐**问题。假如我们只用 `char header[2]` 来作为头部，那么会在往管道写入数据时，会因为内存对齐的原因，导致写入的命令头部和内容之间存在6个“**未初始化**”的字节。
@@ -182,8 +182,56 @@ struct request_package {
 下图展示了内部命令的内存结构以及管道的工作流程：
 ![内部命令封装](/assets/image/posts/2020-05-21-04.svg?style=centerme)
 
-## 外部连接
+## 事件处理
+网络线程在捕获到事件后，若是管道的事件，则走内部命令处理流程，而剩下的网络事件，则根据不同的 socket 状态(或类型)做不同的处理。
+
+### 主动连接
+关于主动向外发起连接，可以回看上一篇文章关于 connect 的时序图，回忆一下在 skynet 的服务中发起一个主动连接的整个过程。其核心逻辑在 `open_socket` 函数中，这里我抠出关键部分的代码：
+```c
+// return -1 when connecting
+static int
+open_socket(struct socket_server *ss, struct request_open * request, struct socket_message *result) {
+	...
+
+	int sock= -1;
+	for (ai_ptr = ai_list; ai_ptr != NULL; ai_ptr = ai_ptr->ai_next ) {
+		sock = socket( ai_ptr->ai_family, ai_ptr->ai_socktype, ai_ptr->ai_protocol );
+		if ( sock < 0 ) {
+			continue;
+		}
+		socket_keepalive(sock);
+		sp_nonblocking(sock); // 设置为非阻塞
+		status = connect( sock, ai_ptr->ai_addr, ai_ptr->ai_addrlen);
+		if ( status != 0 && errno != EINPROGRESS) {
+			close(sock);
+			sock = -1;
+			continue;
+		}
+		break;
+	}
+
+	...
+
+	if(status == 0) {
+		ns->type = SOCKET_TYPE_CONNECTED;
+		...
+		return SOCKET_OPEN;
+	} else {
+		ns->type = SOCKET_TYPE_CONNECTING;
+		sp_write(ss->event_fd, ns->fd, ns, true);
+	}
+
+	...
+}
+```
+上面的代码是一个标准的**非阻塞 connect**，我们需要关注 `connect(sock, ...)` api 的返回值 `status`，如果返回 0，则表示连接已经建立，这通常是在服务器和客户在同一台主机上时发生；如果返回 -1，则需要关注 `errno`，若 `errno = EINPROGRESS`，表示连接建立，建立启动但是尚未完成，则需要把这个 sock 注册到 epoll 中，并关注该描述符的可写事件。
+
+### 接收新连接
+该事件处理主要为监听 fd 服务，当 listen_fd 收到新连接到来时，则生成一个新的 socket 实例，然后上报给 listen_fd 所绑定的那个服务，处理流程较为简单。可能需要注意的点是，新接收到的 socket 需要服务对其 start，才能把新连接注册到 epoll/kqueue 中。关于 listen 流程可以回看上一篇文章关于监听的时序图。
+
 ### 消息读取
+
+
 ### 消息写入
 
 >当每次要写数据时，先检查一下该 fd 中发送队列是否为空，如果为空的话，就尝试直接在当前工作线程发送（这往往是大多数情况）。发送成功就皆大欢喜，如果失败或部分发送，则把没发送的数据放在 socket 结构中，并开启 epoll 的可写事件。
@@ -195,3 +243,4 @@ struct request_package {
 <hr>
 **参考：**
 - [skynet 网络线程的一点优化](https://blog.codingnow.com/2017/06/skynet_socket.html)
+- [Linux下connect超时处理](https://www.jianshu.com/p/3be00ce8dc76)

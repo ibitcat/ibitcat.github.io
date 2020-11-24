@@ -318,4 +318,3 @@ struct wb_list {
 - [从linux源码看socket的close](https://my.oschina.net/alchemystar/blog/1821680)
 - [TCP: When is EPOLLHUP generated?](https://stackoverflow.com/questions/52976152/tcp-when-is-epollhup-generated)
 - [EPOLL 事件之 EPOLLRDHUP](https://blog.csdn.net/midion9/article/details/49883063)
-- [Linux下connect超时处理](https://www.jianshu.com/p/3be00ce8dc76)
