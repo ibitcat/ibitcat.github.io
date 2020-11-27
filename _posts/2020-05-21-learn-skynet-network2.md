@@ -224,7 +224,7 @@ open_socket(struct socket_server *ss, struct request_open * request, struct sock
 	...
 }
 ```
-上面的代码是一个标准的**非阻塞 connect**，我们需要关注 `connect(sock, ...)` api 的返回值 `status`，如果返回 0，则表示连接已经建立，这通常是在服务器和客户在同一台主机上时发生；如果返回 -1，则需要关注 `errno`，若 `errno = EINPROGRESS`，表示连接建立，建立启动但是尚未完成，则需要把这个 sock 注册到 epoll 中，并关注该描述符的可写事件。
+上面的代码是一个标准的**非阻塞 connect**，我们需要关注 `connect(sock, ...)` api 的返回值 `status`，如果返回 0，则表示连接已经建立，这通常是在服务器和客户在同一台主机上时发生；如果返回 -1，则需要关注 `errno`，若 `errno = EINPROGRESS`，表示连接建立，建立启动但是尚未完成，则需要把这个 sock 注册到 epoll 中，并关注该描述符的可写事件，当 epoll/kqueue 捕获到可写事件时，且该 socket 的状态为 CONNECTING，就表示连接已经建立。
 
 ### 接收新连接
 该事件处理主要为监听 fd 服务，当 listen_fd 收到新连接到来时，则生成一个新的 socket 实例，然后上报给 listen_fd 所绑定的那个服务，处理流程较为简单。可能需要注意的点是，新接收到的 socket 需要服务对其 start，才能把新连接注册到 epoll/kqueue 中。关于 listen 流程可以回看上一篇文章关于监听的时序图。
