@@ -255,7 +255,59 @@ if (n == sz) {
 >
 >当然 udp 会更简单一些，一是 udp 包没有部分发送的可能，二是 udp 不需要保证次序。所以 udp 立即发送失败后，可以直接按原流程扔到发送队列尾即可。
 
-另一个优化是将 socket 的发送队列由一个队列拆分成高优先级、低优先级两个队列，消息要插入到哪个队列由上层自行控制。例如：游戏拍卖行的数据、排行榜数据就可以放入低优先级队列中，因为这些消息的实时性不需要那么高；而心跳包、战斗包就需要放入高优先级队列。详情可以查阅上一篇文章的[写入队列](/_posts/2020-05-20-learn-skynet-network1/#写入队列)章节，这里就不做赘述了。
+另一个优化是将 socket 的发送队列由一个队列拆分成高优先级、低优先级两个队列，消息要插入到哪个队列由上层自行控制。例如：游戏拍卖行的数据、排行榜数据就可以放入低优先级队列中，因为这些消息的实时性不需要那么高；而心跳包、战斗包就需要放入高优先级队列。详情可以查阅上一篇文章的[写入队列](/_posts/2020-05-20-learn-skynet-network1/#写入队列)章节，这里就不做赘述了，直接看代码最实在。发送核心代码如下：
+```c
+/*
+	Each socket has two write buffer list, high priority and low priority.
+
+	1. send high list as far as possible.
+	2. If high list is empty, try to send low list.
+	3. If low list head is uncomplete (send a part before), move the head of low list to empty high list (call raise_uncomplete) .
+	4. If two lists are both empty, turn off the event. (call check_close)
+ */
+static int
+send_buffer_(struct socket_server *ss, struct socket *s, struct socket_lock *l, struct socket_message *result) {
+	assert(!list_uncomplete(&s->low));
+	// step 1，优先发送高优先级队列
+	if (send_list(ss,s,&s->high,l,result) == SOCKET_CLOSE) {
+		return SOCKET_CLOSE;
+	}
+	if (s->high.head == NULL) {
+		// step 2，高优先级队列为空，则发送低优先级队列
+		if (s->low.head != NULL) {
+			if (send_list(ss,s,&s->low,l,result) == SOCKET_CLOSE) {
+				return SOCKET_CLOSE;
+			}
+			// step 3，若低优先级队列未发送完，则提升一个头部的包到高优先级队列
+			if (list_uncomplete(&s->low)) {
+				raise_uncomplete(s);
+				return -1;
+			}
+			if (s->low.head)
+				return -1;
+		}
+		// step 4，两个队列都发送完，则关闭写事件
+		assert(send_buffer_empty(s) && s->wb_size == 0);
+		sp_write(ss->event_fd, s->fd, s, false);
+
+		if (s->type == SOCKET_TYPE_HALFCLOSE) {
+			// 若 socket 为半关闭状态，发送完数据后完全关闭并回收该 socket
+			force_close(ss, s, l, result);
+			return SOCKET_CLOSE;
+		}
+		if(s->warn_size > 0){
+			s->warn_size = 0;
+			result->opaque = s->opaque;
+			result->id = s->id;
+			result->ud = 0;
+			result->data = NULL;
+			return SOCKET_WARNING;
+		}
+	}
+
+	return -1;
+}
+```
 
 <hr>
 **参考：**
