@@ -283,7 +283,7 @@ socket 的状态目前一共有 9 种，其宏定义如下：
 
 从上面这些网络操作的时序图中，我们可以看到它们都采用了异步消息通知的机制，网络调用由服务发起，通过内部命令管道转发给网络库，最终由网络线程执行具体的逻辑。这也印证了**RESERVE**状态的必要性。
 
-需要注意的是，skynet 网络库使用的系统网络 API 基本都是非阻塞的，除了 getaddrinfo，它是一个阻塞 API，linux 提供的各DNS API函数都是阻塞式的，无法设置超时时间等；另外，由 socket() 创建的 fd 也基本会设置成非阻塞(nonblocking)模式，包括 connect 的 fd，只有 listen fd 为阻塞。
+需要注意的是，skynet 网络库使用的系统网络 API 基本都是非阻塞的，除了 getaddrinfo，它是一个阻塞 API，linux 提供的各DNS API函数都是阻塞式的，无法设置超时时间等（关于此 api，官方的[wiki](https://github.com/cloudwu/skynet/wiki/Socket#%E5%9F%9F%E5%90%8D%E6%9F%A5%E8%AF%A2)也有说明）；另外，由 socket() 创建的 fd 也基本会设置成非阻塞(nonblocking)模式，包括 connect 的 fd，只有 listen fd 为阻塞。
 
 ### 写入队列
 一个 socket 实例有两个发送队列：高优先级队列、低优先级队列。它们的结构相同，只是在网络线程发送数据时有优先顺序，高优先级队列中的数据会优先发送。
