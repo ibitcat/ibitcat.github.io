@@ -124,7 +124,7 @@ socket_server_poll(struct socket_server *ss, struct socket_message * result, int
 ```c
 #define SOCKET_DATA 0   		// socket 接收到了数据
 #define SOCKET_CLOSE 1			// socket 被关闭
-#define SOCKET_OPEN 2			// socket 连接成功（主动连接、被动连接）
+#define SOCKET_OPEN 2			// socket 连接成功（主动连接、被动连接等），返回此值也就表示连接已经真正可用
 #define SOCKET_ACCEPT 3			// 接收到新的连接（需要后续 start 才能使用）
 #define SOCKET_ERR 4			// socket 错误，需要关闭
 #define SOCKET_EXIT 5			// 退出网络线程
