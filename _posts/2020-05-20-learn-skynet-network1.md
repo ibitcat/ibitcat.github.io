@@ -46,7 +46,7 @@ thread_socket(void *p) {
 }
 ```
 
-此线程的逻辑非常简单，它会循环调用 poll 接口，并根据返回值来确定继续或退出线程。关于其返回值，我已经在上面代码注释中有描述，这里着重探讨 poll 接口：`skynet_socket_poll`，它调用了网络库底层的`socket_server_poll`接口，该接口处理由操作系统提供的多路复用IO接口所捕获到的网络事件，包括内部网络命令和外部网络消息，然后根据其处理后的返回的网络消息类型，将返回结果转发给对应的服务（context）。
+此线程的逻辑非常简单，它会循环调用 poll 接口，并根据返回值来决定继续或退出线程。关于其返回值，我已经在上面代码注释中有描述，这里着重探讨 poll 接口：`skynet_socket_poll`，它调用了网络库底层的`socket_server_poll`接口，该接口处理由操作系统提供的多路复用IO接口所捕获到的网络事件，包括内部网络命令和外部网络消息，然后根据其处理后的返回的网络消息类型，将返回结果转发给对应的服务（context）。
 >skynet 的多路复用IO接口支持 unix-like 系统的跨平台，linux (例如centos、ubuntu等)使用 epoll；unix (MacOS、FreeBSD等)使用kqueue。
 
 ### 网络管理器
@@ -105,7 +105,7 @@ for fd, event in events {
 *PS. 关于epoll_wait 的 timeout 参数，可以参考 man 手册：*
 > Note that the timeout interval will be rounded up to the  system  clock  granularity,  and  kernel  scheduling delays  mean that  the  blocking  interval  may overrun by a small amount.  Specifying a timeout of -1 causes epoll_wait() to block indefinitely, while specifying a timeout equal to  zero  cause  epoll_wait()  to  return immediately, even if no events are available.
 
-为了解决上面的问题，管道就派上用场，它是半双工的，一端写入，另一端读取，我们只需要把读端 fd 注册到 epoll 中，这就解决了内部请求的唤醒问题。
+为了解决上面的问题，管道就派上用场，它是半双工的，一端写入，另一端读取，我们只需要把读端 fd 注册到 epoll 中，这就解决了内部请求的唤醒问题，倘如外部网络连接一直没有收据到达，epoll 则会阻塞 wait，此时工作线程写入数据到管道中，就可以“激活” epoll 并处理内部命令。
 
 此处还引出一个知识点，我们在使用管道时需要关注两个问题：**管道容量(pipe capacity)**和**管道原子性**。
 - pipe capacity，在 linux 中，管道容量为 65535 byte，即 16 个页(page)大小，若写入数据大于管道容量，则写入会阻塞或者失败。引用 man 手册中的叙述(`man 7 pipe`)：
