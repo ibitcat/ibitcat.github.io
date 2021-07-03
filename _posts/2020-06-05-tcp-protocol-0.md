@@ -13,4 +13,4 @@ tag:
 我们在学习计算机网络的时候，基本都会知道 ISO 七层模型，但是在真正实现时，并没有完全遵循七层模型，它只是国际标准化组织 ISO 提供的一个标准，因为如果完全按照七层模型来实现计算机网络将过于复杂，因此各家厂商实现只是参考该标准，最终形成了我们常见的 TCP/IP 四层协议簇。
 
 下图是 ISO 七层模型和 TCP/IP 四层协议簇的对应关系：
-![ISO_TCPIP](/assets/image/posts/2020-06-05-01.png?style=centerme)
+![ISO_TCPIP](/assets/image/posts/2020-06-05-01.svg?style=centerme)
