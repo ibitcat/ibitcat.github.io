@@ -77,6 +77,15 @@ luaL_Reg l2[] = {
 - unpack，解析收到的网络数据，其实就是把数据解析成 `skynet_socket_message` 这个结构体，并把该结构体的字段信息都返回给 lua（udp 消息还会返回对端的地址信息），如果看过上一篇文章，你就会知道该 API 的作用就是对[收包](/_posts/2020-05-21-learn-skynet-network2/#收包)过程的反向解析。
 
 ## socket api
+在上一节，我们对 socketdriver 有一个简单的了解，也列出了其提供的 C API，而我们知道 skynet 底层的网络操作都是异步的方式（发送请求到网络线程，处理完毕后网络线程发送结果消息），为了能在 lua 层更好进行网络操作，skynet 提供了一个名为 socket 的 lua 模块，它利用了 lua 的协程机制，将异步的网络请求包装成同步调用，大大降低了我们开发时的心智负担。
+
+在 lua 服务中，只需要把该模块 require 进来，就可以很方便进行网络操作了。
+```lua
+local socket = require "skynet.socket"
+```
+
+接下来，
+
 
 ## socket buffer
 
