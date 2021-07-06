@@ -1,5 +1,5 @@
 ---
-title:  "彻底弄懂 TCP 协议 —— TCP协议"
+title:  "彻底弄懂 TCP 协议簇 —— TCP协议"
 date: 2020-06-20
 tag:
 - TCP/IP
@@ -74,4 +74,3 @@ TCP 是一个**流式**协议，即它传输的是字节流，而字节流的特
 
 ## 参考
 1. [面向连接和无连接的套接字到底有什么区别](http://c.biancheng.net/view/vip_5864.html)。
-2. [TCP滑动窗口（发送窗口和接受窗口）](https://www.cnblogs.com/hongdada/p/11171068.html)。
