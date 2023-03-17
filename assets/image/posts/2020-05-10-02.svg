@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1006px" preserveAspectRatio="none" style="width:700px;height:1006px;" version="1.1" viewBox="0 0 700 1006" width="700px" zoomAndPan="magnify"><defs><filter height="300%" id="fvg84bsekrzze" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><ellipse cx="388.5" cy="20" fill="#000000" filter="url(#fvg84bsekrzze)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><path d="M484,46.2695 L484,69.9688 L464,73.9688 L484,77.9688 L484,101.668 A0,0 0 0 0 484,101.668 L688,101.668 A0,0 0 0 0 688,101.668 L688,56.2695 L678,46.2695 L484,46.2695 A0,0 0 0 0 484,46.2695 " fill="#FBFB77" filter="url(#fvg84bsekrzze)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M678,46.2695 L678,56.2695 L688,56.2695 L678,46.2695 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="65" x="490" y="63.3364">两个参数：</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="126" x="490" y="78.4692">name=服务模板名称</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="183" x="490" y="93.6021">param=创建服务实例所需参数</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="151" x="313" y="50"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="323" y="71.1387">收到服务创建消息</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="327" y="85.1074"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="127" x="327" y="85.1074">skynet_context_new</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="159" x="309" y="121.668"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="72" x="319" y="142.8066">查询服务模板</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="323" y="156.7754"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="135" x="323" y="156.7754">skynet_module_query</text><rect fill="#E0FFFF" filter="url(#fvg84bsekrzze)" height="367.9844" style="stroke: #000000; stroke-width: 2.0;" width="498" x="10" y="235.3159"/><path d="M64,236.3159 L64,244.6128 L54,254.6128 L10,254.6128 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="44" x="13" y="249.311">create</text><rect fill="#FF69B4" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="219" x="279" y="271.6128"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="120" x="289" y="292.7515">使用模板创建服务实例</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="199" x="289" y="306.7202">skynet_module_instance_create</text><path d="M20,343.3862 L20,383.6519 A0,0 0 0 0 20,383.6519 L275,383.6519 A0,0 0 0 0 275,383.6519 L275,367.519 L295,363.519 L275,359.519 L275,353.3862 L265,343.3862 L20,343.3862 A0,0 0 0 0 20,343.3862 " fill="#FBFB77" filter="url(#fvg84bsekrzze)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M265,343.3862 L265,353.3862 L275,353.3862 L265,343.3862 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="234" x="26" y="360.4531">这里会把创建好的服务实例挂载到上下文</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="161" x="26" y="375.5859">即：ctx-&gt;instance = inst;</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="187" x="295" y="339.5503"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="305" y="360.689">创建服务上下文</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="167" x="305" y="374.6577">skynet_malloc(sizeof(*ctx))</text><path d="M88,411.3237 L88,451.5894 A0,0 0 0 0 88,451.5894 L272,451.5894 A0,0 0 0 0 272,451.5894 L272,435.4565 L292,431.4565 L272,427.4565 L272,421.3237 L262,411.3237 L88,411.3237 A0,0 0 0 0 88,411.3237 " fill="#FBFB77" filter="url(#fvg84bsekrzze)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M262,411.3237 L262,421.3237 L272,421.3237 L262,411.3237 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="117" x="94" y="428.3906">加入到服务仓库后，</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacingAndGlyphs" textLength="163" x="94" y="443.5234">会分配一个handle id 给 ctx</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="193" x="292" y="407.4878"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="302" y="428.6265">注册到服务仓库中</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="173" x="302" y="442.5952">skynet_handle_register(ctx)</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="137" x="320" y="475.4253"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="330" y="496.564">创建服务的消息队列</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="334" y="510.5327"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="113" x="334" y="510.5327">skynet_mq_create</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="96" x="340.5" y="543.3628"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="76" x="350.5" y="564.5015">ctx 的总数+1</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="354.5" y="578.4702"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="72" x="354.5" y="578.4702">context_inc</text><rect fill="#87CEFA" filter="url(#fvg84bsekrzze)" height="296.1094" style="stroke: #000000; stroke-width: 2.0;" width="450" x="151.5" y="613.3003"/><path d="M181.5,614.3003 L181.5,622.5972 L171.5,632.5972 L151.5,632.5972 " fill="none" style="stroke: #000000; stroke-width: 2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="20" x="154.5" y="627.2954">init</text><rect fill="#FF69B4" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="197" x="290" y="649.5972"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="84" x="300" y="670.7358">服务实例初始化</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="177" x="300" y="684.7046">skynet_module_instance_init</text><polygon fill="#FEFECE" filter="url(#fvg84bsekrzze)" points="361,717.5347,416,717.5347,428,729.5347,416,741.5347,361,741.5347,349,729.5347,361,717.5347" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="55" x="361" y="733.3428">初始化成功</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="20" x="329" y="726.9404">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="14" x="428" y="726.9404">no</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="219" x="171.5" y="751.5347"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="199" x="181.5" y="772.6733">把服务消息队列push到全局消息队列</text><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="140" x="181.5" y="786.6421">skynet_globalmq_push</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="171" x="410.5" y="751.5347"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="66" x="420.5" y="772.6733">释放销毁ctx</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="424.5" y="786.6421"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="147" x="424.5" y="786.6421">skynet_context_release</text><rect fill="#FEFECE" filter="url(#fvg84bsekrzze)" height="47.9375" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="142" x="425" y="819.4722"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="435" y="840.6108">释放销毁消息队列</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="0" x="439" y="854.5796"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="118" x="439" y="854.5796">skynet_mq_release</text><polygon fill="#FEFECE" filter="url(#fvg84bsekrzze)" points="388.5,873.4097,400.5,885.4097,388.5,897.4097,376.5,885.4097,388.5,873.4097" style="stroke: #A80036; stroke-width: 1.5;"/><polygon fill="#FEFECE" filter="url(#fvg84bsekrzze)" points="366.5,189.6055,410.5,189.6055,422.5,201.6055,410.5,213.6055,366.5,213.6055,354.5,201.6055,366.5,189.6055" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="20" x="392.5" y="223.8159">yes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="44" x="366.5" y="205.4136">模板存在</text><polygon fill="#FEFECE" filter="url(#fvg84bsekrzze)" points="388.5,929.4097,400.5,941.4097,388.5,953.4097,376.5,941.4097,388.5,929.4097" style="stroke: #A80036; stroke-width: 1.5;"/><ellipse cx="388.5" cy="984.4097" fill="#FFFFFF" filter="url(#fvg84bsekrzze)" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="388.5" cy="984.4097" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="30" y2="50"/><polygon fill="#A80036" points="384.5,40,388.5,50,392.5,40,388.5,44" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="97.9375" y2="121.668"/><polygon fill="#A80036" points="384.5,111.668,388.5,121.668,392.5,111.668,388.5,115.668" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="319.5503" y2="339.5503"/><polygon fill="#A80036" points="384.5,329.5503,388.5,339.5503,392.5,329.5503,388.5,333.5503" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="387.4878" y2="407.4878"/><polygon fill="#A80036" points="384.5,397.4878,388.5,407.4878,392.5,397.4878,388.5,401.4878" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="455.4253" y2="475.4253"/><polygon fill="#A80036" points="384.5,465.4253,388.5,475.4253,392.5,465.4253,388.5,469.4253" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="523.3628" y2="543.3628"/><polygon fill="#A80036" points="384.5,533.3628,388.5,543.3628,392.5,533.3628,388.5,537.3628" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="496" x2="496" y1="799.4722" y2="819.4722"/><polygon fill="#A80036" points="492,809.4722,496,819.4722,500,809.4722,496,813.4722" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="349" x2="281" y1="729.5347" y2="729.5347"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="281" x2="281" y1="729.5347" y2="751.5347"/><polygon fill="#A80036" points="277,741.5347,281,751.5347,285,741.5347,281,745.5347" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="428" x2="496" y1="729.5347" y2="729.5347"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="496" x2="496" y1="729.5347" y2="751.5347"/><polygon fill="#A80036" points="492,741.5347,496,751.5347,500,741.5347,496,745.5347" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="281" x2="281" y1="799.4722" y2="885.4097"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="281" x2="376.5" y1="885.4097" y2="885.4097"/><polygon fill="#A80036" points="366.5,881.4097,376.5,885.4097,366.5,889.4097,370.5,885.4097" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="496" x2="496" y1="867.4097" y2="885.4097"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="496" x2="400.5" y1="885.4097" y2="885.4097"/><polygon fill="#A80036" points="410.5,881.4097,400.5,885.4097,410.5,889.4097,406.5,885.4097" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="697.5347" y2="717.5347"/><polygon fill="#A80036" points="384.5,707.5347,388.5,717.5347,392.5,707.5347,388.5,711.5347" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="591.3003" y2="649.5972"/><polygon fill="#A80036" points="384.5,639.5972,388.5,649.5972,392.5,639.5972,388.5,643.5972" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="213.6055" y2="271.6128"/><polygon fill="#A80036" points="384.5,261.6128,388.5,271.6128,392.5,261.6128,388.5,265.6128" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="422.5" x2="611.5" y1="201.6055" y2="201.6055"/><polygon fill="#A80036" points="607.5,567.8628,611.5,577.8628,615.5,567.8628,611.5,571.8628" style="stroke: #A80036; stroke-width: 1.5;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="611.5" x2="611.5" y1="201.6055" y2="941.4097"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="611.5" x2="400.5" y1="941.4097" y2="941.4097"/><polygon fill="#A80036" points="410.5,937.4097,400.5,941.4097,410.5,945.4097,406.5,941.4097" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="897.4097" y2="929.4097"/><polygon fill="#A80036" points="384.5,919.4097,388.5,929.4097,392.5,919.4097,388.5,923.4097" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="169.6055" y2="189.6055"/><polygon fill="#A80036" points="384.5,179.6055,388.5,189.6055,392.5,179.6055,388.5,183.6055" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="388.5" x2="388.5" y1="953.4097" y2="973.4097"/><polygon fill="#A80036" points="384.5,963.4097,388.5,973.4097,392.5,963.4097,388.5,967.4097" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[87c36a5eb50e6386caad7a5e5efba3b5]
+@startuml
+skinparam sequenceMessageAlign center
+
+start
+:收到服务创建消息\n //skynet_context_new//;
+note right
+    两个参数：
+    name=服务模板名称
+    param=创建服务实例所需参数
+end note
+
+:查询服务模板\n //skynet_module_query//;
+if (模板存在) then (yes)
+    ' 创建部分
+    partition create #LightCyan {
+        #HotPink:使用模板创建服务实例
+        //skynet_module_instance_create//;
+
+        :创建服务上下文
+        //skynet_malloc(sizeof(*ctx))//;
+        note left
+            这里会把创建好的服务实例挂载到上下文
+            即：ctx->instance = inst;
+        end note
+
+        :注册到服务仓库中
+        //skynet_handle_register(ctx)//;
+        note left
+            加入到服务仓库后，
+            会分配一个handle id 给 ctx
+        end note
+
+        :创建服务的消息队列\n //skynet_mq_create//;
+        :ctx 的总数+1\n //context_inc//;
+    }
+
+    ' 初始化部分
+    partition init #LightSkyBlue {
+        #HotPink:服务实例初始化
+        //skynet_module_instance_init//;
+
+        if (初始化成功) then (yes)
+            :把服务消息队列push到全局消息队列
+            //skynet_globalmq_push//;
+        else (no)
+            :释放销毁ctx\n //skynet_context_release//;
+            :释放销毁消息队列\n //skynet_mq_release//;
+        endif
+    }
+endif
+
+stop
+
+@enduml
+
+@startuml
+skinparam sequenceMessageAlign center
+
+start
+:收到服务创建消息\n //skynet_context_new//;
+note right
+    两个参数：
+    name=服务模板名称
+    param=创建服务实例所需参数
+end note
+
+:查询服务模板\n //skynet_module_query//;
+if (模板存在) then (yes)
+    partition create #LightCyan {
+        #HotPink:使用模板创建服务实例
+        //skynet_module_instance_create//;
+
+        :创建服务上下文
+        //skynet_malloc(sizeof(*ctx))//;
+        note left
+            这里会把创建好的服务实例挂载到上下文
+            即：ctx->instance = inst;
+        end note
+
+        :注册到服务仓库中
+        //skynet_handle_register(ctx)//;
+        note left
+            加入到服务仓库后，
+            会分配一个handle id 给 ctx
+        end note
+
+        :创建服务的消息队列\n //skynet_mq_create//;
+        :ctx 的总数+1\n //context_inc//;
+    }
+
+    partition init #LightSkyBlue {
+        #HotPink:服务实例初始化
+        //skynet_module_instance_init//;
+
+        if (初始化成功) then (yes)
+            :把服务消息队列push到全局消息队列
+            //skynet_globalmq_push//;
+        else (no)
+            :释放销毁ctx\n //skynet_context_release//;
+            :释放销毁消息队列\n //skynet_mq_release//;
+        endif
+    }
+endif
+
+stop
+
+@enduml
+
+PlantUML version 1.2020.10(Sun May 17 17:35:57 CST 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 11.0.7+10-post-Ubuntu-2ubuntu218.04
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
