@@ -7,7 +7,7 @@
 
 - Site: **<https://bitcat.love>**
 - E-mail: **[shui_mu98(at)163.com](mailto:shui_mu98@163.com)**
-- Notebook: **<https://domicat.me/xnotes>**
+- Notebook: **<https://bitcat.love/xnotes>**
 - WeChat: **bitxcat**
 
 <!-- .slide -->
