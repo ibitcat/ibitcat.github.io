@@ -1,4 +1,4 @@
-title: Domi●Cat # 站点标题
+title: Bit●Cat # 站点标题
 description: | # 头像背后的信息（html格式），<br/>代表换行，图片居中可以参考<https://stackoverflow.com/questions/12090472/github-readme-md-center-image>
   未来一直来<br/>
   过去一直去<br/>
@@ -10,7 +10,7 @@ description: | # 头像背后的信息（html格式），<br/>代表换行，图
   <a href="https://github.com/shuimu98">
     <i class="fab fa-github"></i>
   </a>
-url: https://domicat.me # 你的域名，例如https://wu-kan.github.io
+url: https://bitcat.love # 你的域名，例如https://wu-kan.github.io
 baseurl: "" # 假如你的博客是建在某个目录下的，请在这里加上目录名，并且下面配置的所有链接里的`/assets`前也要加，即`/your_baseurl/assets`。这一项结尾不要有'/'。
 
 defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/front-matter-defaults/>功能进行配置
@@ -274,7 +274,7 @@ defaults: # 将所有配置选项使用<https://jekyllrb.com/docs/configuration/
               - | # Copyright声明
                 <div>
                   <i class="fas fa-copyright fa-fw"></i>
-                  2014-2021 domicat
+                  2014-2021 bitcat
                 </div>
             wordcount: # 全站字数统计
               enable: false # 本地调试时建议关闭，非常影响站点生成速度（所需时间与博文数量的平方成正比）
