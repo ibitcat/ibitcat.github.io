@@ -5,7 +5,7 @@
 <!-- .slide -->
 ## 联系我
 
-- Site: **<https://domicat.me>**
+- Site: **<https://bitcat.love>**
 - E-mail: **[shui_mu98(at)163.com](mailto:shui_mu98@163.com)**
 - Notebook: **<https://domicat.me/xnotes>**
 - WeChat: **bitxcat**
