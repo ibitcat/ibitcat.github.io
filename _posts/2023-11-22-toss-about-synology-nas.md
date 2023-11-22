@@ -228,7 +228,7 @@ curl -x 'http://127.0.0.1:8118' www.google.com
 dsm 毕竟是linux系统，也可以安装其他的linux常用工具。
 
 ### 安装 ncat
-DSM 系统默认没有安装 nact 工具(telnet也没有安装)，可以运行 `sudo synogear install`，等待下载后进入 synogear，运行 `synogear list`列出可用的工具列表，里面就有 ncat。例如，检查 privoxy 是否监听 8118 端口:
+DSM 系统默认没有安装 nact 工具(telnet也没有安装)，可以运行 `sudo synogear install`，等待下载后进入 synogear，运行 `synogear list` 列出可用的工具列表，里面就有 ncat。例如，检查 privoxy 是否监听 8118 端口:
 ```
 ncat 127.0.0.1 8118 -vz
 ```
