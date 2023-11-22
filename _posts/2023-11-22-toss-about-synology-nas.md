@@ -221,6 +221,9 @@ curl -x 'http://127.0.0.1:8118' www.google.com
 我们可以在 privoxy 管理后台页面查看和编辑自己的代理规则。
 ![privoxy-action](/assets/image/posts/2023-11-22-03.png?style=centerme)
 
+最后最后，我们要在 DSM 中设置使用代理。
+![dsm-proxy](/assets/image/posts/2023-11-22-04.png?style=centerme)
+
 ## 其他
 dsm 毕竟是linux系统，也可以安装其他的linux常用工具。
 
