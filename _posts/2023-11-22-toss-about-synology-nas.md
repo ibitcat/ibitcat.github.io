@@ -9,7 +9,7 @@ tag:
 
 ## 盘位与RAID
 在选择 NAS 型号时，纠结了很久 2 盘位和 4 盘位，最终整理了自己的需求如下：
-- 家庭照片存储，用于取代 icloud photos（icloud fow windows 同步照片实在时拉跨）
+- 家庭照片存储，用于取代 `icloud photos`（icloud fow windows 同步照片实在时拉跨）
 - 构建简单的家庭影音，但是需求不大
 - 存储备份资料，包括重要文档，项目代码，书籍pdf等
 - 解放电脑的存储压力，家里的台式机和笔记本硬盘都比较小，日积月累都已经变红了
@@ -21,7 +21,7 @@ tag:
 - 重要数据但数据过大(如购买/下载的视频教程、美术资源等)，视数据大小 NAS 内部双盘备份 x 移动硬盘冷备(多份)
 - 普通数据，需要自己根据情况（如可重新获取难度、数据大小）来冷备
 
-总结来说：真正重要的数据其实并不会很大，这些数据就要谨慎之重视之，其他数据视情况而定。
+总结来说：**真正重要的数据其实并不会很大，这些数据就要谨慎之重视之，其他数据视情况而定**。
 此外，要在硬盘使用到期前用新盘替换，一般周期 5 ~ 6 年，尽量保证硬盘都在“有效期”内。
 
 ## DSM 配置
@@ -35,11 +35,13 @@ DSM 有一个“套件中心”，其实就是类似手机的 “应用中心”
 
 ### 官方套件
 目前我安装的几个官方套件如下：
-- Cloud Sync，这个套件主要是用来同步照片到百度云，如果设置了密码，同步的到云盘的文件将被加密，这样别人下载后看到的内容都是乱码，可以通过群晖提供的软件 Synology Cloud Sync Decryption Tool 来解密文件。
+- `Cloud Sync`，这个套件主要是用来同步照片到百度云，如果设置了密码，同步的到云盘的文件将被加密，这样别人下载后看到的内容都是乱码，可以通过群晖提供的软件 `Synology Cloud Sync Decryption Tool` 来解密文件。
 
-- Synology Drive，配套的 Synology Drive Server 也要一起安装，功能类似微软的 OneDrive，它提供两种模式：同步模式和备份模式。不同的系统都有对于的Drive Client，不过在使用中，app 版本在 4G 网络无法使用quickconnect Id连接 drive，但是在 WIFI 下可以连(公司的wifi下也可以)，不知道是什么原因。目前在4G网络下的解决办法只能是配合内网穿透来连接drive。
+- `Synology Drive`，配套的 `Synology Drive Server` 也要一起安装，功能类似微软的 OneDrive，它提供两种模式：同步模式和备份模式。不同的系统都有对于的Drive Client，~~不过在使用中，app 版本在 4G 网络无法使用quickconnect Id连接 drive，但是在 WIFI 下可以连(公司的wifi下也可以)，不知道是什么原因。目前在4G网络下的解决办法只能是配合内网穿透来连接drive~~。
 
-- Video Stasion，官方的影音套件，配套的 Advanced Media Extensions 也要一起安装（还需要一个ffmpeg，后面会说），电影海报信息的刮削使用了 TMDB 的api，根据官方的指引注册可以获得 api 的key，不过因为国内墙的关系，api地址`api.themoviedb.org`已经被block，需要使用一些手段才能正常使用，后面会说。
+    **【已解决】**：通过和群晖官方的技术人员咨询，发现 drive app上的登录请求都发生到了全球站，而不是中国站，原来是我的 iphone 地区设置成美国(应该是之前登录美区账号后没有切换回来)，具体操作：进入 `设置 ➡️ 通用 ➡️ 地区与语言`，修改地区成 **【中国】**。
+
+- `Video Stasion`，官方的影音套件，配套的 `Advanced Media Extensions` 也要一起安装（还需要一个ffmpeg，后面会说），电影海报信息的刮削使用了 TMDB 的api，根据官方的指引注册可以获得 api 的key，不过因为国内墙的关系，api地址`api.themoviedb.org`已经被block，需要使用一些手段才能正常使用，后面会说。
 
 ### 社区套件
 
@@ -48,14 +50,14 @@ DSM 有一个“套件中心”，其实就是类似手机的 “应用中心”
 - synocommunity，地址：`https://packages.synocommunity.com/`
 
 我不是矿神，我主要是用来安装里面的 frp，解决上面提到的 4G 网络访问 drive 的问题，因为我使用的是 [樱花frp](https://www.natfrp.com/)，所以下载安装 `SakuraFrp`，打开后配置也很简单，大概格式如下：
-```
+```bash
 token=xxxx      #这里填账号的密钥
 idx=123,456     #这里填隧道id，如果有多个隧道用英文逗号隔开
 ```
 ![sakuraFrp](/assets/image/posts/2023-11-22-01.png?style=centerme)
 
 synocommunity，这个源里面主要安装 `ffmpeg 6`，安装完后，使用 ssh 登录到nas系统，并使用 `sudo -i` 输入密码后切换到 root 用户，在终端执行下面的命令:
-```
+```bash
 bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"
 ```
 等待安装完毕。
@@ -89,7 +91,7 @@ mv public dashboard
 ```
 
 编辑 config.yaml 配置文件，添加 dashboard ui:
-```
+```yaml
 external-ui: dashboard // 增加这一行
 external-controller: 0.0.0.0:9090
 ```
@@ -97,17 +99,17 @@ external-controller: 0.0.0.0:9090
 输入 `./clash -d .` 运行 clash，在浏览器中输入 `http://你nas的ip:9090/ui` 即可进入 clash 网页管理界面。
 
 每次手动运行clash也挺麻烦，我们用服务的方式启动 clash，并加入到开机启动。先移动 clash，
-```
+```bash
 mv clash /usr/local/bin
 ```
 
 然后创建 clash.service 文件：
-```
+```bash
 vim /usr/local/lib/systemd/system/clash.service
 ```
 
 输入以下内容：
-```
+```ini
 [Unit]
 Description=clash service
 After=network.target
@@ -123,14 +125,14 @@ WantedBy=multi-user.target
 ```
 
 最后运行 systemctl 命令加载服务并启动 clash 服务：
-```
+```bash
 systemctl daemon-reload
 systemctl enable clash
 systemctl start clash
 ```
 
 到这里，其实就可以使用 clash 来科学上网了，可以在用户目录的 `.bashrc` 文件中(没有则创建)添加如下内容：
-```
+```bash
 # Open proxy
 clashOn() {
     export https_proxy=http://127.0.0.1:7890
@@ -159,7 +161,7 @@ clashOff() {
 ![privoxy](/assets/image/posts/2023-11-22-02.png?style=centerme)
 
 接下来，我们要修改配置，再次使用 ssh 登录到系统，并切换成 root 用户，进入 Privoxy 套件目录：
-```
+```bash
 cd /var/packages/privoxy/
 ```
 
@@ -168,7 +170,7 @@ cd /var/packages/privoxy/
 - var 是运行时目录，里面有pid文件和log文件
 
 修改 `etc/config`:
-```
+```bash
 # 注释掉下面三个自带的 action 规则文件
 #actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
 #actionsfile default.action   # Main actions file
@@ -187,7 +189,7 @@ debug 65535
 ```
 
 接下来，添加自己的代理规则文件`vim etc/my.action`，输入以下内容：
-```
+```bash
 # 默认不走代理，其他走socks5代理
 {{alias}}
 direct = +forward-override{forward .}
@@ -208,11 +210,11 @@ socks5 = +forward-override{forward-socks5 localhost:7891 .}
 .github.com
 ```
 保存后要修改文件的拥有者：
-```
+```bash
 chown privoxy:privoxy etc/my.action
 ```
 最后，重启套件生效。测试下是否能够成功代理：
-```
+```bash
 curl -x 'http://127.0.0.1:8118' www.google.com
 ```
 
@@ -229,7 +231,7 @@ dsm 毕竟是linux系统，也可以安装其他的linux常用工具。
 
 ### 安装 ncat
 DSM 系统默认没有安装 nact 工具(telnet也没有安装)，可以运行 `sudo synogear install`，等待下载后进入 synogear，运行 `synogear list` 列出可用的工具列表，里面就有 ncat。例如，检查 privoxy 是否监听 8118 端口:
-```
+```bash
 ncat 127.0.0.1 8118 -vz
 ```
 
