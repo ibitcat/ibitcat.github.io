@@ -59,7 +59,7 @@ idx=123,456     #这里填隧道id，如果有多个隧道用英文逗号隔开
 
 synocommunity，这个源里面主要安装 `ffmpeg 6`，安装完后，使用 ssh 登录到nas系统，并使用 `sudo -i` 输入密码后切换到 root 用户，在终端执行下面的命令:
 ```bash
-bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"
+bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s install
 ```
 等待安装完毕。
 
@@ -85,7 +85,7 @@ wget "你的订阅链接" -O config.yaml
 wget https://github.com/zhongfly/Clash-premium-backup/releases/download/2023-09-05-gdcc8d87/clash-linux-amd64-n2023-09-05-gdcc8d87.gz
 wget https://github.com/haishanh/yacd/releases/download/v0.3.8/yacd.tar.xz
 gzip -d clash-linux-amd64-n2023-09-05-gdcc8d87.gz
-tar -zxvf yacd.tar.xz
+tar -xvf yacd.tar.xz
 mv clash-linux-amd64 clash
 chmod +x clash
 mv public dashboard
@@ -119,7 +119,8 @@ After=network.target
 Type=simple
 User=root
 ExecStart=/usr/local/bin/clash
-Restart=on-failure # or always, on-abort, etc
+# or always, on-abort, etc
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
@@ -131,6 +132,8 @@ systemctl daemon-reload
 systemctl enable clash
 systemctl start clash
 ```
+
+可以使用 `sudo journalctl -fu clash` 来查看日志，前提是 systemd-journald 服务要先运行，用 `sudo systemctl status systemd-journald` 来查看开启状态。
 
 到这里，其实就可以使用 clash 来科学上网了，可以在用户目录的 `.bashrc` 文件中(没有则创建)添加如下内容：
 ```bash
@@ -189,6 +192,7 @@ debug 1
 debug 65535
 
 # 监听地址这里我设置同时监听 ipv4 和 ipv6本地地址
+# 8118 端口不要改，否则web管理页面会打不开
 listen-address [::]:8118
 ```
 
@@ -205,6 +209,7 @@ socks5 = +forward-override{forward-socks5 localhost:7891 .}
 
 #socks5代理
 {socks5}
+.synocommunity.com
 .themoviedb.org
 .youtube.com
 .google.
