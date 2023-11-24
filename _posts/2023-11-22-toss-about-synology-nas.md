@@ -65,6 +65,12 @@ bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStat
 
 更高阶的安装参考[Wrapper_VideoStation](https://github.com/darknebular/Wrapper_VideoStation)的文档。
 
+**注意：** 安装完 AME 套件后要激活一次(即使用Video station播放一次)再安装，否则会报以下错误：
+```bash
+ERROR: YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer.
+```
+参考这个[issue](https://github.com/darknebular/Wrapper_VideoStation/issues/36)。
+
 ## 科学上网
 众所周知的原因，国内上网需要一些科技，我这里使用 clash + privoxy 的组合来实现科学上网。
 - clash，原作者已经删库跑路了，不过找到了一个备份仓库[Clash-premium](https://github.com/zhongfly/Clash-premium-backup)
