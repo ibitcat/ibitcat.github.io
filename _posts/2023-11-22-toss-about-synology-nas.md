@@ -259,6 +259,42 @@ DSM 系统默认没有安装 nact 工具(telnet也没有安装)，可以运行 `
 ncat 127.0.0.1 8118 -vz
 ```
 
+### 使用fdupes来删除重复图片
+群晖无法安装 `fdupes`，不过在 github 上找到一个 golang 版本的版本，正好 opkg 能安装 golang，可以自己 git 拉下来源码编译运行。
+```bash
+# 能找到 golang 包，而且版本还比较新
+sudo opkg find go
+go - 1.20.7-1 - Go is an open source programming language that makes it
+ easy to build simple, reliable, and efficient software.
+
+sudo opkg install go
+
+# 临时把 go 加入 PATH
+export PATH="$PATH:/opt/bin/go/bin"
+
+# 设置goproxy
+go env -w GOPROXY=https://goproxy.cn,direct
+
+# clone 代码
+git clone https://github.com/OSPG/godedupe.git
+
+# 编译
+cd godeedupe
+go mod init godeedupe
+go mod tidy
+go build
+
+# 查找重复图片
+./godeedupe  -t ~/Photos -m > dup.log
+
+# 只移除 PhotoLibrary 文件夹中重复的图片到 dups 文件夹下
+mkdir dups
+grep -w "PhotoLibrary" dup.log |grep -v "@eaDir" |xargs -I {} mv {} dups/
+
+# 检查照片无误后删除重复照片
+rm -rf dups/
+```
+
 参考：
 - [linux下部署Clash+dashboard](https://parrotsec-cn.org/t/linux-clash-dashboard/5169)
 - [linux 配置 privoxy 实现系统全局/自动代理](https://blog.kelu.org/tech/2020/10/24/linux-privoxy.html)
