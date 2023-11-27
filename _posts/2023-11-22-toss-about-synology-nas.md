@@ -240,7 +240,7 @@ curl -x 'http://127.0.0.1:8118' www.google.com
 ![dsm-proxy](/assets/image/posts/2023-11-22-04.png?style=centerme)
 
 ## 开启ipv6和DDNS
-关于如何开启 ipv6 这里不细说，网上有很多教程，我采用的方案是：**光猫桥接模式 + 路由器拨号上网**，路由器是 TP-LINK 的 `TL-R470GP-AC`，它是一款 `PoE·AC` 一体机，设置 ipv6 的教程参考官方文档 [企业路由器IPv6上网配置指导](https://smb.tp-link.com.cn/service/detail_article_4370.html)，按照步骤操作成功开通，不过需要注意的是，在测试 ipv6 连接时，要推出本机运行的代理软件，如 `clash for windows`（*这里我被坑了很久*）。
+关于如何开启 ipv6 这里不细说，网上有很多教程，我采用的方案是：**光猫桥接模式 + 路由器拨号上网**，路由器是 TP-LINK 的 `TL-R470GP-AC`，它是一款 `PoE·AC` 一体机，设置 ipv6 的教程参考官方文档 [企业路由器IPv6上网配置指导](https://smb.tp-link.com.cn/service/detail_article_4370.html)，按照步骤操作成功开通，不过需要注意的是，在测试 ipv6 连接时，要退出本机运行的代理软件，或者把代理的 ipv6 打开（*这里我被坑了很久*）。
 
 DDNS 我使用的是群晖官方的服务，傻瓜操作不折腾了，最终也能连接成功，最好开启群晖的防火墙，只放行局域网访问和特定端口。
 
@@ -370,7 +370,7 @@ server {
 sudo systemctl reload nginx.service
 ```
 
-需要注意的是，上面的 cert.pem 证书需要添加上中间证书，添加也很简单，在群晖导出 `Let's Encrypt` 证书压缩包，里面含有三个文件:
+需要注意的是，上面的 cert.pem 证书需要添加上中间证书，在群晖导出 `Let's Encrypt` 证书压缩包，里面含有三个文件:
 - 私钥文件：private.pem
 - 证书文件: cert.pem
 - 中间证书：chain.pem
