@@ -61,9 +61,7 @@ synocommunity，这个源里面主要安装 `ffmpeg 6`，安装完后，使用 s
 ```bash
 bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s install
 ```
-等待安装完毕。
-
-更高阶的安装参考[Wrapper_VideoStation](https://github.com/darknebular/Wrapper_VideoStation)的文档。
+等待安装完毕。更高阶的安装参考[Wrapper_VideoStation](https://github.com/darknebular/Wrapper_VideoStation)的文档。
 
 **注意：** 安装完 AME 套件后要激活一次(即使用Video station播放一次)再安装，否则会报以下错误：
 ```bash
@@ -259,6 +257,18 @@ DSM 系统默认没有安装 nact 工具(telnet也没有安装)，可以运行 `
 ncat 127.0.0.1 8118 -vz
 ```
 
+### 安装opkg包管理工具
+包管理工具有 `ipkg` 和 `opkg`，不过前者已经停止更新，所以推荐使用后者。安装步骤参考[官方 wiki — Synology NAS](https://github.com/Entware/Entware/wiki/Install-on-Synology-NAS)。
+
+下面列出一些常用命令：
+```bash
+sudo opkg list              #列出opkg 可用的包
+sudo opkg list-installed    #列出已安装的包
+sudo opkg install <pkg>     #安装包
+sudo opkg remove <pkg>      #卸载包
+sudo opkg find <pkg>        #查找包
+```
+
 ### 使用fdupes来删除重复图片
 群晖无法安装 `fdupes`，不过在 github 上找到一个 golang 版本的版本，正好 opkg 能安装 golang，可以自己 git 拉下来源码编译运行。
 ```bash
@@ -295,7 +305,73 @@ grep -w "PhotoLibrary" dup.log |grep -v "@eaDir" |xargs -I {} mv {} dups/
 rm -rf dups/
 ```
 
+### Nginx 反向代理 Gogs
+群晖系统本身自带了 nginx 服务，所以我这里没有使用 docker 的方式。配置步骤如下：
+```bash
+# 1. 创建自定义nginx 配置目录
+cd ~
+mkdir -p nginx/conf.d
+mkdir -p nginx/ssl
+
+# 2. 上传证书和私钥文件到 ssl
+
+# 3. 创建 nginx 配置
+cd nginx/conf.d
+vim dsm.conf
+
+# 4. 输入以下内容
+server {
+    #listen 8043 ssl;
+    listen [::]:8043 ssl ipv6only=on;
+
+    server_name xxx.synology.me;
+    ssl_certificate /var/services/homes/xxx/nginx/ssl/cert.pem;
+    ssl_certificate_key /var/services/homes/xxx/nginx/ssl/key.pem;
+
+    location / {
+        proxy_connect_timeout 60;
+        proxy_read_timeout 60;
+        proxy_send_timeout 60;
+        proxy_intercept_errors off;
+        proxy_http_version 1.1;
+        proxy_set_header        Host                            $http_host;
+        proxy_set_header        Upgrade                         $http_upgrade;
+        proxy_set_header        Connection                      $connection_upgrade;
+        proxy_set_header        X-Real-IP           $remote_addr;
+        proxy_set_header        X-Forwarded-For         $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto       $scheme;
+
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    # DS Photo 配置，默认使用的是本地 80 和 443 端口，此处使用 443 端口，即 https
+    #location /photo {
+    #    proxy_pass https://群晖内网地址;
+    #}
+
+    error_page 403 404 500 502 503 504 @error_page;
+    # 一个奇技淫巧🤣，让http和https用同一个端口，参考 https://www.zhihu.com/question/34017892
+    error_page 497 https://$server_name:8043$request_uri;
+
+    location @error_page {
+        root /usr/syno/share/nginx;
+        rewrite (.*) /error.html break;
+        allow all;
+    }
+}
+
+#server {
+#    listen [::]:8030 ipv6only=on;
+#    server_name bitcat.synology.me;
+#    rewrite ^(.*) https://$server_name:8043$1 permanent;
+#}
+
+# 5. 保存后重新load配置
+sudo systemctl reload nginx.service
+```
+
 参考：
 - [linux下部署Clash+dashboard](https://parrotsec-cn.org/t/linux-clash-dashboard/5169)
 - [linux 配置 privoxy 实现系统全局/自动代理](https://blog.kelu.org/tech/2020/10/24/linux-privoxy.html)
 - [理解socks5协议的工作过程和协议细节](https://wiyi.org/socks5-protocol-in-deep.html)
+- [群晖使用自有 Nginx自定义配置](https://lox.im/index.php/764.html)
