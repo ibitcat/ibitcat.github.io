@@ -370,8 +370,29 @@ server {
 sudo systemctl reload nginx.service
 ```
 
-参考：
+需要注意的是，上面的 cert.pem 证书需要添加上中间证书，添加也很简单，在群晖导出 `Let's Encrypt` 证书压缩包，里面含有三个文件:
+- 私钥文件：private.pem
+- 证书文件: cert.pem
+- 中间证书：chain.pem
+
+如果只使用 cert.pem，在 git 下拉代码时会报以下错误：
+```bash
+SSL certificate problem: unable to get local issuer certificate
+或者
+SSL certificate problem: unable to verify the first certificate
+```
+
+这就是缺少中间文件，可以通过以下命令查看详细的证书信息：
+```bash
+ openssl s_client -showcerts -connect xxx.synology.me:8043
+```
+
+解决办法也很简单，把 chain.pem 的内容复制后追加到 cert.pem，然后 reload nginx 即可。
+
+
+## 参考：
 - [linux下部署Clash+dashboard](https://parrotsec-cn.org/t/linux-clash-dashboard/5169)
 - [linux 配置 privoxy 实现系统全局/自动代理](https://blog.kelu.org/tech/2020/10/24/linux-privoxy.html)
 - [理解socks5协议的工作过程和协议细节](https://wiyi.org/socks5-protocol-in-deep.html)
 - [群晖使用自有 Nginx自定义配置](https://lox.im/index.php/764.html)
+- [nginx 配置中间证书](https://www.cnblogs.com/xuehuashanghe/p/14554856.html)
