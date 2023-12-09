@@ -389,6 +389,16 @@ SSL certificate problem: unable to verify the first certificate
 
 解决办法也很简单，把 chain.pem 的内容复制后追加到 cert.pem，然后 reload nginx 即可。
 
+### 修改docket时区
+群晖docker 容器的默认时区是 UTC，可以通过容器的终端机➡️新增➡️bash，输入 `date` 命令查看。
+
+修改时区步骤：
+- 使用 ssh 登录 dsm;
+- 输入 `sudo docker ps` 查看容器列表;
+- 输入 `sudo docker cp /etc/localtime [时区不对的容器id]:/etc/localtime` 修改时区文件;
+
+此时，再查看容器时间就正常了。
+
 
 ## 参考：
 - [linux下部署Clash+dashboard](https://parrotsec-cn.org/t/linux-clash-dashboard/5169)
