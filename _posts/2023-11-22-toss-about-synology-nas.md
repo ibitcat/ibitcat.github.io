@@ -399,6 +399,19 @@ SSL certificate problem: unable to verify the first certificate
 
 此时，再查看容器时间就正常了。
 
+### 备份gogs数据
+Gogs服务使用docker方式运行，它的运行用户为 git，用户uid:gid 为 1000:1000，那么在使用 Cloud Sync 和 WebDav 做备份时有一个问题：docker 内的文件变动无法备份，因为宿主机没有 uid 为 1000 的用户，网上查阅资料也没有找到解决办法，最终用 root 用户的定时任务来增量备份。
+
+操作步骤：
+- 使用 ssh 登录后，切换到 root 用户；
+- 编辑 /etc/crontab 文件，添加定时任务;
+- 保存后 `systemctl restart crond` 重启服务;
+
+定时任务使用 rsync 做增量同步，例如 5 分钟同步一次：
+```bash
+*/5 * * * * root rsync -av --progress --delete /volume1/docker/gogs/ /volume2/backup2/gogs-docker/
+```
+
 
 ## 参考：
 - [linux下部署Clash+dashboard](https://parrotsec-cn.org/t/linux-clash-dashboard/5169)
