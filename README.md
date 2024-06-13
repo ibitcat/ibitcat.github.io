@@ -9,7 +9,7 @@
 - E-mail: **[shui_mu98(at)163.com](mailto:shui_mu98@163.com)**
 - Github: **<https://github.com/ibitcat>**
 - Notebook: **<https://bitcat.love/xnotes>**
-- WeChat: **bitxcat**
+- WeChat: **ibitcat**
 
 <!-- .slide -->
 ## 关于我
